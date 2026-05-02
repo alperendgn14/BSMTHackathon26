@@ -1,118 +1,125 @@
 [
     {
-        "event_type": "relocation",
-        "summary_tr": "Çin'in batı yönüne doğru üretime yer değiştirme hızlanmasıyla birlikte Chongqing endüstriyel değişim çabalarını yoğunlaştırdı. Ülke, üretim merkezlerini yeni bölgelere taşıma eğiliminde. Bu hareketin arkasında, maliyetleri azaltma ve yeni pazarlara ulaşma mụcelleri yatıyor.",
-        "company": null,
-        "from_location": "Doğu Çin",
-        "to_location": "Batı Çin",
-        "sector": "Üretim ve imalat",
-        "score": 85,
-        "confidence": 0.95,
+        "article": {
+            "text_summary_tr": "Çin'in batıya yönelik imalat sanayisinin taşınması hızlanıyor. Chongqing, endüstriyel değişiklik çabalarını artırıyor.",
+            "event_type": "relocation",
+            "confidence": 0.8
+        },
+        "entities": {
+            "company": {
+                "name": null,
+                "ticker": null
+            },
+            "countries": [
+                "Çin"
+            ],
+            "from_location": null,
+            "to_location": "Chongqing"
+        },
+        "industry": {
+            "sector": null,
+            "line_type": null,
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": null,
+            "jobs_impact": null,
+            "timeline": null
+        },
+        "bios_fit": {
+            "rationale_tr": "Çin'in batıya yönelik imalat sanayisinin taşınması hızlanmakta, Chongqing endüstriyel değişiklik çabalarını artırıyor.",
+            "recommended_action": "monitor"
+        },
         "original_title": "Chongqing Steps Up Industrial Shift Efforts as China’s Westward Manufacturing Relocation Accelerates - iChongqing",
         "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNdk5wVU00QXRVMDE3MklkVXFZY3M1Y1RnT2xQdTFqcnZlLURPNlNSMVAwZ2ZJM3hseFZ3X3VJVUF0VnZLQi1lMUlIQkhac0lZeFpLQ1daV05mazFrNjdsaHlRZm9zTVlobkpocUUxYTJYU1dNOW1lVVNDSmFqR0pvbTl1aU91WmJnTVpENlV6U0xGRHkyd1ZXaENTaUJ4NTVuLS03TEE3TV9SMnNZVUhHbWZfdzRQVHpzbFdOaC1QcVhYTXozdlc4VTQ0NHQ1NFVhdkFUc0xB0gHbAUFVX3lxTE5JTEZMbWJ3WFRENGh5UDNzdXVTbjgyZy1UaE1Wc1AzSVB0UDFjVFFJeVIxWjFIWUFfZ3VqLTJBNlYzcHZjR00yU3NKeE5KdFFrMmt6dmpIVnhVX0Q0UHlWeGRZcEdQMV9abGstdnAydGl4ckRZenZHN2Rpd3V6alJhemlDMkV2eHRVT0IyT084dktDdHBza25KQ0lWcnhzNGM4Uk13N29BNGVGYkQweDgxeUF1Z3ktY2tFZ0dZWFFzaXBTaEpESVYtV1FqMGhzUGNhbTVlYWxreWhVcw?oc=5",
-        "published_date": "Wed, 26 Nov 2025 08:00:00 GMT"
+        "published_date": "Wed, 26 Nov 2025 08:00:00 GMT",
+        "score": [
+            55,
+            0.54
+        ]
     },
     {
-        "event_type": "relocation",
-        "summary_tr": "Kumho Tire, fabrika taşınmasına ilişkin uzun süredir ertelenen anlaşmaya ulaştı. Anlaşma, şirketin fabrikasını başka bir konuma taşıma planlarını içeriyor.",
-        "company": "Kumho Tire",
-        "from_location": null,
-        "to_location": null,
-        "sector": "otomotiv",
-        "score": 80,
-        "confidence": 0.9,
+        "article": {
+            "text_summary_tr": "Kumho Tire, fabrika taşınması anlaşmasını uzun bir gecikmeden sonra imzaladı.",
+            "event_type": "relocation",
+            "confidence": 0.8
+        },
+        "entities": {
+            "company": {
+                "name": "Kumho Tire",
+                "ticker": null
+            },
+            "countries": [
+                "Güney Kore"
+            ],
+            "from_location": null,
+            "to_location": null
+        },
+        "industry": {
+            "sector": "Otomotiv",
+            "line_type": "Lastik Üretimi",
+            "equipment_keywords": [
+                "lastik makinaları",
+                "fabrika ekipmanları"
+            ]
+        },
+        "signals": {
+            "capex_usd": null,
+            "jobs_impact": null,
+            "timeline": null
+        },
+        "bios_fit": {
+            "rationale_tr": "Şirketin fabrika taşınması quyếtarı, endüstriyel relokasyon trendine uymaktadır.",
+            "recommended_action": "monitor"
+        },
         "original_title": "Kumho Tire reaches long-delayed deal on factory relocation - The Korea Times",
         "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPZTdSYmhXekpBQzV0bTk1SlBpLTNNNEVJUTVRQ2o5V19fdnlMUmhxMklBYWpJaHlrZ2FRUmJNLUJXck12RUJ2cHlYRGJrQkVFZWZjRW1TNm9aVWdxOV90NWpGNG5aLTBnbGZWMDZNRy0tazBtZjVWQl82SVFqLXBPeFZyQ09iS0oxR1RBNFlUYkNaa0NGNFdvVWxSb2p6ZTZhT1NVTzg5OTByWXZOb0x2TjhUR3dHUdIBuwFBVV95cUxPcm1xNGtUMzhWLUhSbXR1MXhSMHBuU3F2N1BvbmllSWVCX1FLSFRwcnlIWm5nWlF6VUdXWGVQVGZkUm11U05PWWgzVGFJNkxUd3V1NzJGX1p3NmJvNXlVNnozVXU5eTZFdTNBTzA4VXhmaXlZUVFzY3lBTVB3NXVSYmhVdWE1YzBKWndQck9qSTVkamhyaHZ1Y2d5RTlkalpTS0tBTWpoZ0Rua3hITGkwMGlrR3hZZnpRNjNv?oc=5",
-        "published_date": "Wed, 30 Jul 2025 07:00:00 GMT"
+        "published_date": "Wed, 30 Jul 2025 07:00:00 GMT",
+        "score": [
+            73,
+            0.62
+        ]
     },
     {
-        "event_type": "relocation",
-        "summary_tr": "Çin'in batıya yönelik üretiminin yeniden yerleşimi hızlanırken, Chongqing endüstriyel değişim çabalarını artırıyor.",
-        "company": null,
-        "from_location": "Doğu Çin",
-        "to_location": "Batı Çin",
-        "sector": "Üretim",
-        "score": 80,
-        "confidence": 0.9,
-        "original_title": "Chongqing Steps Up Industrial Shift Efforts as China’s Westward Manufacturing Relocation Accelerates - iChongqing",
-        "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNdk5wVU00QXRVMDE3MklkVXFZY3M1Y1RnT2xQdTFqcnZlLURPNlNSMVAwZ2ZJM3hseFZ3X3VJVUF0VnZLQi1lMUlIQkhac0lZeFpLQ1daV05mazFrNjdsaHlRZm9zTVlobkpocUUxYTJYU1dNOW1lVVNDSmFqR0pvbTl1aU91WmJnTVpENlV6U0xGRHkyd1ZXaENTaUJ4NTVuLS03TEE3TV9SMnNZVUhHbWZfdzRQVHpzbFdOaC1QcVhYTXozdlc4VTQ0NHQ1NFVhdkFUc0xB0gHbAUFVX3lxTE5JTEZMbWJ3WFRENGh5UDNzdXVTbjgyZy1UaE1Wc1AzSVB0UDFjVFFJeVIxWjFIWUFfZ3VqLTJBNlYzcHZjR00yU3NKeE5KdFFrMmt6dmpIVnhVX0Q0UHlWeGRZcEdQMV9abGstdnAydGl4ckRZenZHN2Rpd3V6alJhemlDMkV2eHRVT0IyT084dktDdHBza25KQ0lWcnhzNGM4Uk13N29BNGVGYkQweDgxeUF1Z3ktY2tFZ0dZWFFzaXBTaEpESVYtV1FqMGhzUGNhbTVlYWxreWhVcw?oc=5",
-        "published_date": "Wed, 26 Nov 2025 08:00:00 GMT"
-    },
-    {
-        "event_type": "relocation",
-        "summary_tr": "Kumho Tire, fabrika taşınması konusunda uzun süredir ertelenen anlaşmaya ulaştı. Şirket, yeni yer için planlarını正在 tiến hành etmekte.",
-        "company": "Kumho Tire",
-        "from_location": null,
-        "to_location": null,
-        "sector": "otomotiv",
-        "score": 80,
-        "confidence": 0.9,
-        "original_title": "Kumho Tire reaches long-delayed deal on factory relocation - The Korea Times",
-        "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPZTdSYmhXekpBQzV0bTk1SlBpLTNNNEVJUTVRQ2o5V19fdnlMUmhxMklBYWpJaHlrZ2FRUmJNLUJXck12RUJ2cHlYRGJrQkVFZWZjRW1TNm9aVWdxOV90NWpGNG5aLTBnbGZWMDZNRy0tazBtZjVWQl82SVFqLXBPeFZyQ09iS0oxR1RBNFlUYkNaa0NGNFdvVWxSb2p6ZTZhT1NVTzg5OTByWXZOb0x2TjhUR3dHUdIBuwFBVV95cUxPcm1xNGtUMzhWLUhSbXR1MXhSMHBuU3F2N1BvbmllSWVCX1FLSFRwcnlIWm5nWlF6VUdXWGVQVGZkUm11U05PWWgzVGFJNkxUd3V1NzJGX1p3NmJvNXlVNnozVXU5eTZFdTNBTzA4VXhmaXlZUVFzY3lBTVB3NXVSYmhVdWE1YzBKWndQck9qSTVkamhyaHZ1Y2d5RTlkalpTS0tBTWpoZ0Rua3hITGkwMGlrR3hZZnpRNjNv?oc=5",
-        "published_date": "Wed, 30 Jul 2025 07:00:00 GMT"
-    },
-    {
-        "event_type": "other",
-        "summary_tr": "Zanardi, 21. yüzyılda milyonları etkileyen bir kahramanın ilham verici hikayesi",
-        "company": null,
-        "from_location": null,
-        "to_location": null,
-        "sector": null,
-        "score": 50,
-        "confidence": 0.5,
-        "original_title": "The remarkable life of Zanardi, a 21st century hero who inspired millions",
-        "url": "https://www.bbc.com/sport/formula1/articles/c5y7x763wx5o?at_medium=RSS&at_campaign=rss",
-        "published_date": "Sat, 02 May 2026 12:02:43 GMT"
-    },
-    {
-        "event_type": "other",
-        "summary_tr": "Manchester City teknik direktörü Pep Guardiola'nın takımdan ayrılmasıyla ilgili spekülasyonlar وجود. Kulüp, Guardiola olmadan hayatına hazırlanıyor.",
-        "company": "Manchester City",
-        "from_location": null,
-        "to_location": null,
-        "sector": "Spor",
-        "score": 70,
-        "confidence": 0.8,
-        "original_title": "Football awash with Guardiola exit talk as Man City plan for life without him",
-        "url": "https://www.bbc.com/sport/football/articles/c5y21lkdl78o?at_medium=RSS&at_campaign=rss",
-        "published_date": "Sat, 02 May 2026 13:10:03 GMT"
-    },
-    {
-        "event_type": "other",
-        "summary_tr": "Zanardi, 21. yüzyılın bir kahramanı ve milyonları esinleyen biri olarak dikkat çekiyor. Zanardi'nin hayatı, mücadele ve başarı hikayesiyle dolu. İnsanları çeşitli yöntemlerle esinlemeyi başardı.",
-        "company": null,
-        "from_location": null,
-        "to_location": null,
-        "sector": null,
-        "score": 50,
-        "confidence": 0.5,
-        "original_title": "The remarkable life of Zanardi, a 21st century hero who inspired millions",
-        "url": "https://www.bbc.com/sport/formula1/articles/c5y7x763wx5o?at_medium=RSS&at_campaign=rss",
-        "published_date": "Sat, 02 May 2026 12:02:43 GMT"
-    },
-    {
-        "event_type": "other",
-        "summary_tr": "Manchester City teknik direktörü Pep Guardiola'nın takımdan ayrılacağına dair konuşmaların artmasıyla kulüp, Guardiola olmadan hayatını planlamaya başladı.",
-        "company": "Manchester City",
-        "from_location": null,
-        "to_location": null,
-        "sector": "Spor",
-        "score": 70,
-        "confidence": 0.8,
-        "original_title": "Football awash with Guardiola exit talk as Man City plan for life without him",
-        "url": "https://www.bbc.com/sport/football/articles/c5y21lkdl78o?at_medium=RSS&at_campaign=rss",
-        "published_date": "Sat, 02 May 2026 13:10:03 GMT"
-    },
-    {
-        "event_type": "relocation",
-        "summary_tr": "Avrupa Birliği, Litvanya'dan Ukrayna'ya rekor bir ağır kaldırma_power plant göçünü tamamladı. Proje, ağır yük taşımacılığı kapsamında realization edildi.",
-        "company": "null",
-        "from_location": "Litvanya",
-        "to_location": "Ukrayna",
-        "sector": "enerji",
+        "article": {
+            "text_summary_tr": "Avrupa Birliği, Litvanya'dan Ukrayna'ya rekor bir ağır kaldırma gücüne sahip bir elektrik santrali taşınmasını tamamladı.",
+            "event_type": "relocation",
+            "confidence": 0.8
+        },
+        "entities": {
+            "company": {
+                "name": "null",
+                "ticker": "null"
+            },
+            "countries": [
+                "Litvanya",
+                "Ukrayna"
+            ],
+            "from_location": "Litvanya",
+            "to_location": "Ukrayna"
+        },
+        "industry": {
+            "sector": "Enerji",
+            "line_type": "Ağır kaldırma",
+            "equipment_keywords": [
+                "elektrik santrali"
+            ]
+        },
+        "signals": {
+            "capex_usd": null,
+            "jobs_impact": null,
+            "timeline": "null"
+        },
+        "bios_fit": {
+            "rationale_tr": "Enerji sektöründeki büyük ölçekli proje taşınması nedeniyle Sen BIOS için fırsat çıkaran bir gelişme",
+            "recommended_action": "monitor"
+        },
         "original_title": "EU completes record heavy-lift power plant relocation from Lithuania to Ukraine - Project Cargo Journal",
         "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxPU3VsZTVrRlVIZV9HbHVLWkVYVUUtd3RhaHlrZnJCRDFPblVnV21PX2ZnbXJ4QmdvcW9NUjZLcVBvZVAweWpNTnNWcTc1dWhoUVM3WThmejZhQVZpdnJ4UDFmM2dqTG1sRFc3T0pkZDBwdy1VSFF5cGY5TURYdlpYdDRVejBLOGEzcG5NeDBDYVFOS1g4R014S0ZqYmFoNG1HS3lqTHl1Q2ZYTklEUlNGZ1BXY0xTUjhTWFhycmduNmxNYUF2NVZTQWdweERsSzh2STRVS0tBY2ZUV3dvdlExY0lnc2I?oc=5",
         "published_date": "Mon, 05 Jan 2026 08:00:00 GMT",
-        "score": 81
+        "score": [
+            80,
+            0.7
+        ]
     }
 ]

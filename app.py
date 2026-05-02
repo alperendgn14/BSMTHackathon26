@@ -2,9 +2,11 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import json
 import os
+import io
 import feedparser
 import csv
-from flask import Response, io
+from flask import Response
+from datetime import datetime, timezone
 
 #collector.py dosyasından fonksiyonları içe aktar
 from collector import analyze_with_llama3_api, save_to_db, DB_FILE
@@ -33,16 +35,40 @@ def save_rss_list(rss_list):
 
 @app.route('/api/news', methods=['GET'])
 def get_news():
-    if os.path.exists(DB_FILE):
-        with open(DB_FILE, "r", encoding="utf-8") as f:
-            data=json.load(f)
-            return jsonify(data), 200
+    if not os.path.exists(DB_FILE):
         return jsonify([]), 200
+    with open(DB_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    # F9: Anahtar kelime arama (Başlıkta veya özette)
+    q = request.args.get('q', '').lower()
+    # F8: Olay tipi filtresi
+    event = request.args.get('event')
+    # F8: Minimum skor filtresi
+    min_s = request.args.get('min_score', type=int)
+
+    filtered = [
+        item for item in data 
+        if (not q or q in item.get('original_title','').lower() or q in item.get('summary_tr','').lower()) and
+           (not event or item.get('event_type') == event) and
+           (not min_s or item.get('score', 0) >= min_s)
+    ]
+    # En yüksek skorlu olanı en başta göster
+    return jsonify(sorted(filtered, key=lambda x: x.get('score', 0), reverse=True)) # Skora göre sırala
+
+
+
+    
+    
     
 #kaynakları getir
 @app.route('/api/rss', methods=['GET'])
 def list_rss():
     return jsonify(get_rss_list()), 200
+
+
+
+
 
 #yeni kaynak ekle
 @app.route('/api/rss', methods=['POST'])
@@ -67,6 +93,10 @@ def add_rss():
     save_rss_list(rss_list)
     
     return jsonify({"message": "RSS başarıyla eklendi", "rss_list": rss_list}), 201
+
+
+
+
 
 
 # haberleri yenile/çek
@@ -94,6 +124,10 @@ def refresh_news():
                 print("JSON ayrıştırma hatası:", e)
                 
     return jsonify({"message": "Tüm kaynaklardan veriler çekildi ve AI tarafından işlendi!"}), 200
+
+
+
+
 
 
 @app.route('/api/export', methods=['GET'])
@@ -129,6 +163,84 @@ def export_csv():
         mimetype="text/csv",
         headers={"Content-disposition": "attachment; filename=bios_fit_rapor.csv"}
     )
+
+
+
+
+
+
+#F17 endpoint: Şirket bazlı zaman tüneli
+@app.route('/api/timeline/<company_name>', methods=['GET'])
+def get_company_timeline(company_name):
+    if not os.path.exists(DB_FILE):
+        return jsonify([]), 200
+    
+    with open(DB_FILE,"r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    # sadece o şirketle ilgili olan haberlerin filtrelenip sıralanması.
+    company_news = [item for item in data if item.get('company') and company_name.lower() in item.get('company').lower()]
+    
+    return jsonify(company_news), 200
+
+
+@app.route('/api/crm/send', methods=['POST'])
+def send_to_crm():
+    news_data = request.json
+
+    # Gerçek bir CRM'e (Örn: HubSpot, Salesforce) gider gibi simüle et
+    print(f"🔄 CRM ENTEGRASYONU TETİKLENDİ!")
+    print(f"📦 Müşteri (Account) Oluşturuluyor: {news_data.get('company')}")
+    print(f"🎯 Fırsat (Lead) Açılıyor: {news_data.get('event_type')} - Skor: {news_data.get('score')}")    
+    
+    # Başarı yanıtı dön
+    return jsonify({
+        "status": "success",
+        "message": "Kayıt başarıyla CRM'e (Lead olarak) aktarıldı!",
+        "crm_id": "OPP-98765"
+    }), 200
+
+
+
+
+# F18: Harita (Map) İçin "From - To" API'si
+@app.route('/api/map-data', methods=['GET'])
+def get_map_data():
+    if not os.path.exists(DB_FILE):
+        return jsonify([]), 200
+        
+    with open(DB_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
+        
+    # Sadece hem nereden hem de nereye lokasyonu dolu olanları gönder
+    map_items = [item for item in data if item.get('from_location') and item.get('to_location')]
+    
+    return jsonify(map_items), 200
+
+    
+
+@app.route('/api/reports/weekly', methods=['GET'])
+def get_weekly_report():
+    if not os.path.exists(DB_FILE): return jsonify({"error": "Veri yok"}), 404
+    
+    with open(DB_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    
+    # Sadece yüksek skorlu son 10 haberi al[cite: 4, 6]
+    top_news = sorted(data, key=lambda x: x.get('score', 0), reverse=True)[:10]
+    titles = [n.get('original_title') for n in top_news]
+    
+    # LLM'den bu haberleri stratejik bir bültene dönüştürmesini iste
+    report_prompt = f"Aşağıdaki endüstriyel haberlerden BIOS yönetimi için stratejik bir haftalık bülten özeti oluştur: {titles}"
+    
+    # analyze_with_llama3_api fonksiyonunu burada rapor için çağırabilirsin
+    report_content = analyze_with_llama3_api(report_prompt) 
+    
+    return jsonify({"report": report_content, "date": datetime.now().strftime("%Y-%m-%d")}), 200
+
+
+
+
 
 
 from apscheduler.schedulers.background import BackgroundScheduler

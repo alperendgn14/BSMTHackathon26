@@ -23,17 +23,39 @@ DB_FILE = "database.json"
 
 def analyze_with_llama3_api(text):
     # JSON anahtarlarını İngilizce olarak sabitlediğimiz katı prompt
-    prompt = f"""Sen bir endüstriyel haber analistsin. Aşağıdaki haber metninden bilgileri çıkar. 
-    SADECE aşağıdaki JSON formatında çıktı ver, anahtarları (keys) ASLA Türkçeye çevirme:
-    {{
-        "event_type": "relocation | closure | expansion | new_plant | tender | other",
-        "summary_tr": "Türkçe 2-4 cümlelik özet",
-        "company": "Şirket adı veya null",
-        "from_location": "Çıkış lokasyonu veya null",
-        "to_location": "Hedef lokasyon veya null",
-        "sector": "Sektör veya null",
-    }}
-    METİN: {text}"""
+    prompt = f"""Sen BIOS için fırsat çıkaran bir endüstriyel relokasyon analistsin.
+GÖREV: Metinden şirket, lokasyon, sektör, hat tipi, zaman çizelgesi ve CAPEX bilgilerini çıkar.
+KURALLAR: Sadece JSON döndür. Bulamadığın alanları null bırak. Çıktı dili Türkçe olsun.
+
+İSTENEN JSON YAPISI:
+{{
+  "article": {{
+    "text_summary_tr": "2-4 cümlelik özet",
+    "event_type": "relocation | closure | downsizing | expansion | new_plant | tender | capex_fdi | other",
+    "confidence": 0.0-1.0 arası sayı
+  }},
+  "entities": {{
+    "company": {{"name": "string", "ticker": "null"}},
+    "countries": ["list"],
+    "from_location": "string",
+    "to_location": "string"
+  }},
+  "industry": {{
+    "sector": "string",
+    "line_type": "string",
+    "equipment_keywords": ["list"]
+  }},
+  "signals": {{
+    "capex_usd": number,
+    "jobs_impact": integer,
+    "timeline": "string"
+  }},
+  "bios_fit": {{
+    "rationale_tr": "Skor gerekçesi",
+    "recommended_action": "monitor | reach_out | tender_watch"
+  }}
+}}
+METİN: {text}"""
 
     try:
         chat_completion = client.chat.completions.create(
@@ -65,6 +87,11 @@ def save_to_db(new_data):
     data.append(new_data)
     with open(DB_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
+        new_data["audit"] = {
+        "retrieved_at_utc": datetime.now(timezone.utc).isoformat(), # İzlenebilirlik
+        "gdpr_compliant": True, # Kişisel veri işlenmedi onayı
+        "source_publisher": "Google News RSS Agent" # Kaynak odaklı yaklaşım
+}
     print(f"💾 Veri {DB_FILE} dosyasına eklendi!")
 
 # F13: Yüksek Skorlu Fırsatlar İçin Bildirim
@@ -147,37 +174,73 @@ def fetch_rss_news(rss_url):
         print("-" * 30)
 
 def calculate_bios_fit_score(parsed_json, source_url):
-    # event type - ağırlık : 0.30
-    e_map ={"relocation": 1.0, 
-           "new_plant": 0.90,
-           "expansion": 0.75,
-           "tender": 0.55,
-           "closure": 0.45,
-           "other": 0.10}
-    e_val = e_map.get(parsed_json.get("event_type", "other"), 0.10)
+    # Döküman 2 (SOW) 2.5 maddesindeki iç içe yapıya göre verileri çekiyoruz
+    source_data = parsed_json.get("source", {})
+    article_data = parsed_json.get("article", {})
+    entities_data = parsed_json.get("entities", {})
+    industry_data = parsed_json.get("industry", {})
+    signals_data = parsed_json.get("signals", {})
     
-    #a, aktör netliği. - ağırlık 0.25
-    a_val = 0.0
-    if parsed_json.get("company"): a_val += 0.40
-    if parsed_json.get("from_location"): a_val +=0.25
-    if parsed_json.get("to_location"): a_val +=0.25
-    if parsed_json.get("sector"): a_val +=0.10
-    
-    # g, coğrafya. - ağırlık 0.20 (MVP için Avrupa ülkeleri basit metin kontrolü)
-    loc_text = str(parsed_json.get("from_location")) + str(parsed_json.get("to_location"))
-    if any(country in loc_text for country in ["Germany", "Almanya", "France", "Poland", "Turkey", "Türkiye", "Europe"]):
-        g_val = 1.0
+    # 1. R: Relokasyon Doğrudanlığı (Relocation Directness) - Ağırlık: 0.18
+    # Relocation/Line Transfer ise tam puan; yatırım ise orta puan
+    event_type = article_data.get("event_type", "other")
+    r_map = {"relocation": 1.0, "new_plant": 0.8, "expansion": 0.7, "tender": 0.5, "closure": 0.4, "other": 0.1}
+    r_val = r_map.get(event_type, 0.1)
+
+    # 2. G: Coğrafi Uygunluk (Geographical Suitability) - Ağırlık: 0.15
+    # Avrupa ülkeleri ve Türkiye öncelikli
+    loc_text = f"{entities_data.get('from_location', '')} {entities_data.get('to_location', '')}".lower()
+    europe_keywords = ["germany", "france", "poland", "turkey", "türkiye", "romania", "hungary", "europe"]
+    g_val = 1.0 if any(k in loc_text for k in europe_keywords) else 0.5
+
+    # 3. S: Sektör Önceliği (Industry Priority) - Ağırlık: 0.12
+    # Otomotiv, enerji, batarya, kimya öncelikli
+    sector_text = str(industry_data.get("sector", "")).lower()
+    priority_sectors = ["otomotiv", "automotive", "energy", "enerji", "battery", "batarya", "chemical", "kimya"]
+    s_val = 1.0 if any(s in sector_text for s in priority_sectors) else 0.4
+
+    # 4. T: Teknik Karmaşıklık (Technical Complexity) - Ağırlık: 0.22
+    # Hat tipi veya ekipman anahtar kelimeleri varsa yüksek puan
+    t_val = 1.0 if industry_data.get("line_type") or industry_data.get("equipment_keywords") else 0.5
+
+    # 5. U: Zaman Penceresi (Time Window) - Ağırlık: 0.12
+    # Timeline bilgisi varsa sinyal kalitesi yüksektir
+    u_val = 1.0 if signals_data.get("timeline") else 0.4
+
+    # 6. C: Kaynak Güveni (Source Trust) - Ağırlık: 0.11
+    # IR/Press Release tam puan; saygın medya orta puan
+    source_url = source_url.lower()
+    if "press" in source_url or "ir" in source_url:
+        c_val = 1.0
+    elif any(s in source_url for s in ["reuters", "bloomberg", "wsj", "ft.com"]):
+        c_val = 0.8
     else:
-        g_val = 0.50
-        
-        
-    # t, zaman ve c, kaynak güveni. 
-    t_val = 0.70 # ortalama zaman penceresi 
-    c_val = 0.85 if "reuters" in source_url or "bloomberg" in source_url else 0.55
-    
-    # dökümandaki formül
-    raw_score = 100* ((0.30 * e_val)+ (0.25 * a_val) + (0.20 * g_val) + (0.15 * t_val) + (0.10 * c_val))
-    return round(raw_score)
+        c_val = 0.5
+
+    # 7. V: Proje Hacmi (Project Volume) - Ağırlık: 0.10
+    # CAPEX veya istihdam verisi varsa hacim belirlidir
+    v_val = 1.0 if signals_data.get("capex_usd") or signals_data.get("jobs_impact") else 0.3
+
+    # Döküman 2 - Madde 3.2: Resmi Ağırlıklı Skor Formülü
+    score = 100 * (0.22*t_val + 0.18*r_val + 0.15*g_val + 0.12*s_val + 0.12*u_val + 0.11*c_val + 0.10*v_val)
+
+    # Döküman 2 - Madde 3.2: ScoreConfidence ve DataCompleteness Hesaplama
+    # Kritik alanlar: company, event_type, country, (from/to), sector
+    critical_fields = [
+        entities_data.get("company", {}).get("name"),
+        article_data.get("event_type"),
+        entities_data.get("countries"),
+        entities_data.get("from_location") or entities_data.get("to_location"),
+        industry_data.get("sector")
+    ]
+    data_completeness = sum(1 for field in critical_fields if field) / len(critical_fields)
+    score_confidence = min(1.0, 0.6 * c_val + 0.4 * data_completeness)
+
+    # Eğer güven puanı çok düşükse skoru cezalandır (Doküman 4'teki ek kural)
+    if score_confidence < 0.40:
+        score = score * 0.5
+
+    return round(score), round(score_confidence, 2)
     
     
 #kopya haber engelleyici
