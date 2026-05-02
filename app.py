@@ -9,8 +9,9 @@ import csv
 from flask import Response
 from datetime import datetime, timezone
 import uuid
+from groq import Groq
 
-
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 #collector.py dosyasından fonksiyonları içe aktar
 from collector import analyze_with_llama3_api, save_to_db, DB_FILE
 
@@ -383,7 +384,32 @@ def handle_rss():
         return jsonify(get_rss_list())
 
 
+@app.route('/api/chat', methods=['POST'])
+def chat_with_agent():
+    try:
+        data = request.json
+        context_text = data.get('context', '')
+        user_question = data.get('question', '')
 
+        prompt = f"""Sen endüstriyel yatırımları analiz eden profesyonel bir yapay zeka ajanısın. 
+Aşağıdaki 'HABER METNİ'ni referans alarak kullanıcının 'SORU'suna kısa, net ve profesyonel bir Türkçe ile cevap ver. 
+Eğer sorunun cevabı metinde yoksa "Bu bilgi haber kaynağında bulunmuyor" şeklinde belirt. Asla metin dışı uydurma yapma.
+
+HABER METNİ: {context_text}
+SORU: {user_question}"""
+
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {"role": "system", "content": "You are a precise, context-aware Q&A assistant."},
+                {"role": "user", "content": prompt}
+            ],
+            model="llama-3.1-8b-instant", # Hızlı ve token dostu model
+        )
+        answer = chat_completion.choices[0].message.content
+        return jsonify({"answer": answer}), 200
+    except Exception as e:
+        print(f"Chat Hatası: {e}")
+        return jsonify({"error": "Sistem geçici olarak yanıt veremiyor."}), 500
 
 
 if __name__ == "__main__":
