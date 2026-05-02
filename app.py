@@ -15,6 +15,7 @@ app = Flask(__name__)
 CORS(app) #teammatenin hata almaması için
 
 RSS_DB_FILE = "rss_data.json"
+RSS_SOURCES_FILE = "rss_sources.json"
 
 #helper fonksiyonlar
 
@@ -58,6 +59,22 @@ def get_news():
 
 
 
+
+# --- F2: RSS KAYNAĞI SİLME ---
+@app.route('/api/rss/<rss_id>', methods=['DELETE'])
+def delete_rss_source(rss_id):
+    if not os.path.exists(RSS_SOURCES_FILE):
+        return jsonify({"error": "Kaynak bulunamadı"}), 404
+
+    with open(RSS_SOURCES_FILE, "r", encoding="utf-8") as f:
+        sources = json.load(f)
+
+    new_sources = [s for s in sources if s['id'] != rss_id]
+    
+    with open(RSS_SOURCES_FILE, "w", encoding="utf-8") as f:
+        json.dump(new_sources, f, ensure_ascii=False, indent=4)
+
+    return jsonify({"message": "Kaynak silindi."}), 200
     
     
     
@@ -237,6 +254,63 @@ def get_weekly_report():
     report_content = analyze_with_llama3_api(report_prompt) 
     
     return jsonify({"report": report_content, "date": datetime.now().strftime("%Y-%m-%d")}), 200
+
+
+
+@app.route('/api/stats', methods=['GET'])
+def get_stats():
+    if not os.path.exists(DB_FILE): return jsonify({}), 200
+    with open(DB_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    stats = {
+        "by_sector": {},
+        "by_country": {},
+        "total_opportunity_value": 0 # CAPEX toplamı
+    }
+
+    for item in data:
+        # Sektör bazlı dağılım
+        sector = item.get("industry", {}).get("sector", "Bilinmiyor")
+        stats["by_sector"][sector] = stats["by_sector"].get(sector, 0) + 1
+        
+        # Ülke bazlı dağılım
+        for country in item.get("entities", {}).get("countries", []):
+            stats["by_country"][country] = stats["by_country"].get(country, 0) + 1
+            
+        # Toplam Yatırım Hacmi (CAPEX)
+        capex = item.get("signals", {}).get("capex_usd", 0)
+        if capex: stats["total_opportunity_value"] += capex
+
+    return jsonify(stats)
+
+
+@app.route('/health', methods=['GET'])
+def health_check():
+    health_status = {
+        "status": "healthy",
+        "database": "connected" if os.path.exists(DB_FILE) else "not_found",
+        "timestamp": datetime.now().isoformat(),
+        "version": "v1.0-MVP" # SOW 1.2 sürüm takibi
+    }
+    return jsonify(health_status), 200
+
+
+def is_valid_rss(url):
+    """F3: RSS bağlantısının geçerliliğini kontrol eder."""
+    try:
+        # feedparser ile parse etmeyi dene
+        feed = feedparser.parse(url)
+        # bozo == 1 ise veya haber listesi boşsa geçersiz kabul et
+        if feed.bozo == 1 or len(feed.entries) == 0:
+            return False
+        return True
+    except Exception:
+        return False
+
+
+
+
 
 
 

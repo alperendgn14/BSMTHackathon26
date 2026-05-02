@@ -2,15 +2,15 @@
     {
         "source": {
             "publisher": "Google News RSS",
-            "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOc01hdTBXTjRSdXkyOEhGX0FvWDJWYTgydzlreWIwMGgzbFBoSHFhOWZxdXBWOHQ0bXFDU0V0MzBaSEJEckZXQXBzVDllRzUyZExJbnNKOWhCMWFRelJtNmJFeTViUkFPSVkzdTIyaE5JdlduY2FrQ3Zrdzk0Q0s0NzBaQnI0S2UwTEtmT0xnM3lYdw?oc=5",
-            "retrieved_at_utc": "2026-05-02T16:31:12.656570+00:00",
+            "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPX29RSk5wQTlrZXlOblRzMC05b0VBOFNja0wzVjhCWGlEVmZyQTd4RmR3NDdwSm9PMWtZck5pWE5XOXM3TVVpb2hYZ3NaaF9uT1R0aEpTb1U1QXU2MVpFeGVSb05PemtmOTdrQnZvalRlZkM0bmI3ZXNMMldqSnhlTzRtNENyYmtSeEZGSE9yN0JmTWEzWWxB?oc=5",
+            "retrieved_at_utc": "2026-05-02T16:45:13.210851+00:00",
             "language": "en"
         },
         "article": {
-            "text_summary_tr": "Otomobil üreticileri, Çin'in nadir toprak mıknatısları üzerindeki hakimiyetine karşı çare arıyorlar.",
+            "text_summary_tr": "Hindistan'da kimyasal krizi ülkenin toksik atık deposu haline gelmesine neden oluyor. Ülke, artan kimyasal atık üretimi ve yetersiz atık yönetimi nedeniyle büyük bir çevre krizinin eşiğinde.",
             "event_type": "other",
             "confidence": 0.6,
-            "title": "Automakers Race to Find Workaround to China’s Stranglehold on Rare-Earth Magnets - WSJ"
+            "title": "India Chemical Crisis: Is the Country Becoming a Toxic Dumping Ground? - Deccan Herald"
         },
         "entities": {
             "company": {
@@ -34,14 +34,14 @@
             "timeline": null
         },
         "bios_fit": {
-            "rationale_tr": "Nadir toprak mıknatısları üzerindeki hakimiyete karşı Automakers'ın çare araması, endüstriyel relokasyon analizi için fırsat çıkaran bir gelişmedir.",
+            "rationale_tr": "Metin, Hindistan'da kimyasal atık yönetimi ile ilgili bir krizden bahsettiğini ve ülkenin toksik atık deposu haline gelebileceğini belirttiği için BIOS kapsamında fırsat çıkmamıştır.",
             "recommended_action": "monitor",
-            "score": 57,
-            "score_confidence": 0.6
+            "score": 18,
+            "score_confidence": 0.4
         },
         "assumptions": [
-            "Nadir toprak mıknatısları talebinin artsı",
-            "Çin'in mıknatısları üzerindeki hakimiyetinin devam etmesi"
+            "Ülkenin toksik atık yönetimi konusunda ciddi sorunları vardır",
+            "Kimyasal atık üretimi ve yönetimi ülkenin ekonomisini ve çevre sağlığını olumsuz etkilemektedir"
         ],
         "agent_version": "v1.0",
         "raw_hash": "3e58a9abb037341483d44b5476cb4158",
@@ -49,53 +49,41 @@
             {
                 "title": "Chongqing Steps Up Industrial Shift Efforts as China’s Westward Manufacturing Relocation Accelerates - iChongqing",
                 "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNdk5wVU00QXRVMDE3MklkVXFZY3M1Y1RnT2xQdTFqcnZlLURPNlNSMVAwZ2ZJM3hseFZ3X3VJVUF0VnZLQi1lMUlIQkhac0lZeFpLQ1daV05mazFrNjdsaHlRZm9zTVlobkpocUUxYTJYU1dNOW1lVVNDSmFqR0pvbTl1aU91WmJnTVpENlV6U0xGRHkyd1ZXaENTaUJ4NTVuLS03TEE3TV9SMnNZVUhHbWZfdzRQVHpzbFdOaC1QcVhYTXozdlc4VTQ0NHQ1NFVhdkFUc0xB0gHbAUFVX3lxTE5JTEZMbWJ3WFRENGh5UDNzdXVTbjgyZy1UaE1Wc1AzSVB0UDFjVFFJeVIxWjFIWUFfZ3VqLTJBNlYzcHZjR00yU3NKeE5KdFFrMmt6dmpIVnhVX0Q0UHlWeGRZcEdQMV9abGstdnAydGl4ckRZenZHN2Rpd3V6alJhemlDMkV2eHRVT0IyT084dktDdHBza25KQ0lWcnhzNGM4Uk13N29BNGVGYkQweDgxeUF1Z3ktY2tFZ0dZWFFzaXBTaEpESVYtV1FqMGhzUGNhbTVlYWxreWhVcw?oc=5",
-                "score": 52,
-                "date": "2026-05-02T16:28:32.414655+00:00"
+                "score": 48,
+                "date": "2026-05-02T16:44:56.602455+00:00"
             },
             {
                 "title": "EU completes record heavy-lift power plant relocation from Lithuania to Ukraine - Project Cargo Journal",
                 "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxPU3VsZTVrRlVIZV9HbHVLWkVYVUUtd3RhaHlrZnJCRDFPblVnV21PX2ZnbXJ4QmdvcW9NUjZLcVBvZVAweWpNTnNWcTc1dWhoUVM3WThmejZhQVZpdnJ4UDFmM2dqTG1sRFc3T0pkZDBwdy1VSFF5cGY5TURYdlpYdDRVejBLOGEzcG5NeDBDYVFOS1g4R014S0ZqYmFoNG1HS3lqTHl1Q2ZYTklEUlNGZ1BXY0xTUjhTWFhycmduNmxNYUF2NVZTQWdweERsSzh2STRVS0tBY2ZUV3dvdlExY0lnc2I?oc=5",
-                "score": 73,
-                "date": "2026-05-02T16:28:37.915594+00:00"
+                "score": 75,
+                "date": "2026-05-02T16:45:00.137376+00:00"
             },
             {
                 "title": "Trump touts U.S. auto plant construction boom. Carmakers' actions tell different story - CBC",
                 "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOcEkwcEJpVHdzcG1Qak9MX1VSQ3JsUzJxWl9jSTF0cV9oZkw1M3pNR1hacDFrNkpxMGRvOEV3MjN1UTRiblFZSEdrQ1BzNFdRWk5VYmZSSFYyVTMyLUEwcXBLRlBaTHE4X0Rubm1zMlQ5SG5rU0tpaWR1LTVaLVhLVlg5Z1dQbUdSSm5DUE5WN0lUa2Iwc1dHVHgxeE1nNWRGSFBVcmZ3?oc=5",
-                "score": 58,
-                "date": "2026-05-02T16:28:43.483743+00:00"
+                "score": 42,
+                "date": "2026-05-02T16:45:05.357714+00:00"
             },
             {
                 "title": "How can the EU respond to companies moving their production elsewhere? - Euronews.com",
                 "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNdTJZRXdtam5lb01iWHpXQUMzMUVnQ2JXOUxDbGp0UzBkeVowZ25kd1h1MmhDRzZRbVNQcWZpUEJIdVJmME1jQ2tkMkViU0poWE9iUmRiRTNvZTAwM0lXbV81XzRoVTlveTVKSXBEcElFbUJkczJ6OVhkWnRJNDhHQ3F2cTdZZWdvX0ZnWWdBRnZ6dUtmeGV2cnRXNHlja0NqZkZmSEhVWkxvcVdxSWZBRHZEV0VJUQ?oc=5",
-                "score": 57,
-                "date": "2026-05-02T16:28:47.053978+00:00"
-            },
-            {
-                "title": "India Chemical Crisis: Is the Country Becoming a Toxic Dumping Ground? - Deccan Herald",
-                "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPX29RSk5wQTlrZXlOblRzMC05b0VBOFNja0wzVjhCWGlEVmZyQTd4RmR3NDdwSm9PMWtZck5pWE5XOXM3TVVpb2hYZ3NaaF9uT1R0aEpTb1U1QXU2MVpFeGVSb05PemtmOTdrQnZvalRlZkM0bmI3ZXNMMldqSnhlTzRtNENyYmtSeEZGSE9yN0JmTWEzWWxB?oc=5",
-                "score": 46,
-                "date": "2026-05-02T16:28:50.662493+00:00"
-            },
-            {
-                "title": "Chinese Factories Are Looking for the Next China - The New York Times",
-                "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQbEZNQUJxd3JSZmV2NGhHM3hVUjJGTlFvTXNDSVM2RlJsVThuOUMwd0xWYTVHSlVYLVM0TnVPVWRodzNPRmZUV0hacThfU2NoaklIMmo0T3dkU1NhNkpuWDZEQXhyY3JQelpVbFpfX1p2NnVoNE50NDFVa0luQ1FxcVln?oc=5",
-                "score": 52,
-                "date": "2026-05-02T16:30:58.023733+00:00"
+                "score": 23,
+                "date": "2026-05-02T16:45:09.483041+00:00"
             }
         ]
     },
     {
         "source": {
             "publisher": "Google News RSS",
-            "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPZ0hidmdiWUtjYzFhOEFtX296RkxUN3Y5eEdpVGd0aHBoZWpTYjUyVkVlSUJiQk5IUlJrSEpzODFNNUgyejlxX0t5QXBfdEZzUDQxb2Ewa3ZMTHowM1JDR2luUUJlRGZIVXNYMThKMzQ1SUI4T1ZKZ2J3eS1wZFJrYkx3bVgyMmZ2MWdKOFZ3NHEwc21hN2l4eXJWazZQTVl0SlJJTDd1clhiamvSAbABQVVfeXFMT1F0NkZNZ3FiN0xFMGRyMHc4SUFVRko1N0lfNWgwZUdaejMtOWdOa3NCMEpVQnRWNmE4N3VrT0x2OGZvWXVLSUpDNE15Z3V2RWdaS2JsQUlsd2JrOTNGMmtwTHYzVjdJbGZqZHh5SXpMeVlSTXF0ZVJJNXhqa2N5ZnNPUXBULWdKQWc0QVJtX0RQSjU1R3ZkcUpTNHBrZ09uVkh6TjRuZFJVdU90YTVyaFY?oc=5",
-            "retrieved_at_utc": "2026-05-02T16:30:59.785919+00:00",
+            "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPZTdSYmhXekpBQzV0bTk1SlBpLTNNNEVJUTVRQ2o5V19fdnlMUmhxMklBYWpJaHlrZ2FRUmJNLUJXck12RUJ2cHlYRGJrQkVFZWZjRW1TNm9aVWdxOV90NWpGNG5aLTBnbGZWMDZNRy0tazBtZjVWQl82SVFqLXBPeFZyQ09iS0oxR1RBNFlUYkNaa0NGNFdvVWxSb2p6ZTZhT1NVTzg5OTByWXZOb0x2TjhUR3dHUdIBuwFBVV95cUxPcm1xNGtUMzhWLUhSbXR1MXhSMHBuU3F2N1BvbmllSWVCX1FLSFRwcnlIWm5nWlF6VUdXWGVQVGZkUm11U05PWWgzVGFJNkxUd3V1NzJGX1p3NmJvNXlVNnozVXU5eTZFdTNBTzA4VXhmaXlZUVFzY3lBTVB3NXVSYmhVdWE1YzBKWndQck9qSTVkamhyaHZ1Y2d5RTlkalpTS0tBTWpoZ0Rua3hITGkwMGlrR3hZZnpRNjNv?oc=5",
+            "retrieved_at_utc": "2026-05-02T16:44:58.294752+00:00",
             "language": "en"
         },
         "article": {
-            "text_summary_tr": "Kumho Tire'nin Avrupa'daki fabrika açma planını erteleyebileceği öne sürüldü.",
-            "event_type": "expansion",
-            "confidence": 0.7,
-            "title": "Kumho Tire feared to delay push for European plant - The Korea Times"
+            "text_summary_tr": "Kumho Tire, fabrika taşınması anlaşmasını uzatılan süreden sonra imzaladı. Kumho Tire, fabrika taşınması anlaşmasını imzaladı. Şirketin bu kararı uzun süredir bekleniyordu.",
+            "event_type": "relocation",
+            "confidence": 0.9,
+            "title": "Kumho Tire reaches long-delayed deal on factory relocation - The Korea Times"
         },
         "entities": {
             "company": {
@@ -110,10 +98,10 @@
         },
         "industry": {
             "sector": "Otomotiv",
-            "line_type": "Lastik üretim hattı",
+            "line_type": "Lastik Üretimi",
             "equipment_keywords": [
                 "Lastik makineleri",
-                "Üretim ekipmanları"
+                "Üretim hatları"
             ]
         },
         "signals": {
@@ -122,34 +110,28 @@
             "timeline": null
         },
         "bios_fit": {
-            "rationale_tr": "Kumho Tire'nin Avrupa'da fabrika açma planı, endüstriyel relokasyon bakımından fırsat teşkil edebilir.",
+            "rationale_tr": "Kumho Tire'in fabrika taşınması anlaşması, şirketin üretim kapasitesini artırma ve operasyonel verimliliği tăngırma hedeflerine ulaşmasına yardımcı olabilir.",
             "recommended_action": "monitor",
-            "score": 69,
-            "score_confidence": 0.73
+            "score": 55,
+            "score_confidence": 0.6
         },
         "assumptions": [
-            "Avrupa'daki fabrika açma planının ertelenmesi, şirketin küresel büyüme stratejilerini etkileyebilir."
+            "Taşınmanın şirketin üretim kapasitesini artırmasına yardımcı olacağı",
+            "Taşınmanın şirketin operasyonel verimliliğini tăngırmasına yardımcı olacağı"
         ],
         "agent_version": "v1.0",
         "raw_hash": "2d6a3676c7c90846dac5275bb2cbc731",
-        "updates": [
-            {
-                "title": "Kumho Tire reaches long-delayed deal on factory relocation - The Korea Times",
-                "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPZTdSYmhXekpBQzV0bTk1SlBpLTNNNEVJUTVRQ2o5V19fdnlMUmhxMklBYWpJaHlrZ2FRUmJNLUJXck12RUJ2cHlYRGJrQkVFZWZjRW1TNm9aVWdxOV90NWpGNG5aLTBnbGZWMDZNRy0tazBtZjVWQl82SVFqLXBPeFZyQ09iS0oxR1RBNFlUYkNaa0NGNFdvVWxSb2p6ZTZhT1NVTzg5OTByWXZOb0x2TjhUR3dHUdIBuwFBVV95cUxPcm1xNGtUMzhWLUhSbXR1MXhSMHBuU3F2N1BvbmllSWVCX1FLSFRwcnlIWm5nWlF6VUdXWGVQVGZkUm11U05PWWgzVGFJNkxUd3V1NzJGX1p3NmJvNXlVNnozVXU5eTZFdTNBTzA4VXhmaXlZUVFzY3lBTVB3NXVSYmhVdWE1YzBKWndQck9qSTVkamhyaHZ1Y2d5RTlkalpTS0tBTWpoZ0Rua3hITGkwMGlrR3hZZnpRNjNv?oc=5",
-                "score": 81,
-                "date": "2026-05-02T16:28:35.714954+00:00"
-            }
-        ]
+        "updates": []
     },
     {
         "source": {
             "publisher": "Google News RSS",
             "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOSjBsV3BqWDg5dkMwaUZFQ2ZxeEFYeHhMQUhFbjNBU0lXX2lTREdLSHg1bmxjaXNfanE3RHZSMDZKdlBCU29GbWNlTkg2ck1nUGwxaGQ1ZjdaWjBMS0M4dHlUdktFTW1RY0FoWGc5czd3WmIzbkZfTldSV0VXS0RVVmhBYTd5NVk2TDB3MGxvRDA?oc=5",
-            "retrieved_at_utc": "2026-05-02T16:28:39.667698+00:00",
+            "retrieved_at_utc": "2026-05-02T16:45:01.936418+00:00",
             "language": "en"
         },
         "article": {
-            "text_summary_tr": "Mitel, IP telefon üretimini Almanya'ya taşıyor. Bu hareketin ardındaki reasonlar neler?",
+            "text_summary_tr": "Mitel, IP telefon üretimini Almanya'ya taşıyor. Şirketin bu kararının arkasında hangi sebepler yatıyor?",
             "event_type": "relocation",
             "confidence": 0.9,
             "title": "Why is Mitel Moving its IP Phone Manufacturing to Germany? - Manufacturing Digital"
@@ -166,10 +148,11 @@
             "to_location": "Almanya"
         },
         "industry": {
-            "sector": "Telekomünikasyon",
-            "line_type": "İletişim ürünleri",
+            "sector": "İletişim",
+            "line_type": "IP Telefon",
             "equipment_keywords": [
-                "IP telefon"
+                "IP Telefon",
+                "Üretim"
             ]
         },
         "signals": {
@@ -178,13 +161,14 @@
             "timeline": null
         },
         "bios_fit": {
-            "rationale_tr": "Şirketin üretimini Almanya'ya taşıması, endüstriyel relokasyon trendine uyuyor.",
+            "rationale_tr": "Mitel'in IP telefon üretimini Almanya'ya taşımaya karar vermesi, şirketin üretimi için daha avantajlı bir konum arayışında olabileceğini gösteriyor.",
             "recommended_action": "monitor",
-            "score": 67,
-            "score_confidence": 0.73
+            "score": 61,
+            "score_confidence": 0.8
         },
         "assumptions": [
-            "Mitel'in hareketinin arkasındaki nedenler arasında vergi avantajları veya daha iyi üretim koşulları olabileceği"
+            "Mitel'in üretim maliyetlerini giảmdırmaya çalışıyor olabileceği",
+            "Şirketin Almanya'da daha iyi bir iş ortamı bulabileceği"
         ],
         "agent_version": "v1.0",
         "raw_hash": "b523ad31eb917e96330f2fc2cb7e816d",
@@ -194,13 +178,13 @@
         "source": {
             "publisher": "Google News RSS",
             "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQSDNmVHRBR2Z4QjZyTkpPX1NEbmNqa1F6dlM4M2VJWkM4RTF3M1dYY0h0d1JaR3NCMVR3TGlqWElPMUdYQnFlZDNCNHp2NmJkY0o2VVZHYldJYzZHanlEZFVXLVNxYmZaSFZrWURIeXNJY1FVTDZZeDZOLXdFQjZSdVMweG5OS0tNUzM5aw?oc=5",
-            "retrieved_at_utc": "2026-05-02T16:28:41.806169+00:00",
+            "retrieved_at_utc": "2026-05-02T16:45:03.670054+00:00",
             "language": "en"
         },
         "article": {
-            "text_summary_tr": "Avrupa Komisyonu, 'AI Fabrikaları' projesini hayata geçirmeye devam ediyor.",
-            "event_type": "new_plant",
-            "confidence": 0.0,
+            "text_summary_tr": "Avrupa Komisyonu, yapay zeka endüstrisini desteklemek amacıyla 'AI Factories' projesini hayata geçirmeyi planlıyor.",
+            "event_type": "expansion",
+            "confidence": 0.7,
             "title": "European Commission is moving ahead with ‘AI Factories’ - Euractiv"
         },
         "entities": {
@@ -215,10 +199,11 @@
             "to_location": null
         },
         "industry": {
-            "sector": "Teknoloji",
-            "line_type": "Yazılım",
+            "sector": "Yapay Zeka",
+            "line_type": null,
             "equipment_keywords": [
-                "AI"
+                "AI",
+                "yapay zeka"
             ]
         },
         "signals": {
@@ -227,13 +212,13 @@
             "timeline": null
         },
         "bios_fit": {
-            "rationale_tr": "Skor gerekçesi: Proje, teknoloji sektöründe yeni bir girişim oluşturmayı amaçlıyor.",
+            "rationale_tr": "Avrupa Komisyonu'nun 'AI Factories' projesi, yapay zeka endüstrisinin büyümesi için önemli bir adım olarak görülüyor.",
             "recommended_action": "monitor",
-            "score": 66,
-            "score_confidence": 0.73
+            "score": 47,
+            "score_confidence": 0.6
         },
         "assumptions": [
-            "Projenin yapay zeka teknolojisi üzerine odaklandığı varsayılıyor."
+            "Avrupa Komisyonu'nun bu proje ile ilgili daha fazla yatırım yapacağı varsayımı"
         ],
         "agent_version": "v1.0",
         "raw_hash": "04ee7d8b0c20ba286ba10bde0dac72f2",
@@ -243,11 +228,11 @@
         "source": {
             "publisher": "Google News RSS",
             "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOaUR6M0lSYUNKS3NMY0t3WWZ3Z1FvVVRRdE52OURWX0V4OEc0VTMzbDN2RjVTcDJ5aVVoZU1TbENXd3kzSXFFeHctWjM0ZGh4LTJnYlZVTk9JRW55SGdQQkllWlk5dmJkLWI0ckp6eTNYRm91M09JbFlUQkJiLUJrb3FjWkxSWHZlRzlidktiUUFqVEh1cVdEenFCYVFlVmpPRW45Nw?oc=5",
-            "retrieved_at_utc": "2026-05-02T16:28:45.421035+00:00",
+            "retrieved_at_utc": "2026-05-02T16:45:07.067684+00:00",
             "language": "en"
         },
         "article": {
-            "text_summary_tr": "Çin, İskoçya'daki rüzgar türbini fabrikasını Avrupa'ya taşımayı düşünüyor. İngiliz hükümetinin gecikmelerinin ardından bu adım atılabilecek.",
+            "text_summary_tr": "Çin, İskoçya'daki rüzgar türbini fabrikasını hükümet gecikmeleri dopo Avrupa'ya taşımayı düşünüyor.",
             "event_type": "relocation",
             "confidence": 0.7,
             "title": "China mulls moving Scottish wind turbine factory to Europe after Government delays - The Telegraph"
@@ -258,17 +243,17 @@
                 "ticker": null
             },
             "countries": [
-                "Çin",
-                "İskoçya"
+                "China",
+                "Scotland"
             ],
             "from_location": "İskoçya",
             "to_location": "Avrupa"
         },
         "industry": {
             "sector": "Enerji",
-            "line_type": "Rüzgar türbini",
+            "line_type": "Rüzgar Türbini",
             "equipment_keywords": [
-                "Rüzgar türbini"
+                "rüzgar türbini"
             ]
         },
         "signals": {
@@ -277,14 +262,14 @@
             "timeline": "Bilgi Yok"
         },
         "bios_fit": {
-            "rationale_tr": "İskoçya'daki rüzgar türbini fabrikasının Avrupa'ya taşınmasıyla ilgili haber, endüstriyel relokasyon açısından önem arz ediyor.",
+            "rationale_tr": "Haber, Çin'in İskoçya'daki rüzgar türbini fabrikasını Avrupa'ya taşınmayı düşünmesi nedeniyle endüstriyel relokasyon fırsat alanı olabilir.",
             "recommended_action": "monitor",
-            "score": 81,
-            "score_confidence": 0.73
+            "score": 69,
+            "score_confidence": 1.0
         },
         "assumptions": [
-            "İskoçya'da bulunan rüzgar türbini fabrikasının tamamı taşınabilir.",
-            "Avrupa'ya taşınma kararı alındığında, yeni lokasyonun seçimi için çeşitli faktörler öne çıkabilir."
+            "Hükümet gecikmeleri fabrika taşınmasına neden oldu.",
+            "Çin, Evropadaki başka bir ülkeye taşınabilir."
         ],
         "agent_version": "v1.0",
         "raw_hash": "1b528f7d1a86a4acbcf23f0827125936",
@@ -294,11 +279,11 @@
         "source": {
             "publisher": "Google News RSS",
             "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQdjFHMXhOazkwYTBwbE9WdWE5NGhXVkVKdGZGZnU0cHBwakxUemFWY1Nua1lKMWgzYzdKRG5sSFFmRDBDd3RsRUhfa1NVU0ZNOU82aGhSdHozSWxDUmlGX1NPUExYcENfSGVpRGZKclFOOE9ta3lYdGVjdHhnUkRQSA?oc=5",
-            "retrieved_at_utc": "2026-05-02T16:28:48.896459+00:00",
+            "retrieved_at_utc": "2026-05-02T16:45:11.197975+00:00",
             "language": "en"
         },
         "article": {
-            "text_summary_tr": "BYD, Macaristan'daki fabrikasında seri üretime başlangıç tarihini erteleyecek, Türkiye'deki fabrikada üretimi artırarák",
+            "text_summary_tr": "BYD, Macaristan fabrikasındaki seri üretimi ertelerken, Türkiye fabrikasındaki üretimi artıracak. ",
             "event_type": "relocation",
             "confidence": 0.7,
             "title": "BYD to delay mass production at Hungary plant while moving up production at Turkey plant, report says - CnEVPost"
@@ -320,7 +305,7 @@
             "line_type": "Elektrikli araç",
             "equipment_keywords": [
                 "Elektrikli araç",
-                "Üretim hattı"
+                "Otomotiv"
             ]
         },
         "signals": {
@@ -329,365 +314,16 @@
             "timeline": null
         },
         "bios_fit": {
-            "rationale_tr": "BYD'nin Macaristan'daki fabrikasında üretim ertelenmesi ve Türkiye'deki fabrikada üretim artması, endüstriyel relokasyon için bir fırsat oluşturabilir.",
+            "rationale_tr": "BYD'nin üretim planlarını değiştirmesi, şirketin üretim stratejisinin değişebileceğini gösteriyor.",
             "recommended_action": "monitor",
-            "score": 81,
-            "score_confidence": 0.73
+            "score": 85,
+            "score_confidence": 1.0
         },
         "assumptions": [
-            "BYD'nin üretim erteleme ve artırma kararının ekonomik nedenlere dayandığı"
+            "BYD'nin üretim planlarındaki değişiklikler, şirketin gelecekteki üretim capacidadini etkileyebilir."
         ],
         "agent_version": "v1.0",
         "raw_hash": "d213acd8fff0ce724e145e9b080b1122",
-        "updates": []
-    },
-    {
-        "source": {
-            "publisher": "Google News RSS",
-            "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1OdFNHRjVTLURHUFdzWVlsU0V6SXN5TzZpN2hSazFIalFHY2pPcFdwRXZUaFFSZjFIaGtfOHFlWmtUVGFYWTJyR05lbDd1cnNZWkZROFNNalMzUFNGWmUtVWhoM2I5YTRq?oc=5",
-            "retrieved_at_utc": "2026-05-02T16:31:01.754477+00:00",
-            "language": "en"
-        },
-        "article": {
-            "text_summary_tr": "Niederzissen'de temel atma töreni: Ahrweiler'deki ZF fabrikasının taşınmasına başlamanın işareti",
-            "event_type": "relocation",
-            "confidence": 0.9,
-            "title": "Groundbreaking ceremony in Niederzissen: Starting signal for the relocation of the ZF plant in Ahrweiler - ZF Press Center"
-        },
-        "entities": {
-            "company": {
-                "name": "ZF",
-                "ticker": null
-            },
-            "countries": [
-                "Almanya"
-            ],
-            "from_location": "Ahrweiler",
-            "to_location": "Niederzissen"
-        },
-        "industry": {
-            "sector": "Otomotiv",
-            "line_type": "Üretim hattı",
-            "equipment_keywords": [
-                "otomotiv parça",
-                "aktarma organları"
-            ]
-        },
-        "signals": {
-            "capex_usd": null,
-            "jobs_impact": null,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "ZF'nin Ahrweiler'den Niederzissen'e taşınması, yerel ekonomi ve endüstri için fırsatlar sunabilir",
-            "recommended_action": "monitor",
-            "score": 73,
-            "score_confidence": 0.73
-        },
-        "assumptions": [
-            "Taşınma işlemi kısa süre içinde gerçekleşebilir",
-            "ZF'nin bu hareketi şirketin genişleme planlarına bir parçası olabilir"
-        ],
-        "agent_version": "v1.0",
-        "raw_hash": "665c33b4f58c4eb51add2d45eceb4f60",
-        "updates": []
-    },
-    {
-        "source": {
-            "publisher": "Google News RSS",
-            "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQN1BEZVJzdTYxVVV1ZGc4Z3hlSW1XT2FBOFlhY1VnRnNGTFN2WUtQY01OS0NoRUI3YWYyaThHc3RpcV84ZjRsMmZ0YzFmMXBoSE82UGc1cDRtaE1pdUZfeFZZTkZhSHpaSjAzNU9TcTFxSU1CUl95cGEzV2JYeW5yZHlWVTlTaGZiSm5GT3FwZ2hlajlPeVJrdjE1amdKNmZYcDNnMXJR?oc=5",
-            "retrieved_at_utc": "2026-05-02T16:31:03.636007+00:00",
-            "language": "en"
-        },
-        "article": {
-            "text_summary_tr": "Stellantis, 120 yıllık Vauxhall fabrikasını kapatma planları yapıyor. Bu durum, çalışanların 140 mil uzaklaşmak veya işlerini kaybetmek arasında seçim yapmasını gerektiriyor.",
-            "event_type": "relocation",
-            "confidence": 0.9,
-            "title": "Vauxhall workers face 140-mile relocation or losing their jobs as Stellantis plans to shutter 120-year-old factory - Fortune"
-        },
-        "entities": {
-            "company": {
-                "name": "Stellantis",
-                "ticker": null
-            },
-            "countries": [
-                "İngiltere"
-            ],
-            "from_location": "Vauxhall",
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Otomotiv",
-            "line_type": "Üretim hattı",
-            "equipment_keywords": [
-                "araç üretim ekipmanı"
-            ]
-        },
-        "signals": {
-            "capex_usd": null,
-            "jobs_impact": -140,
-            "timeline": "gelecek"
-        },
-        "bios_fit": {
-            "rationale_tr": "Stellantis tarafından planlanan fabrika kapatması ve çalışanların 140 mil uzaklaşmasına neden olabilecek olay, endüstriyel relokasyon için fırsat oluşturabilir.",
-            "recommended_action": "monitor",
-            "score": 88,
-            "score_confidence": 0.73
-        },
-        "assumptions": [
-            " Fabrikanın kapatılması, yeni bir tesiste üretim hattının kurulmasına neden olabilir."
-        ],
-        "agent_version": "v1.0",
-        "raw_hash": "47fae6c30ffcc7f6268687ea356563dc",
-        "updates": []
-    },
-    {
-        "source": {
-            "publisher": "Google News RSS",
-            "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQNHl4YkZpMHEzX09XcjhwcXBxRTE2alNFOHlQVl9WM1FMZG9aNm0wemRUR1BJNnJQcERkbUNTM0NBRFozRXNra01XNFlsYUpOMHA2M1N0eFAwNFZFVHJfRV9fNGIxUW5odk9KaHRqRVh1Z3JLNEVmYlMxZjJPRDEtWkpONXI0a1VmSi1uRmotS25VOW94?oc=5",
-            "retrieved_at_utc": "2026-05-02T16:31:05.547668+00:00",
-            "language": "en"
-        },
-        "article": {
-            "text_summary_tr": "John Deere'nin üretimini yeniden konumlandırması ABD'deki işleri etkiliyor. Şirket, üretim tesisi taşıma sürecinde.",
-            "event_type": "relocation",
-            "confidence": 0.9,
-            "title": "John Deere’s Manufacturing Relocation Affects US Jobs - Manufacturing Today"
-        },
-        "entities": {
-            "company": {
-                "name": "John Deere",
-                "ticker": null
-            },
-            "countries": [
-                "USA"
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "imalat",
-            "line_type": "tarım ekipmanları",
-            "equipment_keywords": [
-                "traktör",
-                "tarımsal ekipman"
-            ]
-        },
-        "signals": {
-            "capex_usd": null,
-            "jobs_impact": null,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "John Deere'nin üretim tesisi taşıma planı, şirketin faaliyet alanını genişletme veya verimliliği artırma çabasının bir göstergesi olabilir.",
-            "recommended_action": "monitor",
-            "score": 67,
-            "score_confidence": 0.73
-        },
-        "assumptions": [
-            "Şirketin üretim tesisi taşınmasının ardında yatan nedenin maliyet düşürme veya daha iyi bir lokasyon bulunması olabileceği varsayımı"
-        ],
-        "agent_version": "v1.0",
-        "raw_hash": "2ab6ac3772aa9aa2af361029237acc11",
-        "updates": []
-    },
-    {
-        "source": {
-            "publisher": "Google News RSS",
-            "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1feEZWWU94ZWhmaWpYYS1NOWloZTBCNmRiUTBySGpjTDZER2VHT3VscEJ4WDBYN3pKdlFBSkMyMEJOa1VBUUFxc0k3dlVmRzhpSVJmZnJsbXM0UUJvX2RhNy0wOE0zYVNWc0Fma05OVjhRZEUwaVViTExn?oc=5",
-            "retrieved_at_utc": "2026-05-02T16:31:07.138792+00:00",
-            "language": "en"
-        },
-        "article": {
-            "text_summary_tr": "Rhodium Group, Çin'in küresel tedarik zincirlerindeki posiciónu hakkında bir analiz gerçekleştirdi.",
-            "event_type": "other",
-            "confidence": 0.5,
-            "title": "China and the Future of Global Supply Chains - Rhodium Group"
-        },
-        "entities": {
-            "company": {
-                "name": "Rhodium Group",
-                "ticker": null
-            },
-            "countries": [
-                "Çin"
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": null,
-            "jobs_impact": null,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "Metin, bir şirketin relocation planı hakkında bilgi vermemektedir.",
-            "recommended_action": "monitor",
-            "score": 35,
-            "score_confidence": 0.6
-        },
-        "assumptions": [
-            "Rhodium Group'un çalışması, küresel tedarik zincirlerinde Çin'in etkisinin analiz edilmesi amacıyla yapıldı."
-        ],
-        "agent_version": "v1.0",
-        "raw_hash": "c203cfe7b1ed435f5391ffa84369cd3d",
-        "updates": []
-    },
-    {
-        "source": {
-            "publisher": "Google News RSS",
-            "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQVkhuMHlCUGNTZzhwZW5FS2RaQ0l5QU45MzFxcmFpWnlhZVZnenhlekxvOFNVbWIyS3phb1Vkc1BfanpIdWc1QUZnS0ZWbHU4czBFTG9HMEVVY19oLTcyWkNZNmVaSTlOV29NU3RJMEhXR3AtT3dZZ0ZtSFk2VUdPZUp4RjJyRzlYdUcxenpUV2l6cE1IclJYY2V3?oc=5",
-            "retrieved_at_utc": "2026-05-02T16:31:08.921637+00:00",
-            "language": "en"
-        },
-        "article": {
-            "text_summary_tr": "Fabrika Relokasyon Hizmeti Pazarı Patlama Noktasına Gelmek Üzere. Graebel Companies Inc., Atlas Van Lines ve Mayflower Transit gibi şirketler bu sektörde faaliyet gösteriyor.",
-            "event_type": "expansion",
-            "confidence": 0.6,
-            "title": "Factory Relocation Service Market Is Going to Boom | Graebel Companies Inc. • Atlas Van Lines • Mayflower Transit - openPR.com"
-        },
-        "entities": {
-            "company": {
-                "name": "Graebel Companies Inc.",
-                "ticker": null
-            },
-            "countries": [
-                "USA"
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Lojistik ve Taşımacılık",
-            "line_type": "Nakliye Hizmetleri",
-            "equipment_keywords": [
-                "nakliye",
-                "lojistik"
-            ]
-        },
-        "signals": {
-            "capex_usd": null,
-            "jobs_impact": null,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "Pazarın büyüme potansiyeli nedeniyle şirketin faaliyetlerine dikkat etmek gerekiyor.",
-            "recommended_action": "monitor",
-            "score": 63,
-            "score_confidence": 0.73
-        },
-        "assumptions": [
-            "Pazarın büyüme hızının yüksek olacağı",
-            "Şirketlerin rekabetinin artacağı"
-        ],
-        "agent_version": "v1.0",
-        "raw_hash": "122eb4cd1a0bbceb054cce3b08ce3d9b",
-        "updates": []
-    },
-    {
-        "source": {
-            "publisher": "Google News RSS",
-            "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQcF9FSUxGekN3VGs5d2t3WTh1NWgzNTY0b3NSYTgwRlE1am82LVpvNnNZcElTS2RzNlo5WU9OZGs0d25ETzZTdUtqTU5GZEI2V05DQkYxbGVxc01nUEZXQVBUMHh0ekFQT1M1XzlEVFY1ZnpFSTlEQnd3a0szMVNYV0dlSDNNNzFUTzZqQWlSQmtXVlV4NUFPOWFkQWstaVRQRWRZd3pyZDVQWGhFaXl0VE9Zaw?oc=5",
-            "retrieved_at_utc": "2026-05-02T16:31:10.770032+00:00",
-            "language": "en"
-        },
-        "article": {
-            "text_summary_tr": "Birleşik Devletler'den Avrupa'ya üretimini kaydıran bircombine üreticisi, uzmanlara göre gümrük vergileri nedeniyle daha fazlasının takip edeceği anlamına geliyor.",
-            "event_type": "relocation",
-            "confidence": 0.9,
-            "title": "As combine manufacturer shifts production to Europe from U.S., experts say tariffs mean more may follow - CBC"
-        },
-        "entities": {
-            "company": {
-                "name": "combine manufacturer",
-                "ticker": null
-            },
-            "countries": [
-                "United States",
-                "Europe"
-            ],
-            "from_location": "U.S.",
-            "to_location": "Europe"
-        },
-        "industry": {
-            "sector": "tarım ekipmanları",
-            "line_type": "combine",
-            "equipment_keywords": [
-                "tarım ekipmanları",
-                "combine"
-            ]
-        },
-        "signals": {
-            "capex_usd": null,
-            "jobs_impact": null,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "Şirket, gümrük vergilerini gerekçe göstererek üretimini Avrupa'ya kaydırıyor.",
-            "recommended_action": "monitor",
-            "score": 75,
-            "score_confidence": 0.73
-        },
-        "assumptions": [
-            " Şirkete gümrük vergileri nedeniyle üretim maliyeti artmış olabileceği",
-            "Avrupa'ya üretim kaydırmayla şirketin pazar payı artabileceği"
-        ],
-        "agent_version": "v1.0",
-        "raw_hash": "80bc27a4eca2353b9e557041d95ef808",
-        "updates": []
-    },
-    {
-        "source": {
-            "publisher": "Google News RSS",
-            "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOdUYybVQxTkFRSDhpVFY1bXNQUUtiWVhUTWk1VklDWHhtbnBqUXhUM2JUNGZQajdRTUdDSnFuSFRSX1hESzJIT2NmYTlzZWNZX0xxal9sT0dnZ0VLWUdBUlQtZmY1ZFZJRmJhTnBTREt2ZHNSMEsxb1RXcW5oanU4TkJjbV9ieUp0V1Rv?oc=5",
-            "retrieved_at_utc": "2026-05-02T16:31:14.491616+00:00",
-            "language": "en"
-        },
-        "article": {
-            "text_summary_tr": "İsviçreli bir şirket, Gwinnett'teki fabrika taşınması kapsamında 93 kişiyi işe almaya hazırlanıyor.",
-            "event_type": "relocation",
-            "confidence": 0.9,
-            "title": "Swiss Firm to Hire 93 in Gwinnett Factory Relocation - Global Atlanta"
-        },
-        "entities": {
-            "company": {
-                "name": "İsimsiz",
-                "ticker": null
-            },
-            "countries": [
-                "İsviçre",
-                "ABD"
-            ],
-            "from_location": null,
-            "to_location": "Gwinnett"
-        },
-        "industry": {
-            "sector": null,
-            "line_type": "fabrika",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": null,
-            "jobs_impact": 93,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "Şirketin Gwinnett'e fabrika taşınması ve 93 kişi işe alması, endüstrinin büyümesiyle ilgili bir gösterge olabilir.",
-            "recommended_action": "monitor",
-            "score": 70,
-            "score_confidence": 0.6
-        },
-        "assumptions": [
-            "Şirketin sektörü tentang bilgiler bulunmuyor.",
-            "Taşınma nedeniyle oluşabilecek diğer etkiler hakkında bilgi bulunmuyor."
-        ],
-        "agent_version": "v1.0",
-        "raw_hash": "9f2331c93c09c7259aed1b39b348136a",
         "updates": []
     }
 ]

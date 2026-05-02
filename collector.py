@@ -114,49 +114,86 @@ METİN: {text}"""
         return f'{{"error": "{str(e)}"}}'
 
 def calculate_bios_fit_score(parsed_json, source_url):
-    """SOW Madde 3.1 & 3.2: Resmi Ağırlıklı Skor Formülü."""
+    """
+    Hackathon Raporu v1.2 (Madde 7.4) Resmi Ağırlıklı Skor Formülü.
+    Nihai Formül: Score = 100 * (0.30*E + 0.25*A + 0.20*G + 0.15*T + 0.10*C)
+    """
     art = parsed_json.get("article", {})
     ent = parsed_json.get("entities", {})
     ind = parsed_json.get("industry", {})
     sig = parsed_json.get("signals", {})
 
-    # R: Relokasyon Doğrudanlığı (0.18)
+    # 1. E (Event Type): Olay Tipi Puanı - Ağırlık: 0.30
+    # relocation=1.0, new_plant=0.9, expansion=0.75, tender=0.55, closure=0.45, other=0.1
     e_map = {"relocation": 1.0, "new_plant": 0.9, "expansion": 0.75, "tender": 0.55, "closure": 0.45, "other": 0.1}
-    r_val = e_map.get(art.get("event_type", "other"), 0.1)
+    e_val = e_map.get(art.get("event_type", "other"), 0.1)
 
-    # G: Coğrafi Uygunluk (0.15)[cite: 1]
+    # 2. A (Actor Clarity): Aktör Netliği - Ağırlık: 0.25
+    # company(+0.4), from_loc(+0.25), to_loc(+0.25), sector(+0.1)
+    a_val = 0.0
+    if ent.get("company", {}).get("name"): a_val += 0.40
+    if ent.get("from_location"): a_val += 0.25
+    if ent.get("to_location"): a_val += 0.25
+    if ind.get("sector"): a_val += 0.10
+
+    # 3. G (Geography): Coğrafya Puanı - Ağırlık: 0.20[cite: 1]
+    # Avrupa/TR=1.0, Komşu=0.5, Diğer=0.1, Bilinmiyor=0.3[cite: 1]
     loc_text = (str(ent.get("from_location", "")) + " " + str(ent.get("to_location", ""))).lower()
-    europe_keywords = ["germany", "france", "poland", "turkey", "türkiye", "romania", "hungary", "europe"]
-    g_val = 1.0 if any(k in loc_text for k in europe_keywords) else 0.5 if loc_text.strip() else 0.3
+    europe_keywords = ["germany", "france", "poland", "turkey", "türkiye", "romania", "hungary", "balkans", "uk", "europe"]
+    
+    if any(k in loc_text for k in europe_keywords):
+        g_val = 1.0
+    elif any(k in loc_text for k in ["russia", "africa", "egypt", "morocco"]):
+        g_val = 0.5
+    elif not loc_text.strip():
+        g_val = 0.3
+    else:
+        g_val = 0.1
 
-    # S: Sektör Önceliği (0.12)[cite: 1]
-    sector_text = str(ind.get("sector", "")).lower()
-    priority_sectors = ["otomotiv", "automotive", "energy", "enerji", "battery", "batarya", "chemical", "kimya"]
-    s_val = 1.0 if any(s in sector_text for s in priority_sectors) else 0.5 if ind.get("sector") else 0.1
+    # 4. T (Timeline): Zaman Penceresi - Ağırlık: 0.15[cite: 1]
+    # Yakın(0-6ay)=1.0, Orta(6-18ay)=0.7, Uzun(18-36ay)=0.4, Belirtilmemiş=0.3[cite: 1]
+    timeline_text = str(sig.get("timeline", "")).lower()
+    if any(x in timeline_text for x in ["announced", "will move", "q1", "q2", "6 months"]):
+        t_val = 1.0
+    elif "year" in timeline_text or "2026" in timeline_text:
+        t_val = 0.7
+    elif not sig.get("timeline"):
+        t_val = 0.3
+    else:
+        t_val = 0.4
 
-    # T: Teknik Karmaşıklık (0.22)
-    t_val = 1.0 if ind.get("line_type") or ind.get("equipment_keywords") else 0.5
-
-    # U: Zaman Penceresi (0.12)
-    u_val = 1.0 if sig.get("timeline") else 0.4
-
-    # C: Kaynak Güveni (0.11)
+    # 5. C (Source Trust): Kaynak Güveni - Ağırlık: 0.10[cite: 1]
+    # Resmi/IR=1.0, Reuters/Bloomberg=0.85, Sektörel=0.7, Genel=0.55[cite: 1]
     source_url_l = source_url.lower()
-    c_val = 1.0 if any(x in source_url_l for x in ["press", "ir", "reuters", "bloomberg", "wsj"]) else 0.55
+    if "ir" in source_url_l or "press" in source_url_l:
+        c_val = 1.0
+    elif any(x in source_url_l for x in ["reuters", "bloomberg", "wsj", "ft.com"]):
+        c_val = 0.85
+    elif any(x in source_url_l for x in ["industry", "manufacturing", "auto"]):
+        c_val = 0.70
+    else:
+        c_val = 0.55
 
-    # V: Proje Hacmi (0.10)
-    v_val = 1.0 if sig.get("capex_usd") or sig.get("jobs_impact") else 0.3
+    # --- Resmi Ağırlıklı Skor Hesaplama ---[cite: 1]
+    # Score = 100 * (0.30*E + 0.25*A + 0.20*G + 0.15*T + 0.10*C)[cite: 1]
+    score = 100 * (0.30 * e_val + 0.25 * a_val + 0.20 * g_val + 0.15 * t_val + 0.10 * c_val)
 
-    # Resmi Skor Formülü
-    score = 100 * (0.22*t_val + 0.18*r_val + 0.15*g_val + 0.12*s_val + 0.12*u_val + 0.11*c_val + 0.10*v_val)
+    # --- Güven Puanı (Confidence) - Madde 7.4.3 ---[cite: 1]
+    # Kritik 5 alanın doluluk oranı: company, from_loc, to_loc, sector, event_type[cite: 1]
+    critical_fields = [
+        ent.get("company", {}).get("name"),
+        ent.get("from_location"),
+        ent.get("to_location"),
+        ind.get("sector"),
+        art.get("event_type")
+    ]
+    confidence = sum(1 for field in critical_fields if field) / 5.0 #[cite: 1]
 
-    # Güven Puanı
-    critical_fields = [ent.get("company", {}).get("name"), art.get("event_type"), ind.get("sector")]
-    completeness = sum(1 for field in critical_fields if field) / len(critical_fields)
-    confidence = min(1.0, 0.6 * c_val + 0.4 * completeness)
+    # Confidence 0.40 altındaysa skoru cezalandır (0.5 ile çarp)[cite: 1]
+    if confidence < 0.40:
+        score *= 0.5 #[cite: 1]
 
-    if confidence < 0.40: score *= 0.5 # Ceza
-    return round(score), round(confidence, 2)
+    return int(round(score)), round(confidence, 2)
 
 def send_webhook_alert(data):
     """SOW Madde 1.5 & 4.2: Bildirim ve Aksiyon Planı."""
@@ -271,6 +308,24 @@ def fetch_rss_news(rss_url):
 
         except Exception as e:
             print(f"❌ {entry.title} işlenirken hata: {e}")
+
+
+
+def run_scanner():
+    """RSS_SOURCES_FILE içindeki tüm kaynakları sırayla tarar."""
+    if not os.path.exists("rss_sources.json"):
+        print("⚠️ Taranacak RSS kaynağı bulunamadı.")
+        return
+
+    with open("rss_sources.json", "r", encoding="utf-8") as f:
+        sources = json.load(f)
+
+    for source in sources:
+        print(f"📡 {source['name']} taranıyor...")
+        fetch_rss_news(source['url'])
+
+
+
 
 if __name__ == "__main__":
     test_rss_url = "https://news.google.com/rss/search?q=factory+relocation+europe&hl=en-US&gl=US&ceid=US:en" 
