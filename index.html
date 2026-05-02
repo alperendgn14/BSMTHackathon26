@@ -40,7 +40,7 @@
 
     <div class="container mx-auto p-4 md:p-8 flex flex-col md:flex-row gap-8">
         
-        <!-- Sidebar: Filtreler -->
+        <!-- Sidebar: Filtreler ve Sistem Durumu -->
         <aside class="md:w-1/3 lg:w-1/4 space-y-6">
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
                 <h2 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-6 border-b pb-2">Filtreleme</h2>
@@ -50,14 +50,12 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Hızlı Arama</label>
                         <div class="relative">
                             <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-                            <!-- TARAMA YAZDIKÇA TETİKLENİR -->
                             <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Şirket, konu..." class="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition">
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Olay Kategorisi</label>
-                        <!-- KATEGORİ SEÇİLDİKÇE TETİKLENİR -->
                         <select id="eventFilter" onchange="applyFilters()" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="">Tüm Kategoriler</option>
                             <option value="relocation">Endüstriyel Taşınma</option>
@@ -75,6 +73,16 @@
                         <input type="range" id="scoreRange" min="0" max="100" value="0" oninput="updateScoreVal()" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
                     </div>
                 </div>
+            </div>
+
+            <!-- SİSTEM DURUMU (Yeniden Eklendi) -->
+            <div class="bg-slate-900 p-6 rounded-2xl shadow-xl text-white">
+                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Sistem Durumu</p>
+                <div class="flex items-center gap-2 mb-2 text-green-400">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span class="text-xs font-bold uppercase">LLM Analiz Aktif</span>
+                </div>
+                <p class="text-[11px] text-slate-400 leading-relaxed italic">Llama 3, SOW 2.1 parametrelerine göre CAPEX ve lokasyonları süzüyor.</p>
             </div>
         </aside>
 
@@ -171,7 +179,7 @@
             fetchRssSources();
         });
 
-        // 1. ADIM: Sunucudan veriyi bir kez çek
+        // Sunucudan veriyi bir kez çek
         async function fetchNews() {
             const container = document.getElementById('newsContainer');
             const loading = document.getElementById('loading');
@@ -180,7 +188,6 @@
             container.classList.add('opacity-40');
 
             try {
-                // Artık parametre göndermiyoruz, tüm veriyi alıyoruz
                 const response = await fetch(`${API_BASE}/news`);
                 allNewsData = await response.json();
                 
@@ -194,7 +201,7 @@
             }
         }
 
-        // 2. ADIM: Yerel Filtreleme Mantığı (Hızlı ve Akıcı)
+        // Yerel Filtreleme Mantığı
         function applyFilters() {
             const q = document.getElementById('searchInput').value.toLowerCase();
             const event = document.getElementById('eventFilter').value;
@@ -205,24 +212,18 @@
                 const fit = item.bios_fit || {};
                 const company = item.entities?.company?.name || "";
                 
-                // Metin Arama (Başlık, Özet ve Şirket adında arar)
                 const textToSearch = `${art.title || ''} ${art.text_summary_tr || art.summary_tr || ''} ${company}`.toLowerCase();
                 const matchesQ = !q || textToSearch.includes(q);
-                
-                // Kategori Arama
                 const matchesEvent = !event || (art.event_type || '') === event;
-                
-                // Skor Arama
                 const matchesScore = (fit.score || 0) >= min_score;
 
                 return matchesQ && matchesEvent && matchesScore;
             });
 
-            // Filtrelenmiş veriyi ekrana bas
             renderNews();
         }
 
-        // 3. ADIM: Ekrana Çizdirme
+        // Ekrana Çizdirme
         function renderNews() {
             const container = document.getElementById('newsContainer');
             const noNews = document.getElementById('noNews');
@@ -302,7 +303,6 @@
             document.getElementById('detailsModal').classList.add('hidden');
         }
 
-        // MEVCUT API İŞLEMLERİ
         async function triggerCollector() {
             const btn = document.getElementById('scanBtn');
             const originalText = btn.innerHTML;
@@ -376,7 +376,6 @@
             } catch (e) { alert("Hata oluştu."); }
         }
 
-        // Slider değerini yazdırıp filtrelemeyi tetikler
         function updateScoreVal() {
             document.getElementById('scoreVal').innerText = document.getElementById('scoreRange').value;
             applyFilters();
