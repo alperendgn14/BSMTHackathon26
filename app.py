@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 import json
 import os
@@ -13,6 +13,13 @@ from collector import analyze_with_llama3_api, save_to_db, DB_FILE
 
 app = Flask(__name__)
 CORS(app) #teammatenin hata almaması için
+
+
+@app.route('/')
+def index():
+    # index.html dosyan app.py ile aynı klasördeyse '.' kullanılır
+    return send_from_directory('.', 'index.html')
+
 
 RSS_DB_FILE = "rss_data.json"
 RSS_SOURCES_FILE = "rss_sources.json"
@@ -330,8 +337,8 @@ scheduler.start()
 
 
 if __name__ == "__main__":
-    print("🚀 Backend API Sunucusu Çalışıyor: http://localhost:5500")
-    app.run(debug=True, port=5500)
+    print("🚀 Backend API Sunucusu Çalışıyor: http://localhost:5000")
+    app.run(debug=True, port=5000)
                 
     
         

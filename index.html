@@ -3,64 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIOS - Avrupa Haber Tarama Ajanı</title>
+    <title>BIOS AI - Endüstriyel Haber Tarama</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .score-green { border-left: 6px solid #22c55e; }
+        .score-blue { border-left: 6px solid #3b82f6; }
+        .score-yellow { border-left: 6px solid #eab308; }
+        .score-grey { border-left: 6px solid #9ca3af; }
+    </style>
 </head>
-<body class="bg-gray-50 h-screen flex overflow-hidden">
+<body class="bg-gray-50 text-gray-900 font-sans">
 
-    <!-- SOL PANEL: RSS Kaynak Yönetimi (F1, F2, F3) -->
-    <aside class="w-80 bg-white border-r border-gray-200 flex flex-col">
-        <div class="p-6 border-b">
-            <img src="https://biosrelocation.com/wp-content/uploads/2021/05/bios-logo.png" alt="BIOS Logo" class="h-8 mb-4">
-            <h2 class="text-sm font-bold text-gray-500 uppercase tracking-wider">RSS Kaynakları</h2>
-        </div>
-        
-        <div id="rssList" class="flex-1 overflow-y-auto p-4 space-y-2">
-            <!-- Dinamik RSS Listesi buraya gelecek -->
-        </div>
-
-        <div class="p-4 border-t bg-gray-50">
-            <div class="flex gap-2">
-                <input id="rssInput" type="text" placeholder="https://..." class="flex-1 border border-gray-300 rounded px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-                <button onclick="addRSS()" class="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition">
-                    <i class="fas fa-plus"></i>
+    <!-- F5.1: Üst Bar (Arama ve Yenileme) -->
+    <header class="bg-white shadow-sm border-b sticky top-0 z-30">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <h1 class="text-xl font-bold text-blue-600 italic">BIOS AI Agent</h1>
+            
+            <div class="flex items-center space-x-4 w-1/2">
+                <div class="relative w-full">
+                    <input type="text" id="searchInput" placeholder="Haberlerde veya şirketlerde ara..." 
+                           class="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                    <i class="fa fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+                <button onclick="fetchNews()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center">
+                    <i class="fa fa-sync-alt mr-2"></i> Yenile
                 </button>
             </div>
-            <p id="rssError" class="text-red-500 text-xs mt-2 hidden"></p>
         </div>
-    </aside>
+    </header>
 
-    <!-- ANA PANEL: Haber Akışı (F4, F8, F9) -->
-    <main class="flex-1 flex flex-col">
-        <header class="h-20 bg-white border-b flex items-center justify-between px-8">
-            <div class="flex-1 max-w-xl">
-                <div class="relative">
-                    <i class="fas fa-search absolute left-4 top-3 text-gray-400"></i>
-                    <input type="text" onkeyup="filterNews(this.value)" placeholder="Haberlerde, şirketlerde veya lokasyonlarda ara..." class="w-full pl-12 pr-4 py-2 bg-gray-100 border-none rounded-full focus:ring-2 focus:ring-blue-500 outline-none text-sm">
+    <main class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-12 gap-6">
+        
+        <!-- F5.2: Sol Panel (RSS Yönetimi) -->
+        <aside class="col-span-12 lg:col-span-3 space-y-6">
+            <div class="bg-white p-4 rounded-xl shadow-sm border">
+                <h2 class="font-bold mb-4 flex items-center"><i class="fa fa-rss text-orange-500 mr-2"></i> RSS Kaynakları</h2>
+                
+                <div class="space-y-3 mb-4" id="rssList">
+                    <!-- RSS Kaynakları Buraya Gelecek -->
+                </div>
+
+                <hr class="my-4">
+                
+                <div class="space-y-2">
+                    <input type="text" id="newRssName" placeholder="Kaynak Adı (örn: Reuters)" class="w-full p-2 border rounded text-sm">
+                    <input type="text" id="newRssUrl" placeholder="RSS URL" class="w-full p-2 border rounded text-sm">
+                    <button onclick="addRss()" class="w-full bg-gray-800 text-white py-2 rounded text-sm hover:bg-black transition">
+                        Yeni Kaynak Ekle
+                    </button>
                 </div>
             </div>
-            <div class="flex items-center gap-4">
-                <span id="lastUpdate" class="text-xs text-gray-400 font-medium italic"></span>
-                <button onclick="refreshNews()" id="refreshBtn" class="bg-green-600 text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-green-700 transition flex items-center gap-2 shadow-lg shadow-green-100">
-                    <i class="fas fa-sync-alt"></i> HABERLERİ YENİLE
-                </button>
-            </div>
-        </header>
 
-        <!-- Haber Listesi -->
-        <section id="newsFeed" class="p-8 overflow-y-auto grid grid-cols-1 xl:grid-cols-2 gap-6">
-            <!-- Haber Kartları buraya gelecek -->
+            <!-- F8: Filtreleme Alanı -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border">
+                <h2 class="font-bold mb-4">Filtreler</h2>
+                <div class="space-y-4 text-sm">
+                    <div>
+                        <label class="block text-gray-500 mb-1">Olay Tipi</label>
+                        <select id="eventFilter" class="w-full p-2 border rounded">
+                            <option value="">Tümü</option>
+                            <option value="relocation">Relocation</option>
+                            <option value="new_plant">New Plant</option>
+                            <option value="expansion">Expansion</option>
+                            <option value="closure">Closure</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 mb-1">Minimum Skor</label>
+                        <input type="range" id="scoreRange" min="0" max="100" value="0" class="w-full">
+                        <div class="text-right text-xs text-blue-600 font-bold" id="scoreValue">0+</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- F5.1: Orta Alan (Haber Kartları) -->
+        <section class="col-span-12 lg:col-span-9 space-y-4">
+            <div id="loading" class="hidden text-center py-20 text-gray-500">
+                <i class="fa fa-spinner fa-spin text-3xl mb-2 text-blue-500"></i>
+                <p>Yapay zekâ haberleri analiz ediyor...</p>
+            </div>
+
+            <div id="newsContainer" class="space-y-4">
+                <!-- Haber Kartları Buraya Gelecek -->
+            </div>
+
+            <div id="emptyState" class="hidden text-center py-20 bg-white rounded-xl border border-dashed border-gray-300">
+                <i class="fa fa-newspaper text-5xl text-gray-200 mb-4"></i>
+                <p class="text-gray-400">Henüz kriterlere uygun haber bulunamadı.</p>
+            </div>
         </section>
     </main>
 
-    <!-- Loading Overlay -->
-    <div id="loadingOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex flex-col items-center justify-center text-white">
-        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-400 mb-4"></div>
-        <p class="font-bold tracking-widest uppercase animate-pulse">Llama 3 Analiz Ediyor...</p>
+    <!-- F5.3: Haber Detay Modal (Overlay) -->
+    <div id="newsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl">
+            <div id="modalContent"></div>
+            <div class="p-4 border-t bg-gray-50 flex justify-end">
+                <button onclick="closeModal()" class="px-6 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Kapat</button>
+            </div>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const API_BASE = "http://127.0.0.1:5000/api";
+
+        // --- F7b: Skor Renk Belirleme (Madde 7.4.4) ---
+        function getScoreClass(score) {
+            if (score >= 80) return 'score-green';
+            if (score >= 65) return 'score-blue';
+            if (score >= 50) return 'score-yellow';
+            return 'score-grey';
+        }
+
+        function getScoreLabel(score) {
+            if (score >= 80) return { text: 'Yüksek Fırsat', color: 'bg-green-100 text-green-700' };
+            if (score >= 65) return { text: 'İzlenecek', color: 'bg-blue-100 text-blue-700' };
+            if (score >= 50) return { text: 'Şartlı İlgi', color: 'bg-yellow-100 text-yellow-700' };
+            return { text: 'Düşük Alaka', color: 'bg-gray-100 text-gray-700' };
+        }
+
+        // --- F4: Haberleri Çekme ---
+        async function fetchNews() {
+            const loading = document.getElementById('loading');
+            const container = document.getElementById('newsContainer');
+            const empty = document.getElementById('emptyState');
+            const query = document.getElementById('searchInput').value;
+            const event = document.getElementById('eventFilter').value;
+            const minScore = document.getElementById('scoreRange').value;
+
+            loading.classList.remove('hidden');
+            container.innerHTML = '';
+            empty.classList.add('hidden');
+
+            try {
+                const response = await fetch(`${API_BASE}/news?q=${query}&event=${event}&min_score=${minScore}`);
+                const news = await response.json();
+
+                loading.classList.add('hidden');
+
+                if (news.length === 0) {
+                    empty.classList.remove('hidden');
+                    return;
+                }
+
+                news.forEach(item => {
+                    const scoreLabel = getScoreLabel(item.bios_fit.score);
+                    const card = `
+                        <div class="bg-white p-5 rounded-xl shadow-sm border ${getScoreClass(item.bios_fit.score)} hover:shadow-md transition cursor-pointer" 
+                             onclick='showDetails(${JSON.stringify(item)})'>
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-bold uppercase tracking-wider text-gray-400">${item.source.publisher}</span>
+                                <span class="text-xs px-2 py-1 rounded-full font-bold ${scoreLabel.color}">${scoreLabel.text} (${item.bios_fit.score})</span>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2 line-clamp-2">${item.article.title}</h3>
+                            <p class="text-sm text-gray-600 mb-4 line-clamp-3">${item.article.summary_tr}</p>
+                            <div class="flex items-center text-xs text-gray-400 space-x-4">
+                                <span><i class="fa fa-calendar-alt mr-1"></i> ${new Date(item.source.retrieved_at_utc).toLocaleDateString()}</span>
+                                <span><i class="fa fa-tag mr-1"></i> ${item.article.event_type}</span>
+                                <span class="text-blue-600 font-bold underline">Detayları Gör</span>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += card;
+                });
+            } catch (err) {
+                alert("Haberler yüklenirken hata oluştu. Backend'in çalıştığından emin ol!");
+                loading.classList.add('hidden');
+            }
+        }
+
+        // --- F10: Detay Görünümü (Modal) ---
+        function showDetails(item) {
+            const content = `
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-2xl font-bold w-3/4">${item.article.title}</h2>
+                        <div class="text-center">
+                            <div class="text-3xl font-black text-blue-600">${item.bios_fit.score}</div>
+                            <div class="text-[10px] uppercase text-gray-400 font-bold">BIOS Score</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="text-xs text-blue-400 font-bold uppercase">🏢 Şirket</div>
+                            <div class="font-bold">${item.entities.company.name || 'Bilinmiyor'}</div>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="text-xs text-blue-400 font-bold uppercase">📍 Rota</div>
+                            <div class="font-bold">${item.entities.from_location || '?'} ➔ ${item.entities.to_location || '?'}</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="text-sm font-bold text-gray-400 uppercase mb-2">AI Analiz Özeti</h4>
+                        <p class="text-gray-700 leading-relaxed">${item.article.summary_tr}</p>
+                    </div>
+
+                    <div class="bg-gray-100 p-4 rounded-xl mb-4">
+                        <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">💡 Önerilen Aksiyon</h4>
+                        <div class="flex items-center text-blue-700 font-bold">
+                            <i class="fa fa-lightbulb mr-2"></i> ${item.bios_fit.recommended_action}
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">${item.bios_fit.rationale_tr}</p>
+                    </div>
+
+                    <a href="${item.source.url}" target="_blank" class="block text-center w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition">
+                        Kaynağa Git <i class="fa fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+            `;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('newsModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('newsModal').classList.add('hidden');
+        }
+
+        // --- F1 & F2: RSS Yönetimi ---
+        async function fetchRss() {
+            const list = document.getElementById('rssList');
+            const res = await fetch(`${API_BASE}/rss`);
+            const sources = await res.json();
+            list.innerHTML = '';
+            sources.forEach(s => {
+                list.innerHTML += `
+                    <div class="flex justify-between items-center bg-gray-50 p-2 rounded border">
+                        <div class="overflow-hidden">
+                            <div class="text-sm font-bold truncate">${s.name}</div>
+                            <div class="text-[10px] text-gray-400 truncate">${s.url}</div>
+                        </div>
+                        <button onclick="deleteRss('${s.id}')" class="text-red-400 hover:text-red-600 p-1">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        async function addRss() {
+            const name = document.getElementById('newRssName').value;
+            const url = document.getElementById('newRssUrl').value;
+            if (!url) return alert("URL boş olamaz!");
+
+            const res = await fetch(`${API_BASE}/rss`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ name, url })
+            });
+
+            if (res.ok) {
+                document.getElementById('newRssName').value = '';
+                document.getElementById('newRssUrl').value = '';
+                fetchRss();
+            } else {
+                const err = await res.json();
+                alert(err.error);
+            }
+        }
+
+        async function deleteRss(id) {
+            if (confirm("Kaynağı silmek istediğine emin misin?")) {
+                await fetch(`${API_BASE}/rss/${id}`, { method: 'DELETE' });
+                fetchRss();
+            }
+        }
+
+        // Event Listeners
+        document.getElementById('scoreRange').oninput = function() {
+            document.getElementById('scoreValue').innerText = this.value + '+';
+        };
+
+        // Init
+        fetchRss();
+        fetchNews();
+    </script>
 </body>
 </html>
