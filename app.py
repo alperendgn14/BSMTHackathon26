@@ -1,3 +1,4 @@
+import subprocess
 from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 import json
@@ -7,6 +8,8 @@ import feedparser
 import csv
 from flask import Response
 from datetime import datetime, timezone
+import uuid
+
 
 #collector.py dosyasından fonksiyonları içe aktar
 from collector import analyze_with_llama3_api, save_to_db, DB_FILE
@@ -26,14 +29,38 @@ RSS_SOURCES_FILE = "rss_sources.json"
 
 #helper fonksiyonlar
 
+@app.route('/api/start-collector', methods=['POST'])
+def start_collector():
+    try:
+        # Popen kullanarak collector'ı arka planda başlatıyoruz.
+        # Bu sayede site donmaz, collector işini yaparken site çalışmaya devam eder.
+        subprocess.Popen(["python", "collector.py"])
+        
+        return jsonify({
+            "status": "success", 
+            "message": "Haber toplama işlemi arka planda başlatıldı. Birazdan liste güncellenecek."
+        }), 202
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+
+
+
 def get_rss_list():
-    if(os.path.exists(RSS_DB_FILE)):
-        with open (RSS_DB_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-        return[]
+    try:
+        # F11: Dosya kontrolü ve kalıcılık
+        if not os.path.exists('rss_sources.json'):
+            return []
+        
+        with open('rss_sources.json', 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            # Veri None ise veya liste değilse boş liste dön
+            return data if isinstance(data, list) else []
+    except (json.JSONDecodeError, Exception):
+        return []
     
 def save_rss_list(rss_list):
-    with open(RSS_DB_FILE, "w", encoding="utf-8") as f:
+    with open(RSS_SOURCES_FILE, "w", encoding="utf-8") as f:
         json.dump(rss_list, f, ensure_ascii=False, indent=4)
         
         
@@ -42,46 +69,45 @@ def save_rss_list(rss_list):
 #kayıtlı haberleri getir.
 
 @app.route('/api/news', methods=['GET'])
+@app.route('/api/news', methods=['GET'])
 def get_news():
-    if not os.path.exists(DB_FILE):
-        return jsonify([]), 200
-    with open(DB_FILE, "r", encoding="utf-8") as f:
-        data = json.load(f)
+    try:
+        # rss_data.json dosyasını oku
+        if not os.path.exists(RSS_DB_FILE):
+            return jsonify([])
 
-    # F9: Anahtar kelime arama (Başlıkta veya özette)
-    q = request.args.get('q', '').lower()
-    # F8: Olay tipi filtresi
-    event = request.args.get('event')
-    # F8: Minimum skor filtresi
-    min_s = request.args.get('min_score', type=int)
+        with open(RSS_DB_FILE, 'r', encoding='utf-8') as f:
+            all_news = json.load(f)
 
-    filtered = [
-        item for item in data 
-        if (not q or q in item.get('original_title','').lower() or q in item.get('summary_tr','').lower()) and
-           (not event or item.get('event_type') == event) and
-           (not min_s or item.get('score', 0) >= min_s)
-    ]
-    # En yüksek skorlu olanı en başta göster
-    return jsonify(sorted(filtered, key=lambda x: x.get('score', 0), reverse=True)) # Skora göre sırala
+        # Haberleri en yeniden en eskiye sırala (isteğe bağlı)
+        all_news.reverse() 
+
+        return jsonify(all_news)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 
 
 # --- F2: RSS KAYNAĞI SİLME ---
-@app.route('/api/rss/<rss_id>', methods=['DELETE'])
-def delete_rss_source(rss_id):
-    if not os.path.exists(RSS_SOURCES_FILE):
-        return jsonify({"error": "Kaynak bulunamadı"}), 404
+@app.route('/api/rss/<id>', methods=['DELETE'])
+def delete_rss(id):
+    try:
+        if not os.path.exists(RSS_SOURCES_FILE):
+            return jsonify({"error": "Dosya bulunamadı"}), 404
 
-    with open(RSS_SOURCES_FILE, "r", encoding="utf-8") as f:
-        sources = json.load(f)
+        with open(RSS_SOURCES_FILE, 'r', encoding='utf-8') as f:
+            sources = json.load(f)
 
-    new_sources = [s for s in sources if s['id'] != rss_id]
-    
-    with open(RSS_SOURCES_FILE, "w", encoding="utf-8") as f:
-        json.dump(new_sources, f, ensure_ascii=False, indent=4)
+        # ID'si eşleşmeyenleri tut, eşleşeni listeden çıkar
+        new_sources = [s for s in sources if s.get('id') != id]
 
-    return jsonify({"message": "Kaynak silindi."}), 200
+        with open(RSS_SOURCES_FILE, 'w', encoding='utf-8') as f:
+            json.dump(new_sources, f, indent=4, ensure_ascii=False)
+
+        return jsonify({"message": "Kaynak başarıyla silindi", "sources": new_sources}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
     
     
     
@@ -97,26 +123,26 @@ def list_rss():
 #yeni kaynak ekle
 @app.route('/api/rss', methods=['POST'])
 def add_rss():
-    data = request.json
-    new_url = data.get("url")
-    
-    if not new_url:
-        return jsonify({"error": "URL gönderilmedi!"}), 400
-    
-    # f3 gereksinimi, geçerlilik kontrolü
-    feed = feedparser.parse(new_url)
-    if feed.bozo != 0:
-        return jsonify({"error": "Geçersiz RSS formatı veya bağlantı hatası!"}), 400
-    
-    rss_list = get_rss_list()
-    #aynı url kontrolü
-    if any(r['url'] == new_url for r in rss_list):
-        return jsonify({"error": "Bu URL zaten kayıtlı!"}), 400
-    
-    rss_list.append({"url": new_url, "name": feed.feed.get('title', 'İsimsiz Kaynak')})
-    save_rss_list(rss_list)
-    
-    return jsonify({"message": "RSS başarıyla eklendi", "rss_list": rss_list}), 201
+    data = request.get_json()
+    # Kayıtları MUTLAKA rss_sources.json dosyasına yönlendiriyoruz
+    try:
+        sources = []
+        if os.path.exists("rss_sources.json") and os.stat("rss_sources.json").st_size > 0:
+            with open("rss_sources.json", 'r', encoding='utf-8') as f:
+                sources = json.load(f)
+
+        sources.append({
+            "id": str(uuid.uuid4())[:8],
+            "url": data['url'],
+            "name": data.get('name', 'Yeni Kaynak')
+        })
+
+        with open("rss_sources.json", 'w', encoding='utf-8') as f:
+            json.dump(sources, f, indent=4, ensure_ascii=False)
+
+        return jsonify(sources), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 
@@ -333,6 +359,30 @@ def auto_fetch_job():
 scheduler = BackgroundScheduler()
 scheduler.add_job(func=auto_fetch_job, trigger="interval", minutes=15)
 scheduler.start()
+
+
+@app.route('/api/rss', methods=['GET', 'POST'])
+def handle_rss():
+    if request.method == 'POST':
+        print("--- POST ISTEGI GELDI ---") # Terminalde takip için
+        data = request.get_json()
+        new_url = data.get("url")
+        
+        # Daha önce yazdığımız ekleme mantığı buraya:
+        rss_list = get_rss_list()
+        # ... (Geçerlilik ve kopya kontrolü) ...
+        
+        new_entry = {"id": str(uuid.uuid4())[:8], "url": new_url, "name": "Yeni Kaynak"}
+        rss_list.append(new_entry)
+        save_rss_list(rss_list)
+        
+        return jsonify({"message": "Eklendi", "rss_list": rss_list}), 201
+    
+    else:
+        # GET isteği gelirse listeyi döndür
+        return jsonify(get_rss_list())
+
+
 
 
 

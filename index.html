@@ -3,105 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIOS AI - Endüstriyel Haber Tarama</title>
+    <title>BIOS AI Agent | SOW Analiz Paneli</title>
+    <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
-        .score-green { border-left: 6px solid #22c55e; }
-        .score-blue { border-left: 6px solid #3b82f6; }
-        .score-yellow { border-left: 6px solid #eab308; }
-        .score-grey { border-left: 6px solid #9ca3af; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .news-card { transition: all 0.2s ease-in-out; border: 1px solid #e5e7eb; }
+        .news-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border-color: #3b82f6; }
+        .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans">
+<body class="bg-gray-50 text-gray-900">
 
-    <!-- F5.1: Üst Bar (Arama ve Yenileme) -->
-    <header class="bg-white shadow-sm border-b sticky top-0 z-30">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <h1 class="text-xl font-bold text-blue-600 italic">BIOS AI Agent</h1>
-            
-            <div class="flex items-center space-x-4 w-1/2">
-                <div class="relative w-full">
-                    <input type="text" id="searchInput" placeholder="Haberlerde veya şirketlerde ara..." 
-                           class="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
-                    <i class="fa fa-search absolute left-3 top-3 text-gray-400"></i>
-                </div>
-                <button onclick="fetchNews()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center">
-                    <i class="fa fa-sync-alt mr-2"></i> Yenile
+    <!-- Header (SOW 1.6) -->
+    <nav class="bg-slate-900 text-white p-4 shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-xl shadow-lg shadow-blue-500/20">B</div>
+                <h1 class="text-xl font-bold tracking-tight">BIOS <span class="text-blue-400 font-light text-sm italic">SOW Agent</span></h1>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="triggerCollector()" id="scanBtn" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 transition shadow-lg shadow-blue-500/30">
+                    <i class="fas fa-bolt text-yellow-400" id="scanIcon"></i> Haberleri Güncelle
+                </button>
+                <button onclick="toggleRssModal()" class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-lg text-sm font-semibold transition border border-slate-700">
+                    <i class="fas fa-rss"></i> Kaynaklar
                 </button>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <main class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-12 gap-6">
+    <div class="container mx-auto p-4 md:p-8 flex flex-col md:flex-row gap-8">
         
-        <!-- F5.2: Sol Panel (RSS Yönetimi) -->
-        <aside class="col-span-12 lg:col-span-3 space-y-6">
-            <div class="bg-white p-4 rounded-xl shadow-sm border">
-                <h2 class="font-bold mb-4 flex items-center"><i class="fa fa-rss text-orange-500 mr-2"></i> RSS Kaynakları</h2>
+        <!-- Sidebar: Filtreler (SOW 2.3, 7.4) -->
+        <aside class="md:w-1/3 lg:w-1/4 space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <h2 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-6 border-b pb-2">Filtreleme</h2>
                 
-                <div class="space-y-3 mb-4" id="rssList">
-                    <!-- RSS Kaynakları Buraya Gelecek -->
-                </div>
+                <div class="space-y-6">
+                    <!-- Arama -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Hızlı Arama</label>
+                        <div class="relative">
+                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                            <input type="text" id="searchInput" oninput="fetchNews()" placeholder="Şirket, sektör, ülke..." class="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition">
+                        </div>
+                    </div>
 
-                <hr class="my-4">
-                
-                <div class="space-y-2">
-                    <input type="text" id="newRssName" placeholder="Kaynak Adı (örn: Reuters)" class="w-full p-2 border rounded text-sm">
-                    <input type="text" id="newRssUrl" placeholder="RSS URL" class="w-full p-2 border rounded text-sm">
-                    <button onclick="addRss()" class="w-full bg-gray-800 text-white py-2 rounded text-sm hover:bg-black transition">
-                        Yeni Kaynak Ekle
-                    </button>
+                    <!-- Olay Tipi (SOW 2.1) -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Olay Kategorisi</label>
+                        <select id="eventFilter" onchange="fetchNews()" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                            <option value="">Tüm Kategoriler</option>
+                            <option value="relocation">Endüstriyel Taşınma</option>
+                            <option value="new_plant">Yeni Tesis Yatırımı</option>
+                            <option value="expansion">Kapasite Artışı</option>
+                            <option value="other">Diğer</option>
+                        </select>
+                    </div>
+
+                    <!-- BIOS-fit Puanı (SOW 7.4) -->
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <label class="text-sm font-semibold text-gray-700">Minimum BIOS-fit</label>
+                            <span id="scoreVal" class="text-sm font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">0</span>
+                        </div>
+                        <input type="range" id="scoreRange" min="0" max="100" value="0" oninput="updateScoreVal()" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                    </div>
                 </div>
             </div>
 
-            <!-- F8: Filtreleme Alanı -->
-            <div class="bg-white p-4 rounded-xl shadow-sm border">
-                <h2 class="font-bold mb-4">Filtreler</h2>
-                <div class="space-y-4 text-sm">
-                    <div>
-                        <label class="block text-gray-500 mb-1">Olay Tipi</label>
-                        <select id="eventFilter" class="w-full p-2 border rounded">
-                            <option value="">Tümü</option>
-                            <option value="relocation">Relocation</option>
-                            <option value="new_plant">New Plant</option>
-                            <option value="expansion">Expansion</option>
-                            <option value="closure">Closure</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-gray-500 mb-1">Minimum Skor</label>
-                        <input type="range" id="scoreRange" min="0" max="100" value="0" class="w-full">
-                        <div class="text-right text-xs text-blue-600 font-bold" id="scoreValue">0+</div>
-                    </div>
+            <div class="bg-slate-900 p-6 rounded-2xl shadow-xl text-white">
+                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Sistem Durumu</p>
+                <div class="flex items-center gap-2 mb-2 text-green-400">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span class="text-xs font-bold uppercase">LLM Analiz Aktif</span>
                 </div>
+                <p class="text-[11px] text-slate-400 leading-relaxed italic">Llama 3, SOW 2.1 parametrelerine göre CAPEX ve Entitileri süzüyor.</p>
             </div>
         </aside>
 
-        <!-- F5.1: Orta Alan (Haber Kartları) -->
-        <section class="col-span-12 lg:col-span-9 space-y-4">
-            <div id="loading" class="hidden text-center py-20 text-gray-500">
-                <i class="fa fa-spinner fa-spin text-3xl mb-2 text-blue-500"></i>
-                <p>Yapay zekâ haberleri analiz ediyor...</p>
+        <!-- Haber Listesi -->
+        <main class="md:flex-1">
+            <div id="loading" class="hidden flex flex-col items-center py-20">
+                <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                <p class="mt-4 text-gray-500 font-medium italic">Veriler yapay zeka ile puanlanıyor...</p>
+            </div>
+            
+            <div id="newsContainer" class="grid grid-cols-1 gap-5">
+                <!-- Haber Kartları JavaScript ile Gelecek -->
             </div>
 
-            <div id="newsContainer" class="space-y-4">
-                <!-- Haber Kartları Buraya Gelecek -->
+            <div id="noNews" class="hidden text-center py-24 bg-white rounded-3xl border-2 border-dashed border-gray-200">
+                <div class="text-gray-300 mb-4"><i class="fas fa-folder-open text-6xl"></i></div>
+                <p class="text-gray-500 font-medium">Aranan kriterlerde haber bulunamadı.</p>
             </div>
+        </main>
+    </div>
 
-            <div id="emptyState" class="hidden text-center py-20 bg-white rounded-xl border border-dashed border-gray-300">
-                <i class="fa fa-newspaper text-5xl text-gray-200 mb-4"></i>
-                <p class="text-gray-400">Henüz kriterlere uygun haber bulunamadı.</p>
+    <!-- RSS Modal (SOW 1.6, CRUD) -->
+    <div id="rssModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-[100]">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-xl overflow-hidden animate-in fade-in zoom-in duration-200">
+            <div class="p-6 bg-gray-50 border-b flex justify-between items-center">
+                <h3 class="font-bold text-lg flex items-center gap-2 text-slate-800">
+                    <i class="fas fa-rss-square text-orange-500"></i> Kaynak Yönetimi
+                </h3>
+                <button onclick="toggleRssModal()" class="w-8 h-8 rounded-full hover:bg-gray-200 flex items-center justify-center transition text-xl">&times;</button>
             </div>
-        </section>
-    </main>
-
-    <!-- F5.3: Haber Detay Modal (Overlay) -->
-    <div id="newsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl">
-            <div id="modalContent"></div>
-            <div class="p-4 border-t bg-gray-50 flex justify-end">
-                <button onclick="closeModal()" class="px-6 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Kapat</button>
+            <div class="p-8">
+                <div class="flex flex-col gap-3 mb-8">
+                    <input type="text" id="rssNameInput" placeholder="Kaynak Adı (Örn: Reuters)" class="w-full p-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-sm">
+                    <div class="flex gap-2">
+                        <input type="text" id="rssUrlInput" placeholder="RSS URL (Google News, Reuters vb.)" class="flex-1 p-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-sm">
+                        <button onclick="addRss()" class="bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-slate-800 transition">Ekle</button>
+                    </div>
+                </div>
+                <div id="rssList" class="space-y-3 max-h-72 overflow-y-auto pr-2">
+                    <!-- RSS Listesi -->
+                </div>
             </div>
         </div>
     </div>
@@ -109,177 +131,180 @@
     <script>
         const API_BASE = "http://127.0.0.1:5000/api";
 
-        // --- F7b: Skor Renk Belirleme (Madde 7.4.4) ---
-        function getScoreClass(score) {
-            if (score >= 80) return 'score-green';
-            if (score >= 65) return 'score-blue';
-            if (score >= 50) return 'score-yellow';
-            return 'score-grey';
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchNews();
+            fetchRssSources();
+        });
 
-        function getScoreLabel(score) {
-            if (score >= 80) return { text: 'Yüksek Fırsat', color: 'bg-green-100 text-green-700' };
-            if (score >= 65) return { text: 'İzlenecek', color: 'bg-blue-100 text-blue-700' };
-            if (score >= 50) return { text: 'Şartlı İlgi', color: 'bg-yellow-100 text-yellow-700' };
-            return { text: 'Düşük Alaka', color: 'bg-gray-100 text-gray-700' };
-        }
-
-        // --- F4: Haberleri Çekme ---
+        // Haberleri Getir (SOW 7.4)
         async function fetchNews() {
-            const loading = document.getElementById('loading');
-            const container = document.getElementById('newsContainer');
-            const empty = document.getElementById('emptyState');
-            const query = document.getElementById('searchInput').value;
+            const q = document.getElementById('searchInput').value;
             const event = document.getElementById('eventFilter').value;
-            const minScore = document.getElementById('scoreRange').value;
+            const min_score = document.getElementById('scoreRange').value;
+            
+            const container = document.getElementById('newsContainer');
+            const loading = document.getElementById('loading');
+            const noNews = document.getElementById('noNews');
 
             loading.classList.remove('hidden');
-            container.innerHTML = '';
-            empty.classList.add('hidden');
+            container.classList.add('opacity-40');
 
             try {
-                const response = await fetch(`${API_BASE}/news?q=${query}&event=${event}&min_score=${minScore}`);
+                const response = await fetch(`${API_BASE}/news?q=${q}&event=${event}&min_score=${min_score}`);
                 const news = await response.json();
+                
+                container.innerHTML = '';
+                if (!news || news.length === 0) {
+                    noNews.classList.remove('hidden');
+                } else {
+                    noNews.classList.add('hidden');
+                    news.forEach(item => {
+                        // Savunmacı Veri Erişimi
+                        const art = item.article || {};
+                        const src = item.source || {};
+                        const fit = item.bios_fit || {};
+                        const score = fit.score || 0;
+                        const summary = art.text_summary_tr || art.summary_tr || "Haber içeriği analiz ediliyor...";
 
-                loading.classList.add('hidden');
-
-                if (news.length === 0) {
-                    empty.classList.remove('hidden');
-                    return;
+                        let scoreClass = 'text-gray-500 bg-gray-50 border-gray-200';
+                        if (score >= 75) scoreClass = 'text-emerald-600 bg-emerald-50 border-emerald-200';
+                        else if (score >= 40) scoreClass = 'text-blue-600 bg-blue-50 border-blue-200';
+                        
+                        container.innerHTML += `
+                            <div class="news-card bg-white p-6 rounded-2xl shadow-sm relative overflow-hidden group">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="flex flex-col">
+                                        <span class="text-[10px] font-black text-blue-500 uppercase tracking-widest">${src.publisher || 'GLOBAL SOURCE'}</span>
+                                        <span class="text-[10px] text-gray-400 font-medium mt-0.5">
+                                            <i class="far fa-clock mr-1"></i> ${new Date(src.retrieved_at_utc).toLocaleDateString('tr-TR')}
+                                        </span>
+                                    </div>
+                                    <div class="px-3 py-1 rounded-full text-xs font-bold border ${scoreClass}">
+                                        Fit: ${score}/100
+                                    </div>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3 leading-tight text-slate-800 group-hover:text-blue-700 transition">${art.title || 'Başlıksız Haber'}</h3>
+                                <p class="text-sm text-gray-500 mb-6 leading-relaxed line-clamp-3">${summary}</p>
+                                <div class="flex justify-between items-center border-t pt-4">
+                                    <span class="text-[11px] font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded uppercase tracking-tighter">
+                                        # ${art.event_type || 'Genel'}
+                                    </span>
+                                    <a href="${src.url}" target="_blank" class="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1">
+                                        KAYNAĞA GİT <i class="fas fa-external-link-alt text-[10px] ml-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                    });
                 }
-
-                news.forEach(item => {
-                    const scoreLabel = getScoreLabel(item.bios_fit.score);
-                    const card = `
-                        <div class="bg-white p-5 rounded-xl shadow-sm border ${getScoreClass(item.bios_fit.score)} hover:shadow-md transition cursor-pointer" 
-                             onclick='showDetails(${JSON.stringify(item)})'>
-                            <div class="flex justify-between items-start mb-2">
-                                <span class="text-xs font-bold uppercase tracking-wider text-gray-400">${item.source.publisher}</span>
-                                <span class="text-xs px-2 py-1 rounded-full font-bold ${scoreLabel.color}">${scoreLabel.text} (${item.bios_fit.score})</span>
-                            </div>
-                            <h3 class="text-lg font-bold mb-2 line-clamp-2">${item.article.title}</h3>
-                            <p class="text-sm text-gray-600 mb-4 line-clamp-3">${item.article.summary_tr}</p>
-                            <div class="flex items-center text-xs text-gray-400 space-x-4">
-                                <span><i class="fa fa-calendar-alt mr-1"></i> ${new Date(item.source.retrieved_at_utc).toLocaleDateString()}</span>
-                                <span><i class="fa fa-tag mr-1"></i> ${item.article.event_type}</span>
-                                <span class="text-blue-600 font-bold underline">Detayları Gör</span>
-                            </div>
-                        </div>
-                    `;
-                    container.innerHTML += card;
-                });
-            } catch (err) {
-                alert("Haberler yüklenirken hata oluştu. Backend'in çalıştığından emin ol!");
+            } catch (error) {
+                console.error("Yükleme hatası:", error);
+            } finally {
                 loading.classList.add('hidden');
+                container.classList.remove('opacity-40');
             }
         }
 
-        // --- F10: Detay Görünümü (Modal) ---
-        function showDetails(item) {
-            const content = `
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h2 class="text-2xl font-bold w-3/4">${item.article.title}</h2>
-                        <div class="text-center">
-                            <div class="text-3xl font-black text-blue-600">${item.bios_fit.score}</div>
-                            <div class="text-[10px] uppercase text-gray-400 font-bold">BIOS Score</div>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-2 gap-4 mb-6">
-                        <div class="bg-blue-50 p-3 rounded-lg">
-                            <div class="text-xs text-blue-400 font-bold uppercase">🏢 Şirket</div>
-                            <div class="font-bold">${item.entities.company.name || 'Bilinmiyor'}</div>
-                        </div>
-                        <div class="bg-blue-50 p-3 rounded-lg">
-                            <div class="text-xs text-blue-400 font-bold uppercase">📍 Rota</div>
-                            <div class="font-bold">${item.entities.from_location || '?'} ➔ ${item.entities.to_location || '?'}</div>
-                        </div>
-                    </div>
+        // Collector Tetikle
+        async function triggerCollector() {
+            const btn = document.getElementById('scanBtn');
+            const icon = document.getElementById('scanIcon');
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+            icon.classList.replace('fa-bolt', 'fa-spinner');
+            icon.classList.add('fa-spin');
 
-                    <div class="mb-6">
-                        <h4 class="text-sm font-bold text-gray-400 uppercase mb-2">AI Analiz Özeti</h4>
-                        <p class="text-gray-700 leading-relaxed">${item.article.summary_tr}</p>
-                    </div>
-
-                    <div class="bg-gray-100 p-4 rounded-xl mb-4">
-                        <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">💡 Önerilen Aksiyon</h4>
-                        <div class="flex items-center text-blue-700 font-bold">
-                            <i class="fa fa-lightbulb mr-2"></i> ${item.bios_fit.recommended_action}
-                        </div>
-                        <p class="text-xs text-gray-500 mt-1">${item.bios_fit.rationale_tr}</p>
-                    </div>
-
-                    <a href="${item.source.url}" target="_blank" class="block text-center w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition">
-                        Kaynağa Git <i class="fa fa-external-link-alt ml-2"></i>
-                    </a>
-                </div>
-            `;
-            document.getElementById('modalContent').innerHTML = content;
-            document.getElementById('newsModal').classList.remove('hidden');
+            try {
+                const response = await fetch(`${API_BASE}/start-collector`, { method: 'POST' });
+                const data = await response.json();
+                alert(data.message);
+                
+                // Analiz için 8 saniye bekle ve yenile
+                setTimeout(() => {
+                    fetchNews();
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-50');
+                    icon.classList.replace('fa-spinner', 'fa-bolt');
+                    icon.classList.remove('fa-spin');
+                }, 8000);
+            } catch (e) { 
+                alert("Hata: Backend sunucusuna bağlanılamadı.");
+                btn.disabled = false;
+                btn.classList.remove('opacity-50');
+                icon.classList.replace('fa-spinner', 'fa-bolt');
+                icon.classList.remove('fa-spin');
+            }
         }
 
-        function closeModal() {
-            document.getElementById('newsModal').classList.add('hidden');
-        }
-
-        // --- F1 & F2: RSS Yönetimi ---
-        async function fetchRss() {
-            const list = document.getElementById('rssList');
-            const res = await fetch(`${API_BASE}/rss`);
-            const sources = await res.json();
-            list.innerHTML = '';
-            sources.forEach(s => {
-                list.innerHTML += `
-                    <div class="flex justify-between items-center bg-gray-50 p-2 rounded border">
-                        <div class="overflow-hidden">
-                            <div class="text-sm font-bold truncate">${s.name}</div>
-                            <div class="text-[10px] text-gray-400 truncate">${s.url}</div>
+        // RSS Yönetimi (CRUD)
+        async function fetchRssSources() {
+            try {
+                const response = await fetch(`${API_BASE}/rss`);
+                const list = await response.json();
+                const container = document.getElementById('rssList');
+                
+                container.innerHTML = list.length === 0 ? '<p class="text-sm text-gray-400 italic text-center p-4">Kayıtlı kaynak bulunamadı.</p>' : 
+                    list.map(src => `
+                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded-2xl border border-gray-100 group hover:border-blue-200 transition">
+                        <div class="flex flex-col overflow-hidden max-w-[80%]">
+                            <span class="text-sm font-bold text-slate-700 truncate">${src.name || 'İsimsiz Kaynak'}</span>
+                            <span class="text-[10px] text-gray-400 truncate">${src.url}</span>
                         </div>
-                        <button onclick="deleteRss('${s.id}')" class="text-red-400 hover:text-red-600 p-1">
-                            <i class="fa fa-trash"></i>
+                        <button onclick="deleteRss('${src.id}')" class="text-red-400 hover:text-red-600 p-2 opacity-0 group-hover:opacity-100 transition">
+                            <i class="fas fa-trash-alt"></i>
                         </button>
                     </div>
-                `;
-            });
+                `).join('');
+            } catch (e) { console.log("RSS listesi çekilemedi."); }
         }
 
         async function addRss() {
-            const name = document.getElementById('newRssName').value;
-            const url = document.getElementById('newRssUrl').value;
-            if (!url) return alert("URL boş olamaz!");
+            const nameInput = document.getElementById('rssNameInput');
+            const urlInput = document.getElementById('rssUrlInput');
+            const name = nameInput.value.trim();
+            const url = urlInput.value.trim();
+            
+            if (!url) return alert("URL alanı boş bırakılamaz!");
 
-            const res = await fetch(`${API_BASE}/rss`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ name, url })
-            });
-
-            if (res.ok) {
-                document.getElementById('newRssName').value = '';
-                document.getElementById('newRssUrl').value = '';
-                fetchRss();
-            } else {
-                const err = await res.json();
-                alert(err.error);
-            }
+            try {
+                const response = await fetch(`${API_BASE}/rss`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: name || "Yeni Kaynak", url: url })
+                });
+                
+                if (response.ok) {
+                    nameInput.value = '';
+                    urlInput.value = '';
+                    fetchRssSources();
+                } else {
+                    const err = await response.json();
+                    alert(err.error || "Eklenirken bir hata oluştu.");
+                }
+            } catch (e) { alert("Sunucuyla iletişim kurulamadı."); }
         }
 
         async function deleteRss(id) {
-            if (confirm("Kaynağı silmek istediğine emin misin?")) {
-                await fetch(`${API_BASE}/rss/${id}`, { method: 'DELETE' });
-                fetchRss();
-            }
+            if(!confirm("Bu RSS kaynağını silmek istediğinize emin misiniz?")) return;
+            try {
+                const response = await fetch(`${API_BASE}/rss/${id}`, { method: 'DELETE' });
+                if (response.ok) {
+                    fetchRssSources();
+                } else {
+                    alert("Silme işlemi başarısız.");
+                }
+            } catch (e) { alert("Silme sırasında hata oluştu."); }
         }
 
-        // Event Listeners
-        document.getElementById('scoreRange').oninput = function() {
-            document.getElementById('scoreValue').innerText = this.value + '+';
-        };
+        function updateScoreVal() {
+            const val = document.getElementById('scoreRange').value;
+            document.getElementById('scoreVal').innerText = val;
+            fetchNews();
+        }
 
-        // Init
-        fetchRss();
-        fetchNews();
+        function toggleRssModal() {
+            document.getElementById('rssModal').classList.toggle('hidden');
+        }
     </script>
 </body>
 </html>

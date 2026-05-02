@@ -10,6 +10,10 @@ from datetime import datetime, timezone, timedelta
 
 load_dotenv()
 
+
+RSS_DB_FILE = "rss_data.json"      # Verilerin (haberlerin) yazılacağı yer
+RSS_SOURCES_FILE = "rss_sources.json"  # Kaynakların (site listesinin) okunacağı yer
+
 # Yapılandırma
 api_key = os.getenv("GROQ_API_KEY")
 if api_key is None:
@@ -63,12 +67,13 @@ def is_duplicate(url):
     return False
 
 def analyze_with_llama3_api(text):
-    """SOW Madde 2.1, 2.3 & 2.5: Entity Extraction ve Assumptions."""
+    """SOW Madde 2.1, 2.3 & 2.5 uyumlu, detaylı analiz fonksiyonu."""
+    # Docx dosyalarındaki teknik isterlere göre hazırlanmış detaylı prompt
     prompt = f"""Sen BIOS için fırsat çıkaran bir endüstriyel relokasyon analistsin.
 GÖREV: Metinden şirket, lokasyon, sektör, hat tipi, zaman çizelgesi ve CAPEX bilgilerini çıkar.
 KURALLAR: Sadece JSON döndür. Bulamadığın alanları null bırak. Çıktı dili Türkçe olsun.
 
-İSTENEN JSON YAPISI:
+İSTENEN JSON YAPISI (MUTLAKA BU ANAHTARLAR OLMALI):
 {{
   "source": {{ "original_language": "ISO639-1 kodu", "confidence": 0.0 }},
   "article": {{
@@ -88,30 +93,38 @@ KURALLAR: Sadece JSON döndür. Bulamadığın alanları null bırak. Çıktı d
     "equipment_keywords": ["list"]
   }},
   "signals": {{
-    "capex_usd": number,
-    "jobs_impact": integer,
+    "capex_usd": 0,
+    "jobs_impact": 0,
     "timeline": "string"
   }},
   "bios_fit": {{
     "rationale_tr": "Skor gerekçesi",
     "recommended_action": "monitor | reach_out | request_docs | propose_site_visit | partner_search | tender_watch"
   }},
-  "assumptions": ["Metinde doğrudan geçmeyen ama tahmin edilen varsayımlar listesi"]
+  "assumptions": ["Varsayımlar listesi"]
 }}
+
 METİN: {text}"""
 
     try:
         chat_completion = client.chat.completions.create(
             messages=[
-                {"role": "system", "content": "You are a data extraction assistant that strictly outputs JSON."},
+                {"role": "system", "content": "You are a data extraction assistant that strictly outputs the requested JSON structure. Never omit the 'article' key."},
                 {"role": "user", "content": prompt}
             ],
-            model="llama-3.3-70b-versatile",
+            model="llama-3.1-8b-instant",
             response_format={"type": "json_object"}, 
         )
         return chat_completion.choices[0].message.content
     except Exception as e:
-        return f'{{"error": "{str(e)}"}}'
+        # Hata anında SOW yapısını bozmamak için boş ama geçerli bir JSON dönüyoruz
+        print(f"⚠️ LLM Hatası: {e}")
+        return json.dumps({
+            "article": {"text_summary_tr": "Analiz başarısız", "event_type": "other"},
+            "entities": {"company": {"name": "null"}},
+            "bios_fit": {"score": 0},
+            "signals": {"capex_usd": 0}
+        })
 
 def calculate_bios_fit_score(parsed_json, source_url):
     """
@@ -226,107 +239,84 @@ def send_webhook_alert(data):
         print(f"Bildirim Hatası: {e}")
 
 def save_to_db(new_item):
-    """SOW Madde 4.4: Threading ve Kayıt."""
+    """Haberleri rss_data.json dosyasına ekler."""
     data = []
-    if os.path.exists(DB_FILE):
-        with open(DB_FILE, "r", encoding="utf-8") as f:
-            try: data = json.load(f)
-            except: pass
-
-    company_name = new_item.get("entities", {}).get("company", {}).get("name")
-    existing = next((i for i in data if i.get("entities", {}).get("company", {}).get("name") == company_name), None)
-
-    if existing:
-        if "updates" not in existing: existing["updates"] = []
-        existing["updates"].append({
-            "title": existing["article"]["title"],
-            "url": existing["source"]["url"],
-            "score": existing["bios_fit"]["score"],
-            "date": existing["source"]["retrieved_at_utc"]
-        })
-        existing.update({
-            "article": new_item["article"],
-            "source": new_item["source"],
-            "bios_fit": new_item["bios_fit"],
-            "signals": new_item["signals"],
-            "assumptions": new_item.get("assumptions", [])
-        })
-    else:
-        new_item["updates"] = []
-        data.append(new_item)
-
-    with open(DB_FILE, "w", encoding="utf-8") as f:
+    # app.py ile aynı değişken ismini (RSS_DB_FILE) kullanıyoruz
+    if os.path.exists(RSS_DB_FILE):
+        with open(RSS_DB_FILE, "r", encoding="utf-8") as f:
+            try:
+                data = json.load(f)
+            except:
+                pass
+    
+    data.append(new_item)
+    
+    with open(RSS_DB_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
-def fetch_rss_news(rss_url):
-    """Geliştirilmiş RSS Tarayıcı - Tam olarak 10 başarılı işlem hedefler."""
+def fetch_rss_news(rss_url, publisher_name="RSS"):
     feed = feedparser.parse(rss_url)
-    processed_count = 0
-    max_items = 10 # Hedeflenen başarılı işlem sayısı
-
-    for entry in feed.entries:
-        if processed_count >= max_items:
-            break # 10 başarılı işleme ulaştığımızda dur
-
-        # 1. Robots.txt Kontrolü[cite: 1]
-        if not check_robots_txt(entry.link):
-            continue
-
-        # 2. Kopya Kontrolü (F5 Zorunluluğu)
-        if is_duplicate(entry.link):
-            print(f"⏭️ Zaten var: {entry.title}")
-            continue
+    
+    for entry in feed.entries[:10]:
+        if is_duplicate(entry.link): continue
         
-        # 3. LLM Analizi (ArticleRecord v1 Şeması)
         result = analyze_with_llama3_api(entry.title)
         try:
             parsed = json.loads(result)
             
-            # SOW Madde 2.5: Audit ve Meta verileri
+            # --- ONARICI MANTIK ---
+            # Eğer 'article' anahtarı hala yoksa (LLM kurallara uymadıysa) manuel oluştur
+            if "article" not in parsed:
+                parsed["article"] = {
+                    "text_summary_tr": "Otomatik analiz başarısız oldu.",
+                    "event_type": "other"
+                }
+
+            # Eksik olabilecek diğer anahtarları da garantiye alalım
+            if "bios_fit" not in parsed: parsed["bios_fit"] = {"score": 10}
+            if "entities" not in parsed: parsed["entities"] = {"company": {"name": "Bilinmiyor"}}
+
+            # Veriyi zenginleştir ve başlığı ekle
             parsed["source"] = {
-                "publisher": "Google News RSS",
+                "publisher": publisher_name,
                 "url": entry.link,
-                "retrieved_at_utc": datetime.now(timezone.utc).isoformat(),
-                "language": parsed.get("source", {}).get("original_language", "tr")
+                "retrieved_at_utc": datetime.now(timezone.utc).isoformat()
             }
             parsed["article"]["title"] = entry.title
-            parsed["agent_version"] = "v1.0"
-            parsed["raw_hash"] = hashlib.md5(entry.link.encode()).hexdigest()
-
-            # 4. Resmi Skorlama (Madde 3.2 Formülü)
-            score, conf = calculate_bios_fit_score(parsed, entry.link)
+            
+            # Skorlama yap ve kaydet
+            score, _ = calculate_bios_fit_score(parsed, entry.link)
             parsed["bios_fit"]["score"] = score
-            parsed["bios_fit"]["score_confidence"] = conf
-
-            # 5. Bildirim ve Kayıt
-            if score >= 80:
-                send_webhook_alert(parsed)
             
             save_to_db(parsed)
-            processed_count += 1 # Sadece başarılı kayıtta sayacı artır
-            print(f"✅ [{processed_count}/{max_items}] İşlendi: {entry.title} (Skor: {score})")
+            print(f"✅ Kaydedildi: {entry.title[:40]}...")
 
         except Exception as e:
-            print(f"❌ {entry.title} işlenirken hata: {e}")
-
+            print(f"❌ Haber işlenemedi: {e}")
 
 
 def run_scanner():
-    """RSS_SOURCES_FILE içindeki tüm kaynakları sırayla tarar."""
-    if not os.path.exists("rss_sources.json"):
-        print("⚠️ Taranacak RSS kaynağı bulunamadı.")
+    """Site üzerinden eklenen kaynakları tarar."""
+    # app.py'da tanımladığın değişken ismini kullanıyoruz
+    if not os.path.exists(RSS_SOURCES_FILE):
+        print(f"⚠️ {RSS_SOURCES_FILE} bulunamadı. Önce siteden kaynak ekle.")
         return
 
-    with open("rss_sources.json", "r", encoding="utf-8") as f:
-        sources = json.load(f)
+    with open(RSS_SOURCES_FILE, "r", encoding="utf-8") as f:
+        try:
+            sources = json.load(f)
+        except:
+            print("❌ Kaynak dosyası okunamadı.")
+            return
 
     for source in sources:
-        print(f"📡 {source['name']} taranıyor...")
-        fetch_rss_news(source['url'])
-
+        print(f"📡 {source.get('name', 'RSS')} taranıyor...")
+        fetch_rss_news(source['url'], source.get('name', 'RSS'))
 
 
 
 if __name__ == "__main__":
-    test_rss_url = "https://news.google.com/rss/search?q=factory+relocation+europe&hl=en-US&gl=US&ceid=US:en" 
-    fetch_rss_news(test_rss_url)
+    # ÖNEMLİ: Sabit linki sildik, artık run_scanner() çağırıyoruz.
+    # Bu sayede rss_sources.json içindeki tüm linklere bakacak.
+    print("🚀 Tarayıcı başlatılıyor...")
+    run_scanner()
