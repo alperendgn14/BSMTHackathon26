@@ -702,17 +702,22 @@
             const item = currentNewsData[index]; if (!item) return;
             currentDetailIndex = index;
 
-            // Elementlere veri atama
+            // Temel Bilgiler
             document.getElementById('detailTitle').innerText = item.article?.title || "Analiz Detayı";
             document.getElementById('detailSummary').innerText = item.article?.text_summary_tr || "Özet hazır değil.";
             document.getElementById('detailCompany').innerText = item.entities?.company?.name || "Bilinmiyor";
+            document.getElementById('detailCapex').innerText = item.signals?.capex_usd ? `$${item.signals.capex_usd.toLocaleString()}` : "Veri Yok";
+            document.getElementById('detailTimeline').innerText = item.signals?.timeline || "Belirsiz";
 
-            // Risk Analizi Bağlantısı
+            // Risk ve Sentiment Analizi
             const riskBox = document.getElementById('riskContainer');
             const riskList = document.getElementById('detailRisks');
             const analysis = item.analysis || {};
             const risks = analysis.risks || [];
+            const sentiment = analysis.sentiment || 'neutral';
+            const score = item.bios_fit?.score || 0;
 
+            // Risk listesi gösterimi[cite: 6]
             if (risks.length > 0) {
                 riskBox.classList.remove('hidden');
                 riskList.innerHTML = risks.map(r => `<li>${r}</li>`).join('');
@@ -720,20 +725,41 @@
                 riskBox.classList.add('hidden');
             }
 
-            // Skor ve Renk Yönetimi
-            const score = item.bios_fit?.score || 0;
-            const sentiment = analysis.sentiment || 'neutral';
+            // Skor Dairesi ve Renk Mantığı (Senin istediğin özel ayar)
             const detailScore = document.getElementById('detailScore');
             const scoreCircle = document.getElementById('scoreCircle');
-
             detailScore.innerText = score;
             scoreCircle.setAttribute('stroke-dasharray', `${score}, 100`);
 
-            // Sentiment'e göre renk ata
-            let dynamicColor = sentiment === 'positive' ? '#10b981' : sentiment === 'negative' ? '#f43f5e' : '#3b82f6';
+            let dynamicColor;
+            // Eğer puan 50'den büyükse fırsattır, sentiment negatif olsa bile yeşil/emerald tonu yap[cite: 6]
+            if (score >= 50) {
+                dynamicColor = '#10b981'; // Emerald 500 (Fırsat Yeşili)
+            } else if (sentiment === 'negative') {
+                dynamicColor = '#f43f5e'; // Sadece düşük puanlı ve negatifse kırmızı kalsın
+            } else {
+                dynamicColor = '#3b82f6'; // Nötr/Mavi
+            }
+
             scoreCircle.style.color = dynamicColor;
             detailScore.style.color = dynamicColor;
 
+            // Aksiyon Butonu Metni Güncelleme[cite: 6]
+            const action = document.getElementById('detailAction');
+            if (score >= 50) {
+                action.className = "w-full text-center p-4 rounded-2xl font-bold text-[10px] uppercase bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400";
+                action.innerText = sentiment === 'negative' ? "Kriz Fırsatı: Taşıma Teklifi Ver" : "Kritik Fırsat: Temasa Geçin";
+            } else {
+                action.className = "w-full text-center p-4 rounded-2xl font-bold text-[10px] uppercase bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400";
+                action.innerText = "İzleme Listesinde";
+            }
+
+            // Rota Bilgisi[cite: 6]
+            const locs = getSmartLocations(item);
+            document.getElementById('detailRoute').innerText = formatRoute(locs.from, locs.to);
+
+            document.getElementById('chatHistory').innerHTML = '<p class="text-slate-500 dark:text-slate-400 italic text-xs">Ajan analiz için hazır...</p>';
+            document.getElementById('chatInput').value = '';
             document.getElementById('detailsModal').classList.add('active');
         }
 
