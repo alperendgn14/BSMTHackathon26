@@ -3,6 +3,9 @@ import os
 import json
 from groq import Groq
 from dotenv import load_dotenv
+import requests
+from datetime import datetime, timezone
+import urllib.robotparser
 
 load_dotenv()
 
@@ -45,6 +48,9 @@ def analyze_with_llama3_api(text):
     except Exception as e:
         return f'{{"error": "API bağlantı hatası: {str(e)}"}}'
 
+
+
+
 def save_to_db(new_data):
     # Mevcut verileri oku veya yeni dosya oluştur
     data = []
@@ -61,31 +67,82 @@ def save_to_db(new_data):
         json.dump(data, f, ensure_ascii=False, indent=4)
     print(f"💾 Veri {DB_FILE} dosyasına eklendi!")
 
+# F13: Yüksek Skorlu Fırsatlar İçin Bildirim
+def send_webhook_alert(news_data):
+    # Bir Discord sunucusu açıp kanal ayarlarından saniyeler içinde Webhook URL alabilirsin.
+    WEBHOOK_URL = "BURAYA_DISCORD_VEYA_SLACK_WEBHOOK_URL_GELECEK"
+    
+    if news_data.get("score", 0) >= 80:
+        mesaj = {
+            "content": f"🚨 **YENİ YÜKSEK FIRSAT YAKALANDI! (Skor: {news_data['score']})**\n"
+                       f"🏢 **Şirket:** {news_data['company']}\n"
+                       f"📍 **Rota:** {news_data['from_location']} ➡️ {news_data['to_location']}\n"
+                       f"📝 **Özet:** {news_data['summary_tr']}\n"
+                       f"🔗 [Kaynağa Git]({news_data['url']})"
+        }
+        try:
+            requests.post(WEBHOOK_URL, json=mesaj)
+            print("🔔 Discord/Slack bildirimi gönderildi!")
+        except Exception as e:
+            print("Bildirim hatası:", e)
+
+def check_robots_txt(url):
+    try:
+        # Domain'in ana robots.txt dosyasını bul (Örn: https://www.reuters.com/robots.txt)
+        parsed_uri = urllib.parse.urlparse(url)
+        base_url = '{uri.scheme}://{uri.netloc}'.format(uri=parsed_uri)
+        
+        rp = urllib.robotparser.RobotFileParser()
+        rp.set_url(base_url + "/robots.txt")
+        rp.read()
+        
+        # Sitemizin botu (USER_AGENT) buraya girebilir mi?
+        return rp.can_fetch(feedparser.USER_AGENT, url)
+    except:
+        return True # Hata varsa (dosya yoksa vb.) varsayılan olarak izin ver
+
+
+
 def fetch_rss_news(rss_url):
     print(f"[{rss_url}] adresinden haberler çekiliyor...\n")
+    
+    # İŞTE EKSİK OLAN/BULUNAMAYAN SATIR BURASI:
     feed = feedparser.parse(rss_url)
 
+    # Hackathon F3 Zorunluluğu: Bağlantı kontrolü
     if feed.bozo != 0:
-        print("RSS okuma hatası!")
+        print("RSS okuma hatası! Geçerli bir bağlantı olduğundan emin ol.")
         return
 
-    # İşlemi hızlandırmak için ilk 2 haberi test edelim
-    for i, entry in enumerate(feed.entries[:2]):
+    # İşlemi hızlandırmak için ilk 3 haberi test edelim
+    for i, entry in enumerate(feed.entries[:3]):
+        
+        # F5 Zorunluluğu: Kopya Haber Kontrolü (Dedup)
+        if is_duplicate(entry.link):
+            print(f"⏭️ Zaten eklenmiş, atlanıyor: {entry.title}")
+            continue
+
         print(f"--- İşlenen Haber {i+1} ---")
+        
+        # Llama 3 API'sine gönder
         ai_json_result = analyze_with_llama3_api(entry.title)
         
         try:
             parsed_json = json.loads(ai_json_result)
             
-            # Arayüzde (UI) göstermek için habere ait ekstra bilgileri de objeye ekliyoruz
+            # Veritabanına (JSON'a) kaydetmeden önce arayüz için gerekli ekstra verileri ekle
             parsed_json["original_title"] = entry.title
             parsed_json["url"] = entry.link
             parsed_json["published_date"] = entry.get('published', '')
             
+            # Deterministik BIOS-Fit Skorunu hesapla ve AI'ın uydurduğu skorun üzerine yaz (F7b)
+            parsed_json["score"] = calculate_bios_fit_score(parsed_json, entry.link)
+            
             print(json.dumps(parsed_json, indent=4, ensure_ascii=False))
             save_to_db(parsed_json)
+            
         except Exception as e:
-            print("JSON ayrıştırma hatası:", e)
+            print("❌ JSON ayrıştırma hatası:", e)
             
         print("-" * 30)
 
@@ -97,6 +154,7 @@ def calculate_bios_fit_score(parsed_json, source_url):
            "tender": 0.55,
            "closure": 0.45,
            "other": 0.10}
+    e_val = e_map.get(parsed_json.get("event_type", "other"), 0.10)
     
     #a, aktör netliği. - ağırlık 0.25
     a_val = 0.0
@@ -133,21 +191,7 @@ def is_duplicate(url):
                 return False
     return False
 
-# döngüde kullanımı
-for entry in feed.entries[:3]:
-    if is_duplicate(entry.link):
-        print(f"Bu haber zaten kaydedilmiş: {entry.link}")
-        continue
-    # devam eden işlemler...
-
-                
     
-    
-    
-           
-           
-    
-
 
 
 if __name__ == "__main__":
