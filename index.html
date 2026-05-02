@@ -4,52 +4,148 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BIOS AI News Agent</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { darkMode: 'class' }
     </script>
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s; }
-        .news-card { transition: all 0.2s ease-in-out; border: 1px solid #e5e7eb; cursor: pointer; }
-        .dark .news-card { border-color: #334155; }
-        .news-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border-color: #3b82f6; }
-        #scoreCircle { transition: stroke-dasharray 0.8s ease-out; }
         
+        /* KART BÜYÜME (SCALE) EFEKTİ */
+        .news-card { 
+            transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.5s ease; 
+            border: 1px solid #e5e7eb; 
+            cursor: pointer; 
+            transform-origin: center; 
+            will-change: transform, box-shadow; 
+        }
+        .dark .news-card { border-color: #334155; }
+        .news-card:hover { 
+            transform: scale(1.025); 
+            box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.15); 
+            border-color: #3b82f6; 
+            z-index: 10; 
+            position: relative; 
+        }
+        
+        #scoreCircle { transition: stroke-dasharray 0.8s ease-out, color 0.8s ease-out; }
+        
+        /* MODAL FADE VE ZOOM ANİMASYONLARI */
+        .modal-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            transform: scale(0.9);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15), opacity 0.5s ease; 
+            will-change: transform, opacity;
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Harita Karanlık Mod Ayarı */
         .leaflet-container { z-index: 10; border-radius: 0.75rem; }
         .dark .leaflet-layer, .dark .leaflet-control-zoom-in, .dark .leaflet-control-zoom-out, .dark .leaflet-control-attribution {
             filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
         }
 
+        /* Sticky Panel Scrollbar */
         #stickySidebar::-webkit-scrollbar, #chatHistory::-webkit-scrollbar { width: 4px; }
         #stickySidebar::-webkit-scrollbar-track, #chatHistory::-webkit-scrollbar-track { background: transparent; }
         #stickySidebar::-webkit-scrollbar-thumb, #chatHistory::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         .dark #stickySidebar::-webkit-scrollbar-thumb, .dark #chatHistory::-webkit-scrollbar-thumb { background: #475569; }
+
+        /* Neon Navigasyon */
+        @keyframes pan-gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .neon-navbar {
+            background: linear-gradient(270deg, #0f172a, #1d4ed8, #4338ca, #0f172a);
+            background-size: 300% 300%;
+            animation: pan-gradient 10s ease infinite;
+            box-shadow: 0px 4px 20px rgba(59, 130, 246, 0.4), 0px 0px 10px rgba(59, 130, 246, 0.2);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.5);
+        }
+        .dark .neon-navbar {
+            background: linear-gradient(270deg, #020617, #1e3a8a, #312e81, #020617);
+            background-size: 300% 300%;
+            box-shadow: 0px 4px 25px rgba(59, 130, 246, 0.6), 0px 0px 15px rgba(96, 165, 250, 0.3);
+            border-bottom: 1px solid rgba(96, 165, 250, 0.6);
+        }
+
+        /* SİBER GÜVENLİK (CYBER-SCAN) ANİMASYONU */
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .cyber-bg {
+            position: relative;
+            overflow: hidden;
+            background-color: #020617; 
+        }
+        .cyber-bg::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(16, 185, 129, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(16, 185, 129, 0.08) 1px, transparent 1px);
+            background-size: 15px 15px;
+            opacity: 0.8;
+            z-index: 1;
+        }
+        .cyber-bg::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(16, 185, 129, 0.25) 50%, transparent);
+            animation: scanline 4s linear infinite;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .cyber-content {
+            position: relative;
+            z-index: 10; 
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 dark:bg-slate-900 dark:text-slate-100">
 
     <!-- Header -->
-    <nav class="bg-slate-900 text-white p-4 shadow-xl sticky top-0 z-50 border-b border-slate-800">
+    <nav class="neon-navbar text-white p-4 sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-xl">B</div>
-                <h1 class="text-xl font-bold tracking-tight">BIOS <span class="text-blue-400 font-light text-sm">AI Agent</span></h1>
+                <div class="w-10 h-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg flex items-center justify-center font-bold text-xl shadow-[0_0_15px_rgba(255,255,255,0.3)]">B</div>
+                <h1 class="text-xl font-bold tracking-tight drop-shadow-md">BIOS <span class="text-blue-300 font-light text-sm">AI Agent</span></h1>
             </div>
             <div class="flex gap-2 sm:gap-3 items-center">
-                <button onclick="toggleTheme()" class="text-slate-300 hover:text-white p-2 rounded-lg transition" title="Temayı Değiştir">
+                <button onclick="toggleTheme()" class="text-white hover:text-blue-200 p-2 rounded-lg transition" title="Temayı Değiştir">
                     <i id="themeIcon" class="fas fa-moon text-lg"></i>
                 </button>
-                <button onclick="toggleFavoritesView()" id="favBtn" class="bg-slate-800 hover:bg-slate-700 px-3 py-2 sm:px-4 rounded-lg text-sm font-semibold transition border border-slate-700 text-slate-300">
+                <button onclick="toggleFavoritesView()" id="favBtn" class="bg-white/10 hover:bg-white/20 backdrop-blur-sm px-3 py-2 sm:px-4 rounded-lg text-sm font-semibold transition border border-white/20 text-white">
                     <i class="fas fa-star text-yellow-400"></i> <span class="hidden md:inline">Favorilerim</span>
                 </button>
-                <button onclick="triggerCollector()" id="scanBtn" class="bg-blue-600 hover:bg-blue-700 px-3 py-2 sm:px-4 rounded-lg text-sm font-semibold flex items-center gap-2 transition">
-                    <i class="fas fa-bolt text-yellow-400"></i> <span class="hidden md:inline">Güncelle</span>
+                <button onclick="triggerCollector()" id="scanBtn" class="bg-blue-500/80 hover:bg-blue-500 backdrop-blur-sm px-3 py-2 sm:px-4 rounded-lg text-sm font-semibold flex items-center gap-2 transition border border-blue-400/50 shadow-[0_0_10px_rgba(59,130,246,0.5)]">
+                    <i class="fas fa-bolt text-yellow-400 drop-shadow-md"></i> <span class="hidden md:inline">Güncelle</span>
                 </button>
-                <button onclick="toggleRssModal()" class="bg-slate-800 hover:bg-slate-700 px-3 py-2 sm:px-4 rounded-lg text-sm font-semibold transition border border-slate-700">
+                <button onclick="toggleRssModal()" class="bg-white/10 hover:bg-white/20 backdrop-blur-sm px-3 py-2 sm:px-4 rounded-lg text-sm font-semibold transition border border-white/20 text-white">
                     <i class="fas fa-rss"></i> <span class="hidden md:inline">Kaynaklar</span>
                 </button>
             </div>
@@ -90,15 +186,21 @@
                 </div>
             </div>
 
-            <div class="bg-slate-900 dark:bg-black p-6 rounded-2xl shadow-xl text-white border border-slate-800 transition-colors">
-                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Sistem Durumu</p>
-                <div class="flex items-center gap-2 mb-2 text-green-400">
-                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                    <span class="text-xs font-bold uppercase">LLM Analiz Aktif</span>
+            <!-- SİBER GÜVENLİK KARTI -->
+            <div class="cyber-bg p-6 rounded-2xl shadow-[0_0_15px_rgba(16,185,129,0.15)] border border-emerald-900/50 transition-colors">
+                <div class="cyber-content">
+                    <p class="text-[10px] font-bold text-emerald-600/80 uppercase tracking-widest mb-2 flex items-center gap-2">
+                        <i class="fas fa-shield-alt"></i> Sistem Durumu
+                    </p>
+                    <div class="flex items-center gap-2 mb-2 text-emerald-400">
+                        <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
+                        <span class="text-xs font-bold uppercase tracking-wider">LLM Analiz Aktif</span>
+                    </div>
+                    <p class="text-[11px] text-emerald-500/70 leading-relaxed italic">Llama 3, SOW 2.1 parametrelerine göre verileri süzüyor ve analiz ediyor.</p>
                 </div>
-                <p class="text-[11px] text-slate-400 leading-relaxed italic">Llama 3, SOW 2.1 parametrelerine göre verileri süzüyor.</p>
             </div>
 
+            <!-- LOKASYON RADARI -->
             <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 transition-colors">
                 <div class="flex items-center gap-2 mb-3">
                     <i class="fas fa-satellite text-blue-500"></i>
@@ -128,31 +230,31 @@
         </main>
     </div>
 
-    <!-- HABER DETAY MODALI (Sohbet Özelliği Eklendi) -->
-    <div id="detailsModal" class="hidden fixed inset-0 bg-slate-900/80 backdrop-blur-md flex items-center justify-center p-4 z-[110]">
-        <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col animate-in fade-in zoom-in duration-300 transition-colors">
+    <!-- HABER DETAY MODALI -->
+    <div id="detailsModal" class="modal-overlay fixed inset-0 bg-slate-900/80 backdrop-blur-md flex items-center justify-center p-4 z-[110]">
+        <div class="modal-content bg-white dark:bg-slate-800 rounded-3xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col transition-colors">
             <div class="p-6 border-b dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50">
                 <h3 class="font-bold text-xl text-slate-800 dark:text-slate-100" id="detailTitle">Analiz Detayı</h3>
                 <button onclick="closeDetails()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 text-3xl">&times;</button>
             </div>
             
             <div class="p-8 overflow-y-auto flex-1 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
-                <!-- Sol Taraf: Puan ve Aksiyon -->
+                <!-- Sol Taraf -->
                 <div class="flex flex-col items-center space-y-6">
                     <div class="relative w-40 h-40">
                         <svg class="w-full h-full" viewBox="0 0 36 36">
                             <path class="text-gray-200 dark:text-slate-700" stroke-width="3" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                            <path id="scoreCircle" class="text-blue-600 dark:text-blue-400 transition-all duration-1000 ease-out" stroke-width="3" stroke-dasharray="0, 100" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path id="scoreCircle" class="transition-all duration-1000 ease-out" stroke-width="3" stroke-dasharray="0, 100" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" style="color: hsl(0, 85%, 50%);" />
                         </svg>
                         <div class="absolute inset-0 flex flex-col items-center justify-center">
-                            <span id="detailScore" class="text-4xl font-black text-slate-800 dark:text-slate-100">0</span>
+                            <span id="detailScore" class="text-4xl font-black transition-colors duration-1000" style="color: hsl(0, 85%, 50%);">0</span>
                             <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">BIOS-FIT</span>
                         </div>
                     </div>
                     <div id="detailAction" class="w-full text-center p-4 rounded-2xl font-bold text-[10px] uppercase"></div>
                 </div>
                 
-                <!-- Sağ Taraf: Metin ve Sohbet -->
+                <!-- Sağ Taraf -->
                 <div class="md:col-span-2 flex flex-col">
                     <div class="space-y-6 flex-1">
                         <div>
@@ -167,21 +269,15 @@
                         </div>
                     </div>
 
-                    <!-- YENİ: MİNİ RAG / SOHBET BÖLÜMÜ -->
+                    <!-- MİNİ RAG SOHBET -->
                     <div class="mt-8 pt-6 border-t dark:border-slate-700 flex flex-col h-56">
                         <h4 class="text-xs font-black text-slate-400 uppercase mb-3 tracking-widest flex items-center gap-2">
                             <i class="fas fa-robot text-blue-500"></i> Analist Ajan'a Soru Sor
                         </h4>
-                        
-                        <!-- Sohbet Geçmişi -->
-                        <div id="chatHistory" class="flex-1 bg-slate-50 dark:bg-slate-900/50 rounded-xl p-4 overflow-y-auto mb-3 space-y-3 text-sm border border-slate-100 dark:border-slate-700">
-                            <!-- Mesajlar buraya gelecek -->
-                        </div>
-                        
-                        <!-- Girdi Alanı -->
+                        <div id="chatHistory" class="flex-1 bg-slate-50 dark:bg-slate-900/50 rounded-xl p-4 overflow-y-auto mb-3 space-y-3 text-sm border border-slate-100 dark:border-slate-700"></div>
                         <div class="flex gap-2">
                             <input type="text" id="chatInput" placeholder="Bu haberdeki riskler neler?" class="flex-1 p-3 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-600 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 text-sm dark:text-slate-100 transition-colors" onkeypress="if(event.key === 'Enter') askAgent()">
-                            <button onclick="askAgent()" id="chatBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-bold transition-colors">
+                            <button onclick="askAgent()" id="chatBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-bold transition-colors shadow-md">
                                 <i class="fas fa-paper-plane"></i>
                             </button>
                         </div>
@@ -193,9 +289,8 @@
     </div>
 
     <!-- RSS Modal -->
-    <div id="rssModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-[100]">
-        <!-- ... (Aynı RSS Modal Kodu) ... -->
-        <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl w-full max-w-xl overflow-hidden animate-in fade-in zoom-in duration-200 transition-colors">
+    <div id="rssModal" class="modal-overlay fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-[100]">
+        <div class="modal-content bg-white dark:bg-slate-800 rounded-3xl shadow-2xl w-full max-w-xl overflow-hidden transition-colors">
             <div class="p-6 bg-gray-50 dark:bg-slate-800/50 border-b dark:border-slate-700 flex justify-between items-center">
                 <h3 class="font-bold text-lg flex items-center gap-2 text-slate-800 dark:text-slate-100">
                     <i class="fas fa-rss-square text-orange-500"></i> Kaynak Yönetimi
@@ -224,14 +319,65 @@
         let currentNewsData = []; 
         let favorites = JSON.parse(localStorage.getItem('bios_favorites')) || [];
         let showFavsOnly = false;
-        
-        let currentDetailIndex = null; // Sohbet özelliği için eklendi
+        let currentDetailIndex = null;
 
         let map, mapMarker, hoverTimeout;
+        // Güncellenmiş Lokasyon Önbelleği (Türkçe ve İngilizce)
         const locationCache = {
-            "germany": [51.1657, 10.4515], "poland": [51.9194, 19.1451], "usa": [37.0902, -95.7129], 
-            "turkey": [38.9637, 35.2433], "france": [46.2276, 2.2137], "uk": [55.3781, -3.4360]
+            "germany": [51.1657, 10.4515], "almanya": [51.1657, 10.4515],
+            "poland": [51.9194, 19.1451], "polonya": [51.9194, 19.1451],
+            "usa": [37.0902, -95.7129], "abd": [37.0902, -95.7129], "amerika": [37.0902, -95.7129],
+            "turkey": [38.9637, 35.2433], "türkiye": [38.9637, 35.2433],
+            "france": [46.2276, 2.2137], "fransa": [46.2276, 2.2137],
+            "uk": [55.3781, -3.4360], "ingiltere": [55.3781, -3.4360],
+            "italy": [41.8719, 12.5674], "italya": [41.8719, 12.5674],
+            "japan": [36.2048, 138.2529], "japonya": [36.2048, 138.2529],
+            "mexico": [23.6345, -102.5528], "meksika": [23.6345, -102.5528],
+            "china": [35.8617, 104.1954], "çin": [35.8617, 104.1954],
+            "spain": [40.4637, -3.7492], "ispanya": [40.4637, -3.7492],
+            "india": [20.5937, 78.9629], "hindistan": [20.5937, 78.9629]
         };
+
+        // YENİ: YAPAY ZEKA FALLBACK MOTORU (Kaçırılan Lokasyonları Metinden Bulur)
+        function getSmartLocations(item) {
+            let fromLoc = item.entities?.from_location;
+            let toLoc = item.entities?.to_location;
+
+            const isInvalid = (loc) => !loc || loc.toLowerCase() === 'null' || loc === '?' || loc.toLowerCase() === 'unknown';
+
+            if (isInvalid(fromLoc)) fromLoc = null;
+            if (isInvalid(toLoc)) toLoc = null;
+
+            // Eğer Backend hiçbir şey bulamadıysa, Frontend metni tarayıp kurtarsın
+            if (!fromLoc && !toLoc) {
+                const textToScan = `${item.article?.title || ''} ${item.article?.text_summary_tr || ''} ${item.article?.summary_tr || ''}`.toLowerCase();
+                const countries = {
+                    "türkiye": "Türkiye", "almanya": "Almanya", "polonya": "Polonya", 
+                    "abd": "ABD", "amerika": "ABD", "çin": "Çin", "fransa": "Fransa", 
+                    "ingiltere": "İngiltere", "italya": "İtalya", "japonya": "Japonya", 
+                    "meksika": "Meksika", "ispanya": "İspanya", "romanya": "Romanya",
+                    "macaristan": "Macaristan", "hindistan": "Hindistan", "fas": "Fas", 
+                    "sırbistan": "Sırbistan", "çekya": "Çekya", "vietnam": "Vietnam"
+                };
+
+                for (const [key, value] of Object.entries(countries)) {
+                    // Kelime metin içinde geçiyorsa hedef lokasyon olarak ata
+                    if (textToScan.includes(key)) {
+                        toLoc = value; 
+                        break;
+                    }
+                }
+            }
+            return { from: fromLoc, to: toLoc };
+        }
+
+        // LOKASYON FORMATLAYICI FONKSİYON
+        function formatRoute(fromLoc, toLoc) {
+            if (fromLoc && toLoc) return `${fromLoc} ➔ ${toLoc}`;
+            if (toLoc) return `Hedef: ${toLoc}`;
+            if (fromLoc) return `Çıkış: ${fromLoc}`;
+            return "Belirtilmemiş";
+        }
 
         function initMap() {
             map = L.map('map', { zoomControl: false }).setView([48.8566, 2.3522], 3);
@@ -241,8 +387,10 @@
         async function focusMapOnIndex(index) {
             clearTimeout(hoverTimeout);
             const item = currentNewsData[index];
-            const targetLoc = item.entities?.to_location || item.entities?.from_location;
-            if (!targetLoc || targetLoc === 'null' || targetLoc === '?') return;
+            const locs = getSmartLocations(item);
+            const targetLoc = locs.to || locs.from;
+            
+            if (!targetLoc) return;
 
             hoverTimeout = setTimeout(async () => {
                 const locKey = targetLoc.toLowerCase().trim();
@@ -258,11 +406,11 @@
                     document.getElementById('mapLoading').classList.add('hidden');
                 }
                 if (coords) {
-                    map.flyTo(coords, 5, { duration: 1.5, easeLinearity: 0.25 });
+                    map.setView(coords, 4, { animate: true, pan: { duration: 1.5, easeLinearity: 0.25 } });
                     if (mapMarker) map.removeLayer(mapMarker);
                     mapMarker = L.marker(coords).addTo(map).bindPopup(`<b class="text-slate-800">${item.entities?.company?.name || "Bilinmiyor"}</b>`).openPopup();
                 }
-            }, 400); 
+            }, 500); 
         }
 
         function resetMapFocus() { clearTimeout(hoverTimeout); }
@@ -298,8 +446,8 @@
         function toggleFavoritesView() {
             showFavsOnly = !showFavsOnly;
             const btn = document.getElementById('favBtn'), txt = document.getElementById('noNewsText');
-            if (showFavsOnly) { btn.classList.add('bg-blue-600', 'text-white', 'border-blue-600'); btn.classList.remove('bg-slate-800', 'text-slate-300', 'border-slate-700'); txt.innerText = "Favori bulunmuyor."; } 
-            else { btn.classList.add('bg-slate-800', 'text-slate-300', 'border-slate-700'); btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-600'); txt.innerText = "Haber bulunamadı."; }
+            if (showFavsOnly) { btn.classList.add('bg-blue-500/80', 'text-white', 'border-blue-400/50'); btn.classList.remove('bg-white/10', 'text-white', 'border-white/20'); txt.innerText = "Favori bulunmuyor."; } 
+            else { btn.classList.add('bg-white/10', 'text-white', 'border-white/20'); btn.classList.remove('bg-blue-500/80', 'text-white', 'border-blue-400/50'); txt.innerText = "Haber bulunamadı."; }
             applyFilters();
         }
 
@@ -322,17 +470,17 @@
                 no.classList.add('hidden');
                 currentNewsData.forEach((i, idx) => {
                     const art = i.article || {}, src = i.source || {}, fit = i.bios_fit || {}, score = fit.score || 0, id = art.title || src.url;
-                    const star = favorites.includes(id) ? 'fas fa-star text-yellow-400' : 'far fa-star text-gray-400 hover:text-yellow-400';
+                    const star = favorites.includes(id) ? 'fas fa-star text-yellow-400 drop-shadow' : 'far fa-star text-gray-400 hover:text-yellow-400';
                     const sc = score > 70 ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800' : score > 40 ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800' : 'text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700';
 
                     c.innerHTML += `
                         <div class="news-card bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm relative overflow-hidden group transition-colors" onclick="showDetails(${idx})" onmouseenter="focusMapOnIndex(${idx})" onmouseleave="resetMapFocus()">
                             <div class="flex justify-between items-start mb-4">
-                                <div class="flex flex-col"><span class="text-[10px] font-bold text-blue-500 dark:text-blue-400 uppercase">${src.publisher || 'GLOBAL NEWS'}</span><span class="text-[10px] text-gray-400 mt-0.5"><i class="far fa-clock"></i> ${new Date(src.retrieved_at_utc).toLocaleDateString('tr-TR')}</span></div>
+                                <div class="flex flex-col"><span class="text-[10px] font-bold text-blue-500 dark:text-blue-400 uppercase tracking-widest">${src.publisher || 'GLOBAL NEWS'}</span><span class="text-[10px] text-gray-400 mt-0.5"><i class="far fa-clock"></i> ${new Date(src.retrieved_at_utc).toLocaleDateString('tr-TR')}</span></div>
                                 <div class="flex items-center gap-3"><div class="px-3 py-1 rounded-full text-xs font-bold border ${sc}">Fit: ${score}/100</div><button onclick="toggleFavorite(event, this.dataset.id)" data-id="${id.replace(/"/g, '&quot;')}" class="p-1 hover:scale-125 transition-transform"><i class="${star} text-lg"></i></button></div>
                             </div>
-                            <h3 class="text-xl font-bold mb-3 leading-tight text-slate-800 dark:text-slate-100 group-hover:text-blue-400 transition">${art.title || 'Başlıksız'}</h3>
-                            <p class="text-sm text-gray-500 dark:text-slate-400 mb-6 leading-relaxed line-clamp-3">${art.text_summary_tr || "Analiz ediliyor..."}</p>
+                            <h3 class="text-xl font-bold mb-3 leading-tight text-slate-800 dark:text-slate-100 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition">${art.title || 'Başlıksız'}</h3>
+                            <p class="text-sm text-gray-500 dark:text-slate-400 mb-6 leading-relaxed line-clamp-3">${art.text_summary_tr || art.summary_tr || "Analiz ediliyor..."}</p>
                             <div class="flex justify-between items-center border-t dark:border-slate-700 pt-4 text-[11px] font-bold text-slate-400">
                                 <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded uppercase"># ${art.event_type || 'genel'}</span><span class="text-blue-600 dark:text-blue-400">DETAYLARI GÖR <i class="fas fa-chevron-right"></i></span>
                             </div>
@@ -341,61 +489,68 @@
             }
         }
 
-        // DETAY BÖLÜMÜ VE SOHBET (RAG) ENTEGRASYONU
         function showDetails(index) {
             const item = currentNewsData[index]; if(!item) return;
-            currentDetailIndex = index; // Soruyu hangi habere soracağımızı bilmek için kaydet
+            currentDetailIndex = index;
 
             document.getElementById('detailTitle').innerText = item.article?.title || "Analiz Detayı";
             document.getElementById('detailSummary').innerText = item.article?.text_summary_tr || "Özet hazır değil.";
             document.getElementById('detailCompany').innerText = item.entities?.company?.name || "Bilinmiyor";
             document.getElementById('detailCapex').innerText = item.signals?.capex_usd ? `$${item.signals.capex_usd.toLocaleString()}` : "Veri Yok";
             document.getElementById('detailTimeline').innerText = item.signals?.timeline || "Belirsiz";
-            document.getElementById('detailRoute').innerText = `${item.entities?.from_location || '?'} ➔ ${item.entities?.to_location || '?'}`;
+            
+            // YENİ: Akıllı Lokasyon Çıkarımı
+            const locs = getSmartLocations(item);
+            document.getElementById('detailRoute').innerText = formatRoute(locs.from, locs.to);
             
             const score = item.bios_fit?.score || 0;
-            document.getElementById('detailScore').innerText = score; document.getElementById('scoreCircle').setAttribute('stroke-dasharray', `${score}, 100`);
+            const detailScore = document.getElementById('detailScore');
+            const scoreCircle = document.getElementById('scoreCircle');
+            
+            detailScore.innerText = score; 
+            scoreCircle.setAttribute('stroke-dasharray', `${score}, 100`);
+            
+            const hue = (score / 100) * 120;
+            const dynamicColor = `hsl(${hue}, 85%, 50%)`;
+            scoreCircle.style.color = dynamicColor;
+            detailScore.style.color = dynamicColor;
             
             const action = document.getElementById('detailAction');
             action.className = `w-full text-center p-4 rounded-2xl font-bold text-[10px] uppercase transition-colors ${score > 70 ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' : 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400'}`;
             action.innerText = score > 70 ? "Kritik Fırsat: Temasa Geçin" : "İzleme Listesinde";
 
-            // Sohbeti Temizle
             document.getElementById('chatHistory').innerHTML = '<p class="text-slate-500 dark:text-slate-400 italic text-xs">Bu haberle ilgili merak ettiklerinizi yapay zekaya sorun...</p>';
             document.getElementById('chatInput').value = '';
 
-            document.getElementById('detailsModal').classList.remove('hidden');
+            document.getElementById('detailsModal').classList.add('active');
         }
 
-        function closeDetails() { document.getElementById('detailsModal').classList.add('hidden'); }
+        function closeDetails() { document.getElementById('detailsModal').classList.remove('active'); }
 
-        // MİNİ RAG - YAPAY ZEKA İLE SOHBET
         async function askAgent() {
             const input = document.getElementById('chatInput');
             const question = input.value.trim();
             if(!question) return;
 
-            const chatHistory = document.getElementById('chatHistory');
-            const btn = document.getElementById('chatBtn');
-            const item = currentNewsData[currentDetailIndex];
+            const chatHistory = document.getElementById('chatHistory'), btn = document.getElementById('chatBtn'), item = currentNewsData[currentDetailIndex];
             
-            // --- YENİ BAĞLAM (CONTEXT) MÜHENDİSLİĞİ ---
-            // Sadece özeti değil, haberle ilgili çıkardığımız tüm zengin veriyi Llama'ya gönderiyoruz
+            // YENİ: Ajana da doğru (akıllı) rotayı gönder
+            const locs = getSmartLocations(item);
+            const routeContext = formatRoute(locs.from, locs.to);
+            
             const contextText = `
                 Haber Başlığı: ${item.article?.title || 'Bilinmiyor'}
                 Haber Özeti: ${item.article?.text_summary_tr || item.article?.summary_tr || 'Bilinmiyor'}
                 İlgili Şirket: ${item.entities?.company?.name || 'Bilinmiyor'}
-                Lokasyon/Rota: ${item.entities?.from_location || 'Belirsiz'} bölgesinden ${item.entities?.to_location || 'Belirsiz'} bölgesine.
+                Lokasyon/Rota: ${routeContext}
                 Tahmini CAPEX (Bütçe): ${item.signals?.capex_usd ? '$' + item.signals.capex_usd.toLocaleString() : 'Belirtilmemiş'}
                 Zaman Çizelgesi: ${item.signals?.timeline || 'Belirtilmemiş'}
                 Sektör/Ekipman Sinyalleri: ${(item.industry?.equipment_keywords || []).join(', ') || 'Yok'}
             `;
 
-            // Kullanıcı sorusunu ekrana bas
             chatHistory.innerHTML += `<div class="text-right mb-2"><span class="bg-blue-600 text-white px-3 py-2 rounded-xl inline-block text-xs max-w-[85%] text-left shadow-sm">${question}</span></div>`;
             input.value = '';
             
-            // Yükleniyor durumuna al ve aşağı kaydır
             btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
             chatHistory.scrollTop = chatHistory.scrollHeight;
 
@@ -406,22 +561,16 @@
                     body: JSON.stringify({ question: question, context: contextText })
                 });
                 const data = await res.json();
-                
-                if(res.ok && data.answer) {
-                    chatHistory.innerHTML += `<div class="text-left mb-2"><span class="bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 px-3 py-2 rounded-xl inline-block text-xs border border-gray-200 dark:border-slate-700 max-w-[90%] shadow-sm leading-relaxed">${data.answer.replace(/\n/g, '<br>')}</span></div>`;
-                } else {
-                    chatHistory.innerHTML += `<div class="text-left mb-2"><span class="bg-red-50 text-red-600 px-3 py-2 rounded-xl inline-block text-xs border border-red-200">Yanıt alınamadı.</span></div>`;
-                }
-            } catch(e) {
-                chatHistory.innerHTML += `<div class="text-left mb-2"><span class="bg-red-50 text-red-600 px-3 py-2 rounded-xl inline-block text-xs border border-red-200">Bağlantı hatası!</span></div>`;
-            }
+                if(res.ok && data.answer) chatHistory.innerHTML += `<div class="text-left mb-2"><span class="bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 px-3 py-2 rounded-xl inline-block text-xs border border-gray-200 dark:border-slate-700 max-w-[90%] shadow-sm leading-relaxed">${data.answer.replace(/\n/g, '<br>')}</span></div>`;
+                else chatHistory.innerHTML += `<div class="text-left mb-2"><span class="bg-red-50 text-red-600 px-3 py-2 rounded-xl inline-block text-xs border border-red-200">Yanıt alınamadı.</span></div>`;
+            } catch(e) { chatHistory.innerHTML += `<div class="text-left mb-2"><span class="bg-red-50 text-red-600 px-3 py-2 rounded-xl inline-block text-xs border border-red-200">Bağlantı hatası!</span></div>`; }
 
             btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i>';
             chatHistory.scrollTop = chatHistory.scrollHeight;
         }
 
         function updateScoreVal() { document.getElementById('scoreVal').innerText = document.getElementById('scoreRange').value; applyFilters(); }
-        function toggleRssModal() { document.getElementById('rssModal').classList.toggle('hidden'); }
+        function toggleRssModal() { const modal = document.getElementById('rssModal'); if(modal.classList.contains('active')) { modal.classList.remove('active'); } else { modal.classList.add('active'); } }
 
         async function triggerCollector() {
             const btn = document.getElementById('scanBtn'); const originalText = btn.innerHTML;
