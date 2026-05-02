@@ -2,9 +2,15 @@ import feedparser
 import os
 import json
 from groq import Groq
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Groq API Anahtarını buraya yapıştır
 api_key = os.getenv("GROQ_API_KEY")
+
+if api_key is None:
+    raise ValueError("Hata: .env dosyasında GROQ_API_KEY bulunamadı!")
 
 client = Groq()
 feedparser.USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
