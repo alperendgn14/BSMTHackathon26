@@ -1,108 +1,105 @@
 [
     {
         "source": {
-            "publisher": "oç",
+            "publisher": "hnm",
             "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNVE1WMTl1SUo5X1BUQkFPOHd1b2ZfVDR3YzMybjJoRTBPYU5mTVNaM1ZVdkdFaXIwQUt5Q3dyaFRjVDBKX3NiOTgxNTNLNDdWVVBCaTRscDVpR3E3NW5wZEdPR05uNzlacGF3NkFBYlpjX0lwdGlXVDc0ZXdMa3I5X3RKeC0yZkI3eUQzQWpqLTdpWEZFTUtxR1cwb1RkT0JXYjdIaGhTYlNXdHE0MjhJ?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:44:44.472666+00:00"
+            "retrieved_at_utc": "2026-05-02T19:56:56.410218+00:00"
         },
         "article": {
-            "text_summary_tr": "Trump, Avrupa Birliği'nden otomotiv için tarifeyi 25'lere çıkarmayı düşünüyor diye Reuters haber veriyor.",
+            "text_summary_tr": "Amerikalı işadamı Trump, Avrupa Birliği'nden gelen arabaların gümrük vergelerini 25'lere çıkartacağını söyledi.",
             "event_type": "other",
             "confidence": 0.0,
             "title": "Trump says he will raise tariff on autos from European Union to 25% - Reuters"
         },
         "entities": {
             "company": {
-                "name": "null",
+                "name": "Trump",
                 "ticker": null
             },
             "countries": [
-                "null"
-            ],
-            "from_location": "Avrupa Birliği",
-            "to_location": "null"
-        },
-        "industry": {
-            "sector": "Otomotiv",
-            "line_type": "null",
-            "equipment_keywords": [
-                "null"
-            ]
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": " null"
-        },
-        "bios_fit": {
-            "rationale_tr": "null",
-            "recommended_action": "monitor",
-            "score": 46
-        },
-        "assumptions": [
-            "null"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "oç",
-            "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNcWtTdTE1eks2Zy1EM2dVYy1kLWxPM2J2ZXFBU3ByM0ZrMERaQ3o4R1E2akVhWlBaNjRJc0QtTjRUNkVfaWdBbG9FcGFnQlZUVHN3b3pzMTAyaTVSLU9ndU5uNjkxUFY2ekUzRXY5SElpNmNtYkFPc0piaHQyWnFFY1pLWFZadDI5YWc?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:44:45.103775+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Alman otomotiv endüstrisi 'kriz' geçiriyor. Yabancı yatırımlar ve işçi göçü var.",
-            "event_type": "relocation | other",
-            "confidence": 0.0,
-            "title": "German auto industry in ‘crisis’ as investments, jobs move abroad, lobby says - Automotive News"
-        },
-        "entities": {
-            "company": {
-                "name": "Otomotiv endüstrisinin genel adı",
-                "ticker": null
-            },
-            "countries": [
-                "Almanya",
-                "Diğer ülkelere"
+                "Amerika",
+                "Avrupa Birliği"
             ],
             "from_location": null,
             "to_location": null
         },
         "industry": {
-            "sector": "Otomotiv",
+            "sector": null,
             "line_type": null,
             "equipment_keywords": []
         },
         "signals": {
-            "capex_usd": null,
-            "jobs_impact": null,
-            "timeline": "kriz devam ediyor"
+            "capex_usd": 0,
+            "jobs_impact": 0,
+            "timeline": null
         },
         "bios_fit": {
-            "rationale_tr": "Yatırım ve işçi kaybı",
+            "rationale_tr": null,
             "recommended_action": "monitor",
-            "score": 29
+            "score": 30
+        },
+        "assumptions": []
+    },
+    {
+        "source": {
+            "publisher": "hnm",
+            "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNcWtTdTE1eks2Zy1EM2dVYy1kLWxPM2J2ZXFBU3ByM0ZrMERaQ3o4R1E2akVhWlBaNjRJc0QtTjRUNkVfaWdBbG9FcGFnQlZUVHN3b3pzMTAyaTVSLU9ndU5uNjkxUFY2ekUzRXY5SElpNmNtYkFPc0piaHQyWnFFY1pLWFZadDI5YWc?oc=5",
+            "retrieved_at_utc": "2026-05-02T19:56:57.210818+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Alman otomotiv endüstrisi yatırımların ve işlerin dışarıya hareketi nedeniyle kriz içerisine girdi, lobi diyor.",
+            "event_type": "relocation | capex_fdi | other",
+            "confidence": 1.0,
+            "title": "German auto industry in ‘crisis’ as investments, jobs move abroad, lobby says - Automotive News"
+        },
+        "entities": {
+            "company": {
+                "name": null,
+                "ticker": "null"
+            },
+            "countries": [
+                "Almanya",
+                "dışarıya"
+            ],
+            "from_location": null,
+            "to_location": "dışarıya"
+        },
+        "industry": {
+            "sector": null,
+            "line_type": "otomotiv",
+            "equipment_keywords": [
+                "otomobil"
+            ]
+        },
+        "signals": {
+            "capex_usd": null,
+            "jobs_impact": null,
+            "timeline": "kriz"
+        },
+        "bios_fit": {
+            "rationale_tr": "Skor gerekçesi",
+            "recommended_action": "monitor",
+            "score": 23
         },
         "assumptions": [
-            "Yatırımcıların motivasyonları belirsiz",
-            "İşçilerin geçmişi ve becerileri belirsiz",
-            "Yatırımın sonuçları belirsiz"
+            "Endüstriyel relokasyon analizi kapsamında elde edilen bilgiler"
         ]
     },
     {
         "source": {
-            "publisher": "oç",
+            "publisher": "hnm",
             "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPWGc2ZEZhNUVfdFFDTUtta1FKMTZnVjd4QkQzVktMVzN0TDQxc2VXMnBqdGU0eXpZUmx6RThRV0E1S3JROHhrQ2huZkNNRXRONGxYV0NLbzhMR3RMQTE5ek5SMHVDNVVJTEVhMjZGNWhuYVJ1dndFM215RU02YlcxT29WVFJLdjMxV3NMZWJiWF9pMkVRTmJFdkhBdjk?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:44:45.653349+00:00"
+            "retrieved_at_utc": "2026-05-02T19:56:57.699513+00:00"
         },
         "article": {
-            "text_summary_tr": "Kanada, elektrikli araçlar üzerine geleceğine yatırım yaparak ABD'den uzaklaşıyor.",
-            "event_type": "expansion",
-            "confidence": 1.0,
+            "text_summary_tr": "Kanada, otomatik elektrikli araçlara güveniyor: ABD'den uzaklaşma.",
+            "event_type": "other",
+            "confidence": 0.0,
             "title": "Carney Stakes Canada’s Auto Future on E.V.s as It Pulls Away From the U.S. - The New York Times"
         },
         "entities": {
             "company": {
-                "name": "Carney",
+                "name": "Carney Stakes",
                 "ticker": null
             },
             "countries": [
@@ -116,33 +113,33 @@
             "sector": "otomotiv",
             "line_type": null,
             "equipment_keywords": [
-                "elektrikli araç"
+                "otomatik elektrikli araç"
             ]
         },
         "signals": {
             "capex_usd": 0,
             "jobs_impact": 0,
-            "timeline": "Kanada, elektrikli araçlar üzerine yatırım yapmaya devam edecek."
+            "timeline": null
         },
         "bios_fit": {
-            "rationale_tr": "Biyos için fırsat, Kanada'nın elektrikli araçlar üzerine yoğun yatırım yapması",
+            "rationale_tr": "Bulunan nedenler: Kanada'nın ABD'den farklı bir otomotiv stratejisinin olması.",
             "recommended_action": "monitor",
-            "score": 48
+            "score": 27
         },
         "assumptions": [
-            "Yeni teknolojiye adapte olmalı"
+            "Varsayımlar listesi"
         ]
     },
     {
         "source": {
-            "publisher": "oç",
+            "publisher": "hnm",
             "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPM0JESmVwbXNQMmlrY19aODFKYTVER29Td1p3dnNMWUxZRy1yeTA1djdJTXRyMHlpZWZlUDVkU0RVOVZPdzRTb1pPb1FOY2ttVHBBZkkxV2wyaWZodXZ2eHVBM1V6aVNWcDNrZ3JDZnJTdGVZN2Nkcnk1Ri1KdWR4a3gweXV5TnFBakFoVXl4Rkx1bUw4aEI2Y2Z2bmdyM0FiaXZfVNIBqgFBVV95cUxOVV9Wd2M1SDlmMWlheTFYOVp3SldYQVhJTExQdkVXbGdzMV9lUVV5ZkY4bEdKY2FiYVp3eFNLZDE5cWtvcWF4WGZxUG02bWt1R011dDdlZHBoVVNEV1JxbmpUVklBNzJkcEZVYUxQb2pSUVBuNU1QWTJndUhTam43RWZ5OVhkaFhBZ0E5NWJqMXpzaE91ODA2eWtZYjFfX2laOGNIbnl6YkZyUQ?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:44:46.086773+00:00"
+            "retrieved_at_utc": "2026-05-02T19:56:58.245264+00:00"
         },
         "article": {
-            "text_summary_tr": "Çinli şirketler, Meksika'da araç fabrikasını satın almak için teklifler sundular.",
-            "event_type": "expansion",
-            "confidence": 1.0,
+            "text_summary_tr": "China'nın BYD ve Geely otomobil fabrikası satın almak için ön teklif verdi: Reuters - CNBC",
+            "event_type": "new_plant",
+            "confidence": 0.0,
             "title": "Seeking Mexico foothold, China's BYD and Geely bid to buy car plant: Reuters - CNBC"
         },
         "entities": {
@@ -151,38 +148,38 @@
                 "ticker": null
             },
             "countries": [
-                "Meksika"
+                "Türkiye"
             ],
             "from_location": null,
             "to_location": null
         },
         "industry": {
             "sector": "Otomotiv",
-            "line_type": "Araç Üretim",
+            "line_type": "",
             "equipment_keywords": []
         },
         "signals": {
-            "capex_usd": null,
-            "jobs_impact": null,
-            "timeline": null
+            "capex_usd": 0,
+            "jobs_impact": 0,
+            "timeline": "string"
         },
         "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": null,
-            "score": 47
+            "rationale_tr": "İlgili sektörde aktif olan şirket, Meksika'yı hedef almak için bir araç fabrikası satın almak istiyor. BYD ve Geely'nin ön teaseı bu durumu doğrular.",
+            "recommended_action": "monitor",
+            "score": 53
         },
         "assumptions": []
     },
     {
         "source": {
-            "publisher": "oç",
+            "publisher": "hnm",
             "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9fVjhNMDNBZkxiSnR5UGJ3bXBURGljTjlPY3BmZjV1TDE3aVdrVk1hS0NNMzAzajVmVmZoekhJQm1zeVlnQVkyc2tISUFGTUVaSTZnOUpHOWtBSVRzMmt4dlNGYzBkRThUakVjck9WQWlST29CeTA5bmxqUmlOQQ?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:44:46.558775+00:00"
+            "retrieved_at_utc": "2026-05-02T19:56:58.570354+00:00"
         },
         "article": {
-            "text_summary_tr": "Endüstriyel ve hizmet sektörlerine ait global M&A trendleri 2026'da ne önümüzde?",
-            "event_type": "tender",
-            "confidence": 1.0,
+            "text_summary_tr": null,
+            "event_type": null,
+            "confidence": 0.0,
             "title": "Global M&A trends in industrials and services: 2026 outlook - PwC"
         },
         "entities": {
@@ -206,21 +203,21 @@
         },
         "bios_fit": {
             "rationale_tr": null,
-            "recommended_action": "monitor",
-            "score": 14
+            "recommended_action": null,
+            "score": 8
         },
         "assumptions": []
     },
     {
         "source": {
-            "publisher": "oç",
+            "publisher": "hnm",
             "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1nZ3doakVjSld0TzVPMVRQSmJJWk9UWGJhVjBIR0liQVNKZkZ5R2ZWNEluanRDZUI4TmsyU044WWx0X0phamVTbjJEY2s0VlJhQzBudnIxRTY4dw?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:44:47.033499+00:00"
+            "retrieved_at_utc": "2026-05-02T19:56:59.039529+00:00"
         },
         "article": {
-            "text_summary_tr": "İsviçre kadar küçük bir Slovakistan, otomobil üretme devi haline geldi.",
-            "event_type": "relocation | expansion",
-            "confidence": 0.0,
+            "text_summary_tr": "Küçük bir Slovakistanın arabalar yapmaya dönüştüğüne dair",
+            "event_type": "expansion",
+            "confidence": 0.8,
             "title": "How tiny Slovakia became a car making heavyweight - BBC"
         },
         "entities": {
@@ -229,17 +226,16 @@
                 "ticker": "null"
             },
             "countries": [
-                "Slovakistan"
+                "Slovakia"
             ],
             "from_location": "null",
             "to_location": "null"
         },
         "industry": {
-            "sector": "Otomobil",
-            "line_type": "Otomobil Üretimi",
+            "sector": "Automotive",
+            "line_type": "Araba Üretim",
             "equipment_keywords": [
-                "Otomobil üretim hattı",
-                "Slovakistan"
+                "Araba Üretim Ekipmanı"
             ]
         },
         "signals": {
@@ -250,22 +246,20 @@
         "bios_fit": {
             "rationale_tr": "null",
             "recommended_action": "monitor",
-            "score": 46
+            "score": 65
         },
-        "assumptions": [
-            "null"
-        ]
+        "assumptions": []
     },
     {
         "source": {
-            "publisher": "oç",
+            "publisher": "hnm",
             "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPYVhWelpveDdwQlhzY2NrdVowTGhiME9JSXJ2anlTeG5FcVJVbllHdDNZYktySjhDeS01RzhfM1MxcEVHekQxdlBmWFgxMTRWbDM4dEpqMVFvcGtTV1BMSnV0bXlwM2ZRVGVVZ2Vzd3l2WHpGRmN3SGlCWHJOTmxqaUZON0NvaS1IOUpZT3VKTHo?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:44:47.615408+00:00"
+            "retrieved_at_utc": "2026-05-02T19:56:59.638378+00:00"
         },
         "article": {
-            "text_summary_tr": "Avrupa otomotiv tedarikçisi, McAllen'de 225M$ yatırım yaparak fabrika yapacak.",
-            "event_type": "new_plant",
-            "confidence": 0.0,
+            "text_summary_tr": "Avrupa otomotiv tedarikcisibir $225M fabrikayı McAllen'de inşa edcek",
+            "event_type": "relocation",
+            "confidence": 0.8,
             "title": "European automotive supplier to build $225M plant in McAllen - The Business Journals"
         },
         "entities": {
@@ -274,17 +268,16 @@
                 "ticker": null
             },
             "countries": [
-                "İspanya",
-                "Meksika"
+                "United States"
             ],
             "from_location": null,
             "to_location": "McAllen"
         },
         "industry": {
-            "sector": "Otomotiv Sektörü",
-            "line_type": "Fabrikalar",
+            "sector": "Automotive",
+            "line_type": null,
             "equipment_keywords": [
-                "Makina Ekipmanları"
+                "Automotive manufacturing equipment"
             ]
         },
         "signals": {
@@ -293,23 +286,23 @@
             "timeline": null
         },
         "bios_fit": {
-            "rationale_tr": null,
+            "rationale_tr": "Yüksek sermaye yatırımı",
             "recommended_action": "monitor",
-            "score": 58
+            "score": 61
         },
         "assumptions": [
-            "Fabrika inşaatındaki zaman diliminin belirlenmesi",
-            "Fabrika inşaatındaki maliyetlerin belirlenmesi"
+            "Fabrikanın kapasitesinin tam olarak ne olacağı",
+            "Çalışanların sayısı"
         ]
     },
     {
         "source": {
-            "publisher": "oç",
+            "publisher": "hnm",
             "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOZVg1WWw4c3FNcEZHSkduS0h4VG5kQi05SlUzZ1FKN1l3N3EtTmo2d1NUaWo4eWUzSUFoVUhCYXRzdGJteHAzS1FRS05oSV9rMlJOWmQ0dEIyQkl3a1VjcHpGX1RMTk85VmR4bXFMV25Xbl9fa1d1eHZiOU9tTWI4Ng?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:44:48.010690+00:00"
+            "retrieved_at_utc": "2026-05-02T19:57:00.085501+00:00"
         },
         "article": {
-            "text_summary_tr": "Avrupa için Çin teknoloji yatırımlarını açan kapı hala açık.",
+            "text_summary_tr": "Avrupa için Çin teknoloji yatırımlarının kapıları hala açık",
             "event_type": "other",
             "confidence": 0.0,
             "title": "Europe's door to Chinese tech investment is still ajar - Centre for European Reform (CER)"
@@ -317,70 +310,115 @@
         "entities": {
             "company": {
                 "name": "Centre for European Reform (CER)",
-                "ticker": "null"
+                "ticker": null
             },
             "countries": [
-                "Avrupa",
-                "Çin"
+                "Avrupa"
             ],
-            "from_location": "null",
-            "to_location": "null"
+            "from_location": null,
+            "to_location": null
         },
         "industry": {
-            "sector": "null",
-            "line_type": "null",
+            "sector": null,
+            "line_type": null,
             "equipment_keywords": []
         },
         "signals": {
             "capex_usd": 0,
             "jobs_impact": 0,
-            "timeline": "null"
+            "timeline": null
         },
         "bios_fit": {
             "rationale_tr": "",
             "recommended_action": "monitor",
-            "score": 42
+            "score": 25
         },
         "assumptions": []
     },
     {
         "source": {
-            "publisher": "oç",
-            "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPdU5CaUJVZ3R1UlQ4bmY4cTFWSGJjUF9YNTN5emNwQXBYdi1EVTlXV29nQ1dXRFpqaTdZR2pjcHA1aVU0S1JQUHVsWEJXUUtQTDZIRk1KRUp4dWotcFZaYTVhSlB5LTBGMFlCLXV3ZGJFZmJ3YWNmSzdOSmUyX29MTlVMR2dfYXBaVkpzbW5FaXFGZ2YxallPUlVhUkV3bUpXUzhaWlNIRmpjNG1NeW8xNnln?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:44:54.962484+00:00"
+            "publisher": "hnm",
+            "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQLUdRZXg5al9ISGxlak1SMjlJbmNvdEtLTEpocWNjaUJ2UDFLblIxSkphMXlFSHRWSmptUkh3VWxTa0o5TDBJNDZKb1dZSUtHVFA0U1dVcWxxQmFKay1hWVBfQ1NJcEtWV1A5VnVGZGZmUlFiaEZ4bXdTRExxRGJXLTJmNEVfUC1JdW9MbWhzMXJuNTJEZVVOcl9NNFp6Zw?oc=5",
+            "retrieved_at_utc": "2026-05-02T19:57:00.543293+00:00"
         },
         "article": {
-            "text_summary_tr": "Alman otomotiv sanayisinin kriz altında olduğu, yabancı ülkelerdeki yatırımlar ve işlerin kaybolduğu, lobinin açıklaması.",
-            "event_type": "relocation",
+            "text_summary_tr": "2026 yılındaki zorluklar: Çin, fazla kapasite, tedarik kaosu, SDV değişimi",
+            "event_type": "other",
             "confidence": 0.0,
-            "title": "German auto industry in 'crisis' as investments, jobs move abroad, lobby says - Reuters"
+            "title": "Industry’s 2026 challenges: China, excess capacity, supply chaos, SDV shift - Automotive News"
         },
         "entities": {
             "company": {
-                "name": "Alman otomotiv sanayisi",
+                "name": "Industry'",
                 "ticker": null
             },
-            "countries": [],
-            "from_location": "Almanya",
-            "to_location": "yabancı ülkeler"
+            "countries": [
+                "China"
+            ],
+            "from_location": null,
+            "to_location": null
         },
         "industry": {
-            "sector": "otomotiv",
-            "line_type": "tüketicilik",
+            "sector": "Automotive",
+            "line_type": null,
             "equipment_keywords": []
         },
         "signals": {
             "capex_usd": 0,
             "jobs_impact": 0,
-            "timeline": "kaynak gösterilmedi"
+            "timeline": "2026"
         },
         "bios_fit": {
-            "rationale_tr": "Alman otomotiv sanayisinin krizin etkisi.",
+            "rationale_tr": "Tedarik kaosu ve fazla kapasite riski nedeniyle",
             "recommended_action": "monitor",
-            "score": 73
+            "score": 34
         },
         "assumptions": [
-            "Yabancı ülkelerdeki yatırım ve iş artışının nedenleri"
+            "Tedarik zinciri optimize edilecek, yeni iş birlikleri kurulacak"
+        ]
+    },
+    {
+        "source": {
+            "publisher": "hnm",
+            "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPdU5CaUJVZ3R1UlQ4bmY4cTFWSGJjUF9YNTN5emNwQXBYdi1EVTlXV29nQ1dXRFpqaTdZR2pjcHA1aVU0S1JQUHVsWEJXUUtQTDZIRk1KRUp4dWotcFZaYTVhSlB5LTBGMFlCLXV3ZGJFZmJ3YWNmSzdOSmUyX29MTlVMR2dfYXBaVkpzbW5FaXFGZ2YxallPUlVhUkV3bUpXUzhaWlNIRmpjNG1NeW8xNnln?oc=5",
+            "retrieved_at_utc": "2026-05-02T19:57:06.299005+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Alman otomotiv sanayisi krizin içindeyken yatırımlar ve istihdamlar yurt dışına kayıyor diyor lobistler.",
+            "event_type": "relocation",
+            "confidence": 1.0,
+            "title": "German auto industry in 'crisis' as investments, jobs move abroad, lobby says - Reuters"
+        },
+        "entities": {
+            "company": {
+                "name": null,
+                "ticker": null
+            },
+            "countries": [
+                "Almanya"
+            ],
+            "from_location": "Almanya",
+            "to_location": null
+        },
+        "industry": {
+            "sector": "Otomotiv",
+            "line_type": null,
+            "equipment_keywords": [
+                null
+            ]
+        },
+        "signals": {
+            "capex_usd": null,
+            "jobs_impact": null,
+            "timeline": null
+        },
+        "bios_fit": {
+            "rationale_tr": null,
+            "recommended_action": null,
+            "score": 55
+        },
+        "assumptions": [
+            "Varsayımlar listesi: İşlem yapabilmek için bazı varsayımlar altında bulunmakta olup, bu varsayımlar için doğrulanma işlemi yapılmaktadır."
         ]
     }
 ]
