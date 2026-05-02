@@ -2,2443 +2,395 @@
     {
         "source": {
             "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNVE1WMTl1SUo5X1BUQkFPOHd1b2ZfVDR3YzMybjJoRTBPYU5mTVNaM1ZVdkdFaXIwQUt5Q3dyaFRjVDBKX3NiOTgxNTNLNDdWVVBCaTRscDVpR3E3NW5wZEdPR05uNzlacGF3NkFBYlpjX0lwdGlXVDc0ZXdMa3I5X3RKeC0yZkI3eUQzQWpqLTdpWEZFTUtxR1cwb1RkT0JXYjdIaGhTYlNXdHE0MjhJ?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:56:56.410218+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Amerikalı işadamı Trump, Avrupa Birliği'nden gelen arabaların gümrük vergelerini 25'lere çıkartacağını söyledi.",
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "Trump says he will raise tariff on autos from European Union to 25% - Reuters"
-        },
-        "entities": {
-            "company": {
-                "name": "Trump",
-                "ticker": null
-            },
-            "countries": [
-                "Amerika",
-                "Avrupa Birliği"
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": "monitor",
-            "score": 30
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "hnm",
             "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNcWtTdTE1eks2Zy1EM2dVYy1kLWxPM2J2ZXFBU3ByM0ZrMERaQ3o4R1E2akVhWlBaNjRJc0QtTjRUNkVfaWdBbG9FcGFnQlZUVHN3b3pzMTAyaTVSLU9ndU5uNjkxUFY2ekUzRXY5SElpNmNtYkFPc0piaHQyWnFFY1pLWFZadDI5YWc?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:56:57.210818+00:00"
+            "retrieved_at_utc": "2026-05-02T22:12:41.295877+00:00"
         },
         "article": {
-            "text_summary_tr": "Alman otomotiv endüstrisi yatırımların ve işlerin dışarıya hareketi nedeniyle kriz içerisine girdi, lobi diyor.",
-            "event_type": "relocation | capex_fdi | other",
-            "confidence": 1.0,
+            "text_summary_tr": "Alman otomotiv endüstrisi yatırım ve iş kaybısıyla karşı karşıya.",
+            "event_type": "relocation | downsizing",
             "title": "German auto industry in ‘crisis’ as investments, jobs move abroad, lobby says - Automotive News"
         },
-        "entities": {
-            "company": {
-                "name": null,
-                "ticker": "null"
-            },
-            "countries": [
-                "Almanya",
-                "dışarıya"
-            ],
-            "from_location": null,
-            "to_location": "dışarıya"
-        },
-        "industry": {
-            "sector": null,
-            "line_type": "otomotiv",
-            "equipment_keywords": [
-                "otomobil"
+        "analysis": {
+            "sentiment": "negative",
+            "risks": [
+                "Ekonomik küreselleşme",
+                "Endüstriyel hareketlilik"
             ]
         },
-        "signals": {
-            "capex_usd": null,
-            "jobs_impact": null,
-            "timeline": "kriz"
-        },
-        "bios_fit": {
-            "rationale_tr": "Skor gerekçesi",
-            "recommended_action": "monitor",
-            "score": 23
-        },
-        "assumptions": [
-            "Endüstriyel relokasyon analizi kapsamında elde edilen bilgiler"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPWGc2ZEZhNUVfdFFDTUtta1FKMTZnVjd4QkQzVktMVzN0TDQxc2VXMnBqdGU0eXpZUmx6RThRV0E1S3JROHhrQ2huZkNNRXRONGxYV0NLbzhMR3RMQTE5ek5SMHVDNVVJTEVhMjZGNWhuYVJ1dndFM215RU02YlcxT29WVFJLdjMxV3NMZWJiWF9pMkVRTmJFdkhBdjk?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:56:57.699513+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Kanada, otomatik elektrikli araçlara güveniyor: ABD'den uzaklaşma.",
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "Carney Stakes Canada’s Auto Future on E.V.s as It Pulls Away From the U.S. - The New York Times"
-        },
         "entities": {
             "company": {
-                "name": "Carney Stakes",
-                "ticker": null
+                "name": "German auto industry"
             },
-            "countries": [
-                "Kanada",
-                "ABD"
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "otomotiv",
-            "line_type": null,
-            "equipment_keywords": [
-                "otomatik elektrikli araç"
-            ]
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "Bulunan nedenler: Kanada'nın ABD'den farklı bir otomotiv stratejisinin olması.",
-            "recommended_action": "monitor",
-            "score": 27
-        },
-        "assumptions": [
-            "Varsayımlar listesi"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPM0JESmVwbXNQMmlrY19aODFKYTVER29Td1p3dnNMWUxZRy1yeTA1djdJTXRyMHlpZWZlUDVkU0RVOVZPdzRTb1pPb1FOY2ttVHBBZkkxV2wyaWZodXZ2eHVBM1V6aVNWcDNrZ3JDZnJTdGVZN2Nkcnk1Ri1KdWR4a3gweXV5TnFBakFoVXl4Rkx1bUw4aEI2Y2Z2bmdyM0FiaXZfVNIBqgFBVV95cUxOVV9Wd2M1SDlmMWlheTFYOVp3SldYQVhJTExQdkVXbGdzMV9lUVV5ZkY4bEdKY2FiYVp3eFNLZDE5cWtvcWF4WGZxUG02bWt1R011dDdlZHBoVVNEV1JxbmpUVklBNzJkcEZVYUxQb2pSUVBuNU1QWTJndUhTam43RWZ5OVhkaFhBZ0E5NWJqMXpzaE91ODA2eWtZYjFfX2laOGNIbnl6YkZyUQ?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:56:58.245264+00:00"
-        },
-        "article": {
-            "text_summary_tr": "China'nın BYD ve Geely otomobil fabrikası satın almak için ön teklif verdi: Reuters - CNBC",
-            "event_type": "new_plant",
-            "confidence": 0.0,
-            "title": "Seeking Mexico foothold, China's BYD and Geely bid to buy car plant: Reuters - CNBC"
-        },
-        "entities": {
-            "company": {
-                "name": "BYD",
-                "ticker": null
-            },
-            "countries": [
-                "Türkiye"
-            ],
-            "from_location": null,
-            "to_location": null
+            "from_location": "Almanya",
+            "to_location": "yurt dışı"
         },
         "industry": {
             "sector": "Otomotiv",
-            "line_type": "",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": "string"
-        },
-        "bios_fit": {
-            "rationale_tr": "İlgili sektörde aktif olan şirket, Meksika'yı hedef almak için bir araç fabrikası satın almak istiyor. BYD ve Geely'nin ön teaseı bu durumu doğrular.",
-            "recommended_action": "monitor",
-            "score": 53
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9fVjhNMDNBZkxiSnR5UGJ3bXBURGljTjlPY3BmZjV1TDE3aVdrVk1hS0NNMzAzajVmVmZoekhJQm1zeVlnQVkyc2tISUFGTUVaSTZnOUpHOWtBSVRzMmt4dlNGYzBkRThUakVjck9WQWlST29CeTA5bmxqUmlOQQ?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:56:58.570354+00:00"
-        },
-        "article": {
-            "text_summary_tr": null,
-            "event_type": null,
-            "confidence": 0.0,
-            "title": "Global M&A trends in industrials and services: 2026 outlook - PwC"
-        },
-        "entities": {
-            "company": {
-                "name": null,
-                "ticker": null
-            },
-            "countries": [],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": null,
-            "score": 8
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1nZ3doakVjSld0TzVPMVRQSmJJWk9UWGJhVjBIR0liQVNKZkZ5R2ZWNEluanRDZUI4TmsyU044WWx0X0phamVTbjJEY2s0VlJhQzBudnIxRTY4dw?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:56:59.039529+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Küçük bir Slovakistanın arabalar yapmaya dönüştüğüne dair",
-            "event_type": "expansion",
-            "confidence": 0.8,
-            "title": "How tiny Slovakia became a car making heavyweight - BBC"
-        },
-        "entities": {
-            "company": {
-                "name": "null",
-                "ticker": "null"
-            },
-            "countries": [
-                "Slovakia"
-            ],
-            "from_location": "null",
-            "to_location": "null"
-        },
-        "industry": {
-            "sector": "Automotive",
-            "line_type": "Araba Üretim",
             "equipment_keywords": [
-                "Araba Üretim Ekipmanı"
+                "Arabalar",
+                "Otobüsler",
+                "Motorlar"
             ]
         },
         "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": "null"
+            "capex_usd": 500000000,
+            "timeline": "Geçmiş"
         },
         "bios_fit": {
-            "rationale_tr": "null",
-            "recommended_action": "monitor",
-            "score": 65
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPYVhWelpveDdwQlhzY2NrdVowTGhiME9JSXJ2anlTeG5FcVJVbllHdDNZYktySjhDeS01RzhfM1MxcEVHekQxdlBmWFgxMTRWbDM4dEpqMVFvcGtTV1BMSnV0bXlwM2ZRVGVVZ2Vzd3l2WHpGRmN3SGlCWHJOTmxqaUZON0NvaS1IOUpZT3VKTHo?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:56:59.638378+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Avrupa otomotiv tedarikcisibir $225M fabrikayı McAllen'de inşa edcek",
-            "event_type": "relocation",
-            "confidence": 0.8,
-            "title": "European automotive supplier to build $225M plant in McAllen - The Business Journals"
-        },
-        "entities": {
-            "company": {
-                "name": "European automotive supplier",
-                "ticker": null
-            },
-            "countries": [
-                "United States"
-            ],
-            "from_location": null,
-            "to_location": "McAllen"
-        },
-        "industry": {
-            "sector": "Automotive",
-            "line_type": null,
-            "equipment_keywords": [
-                "Automotive manufacturing equipment"
-            ]
-        },
-        "signals": {
-            "capex_usd": 225000000,
-            "jobs_impact": null,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "Yüksek sermaye yatırımı",
-            "recommended_action": "monitor",
-            "score": 61
-        },
-        "assumptions": [
-            "Fabrikanın kapasitesinin tam olarak ne olacağı",
-            "Çalışanların sayısı"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOZVg1WWw4c3FNcEZHSkduS0h4VG5kQi05SlUzZ1FKN1l3N3EtTmo2d1NUaWo4eWUzSUFoVUhCYXRzdGJteHAzS1FRS05oSV9rMlJOWmQ0dEIyQkl3a1VjcHpGX1RMTk85VmR4bXFMV25Xbl9fa1d1eHZiOU9tTWI4Ng?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:57:00.085501+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Avrupa için Çin teknoloji yatırımlarının kapıları hala açık",
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "Europe's door to Chinese tech investment is still ajar - Centre for European Reform (CER)"
-        },
-        "entities": {
-            "company": {
-                "name": "Centre for European Reform (CER)",
-                "ticker": null
-            },
-            "countries": [
-                "Avrupa"
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "",
-            "recommended_action": "monitor",
-            "score": 25
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQLUdRZXg5al9ISGxlak1SMjlJbmNvdEtLTEpocWNjaUJ2UDFLblIxSkphMXlFSHRWSmptUkh3VWxTa0o5TDBJNDZKb1dZSUtHVFA0U1dVcWxxQmFKay1hWVBfQ1NJcEtWV1A5VnVGZGZmUlFiaEZ4bXdTRExxRGJXLTJmNEVfUC1JdW9MbWhzMXJuNTJEZVVOcl9NNFp6Zw?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:57:00.543293+00:00"
-        },
-        "article": {
-            "text_summary_tr": "2026 yılındaki zorluklar: Çin, fazla kapasite, tedarik kaosu, SDV değişimi",
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "Industry’s 2026 challenges: China, excess capacity, supply chaos, SDV shift - Automotive News"
-        },
-        "entities": {
-            "company": {
-                "name": "Industry'",
-                "ticker": null
-            },
-            "countries": [
-                "China"
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Automotive",
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": "2026"
-        },
-        "bios_fit": {
-            "rationale_tr": "Tedarik kaosu ve fazla kapasite riski nedeniyle",
-            "recommended_action": "monitor",
-            "score": 34
-        },
-        "assumptions": [
-            "Tedarik zinciri optimize edilecek, yeni iş birlikleri kurulacak"
-        ]
+            "rationale_tr": "Otomotiv endüstrisi için kritik bir olay. Bu tür olaylar, sektör analizi ihtiyacını artırır.",
+            "recommended_action": "uyarma",
+            "score": 42
+        }
     },
     {
         "source": {
             "publisher": "hnm",
             "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPdU5CaUJVZ3R1UlQ4bmY4cTFWSGJjUF9YNTN5emNwQXBYdi1EVTlXV29nQ1dXRFpqaTdZR2pjcHA1aVU0S1JQUHVsWEJXUUtQTDZIRk1KRUp4dWotcFZaYTVhSlB5LTBGMFlCLXV3ZGJFZmJ3YWNmSzdOSmUyX29MTlVMR2dfYXBaVkpzbW5FaXFGZ2YxallPUlVhUkV3bUpXUzhaWlNIRmpjNG1NeW8xNnln?oc=5",
-            "retrieved_at_utc": "2026-05-02T19:57:06.299005+00:00"
+            "retrieved_at_utc": "2026-05-02T22:12:42.070133+00:00"
         },
         "article": {
-            "text_summary_tr": "Alman otomotiv sanayisi krizin içindeyken yatırımlar ve istihdamlar yurt dışına kayıyor diyor lobistler.",
+            "text_summary_tr": "Alman otomotiv endüstrisi, yatırımlar ve işler yurtdışına kayıyor, lobiler sözlüyor",
             "event_type": "relocation",
-            "confidence": 1.0,
             "title": "German auto industry in 'crisis' as investments, jobs move abroad, lobby says - Reuters"
         },
-        "entities": {
-            "company": {
-                "name": null,
-                "ticker": null
-            },
-            "countries": [
-                "Almanya"
-            ],
-            "from_location": "Almanya",
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Otomotiv",
-            "line_type": null,
-            "equipment_keywords": [
-                null
+        "analysis": {
+            "sentiment": "negative",
+            "risks": [
+                "Yatırım kayıp",
+                "İlgili kesim tepkileri"
             ]
-        },
-        "signals": {
-            "capex_usd": null,
-            "jobs_impact": null,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": null,
-            "score": 55
-        },
-        "assumptions": [
-            "Varsayımlar listesi: İşlem yapabilmek için bazı varsayımlar altında bulunmakta olup, bu varsayımlar için doğrulanma işlemi yapılmaktadır."
-        ]
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNVE1WMTl1SUo5X1BUQkFPOHd1b2ZfVDR3YzMybjJoRTBPYU5mTVNaM1ZVdkdFaXIwQUt5Q3dyaFRjVDBKX3NiOTgxNTNLNDdWVVBCaTRscDVpR3E3NW5wZEdPR05uNzlacGF3NkFBYlpjX0lwdGlXVDc0ZXdMa3I5X3RKeC0yZkI3eUQzQWpqLTdpWEZFTUtxR1cwb1RkT0JXYjdIaGhTYlNXdHE0MjhJ?oc=5",
-            "retrieved_at_utc": "2026-05-02T20:48:49.398479+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Trump, Avrupa Birliği'nden otomotiv için tarife oranını %25'e yükseltme sözünü verdi.",
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "Trump says he will raise tariff on autos from European Union to 25% - Reuters"
-        },
-        "entities": {
-            "company": {
-                "name": "null",
-                "ticker": null
-            },
-            "countries": [],
-            "from_location": "null",
-            "to_location": "null"
-        },
-        "industry": {
-            "sector": "null",
-            "line_type": "null",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": "null"
-        },
-        "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": "null",
-            "score": 46
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNcWtTdTE1eks2Zy1EM2dVYy1kLWxPM2J2ZXFBU3ByM0ZrMERaQ3o4R1E2akVhWlBaNjRJc0QtTjRUNkVfaWdBbG9FcGFnQlZUVHN3b3pzMTAyaTVSLU9ndU5uNjkxUFY2ekUzRXY5SElpNmNtYkFPc0piaHQyWnFFY1pLWFZadDI5YWc?oc=5",
-            "retrieved_at_utc": "2026-05-02T20:48:50.006509+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Alman otomotiv sektörü investasyon ve iş kayıpları ile yurtdışına taşınma krizine girdi, lobiler dedi",
-            "event_type": "relocation",
-            "confidence": 0.0,
-            "title": "German auto industry in ‘crisis’ as investments, jobs move abroad, lobby says - Automotive News"
-        },
-        "entities": {
-            "company": {
-                "name": null,
-                "ticker": null
-            },
-            "countries": [
-                "Almanya",
-                "yerine-çıkarılacağı-yer"
-            ],
-            "from_location": "Almanya",
-            "to_location": "yurtdışına-çıkarılacak-yer"
-        },
-        "industry": {
-            "sector": "otomotiv",
-            "line_type": "üretimi",
-            "equipment_keywords": [
-                "otomotiv-teknolojileri"
-            ]
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": "olası-zaman-çizelgesi"
-        },
-        "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": "monitor",
-            "score": 59
-        },
-        "assumptions": [
-            "Alman-otomotiv-sektörü-krizine-girdi"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPWGc2ZEZhNUVfdFFDTUtta1FKMTZnVjd4QkQzVktMVzN0TDQxc2VXMnBqdGU0eXpZUmx6RThRV0E1S3JROHhrQ2huZkNNRXRONGxYV0NLbzhMR3RMQTE5ek5SMHVDNVVJTEVhMjZGNWhuYVJ1dndFM215RU02YlcxT29WVFJLdjMxV3NMZWJiWF9pMkVRTmJFdkhBdjk?oc=5",
-            "retrieved_at_utc": "2026-05-02T20:48:50.325491+00:00"
-        },
-        "article": {
-            "text_summary_tr": null,
-            "event_type": null,
-            "confidence": 0.0,
-            "title": "Carney Stakes Canada’s Auto Future on E.V.s as It Pulls Away From the U.S. - The New York Times"
-        },
-        "entities": {
-            "company": {
-                "name": null,
-                "ticker": null
-            },
-            "countries": [
-                "Canada",
-                "United States"
-            ],
-            "from_location": "Canada",
-            "to_location": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": "monitor",
-            "score": 11
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPM0JESmVwbXNQMmlrY19aODFKYTVER29Td1p3dnNMWUxZRy1yeTA1djdJTXRyMHlpZWZlUDVkU0RVOVZPdzRTb1pPb1FOY2ttVHBBZkkxV2wyaWZodXZ2eHVBM1V6aVNWcDNrZ3JDZnJTdGVZN2Nkcnk1Ri1KdWR4a3gweXV5TnFBakFoVXl4Rkx1bUw4aEI2Y2Z2bmdyM0FiaXZfVNIBqgFBVV95cUxOVV9Wd2M1SDlmMWlheTFYOVp3SldYQVhJTExQdkVXbGdzMV9lUVV5ZkY4bEdKY2FiYVp3eFNLZDE5cWtvcWF4WGZxUG02bWt1R011dDdlZHBoVVNEV1JxbmpUVklBNzJkcEZVYUxQb2pSUVBuNU1QWTJndUhTam43RWZ5OVhkaFhBZ0E5NWJqMXpzaE91ODA2eWtZYjFfX2laOGNIbnl6YkZyUQ?oc=5",
-            "retrieved_at_utc": "2026-05-02T20:48:50.780651+00:00"
-        },
-        "article": {
-            "text_summary_tr": "BYD ve Geely, Meksika'yı hedef alan araba fabrikasını satın almak için teklifte bulundu.",
-            "event_type": "relocation",
-            "confidence": 0.0,
-            "title": "Seeking Mexico foothold, China's BYD and Geely bid to buy car plant: Reuters - CNBC"
-        },
-        "entities": {
-            "company": {
-                "name": "BYD",
-                "ticker": "null"
-            },
-            "countries": [
-                "Mexico"
-            ],
-            "from_location": "null",
-            "to_location": "Meksika"
-        },
-        "industry": {
-            "sector": "Otomotiv",
-            "line_type": "Araba üretimi",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": "null"
-        },
-        "bios_fit": {
-            "rationale_tr": "",
-            "recommended_action": "monitor",
-            "score": 69
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9fVjhNMDNBZkxiSnR5UGJ3bXBURGljTjlPY3BmZjV1TDE3aVdrVk1hS0NNMzAzajVmVmZoekhJQm1zeVlnQVkyc2tISUFGTUVaSTZnOUpHOWtBSVRzMmt4dlNGYzBkRThUakVjck9WQWlST29CeTA5bmxqUmlOQQ?oc=5",
-            "retrieved_at_utc": "2026-05-02T20:48:51.206929+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Endüstriler ve hizmetler için küresel M&A trendleri 2026 vizyonu - PwC.",
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "Global M&A trends in industrials and services: 2026 outlook - PwC"
-        },
-        "entities": {
-            "company": {
-                "name": "PwC"
-            },
-            "countries": [],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Muhasebe ve Danışmanlık",
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "",
-            "recommended_action": null,
-            "score": 27
-        },
-        "assumptions": [
-            "Varsayımlar listesi"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1nZ3doakVjSld0TzVPMVRQSmJJWk9UWGJhVjBIR0liQVNKZkZ5R2ZWNEluanRDZUI4TmsyU044WWx0X0phamVTbjJEY2s0VlJhQzBudnIxRTY4dw?oc=5",
-            "retrieved_at_utc": "2026-05-02T20:48:51.660915+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Kolay görünmeyen Slovakya, otomotiv sanayiinde dev haline geldi.",
-            "event_type": "expansion",
-            "confidence": 1.0,
-            "title": "How tiny Slovakia became a car making heavyweight - BBC"
-        },
-        "entities": {
-            "company": {
-                "name": "null",
-                "ticker": null
-            },
-            "countries": [
-                "Slovakya"
-            ],
-            "from_location": "null",
-            "to_location": "null"
-        },
-        "industry": {
-            "sector": "otomotiv",
-            "line_type": "otomobil üretimi",
-            "equipment_keywords": [
-                "otomotiv ekipmanları"
-            ]
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": "null"
-        },
-        "bios_fit": {
-            "rationale_tr": "null",
-            "recommended_action": "monitor",
-            "score": 65
-        },
-        "assumptions": [
-            "Varsayımlar listesi: null"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPYVhWelpveDdwQlhzY2NrdVowTGhiME9JSXJ2anlTeG5FcVJVbllHdDNZYktySjhDeS01RzhfM1MxcEVHekQxdlBmWFgxMTRWbDM4dEpqMVFvcGtTV1BMSnV0bXlwM2ZRVGVVZ2Vzd3l2WHpGRmN3SGlCWHJOTmxqaUZON0NvaS1IOUpZT3VKTHo?oc=5",
-            "retrieved_at_utc": "2026-05-02T20:48:52.220632+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Avrupa otomotiv tedarikçisi, McAllen'de 225M$'lık bir işletme kuruyor.",
-            "event_type": "relocation",
-            "confidence": 1.0,
-            "title": "European automotive supplier to build $225M plant in McAllen - The Business Journals"
-        },
-        "entities": {
-            "company": {
-                "name": "European automotive supplier",
-                "ticker": null
-            },
-            "countries": [
-                "United States"
-            ],
-            "from_location": null,
-            "to_location": "McAllen"
-        },
-        "industry": {
-            "sector": "Otomotiv Sanayi",
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 225000000,
-            "jobs_impact": null,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "Avrupa otomotiv tedarikçisinin tesis planları için uygun bir yer olarak görülüyor.",
-            "recommended_action": "monitor",
-            "score": 61
-        },
-        "assumptions": [
-            "Avrupa otomotiv tedarikçisinin planları ile ilgili varsayımlar."
-        ]
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOZVg1WWw4c3FNcEZHSkduS0h4VG5kQi05SlUzZ1FKN1l3N3EtTmo2d1NUaWo4eWUzSUFoVUhCYXRzdGJteHAzS1FRS05oSV9rMlJOWmQ0dEIyQkl3a1VjcHpGX1RMTk85VmR4bXFMV25Xbl9fa1d1eHZiOU9tTWI4Ng?oc=5",
-            "retrieved_at_utc": "2026-05-02T20:48:52.613525+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Avrupa'nın Çin teknoloji yatırımlarına açılan kapı hala açık.",
-            "event_type": "tender",
-            "confidence": 0.8,
-            "title": "Europe's door to Chinese tech investment is still ajar - Centre for European Reform (CER)"
-        },
-        "entities": {
-            "company": {},
-            "countries": [
-                "China",
-                "Europe"
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Teknoloji",
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": null,
-            "jobs_impact": null,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": "monitor",
-            "score": 31
-        },
-        "assumptions": [
-            "Yaygın olarak kullanılan varsayımlar Çin'de teknoloji yatırımlarının artmasıdır."
-        ]
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQLUdRZXg5al9ISGxlak1SMjlJbmNvdEtLTEpocWNjaUJ2UDFLblIxSkphMXlFSHRWSmptUkh3VWxTa0o5TDBJNDZKb1dZSUtHVFA0U1dVcWxxQmFKay1hWVBfQ1NJcEtWV1A5VnVGZGZmUlFiaEZ4bXdTRExxRGJXLTJmNEVfUC1JdW9MbWhzMXJuNTJEZVVOcl9NNFp6Zw?oc=5",
-            "retrieved_at_utc": "2026-05-02T20:48:53.062986+00:00"
-        },
-        "article": {
-            "text_summary_tr": "2026'nın sektör zorlukları: Çin, fazlası kapasite, tedarik kaosu, SDV kayması - Otomotiv Haberleri",
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "Industry’s 2026 challenges: China, excess capacity, supply chaos, SDV shift - Automotive News"
-        },
-        "entities": {
-            "company": {
-                "name": "Industry",
-                "ticker": null
-            },
-            "countries": [
-                "China"
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Automotive",
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": "2026"
-        },
-        "bios_fit": {
-            "rationale_tr": "Skor gerekçesi: Bilgi yetersizliği nedeniyle.",
-            "recommended_action": "request_docs",
-            "score": 34
-        },
-        "assumptions": [
-            "Tedarik zincirlerinin durumla ilgili bilgi yetersizliği"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "hnm",
-            "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPdU5CaUJVZ3R1UlQ4bmY4cTFWSGJjUF9YNTN5emNwQXBYdi1EVTlXV29nQ1dXRFpqaTdZR2pjcHA1aVU0S1JQUHVsWEJXUUtQTDZIRk1KRUp4dWotcFZaYTVhSlB5LTBGMFlCLXV3ZGJFZmJ3YWNmSzdOSmUyX29MTlVMR2dfYXBaVkpzbW5FaXFGZ2YxallPUlVhUkV3bUpXUzhaWlNIRmpjNG1NeW8xNnln?oc=5",
-            "retrieved_at_utc": "2026-05-02T20:48:59.750272+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Alman otomotiv endüstrisi, yatırımlar ve istihdamın yurtdışına taşındığı ve lobiler tarafından kriz ilan ettiği bir durumdaysa.",
-            "event_type": "closure | downsizing",
-            "confidence": 1.0,
-            "title": "German auto industry in 'crisis' as investments, jobs move abroad, lobby says - Reuters"
         },
         "entities": {
             "company": {
                 "name": "Alman otomotiv endüstrisi",
                 "ticker": null
             },
-            "countries": [
-                "Almanya"
-            ],
-            "from_location": null,
-            "to_location": "yurtdışına"
+            "from_location": "Almanya",
+            "to_location": null
+        },
+        "industry": {
+            "sector": "Automotiv",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "kriz"
+        },
+        "bios_fit": {
+            "rationale_tr": "Almanya'dan yurtdışına ihracat, otomotiv endüstrisinin büyüme potansiyelinin karanlık bir resmini oluşturmakta",
+            "recommended_action": "takip",
+            "score": 67
+        }
+    },
+    {
+        "source": {
+            "publisher": "hnm",
+            "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPWGc2ZEZhNUVfdFFDTUtta1FKMTZnVjd4QkQzVktMVzN0TDQxc2VXMnBqdGU0eXpZUmx6RThRV0E1S3JROHhrQ2huZkNNRXRONGxYV0NLbzhMR3RMQTE5ek5SMHVDNVVJTEVhMjZGNWhuYVJ1dndFM215RU02YlcxT29WVFJLdjMxV3NMZWJiWF9pMkVRTmJFdkhBdjk?oc=5",
+            "retrieved_at_utc": "2026-05-02T22:12:42.551920+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Kanada, elektrikli araçlar üzerinde geleceğini karadan çekmekte.",
+            "event_type": "expansion",
+            "title": "Carney Stakes Canada’s Auto Future on E.V.s as It Pulls Away From the U.S. - The New York Times"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": []
+        },
+        "entities": {
+            "company": {
+                "name": "Carney Stakes",
+                "ticker": null
+            },
+            "from_location": "Kanada",
+            "to_location": "null"
         },
         "industry": {
             "sector": "otomotiv",
-            "line_type": "sanayi",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "German auto industry in 'crisis' as investments, jobs move abroad, lobby says - Reuters",
-            "recommended_action": "monitor",
-            "score": 38
-        },
-        "assumptions": [
-            "Yatırımların ve istihdamın yabancı ülkelere taşınmasının nedenleri"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "wsj",
-            "url": "https://www.wsj.com/articles/wall-street-banks-prepare-to-sell-billions-of-dollars-of-x-loans-c609beb1?mod=pls_whats_news_us_business_f",
-            "retrieved_at_utc": "2026-05-02T20:49:07.339667+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Dünya Bankaları, milyarlarca dolar X Loan satış için hazırlanıyor.",
-            "event_type": "capex_fdi",
-            "confidence": 1.0,
-            "title": "Wall Street Banks Prepare to Sell Billions of Dollars of X Loans"
-        },
-        "entities": {
-            "company": {
-                "name": "Wall Street Banks",
-                "ticker": null
-            },
-            "countries": [],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": null,
-            "score": 28
-        },
-        "assumptions": [
-            "Kredi satışları işlemleri hakkında varsayımlar"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "wsj",
-            "url": "https://www.wsj.com/articles/canada-to-provide-720-million-to-canada-post-to-avoid-insolvency-at-mail-service-fc09a6b9?mod=pls_whats_news_us_business_f",
-            "retrieved_at_utc": "2026-05-02T20:49:14.029844+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Kanada Posta, iflası önlemek için 720 milyon dolarlık destek sağlayacak.",
-            "event_type": "relocation",
-            "confidence": 1.0,
-            "title": "Canada to Provide $720 Million to Canada Post to Avoid Insolvency at Mail Service"
-        },
-        "entities": {
-            "company": {
-                "name": "Canada Post",
-                "ticker": null
-            },
-            "countries": [
-                "Kanada"
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Kargo ve Posta Hizmetleri",
-            "line_type": "Mail Servisi",
             "equipment_keywords": [
-                "posta araçları",
-                "kargo gemileri"
-            ]
-        },
-        "signals": {
-            "capex_usd": 720000000,
-            "jobs_impact": null,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "Canada Post'un iflası önlemek için algoritma tarafından belirlenen fırsattır.",
-            "recommended_action": "monitor",
-            "score": 57
-        },
-        "assumptions": [
-            "Destek tutarının gerçekçi olacağı varsayılmıştır."
-        ]
-    },
-    {
-        "source": {
-            "publisher": "wsj",
-            "url": "https://www.wsj.com/articles/amazon-willing-to-discuss-quebec-shutdown-with-canadian-officials-610e5f59?mod=pls_whats_news_us_business_f",
-            "retrieved_at_utc": "2026-05-02T20:49:21.760770+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Amazon, Quebec şubesinin kapatılmasından etkilenen Kanada yetkililerle tartışmaya istekli",
-            "event_type": "relocation | closure | downsizing",
-            "confidence": 0.0,
-            "title": "Amazon Willing to Discuss Quebec Shutdown With Canadian Officials"
-        },
-        "entities": {
-            "company": {
-                "name": "Amazon",
-                "ticker": null
-            },
-            "countries": [
-                "Kanada",
-                "Kuzey Amerika (genel)"
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Bilişim",
-            "line_type": null,
-            "equipment_keywords": [
-                "e-commerce"
+                "elektrikli araçlar"
             ]
         },
         "signals": {
             "capex_usd": 0,
-            "jobs_impact": 0,
             "timeline": null
         },
         "bios_fit": {
-            "rationale_tr": "Québec'teki şube kapatılması, Amazon'ın Kanada'daki varlığının geleceği için endişeleri artırıyor.",
-            "recommended_action": "reach_out",
-            "score": 30
-        },
-        "assumptions": [
-            "Amazon'ın Kanada'daki faaliyetleri, ülkenin ekonomi üzerindeki etkisi"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "wsj",
-            "url": "https://www.wsj.com/articles/target-drops-dei-goals-and-ends-program-to-boost-black-suppliers-77cb4c75?mod=pls_whats_news_us_business_f",
-            "retrieved_at_utc": "2026-05-02T20:49:28.552876+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Target'ın DEI hedeflerini düşürdüğü ve Black sağlayıcılarını desteklemek için programını sona erdirdiği açıklandı.",
-            "event_type": "downsizing",
-            "confidence": 1.0,
-            "title": "Target Drops DEI Goals and Ends Program to Boost Black Suppliers"
-        },
-        "entities": {
-            "company": {
-                "name": "Target",
-                "ticker": "null"
-            },
-            "countries": [
-                "ABD"
-            ],
-            "from_location": "null",
-            "to_location": "null"
-        },
-        "industry": {
-            "sector": "Perakende",
-            "line_type": "null",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": "null"
-        },
-        "bios_fit": {
-            "rationale_tr": "Firmalar, DEI hedeflerine ulaşmak için mevcut programlarını gözden geçirüyor olabilir. Bunu yaparken, Black sağlayıcılarını desteklemek için alternatif yöntemler araştırmaya başlayabilirler.",
-            "recommended_action": "monitor | request_docs",
-            "score": 45
-        },
-        "assumptions": [
-            "Firmaların mevcut programlarını gözden geçirip DEI hedeflerine uymakta zorluk duyuyor olmaları",
-            "Black sağlayıcılarını desteklemek için alternatif yöntemler araştırmak isteğinden kaynaklanabilir"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "wsj",
-            "url": "https://www.wsj.com/articles/basic-materials-roundup-market-talk-f817645e?mod=pls_whats_news_us_business_f",
-            "retrieved_at_utc": "2026-05-02T20:49:42.655350+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Temel malzemeler için bir genel bakış: Piyasalarda konuşulanlar",
-            "event_type": "other",
-            "confidence": 1.0,
-            "title": "Basic Materials Roundup: Market Talk"
-        },
-        "entities": {
-            "company": {
-                "name": "",
-                "ticker": "null"
-            },
-            "countries": [],
-            "from_location": "",
-            "to_location": ""
-        },
-        "industry": {
-            "sector": "Basic Materials",
-            "line_type": "",
-            "equipment_keywords": [
-                "null"
-            ]
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": ""
-        },
-        "bios_fit": {
-            "rationale_tr": "",
+            "rationale_tr": "Biyos sektörüne yönelik bu haber, gelecekte elektrikli araçların ön planda olacağını göstermektedir. Bu nedenle biyos sektörünün gelişimi açısından önemli bir gelişme olarak algılanabilir.",
             "recommended_action": "monitor",
-            "score": 24
-        },
-        "assumptions": [
-            "null"
-        ]
+            "score": 60
+        }
     },
     {
         "source": {
-            "publisher": "wsj",
-            "url": "https://www.wsj.com/articles/auto-transport-roundup-market-talk-f1469058?mod=pls_whats_news_us_business_f",
-            "retrieved_at_utc": "2026-05-02T20:49:49.186392+00:00"
+            "publisher": "hnm",
+            "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPM0JESmVwbXNQMmlrY19aODFKYTVER29Td1p3dnNMWUxZRy1yeTA1djdJTXRyMHlpZWZlUDVkU0RVOVZPdzRTb1pPb1FOY2ttVHBBZkkxV2wyaWZodXZ2eHVBM1V6aVNWcDNrZ3JDZnJTdGVZN2Nkcnk1Ri1KdWR4a3gweXV5TnFBakFoVXl4Rkx1bUw4aEI2Y2Z2bmdyM0FiaXZfVNIBqgFBVV95cUxOVV9Wd2M1SDlmMWlheTFYOVp3SldYQVhJTExQdkVXbGdzMV9lUVV5ZkY4bEdKY2FiYVp3eFNLZDE5cWtvcWF4WGZxUG02bWt1R011dDdlZHBoVVNEV1JxbmpUVklBNzJkcEZVYUxQb2pSUVBuNU1QWTJndUhTam43RWZ5OVhkaFhBZ0E5NWJqMXpzaE91ODA2eWtZYjFfX2laOGNIbnl6YkZyUQ?oc=5",
+            "retrieved_at_utc": "2026-05-02T22:12:43.023168+00:00"
         },
         "article": {
-            "text_summary_tr": "Auto ve taşıma endüstrisinden güncel haberler ve tartışmalar...",
-            "event_type": null,
-            "confidence": 0.0,
-            "title": "Auto & Transport Roundup: Market Talk"
-        },
-        "entities": {
-            "company": {
-                "name": null,
-                "ticker": null
-            },
-            "countries": [
-                null
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": "monitor",
-            "score": 9
-        },
-        "assumptions": [
-            "Varsayımlar listesi tamamiyle bilinmiyor"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "wsj",
-            "url": "https://www.wsj.com/articles/financial-services-roundup-market-talk-fb36548b?mod=pls_whats_news_us_business_f",
-            "retrieved_at_utc": "2026-05-02T20:49:55.705656+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Para hizmetleri round-upu: piyasa konuşmaları.",
-            "event_type": "other",
-            "confidence": 1.0,
-            "title": "Financial Services Roundup: Market Talk"
-        },
-        "entities": {
-            "company": {
-                "name": "null",
-                "ticker": "null"
-            },
-            "countries": [
-                "null"
-            ],
-            "from_location": "null",
-            "to_location": "null"
-        },
-        "industry": {
-            "sector": "null",
-            "line_type": "null",
-            "equipment_keywords": [
-                "null"
-            ]
-        },
-        "signals": {
-            "capex_usd": null,
-            "jobs_impact": null,
-            "timeline": "null"
-        },
-        "bios_fit": {
-            "rationale_tr": "Geçerli gerekçi yok.",
-            "recommended_action": "monitor",
-            "score": 45
-        },
-        "assumptions": [
-            null
-        ]
-    },
-    {
-        "source": {
-            "publisher": "wsj",
-            "url": "https://www.wsj.com/articles/novo-nordisk-shares-surge-on-new-obesity-drug-results-416670ee?mod=pls_whats_news_us_business_f",
-            "retrieved_at_utc": "2026-05-02T20:50:02.271936+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Obesite ilaç sonuçlarından sonra Novo Nordisk hisseleri yükseldi.",
-            "event_type": "expansion",
-            "confidence": 1.0,
-            "title": "Novo Nordisk Shares Surge on New Obesity Drug Results"
-        },
-        "entities": {
-            "company": {
-                "name": "Novo Nordisk",
-                "ticker": "null"
-            },
-            "countries": [],
-            "from_location": "null",
-            "to_location": "null"
-        },
-        "industry": {
-            "sector": "Tıbbi Cihazlar | İlaçlar",
-            "line_type": "null",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": null,
-            "jobs_impact": null,
-            "timeline": "null"
-        },
-        "bios_fit": {
-            "rationale_tr": "",
-            "recommended_action": "null",
-            "score": 64
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "wsj",
-            "url": "https://www.wsj.com/articles/eu-conditionally-approves-international-papers-7-16-billion-ds-smith-buy-c1ce87f1?mod=pls_whats_news_us_business_f",
-            "retrieved_at_utc": "2026-05-02T20:50:09.006738+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Haber hakkında kısa özet: Uluslararası Kağıt'ın DS Smith'i 7.16 milyar dolarlık bir anlaşmayla satın almasına ilişkin EU'nun olumlu gözleminin açıklanması.",
-            "event_type": "relocation",
-            "confidence": 1.0,
-            "title": "EU Conditionally Approves International Paper's $7.16 Billion DS Smith Buy"
-        },
-        "entities": {
-            "company": {
-                "name": "International Paper",
-                "ticker": null
-            },
-            "countries": [
-                "Amerika"
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Kağıt endüstrisi",
-            "line_type": "Kağıt üretimi",
-            "equipment_keywords": [
-                "Kağıt makinaları",
-                "Karton imalatı"
-            ]
-        },
-        "signals": {
-            "capex_usd": 7160000000,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "Bu haber bizi ilgilendirir çünkü büyük bir satın alımla ilgili.",
-            "recommended_action": "monitor",
-            "score": 57
-        },
-        "assumptions": [
-            "Satın alma süreci ne zaman tamamlanacaktır"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "cnbc",
-            "url": "https://www.cnbc.com/2026/05/02/hair-loss-glp-1s.html",
-            "retrieved_at_utc": "2026-05-02T20:50:17.223123+00:00"
-        },
-        "article": {
-            "text_summary_tr": "",
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "Weight loss and hair loss: The growing hair treatment market from GLP-1s"
-        },
-        "entities": {
-            "company": {
-                "name": "",
-                "ticker": null
-            },
-            "countries": [],
-            "from_location": "",
-            "to_location": ""
-        },
-        "industry": {
-            "sector": "",
-            "line_type": "",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": ""
-        },
-        "bios_fit": {
-            "rationale_tr": "",
-            "recommended_action": "",
-            "score": 12
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "cnbc",
-            "url": "https://www.cnbc.com/2026/05/01/spirit-airlines-trump-bailout.html",
-            "retrieved_at_utc": "2026-05-02T20:50:23.749592+00:00"
-        },
-        "article": {
-            "text_summary_tr": "",
-            "event_type": "closure",
-            "confidence": 0.0,
-            "title": "Spirit Airlines shuts down after failing to reach a bailout deal, ending discount travel era"
-        },
-        "entities": {
-            "company": {
-                "name": "Spirit Airlines",
-                "ticker": null
-            },
-            "countries": [
-                "ABD"
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "",
-            "recommended_action": "monitor",
-            "score": 40
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "cnbc",
-            "url": "https://www.cnbc.com/2026/05/01/spirit-airlines-flights-shut-down.html",
-            "retrieved_at_utc": "2026-05-02T20:50:29.405910+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Spirit Havalimanı Uçuşlarını Durdurdu. Bilet Sahibi Seyahatçılara Dikkat!",
-            "event_type": "closure",
-            "confidence": 100.0,
-            "title": "Spirit Airlines shut down. Here's what travelers need to know if they have tickets"
-        },
-        "entities": {
-            "company": {
-                "name": "Spirit Airlines",
-                "ticker": null
-            },
-            "countries": [],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Uçak seyahati",
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "Bu şirketin yeniden yerleşim süreci için uygunluk oranı çok düşüktür.",
-            "recommended_action": "monitor",
-            "score": 43
-        },
-        "assumptions": [
-            "Şirketin durumuna göre yeniden yerleşim süreci için varsayımlar listesi"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "cnbc",
-            "url": "https://www.cnbc.com/2026/05/01/trump-eu-auto-tariffs.html",
-            "retrieved_at_utc": "2026-05-02T20:50:37.205174+00:00"
-        },
-        "article": {
-            "text_summary_tr": "",
-            "event_type": "tender",
-            "confidence": 0.0,
-            "title": "Trump says he's raising EU auto tariffs to 25%"
-        },
-        "entities": {
-            "company": {
-                "name": "Trump",
-                "ticker": null
-            },
-            "countries": [
-                ""
-            ],
-            "from_location": "",
-            "to_location": "",
-            "sector": null,
-            "line_type": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": ""
-        },
-        "bios_fit": {
-            "rationale_tr": "",
-            "recommended_action": "monitor",
-            "score": 44
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "cnbc",
-            "url": "https://www.cnbc.com/2026/05/01/kentucky-derby-prediction-platforms.html",
-            "retrieved_at_utc": "2026-05-02T20:50:42.765103+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Kentucky Derby tahmini platformlarında bahis bulamayacaksınız.",
-            "event_type": "other",
-            "confidence": 1.0,
-            "title": "Why you won't find Kentucky Derby bets on prediction platforms"
-        },
-        "entities": {
-            "company": {
-                "name": "null",
-                "ticker": null
-            },
-            "countries": [
-                "Amerika Birleşik Devletleri"
-            ],
-            "from_location": "null",
-            "to_location": "null"
-        },
-        "industry": {
-            "sector": "null",
-            "line_type": "null",
-            "equipment_keywords": [
-                null
-            ]
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": "null"
-        },
-        "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": "monitor",
-            "score": 42
-        },
-        "assumptions": [
-            "null varsayımları"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "cnbc",
-            "url": "https://www.cnbc.com/2026/05/01/smoothie-king-plots-expansion-as-wellness-trends-boost-sales.html",
-            "retrieved_at_utc": "2026-05-02T20:50:50.370587+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Smoothie King genişlemeyi planlıyor, wellness trendleri satışları artırıyor.",
-            "event_type": "expansion",
-            "confidence": 1.0,
-            "title": "Smoothie King plots expansion as wellness trends boost sales"
-        },
-        "entities": {
-            "company": {
-                "name": "Smoothie King",
-                "ticker": null
-            },
-            "countries": [
-                "ABD"
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Gıda / İçecek",
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": null,
-            "jobs_impact": null,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "Wellness trendlerine bağlı satış artışı fırsatı.",
-            "recommended_action": "monitor",
-            "score": 47
-        },
-        "assumptions": [
-            "Satış verileri wellness trendlerine bağlı olduğu varsayılmaktadır."
-        ]
-    },
-    {
-        "source": {
-            "publisher": "cnbc",
-            "url": "https://www.cnbc.com/2026/05/01/apollo-sports-capital-tom-dundon-pickleball-investment.html",
-            "retrieved_at_utc": "2026-05-02T20:50:56.015379+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Apollo Sports Capital ve Tom Dundon, pickleball'de 225 milyon dolarlık tarihi yatırımı yaptı.",
+            "text_summary_tr": " Çin'in BYD ve Geely'si, Brezilya'daki oto fabrikasını satın almak için teklifte bulundu.",
             "event_type": "new_plant",
-            "confidence": 1.0,
-            "title": "Apollo Sports Capital and Tom Dundon make landmark $225 million investment in pickleball"
+            "title": "Seeking Mexico foothold, China's BYD and Geely bid to buy car plant: Reuters - CNBC"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [
+                "Dolaylı ve dolaylı yollarla"
+            ]
         },
         "entities": {
             "company": {
-                "name": "Apollo Sports Capital",
-                "ticker": null
+                "name": "BYD",
+                "ticker": ""
             },
-            "countries": [
-                "Bilinmiyor"
-            ],
-            "from_location": "Bilinmiyor",
-            "to_location": "Bilinmiyor"
+            "from_location": "",
+            "to_location": "Brezilya"
         },
         "industry": {
-            "sector": "Spor",
-            "line_type": "Bilinmiyor",
+            "sector": "Otomotiv",
             "equipment_keywords": [
-                "Pickleball"
+                "Araç üretim ekipmanları"
             ]
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": ""
+        },
+        "bios_fit": {
+            "rationale_tr": " Çin firmaları, yeni pazarı kazanmaya çalışıyorlar.",
+            "recommended_action": "monitor",
+            "score": 58
+        }
+    },
+    {
+        "source": {
+            "publisher": "hnm",
+            "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9fVjhNMDNBZkxiSnR5UGJ3bXBURGljTjlPY3BmZjV1TDE3aVdrVk1hS0NNMzAzajVmVmZoekhJQm1zeVlnQVkyc2tISUFGTUVaSTZnOUpHOWtBSVRzMmt4dlNGYzBkRThUakVjck9WQWlST29CeTA5bmxqUmlOQQ?oc=5",
+            "retrieved_at_utc": "2026-05-02T22:12:43.557936+00:00"
+        },
+        "article": {
+            "text_summary_tr": "2026 yılında endüstriler ve hizmetlerde M&A trendleri için öngörüler",
+            "event_type": "other",
+            "title": "Global M&A trends in industrials and services: 2026 outlook - PwC"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": []
+        },
+        "entities": {
+            "company": {
+                "name": "PwC",
+                "ticker": null
+            },
+            "from_location": null,
+            "to_location": null
+        },
+        "industry": {
+            "sector": "services",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "2026"
+        },
+        "bios_fit": {
+            "rationale_tr": "Bu trends analizinden fayda sağlar. Dikkat edilmesi gereken bir trend.",
+            "recommended_action": "monitor",
+            "score": 34
+        }
+    },
+    {
+        "source": {
+            "publisher": "hnm",
+            "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1nZ3doakVjSld0TzVPMVRQSmJJWk9UWGJhVjBIR0liQVNKZkZ5R2ZWNEluanRDZUI4TmsyU044WWx0X0phamVTbjJEY2s0VlJhQzBudnIxRTY4dw?oc=5",
+            "retrieved_at_utc": "2026-05-02T22:12:44.069960+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Slovakya küçük bir ülke olmasına rağmen araç üretimi alanında ağır bir oyuncu halini almayı başardı.",
+            "event_type": "expansion",
+            "title": "How tiny Slovakia became a car making heavyweight - BBC"
+        },
+        "analysis": {
+            "sentiment": "positive",
+            "risks": []
+        },
+        "entities": {
+            "company": {
+                "name": "Slovakya",
+                "ticker": null
+            },
+            "from_location": "",
+            "to_location": ""
+        },
+        "industry": {
+            "sector": " automotive",
+            "equipment_keywords": [
+                "arac üretimi"
+            ]
+        },
+        "signals": {
+            "capex_usd": -1,
+            "timeline": "belirsiz"
+        },
+        "bios_fit": {
+            "rationale_tr": "",
+            "recommended_action": "monitor",
+            "score": 57
+        }
+    },
+    {
+        "source": {
+            "publisher": "hnm",
+            "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPYVhWelpveDdwQlhzY2NrdVowTGhiME9JSXJ2anlTeG5FcVJVbllHdDNZYktySjhDeS01RzhfM1MxcEVHekQxdlBmWFgxMTRWbDM4dEpqMVFvcGtTV1BMSnV0bXlwM2ZRVGVVZ2Vzd3l2WHpGRmN3SGlCWHJOTmxqaUZON0NvaS1IOUpZT3VKTHo?oc=5",
+            "retrieved_at_utc": "2026-05-02T22:12:44.580838+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Avrupa otomotiv tedarikçisi $225M'lik McAllen'da üretim tesisini inşa edecek.",
+            "event_type": "new_plant",
+            "title": "European automotive supplier to build $225M plant in McAllen - The Business Journals"
+        },
+        "analysis": {
+            "sentiment": "positive",
+            "risks": []
+        },
+        "entities": {
+            "company": {
+                "name": "European automotive supplier",
+                "ticker": null
+            },
+            "from_location": null,
+            "to_location": "McAllen"
+        },
+        "industry": {
+            "sector": "Automotive",
+            "equipment_keywords": []
         },
         "signals": {
             "capex_usd": 225000000,
-            "jobs_impact": 0,
-            "timeline": "Bilinmiyor"
+            "timeline": "string"
         },
         "bios_fit": {
-            "rationale_tr": "Uzay bios için uygun değildir çünkü pickleball yatırımı bir spor yatırımından oluşmaktadır.",
+            "rationale_tr": "Çok büyük bir yatırım için uygun bir fırsat.",
             "recommended_action": "monitor",
-            "score": 66
-        },
-        "assumptions": [
-            "Varsayımlar listesi"
-        ]
+            "score": 59
+        }
     },
     {
         "source": {
-            "publisher": "cnbc",
-            "url": "https://www.cnbc.com/2026/04/30/rivian-renegotiates-doe-loan-adjusts-capacity-plans-for-georgia-plant.html",
-            "retrieved_at_utc": "2026-05-02T20:51:04.174300+00:00"
+            "publisher": "hnm",
+            "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOZVg1WWw4c3FNcEZHSkduS0h4VG5kQi05SlUzZ1FKN1l3N3EtTmo2d1NUaWo4eWUzSUFoVUhCYXRzdGJteHAzS1FRS05oSV9rMlJOWmQ0dEIyQkl3a1VjcHpGX1RMTk85VmR4bXFMV25Xbl9fa1d1eHZiOU9tTWI4Ng?oc=5",
+            "retrieved_at_utc": "2026-05-02T22:12:45.197104+00:00"
         },
         "article": {
-            "text_summary_tr": "",
-            "event_type": "relocation",
-            "confidence": 1.0,
-            "title": "Rivian renegotiates DOE loan down to $4.5 billion, adjusts capacity plans for Georgia plant"
+            "text_summary_tr": "Avrupa'nın Çin teknolojik yatırım kapısı hala açık.",
+            "event_type": "expansion",
+            "title": "Europe's door to Chinese tech investment is still ajar - Centre for European Reform (CER)"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": []
         },
         "entities": {
             "company": {
-                "name": "Rivian",
+                "name": "Centre for European Reform (CER)",
                 "ticker": null
             },
-            "countries": [
-                "United States"
-            ],
-            "from_location": "",
-            "to_location": "Georgia"
-        },
-        "industry": {
-            "sector": "",
-            "line_type": "",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 4500000000,
-            "jobs_impact": 0,
-            "timeline": "",
-            "type": "",
-            "date": "",
-            "period": "",
-            "status": ""
-        },
-        "bios_fit": {
-            "rationale_tr": "",
-            "recommended_action": "request_docs",
-            "score": 58
-        },
-        "assumptions": [
-            "Varsayımlar listesi"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "cnbc",
-            "url": "https://www.cnbc.com/2026/04/30/investor-jack-selby-markets-underpricing-middle-east-ai-pullback-risk.html",
-            "retrieved_at_utc": "2026-05-02T20:51:09.885024+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Bölgelerdeki AI gerilemesi riskini düşük fiyatlandırırlar, diyor teknoloji yatırımcısı Jack Selby.",
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "Markets are underpricing the risk of Middle East pullback in AI, says tech investor Jack Selby"
-        },
-        "entities": {
-            "company": {
-                "name": "Jack Selby",
-                "ticker": null
-            },
-            "countries": [
-                "Middle East"
-            ],
             "from_location": null,
             "to_location": null
         },
         "industry": {
-            "sector": null,
-            "line_type": null,
+            "sector": "think tank",
             "equipment_keywords": []
         },
         "signals": {
             "capex_usd": 0,
-            "jobs_impact": 0,
             "timeline": null
         },
         "bios_fit": {
-            "rationale_tr": null,
+            "rationale_tr": "Avrupa'da Çin teknoloji yatırımına ilişkin kapının hala açık olması.",
             "recommended_action": "monitor",
-            "score": 25
-        },
-        "assumptions": []
+            "score": 47
+        }
     },
     {
         "source": {
-            "publisher": "cnbc",
-            "url": "https://www.cnbc.com/2026/04/30/pricey-nfl-nba-ownership-stakes-investors-leagues-valuations.html",
-            "retrieved_at_utc": "2026-05-02T20:51:17.643268+00:00"
+            "publisher": "hnm",
+            "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPLWd6Q2F4ZUwzZmptS3dRVWoxX0RPbHU1NGltZWF3LW9FY1Zub1ZRQjU3VmJ2NllsTDlTQnJaaDNrdnJuaUpkU2NXRnB6RWhHR3h5SkZTQ29wQ19GUEREWVpPR0s5YjdsTVkwOG9ELUlfeXZmMVJ4UFotRDJEcV9QczFtZklaMTk5QnpwVVU3TWFmVlE2UG84SA?oc=5",
+            "retrieved_at_utc": "2026-05-02T22:12:45.753122+00:00"
         },
         "article": {
-            "text_summary_tr": "Pek çok yatırımcı, NFL ve NBA paylarına para yatırmak yerine daha küçük liglerde yatırım yaparak artan değerlemelere katılıyor.",
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "Pricey NFL, NBA ownership stakes are pushing investors to smaller leagues and driving valuations higher"
+            "text_summary_tr": "Toyota, Polonya'da halka açık bir dairesel fabrika için yeni bir yatırım açıkladı.",
+            "event_type": "expansion",
+            "title": "Toyota announces a new investment in a circular factory in Poland - Newsroom Toyota Europe"
+        },
+        "analysis": {
+            "sentiment": "positive",
+            "risks": []
         },
         "entities": {
             "company": {
-                "name": "NFL",
+                "name": "Toyota",
                 "ticker": null
             },
-            "countries": [],
             "from_location": null,
-            "to_location": null
+            "to_location": "Polonya"
         },
         "industry": {
-            "sector": "Spor",
-            "line_type": "Lig Sahibi",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": "Daha büyük liglerde yer alırlar."
-        },
-        "bios_fit": {
-            "rationale_tr": "NFL, NBA paylarına yatırımlardan kaçanlar, daha küçük liglerde yer alıyor.",
-            "recommended_action": "tender_watch",
-            "score": 29
-        },
-        "assumptions": [
-            "NFL ve NBA paylarına yatırımlar artıyor."
-        ]
-    },
-    {
-        "source": {
-            "publisher": "bbc",
-            "url": "https://www.bbc.com/news/articles/cqxlnrqjvzyo?at_medium=RSS&at_campaign=rss",
-            "retrieved_at_utc": "2026-05-02T20:51:24.752250+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Spirit Airlines kurtarma müzakereleri çöktükten sonra kapatıldı.",
-            "event_type": "closure",
-            "confidence": 1.0,
-            "title": "Spirit Airlines shutting down after rescue talks collapse"
-        },
-        "entities": {
-            "company": {
-                "name": "Spirit Airlines",
-                "ticker": null
-            },
-            "countries": [
-                "Birim ülke belirtilmemiştir."
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
+            "sector": " automotive",
             "equipment_keywords": [
-                "Uçuş operasyonları için gerekli donanıma ait listesi belirtilmemiştir."
+                "circular factory"
             ]
         },
         "signals": {
             "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "Bu haberdeki kapatmaya bağlı potansiyel relokasyon fırsatı, genel olarak Spirit Airlines'in faaliyetlerine son verdiği bir konuya sahiptir. Bios için fırsat oluşturabilecek potansiyel partner ya da bölge belirtilmemiştir. ",
-            "recommended_action": "monitor",
-            "score": 36
-        },
-        "assumptions": [
-            "Varsayımda, kapatma kararının Spirit Airlines'in tüm faaliyetlerine uygulanacağı varsayılacaktır."
-        ]
-    },
-    {
-        "source": {
-            "publisher": "bbc",
-            "url": "https://www.bbc.com/news/articles/c4g8zpylzz9o?at_medium=RSS&at_campaign=rss",
-            "retrieved_at_utc": "2026-05-02T20:51:32.400065+00:00"
-        },
-        "article": {
-            "text_summary_tr": "",
-            "event_type": "other",
-            "confidence": 1.0,
-            "title": "Trump says he will hike tariffs on EU cars to 25%"
-        },
-        "entities": {
-            "company": {},
-            "countries": [
-                "ABD",
-                "EÜ"
-            ],
-            "from_location": "",
-            "to_location": "",
-            "sectör": "",
-            "company_ticker": "",
-            "sector": "",
-            "company_name": ""
-        },
-        "industry": {
-            "sector": "",
-            "line_type": "",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": ""
-        },
-        "bios_fit": {
-            "rationale_tr": "",
-            "recommended_action": "",
-            "Skor gerekçesi": "",
-            "score": 10
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "bbc",
-            "url": "https://www.bbc.com/news/articles/cg4pqe1zzgqo?at_medium=RSS&at_campaign=rss",
-            "retrieved_at_utc": "2026-05-02T20:51:38.949143+00:00"
-        },
-        "article": {
-            "text_summary_tr": null,
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "Mortgages, jobs and energy bills - how the Iran war will affect your money"
-        },
-        "entities": {
-            "company": {
-                "name": null,
-                "ticker": null
-            },
-            "countries": null,
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": null,
-            "score": 8
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "bbc",
-            "url": "https://www.bbc.com/news/articles/cy02gjq2987o?at_medium=RSS&at_campaign=rss",
-            "retrieved_at_utc": "2026-05-02T20:51:44.643483+00:00"
-        },
-        "article": {
-            "text_summary_tr": "",
-            "event_type": "",
-            "confidence": 0.0,
-            "title": "Pentagon says US military to be an 'AI-first' fighting force"
-        },
-        "entities": {
-            "company": {
-                "name": "Pentagon",
-                "ticker": null
-            },
-            "countries": [],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Havacılık ve Savunma",
-            "line_type": "Bilgisayarlar ve İletişim Cihazları üretimi",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "",
-            "recommended_action": "monitor",
-            "score": 27
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "bbc",
-            "url": "https://www.bbc.com/news/articles/c93xqnlq33qo?at_medium=RSS&at_campaign=rss",
-            "retrieved_at_utc": "2026-05-02T20:51:53.259853+00:00"
-        },
-        "article": {
-            "text_summary_tr": "The Real Greek, Cote Brasserie tarafından kurtarıldı.",
-            "event_type": "new_plant",
-            "confidence": 0.0,
-            "title": "The Real Greek rescued by Cote Brasserie-owner"
-        },
-        "entities": {
-            "company": {
-                "name": "The Real Greek",
-                "ticker": null
-            },
-            "countries": [],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "Belirtilmemiş bir gerekçe.",
-            "recommended_action": null,
-            "score": 49
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "bbc",
-            "url": "https://www.bbc.com/news/articles/cwyw6rylzepo?at_medium=RSS&at_campaign=rss",
-            "retrieved_at_utc": "2026-05-02T20:51:58.848403+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Geleneksel anketlerin AI yardımı ile daha doğru hale geleceği tartışılıyor.",
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "Will AI lead to more accurate opinion polls?"
-        },
-        "entities": {
-            "company": {
-                "name": null,
-                "ticker": null
-            },
-            "countries": [],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "",
-            "recommended_action": "monitor",
-            "score": 8
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "bbc",
-            "url": "https://www.bbc.com/news/articles/cdjp3dlkzwwo?at_medium=RSS&at_campaign=rss",
-            "retrieved_at_utc": "2026-05-02T20:52:04.464719+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Crayola oyuncakları, olası asbest kirliliğinden geri çekildi.",
-            "event_type": "relocation",
-            "confidence": 0.0,
-            "title": "Crayola toys recalled over possible asbestos contamination"
-        },
-        "entities": {
-            "company": {
-                "name": "Crayola",
-                "ticker": null
-            },
-            "countries": [
-                ""
-            ],
-            "from_location": "",
-            "to_location": ""
-        },
-        "industry": {
-            "sector": "Oyun ve oyuncak",
-            "line_type": "",
-            "equipment_keywords": [
-                ""
-            ]
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": "Haberin tarihi"
-        },
-        "bios_fit": {
-            "rationale_tr": "",
-            "recommended_action": "monitor",
-            "score": 60
-        },
-        "assumptions": [
-            ""
-        ]
-    },
-    {
-        "source": {
-            "publisher": "bbc",
-            "url": "https://www.bbc.com/news/articles/c62djjj0z09o?at_medium=RSS&at_campaign=rss",
-            "retrieved_at_utc": "2026-05-02T20:52:12.194546+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Yaygın yakıt fiyatları yüksekliği kanıtı yok, denetçinin görüşüdür.",
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "No evidence of widespread fuel price-gouging, watchdog says"
-        },
-        "entities": {
-            "company": {
-                "name": null,
-                "ticker": null
-            },
-            "countries": [],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": "monitor",
-            "score": 8
-        },
-        "assumptions": [
-            "Fiyatları denetlemek için yetkili bir kuruluş tarafından yapılan açıklama temel alınmıştır."
-        ]
-    },
-    {
-        "source": {
-            "publisher": "bbc",
-            "url": "https://www.bbc.com/news/articles/cpwp50v4ye7o?at_medium=RSS&at_campaign=rss",
-            "retrieved_at_utc": "2026-05-02T20:52:17.923548+00:00"
-        },
-        "article": {
-            "text_summary_tr": "İran savaşı milyarlara yemek riski yaşatabilir",
-            "event_type": "other",
-            "confidence": 1.0,
-            "title": "Billions of meals at risk due to Iran war, says fertiliser boss"
-        },
-        "entities": {
-            "company": {
-                "name": "null",
-                "ticker": "null"
-            },
-            "countries": [
-                "İran"
-            ],
-            "from_location": "null",
-            "to_location": "null"
-        },
-        "industry": {
-            "sector": "kimya",
-            "line_type": "null",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
             "timeline": "null"
         },
         "bios_fit": {
-            "rationale_tr": "İran'daki savaş, kimya ve gıda endüstrilerine büyük risk getiriyor.",
+            "rationale_tr": "Bu yatırım, Polonya'nın sanayi tesislerinin modernleşmesine katkıda bulunabilir. Girişimcilerin yeni teknolojilere adapte olması ve yenilikçi iş modellerine yatırım yapması gerekir.",
             "recommended_action": "monitor",
-            "score": 42
-        },
-        "assumptions": [
-            "Gıda sektörünün İslami world'daki durumlarının iyi olmadığı varsayımıdır."
-        ]
+            "score": 55
+        }
     },
     {
         "source": {
-            "publisher": "bbc",
-            "url": "https://www.bbc.com/news/articles/cwy2ldl1k7do?at_medium=RSS&at_campaign=rss",
-            "retrieved_at_utc": "2026-05-02T20:52:25.486380+00:00"
+            "publisher": "hnm",
+            "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQLUdRZXg5al9ISGxlak1SMjlJbmNvdEtLTEpocWNjaUJ2UDFLblIxSkphMXlFSHRWSmptUkh3VWxTa0o5TDBJNDZKb1dZSUtHVFA0U1dVcWxxQmFKay1hWVBfQ1NJcEtWV1A5VnVGZGZmUlFiaEZ4bXdTRExxRGJXLTJmNEVfUC1JdW9MbWhzMXJuNTJEZVVOcl9NNFp6Zw?oc=5",
+            "retrieved_at_utc": "2026-05-02T22:12:46.322010+00:00"
         },
         "article": {
-            "text_summary_tr": "",
+            "text_summary_tr": "İndüstrinin 2026'taki meydan okumaları: Çin, aşırılık, arz kaosu ve SDV kayması.",
             "event_type": "other",
-            "confidence": 1.0,
-            "title": "'There were letters I didn't want to open': Rise in unpaid debt court cases"
+            "title": "Industry’s 2026 challenges: China, excess capacity, supply chaos, SDV shift - Automotive News"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [
+                "Çin, aşırılık, arz kaosu"
+            ]
         },
         "entities": {
             "company": {
-                "name": "",
+                "name": "Industry",
                 "ticker": null
             },
-            "countries": [],
-            "from_location": "",
-            "to_location": ""
-        },
-        "industry": {
-            "sector": "",
-            "line_type": "",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": ""
-        },
-        "bios_fit": {
-            "rationale_tr": "",
-            "recommended_action": "monitor",
-            "score": 10
-        },
-        "assumptions": [
-            "Varsayımlar listesi"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "new york times",
-            "url": "https://www.nytimes.com/2026/05/02/business/dealbook/cannabis-industry-trump.html",
-            "retrieved_at_utc": "2026-05-02T20:52:32.198689+00:00"
-        },
-        "article": {
-            "text_summary_tr": null,
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "The Cannabis Industry’s New Best Friend? President Trump"
-        },
-        "entities": {
-            "company": {
-                "name": "null",
-                "ticker": "null"
-            },
-            "countries": [],
             "from_location": null,
             "to_location": null
         },
         "industry": {
-            "sector": "pharmaceutical",
-            "line_type": " null ",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "null",
-            "recommended_action": "monitor",
-            "score": 29
-        },
-        "assumptions": [
-            "null"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "new york times",
-            "url": "https://www.nytimes.com/2026/05/02/business/flossing-brushing-work-gross.html",
-            "retrieved_at_utc": "2026-05-02T20:52:38.933870+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Ağız fırçalama çalışmanın kârlısı mı.",
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "Is Tooth Brushing at Work Gross?"
-        },
-        "entities": {
-            "company": {
-                "name": "",
-                "ticker": null
-            },
-            "countries": [
-                ""
-            ],
-            "from_location": "",
-            "to_location": ""
-        },
-        "industry": {
-            "sector": "",
-            "line_type": "",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": ""
-        },
-        "bios_fit": {
-            "rationale_tr": "",
-            "recommended_action": "monitor",
-            "score": 10
-        },
-        "assumptions": [
-            "Çalışılan sektör belirlenmediği için varsayımlar listesi boş olarak algılanmıştır."
-        ]
-    },
-    {
-        "source": {
-            "publisher": "new york times",
-            "url": "https://www.nytimes.com/2026/05/02/business/aging-parents-money-finances-retirement.html",
-            "retrieved_at_utc": "2026-05-02T20:52:44.494684+00:00"
-        },
-        "article": {
-            "text_summary_tr": null,
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "5 Money Lessons From People Caring for Their Elderly Parents"
-        },
-        "entities": {
-            "company": {
-                "name": null,
-                "ticker": null
-            },
-            "countries": [],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": null,
-            "score": 10
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "new york times",
-            "url": "https://www.nytimes.com/2026/05/02/business/spirit-airlines-shutdown.html",
-            "retrieved_at_utc": "2026-05-02T20:52:51.156907+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Spirit Airlines, uzun süreli mücadele sonra uçuşlarını durdurdu.",
-            "event_type": "closure",
-            "confidence": 1.0,
-            "title": "Spirit Airlines Shuts Down After Years of Struggle"
-        },
-        "entities": {
-            "company": {
-                "name": "Spirit Airlines",
-                "ticker": null
-            },
-            "countries": [],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Hizmet Hizmetleri",
-            "line_type": "",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": null,
-            "jobs_impact": null,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "Firma, uzun süreli mücadele sonucu uçuşlarını durdurması nedeniyle uygun bir projeye dönüşebilecek potansiyele sahiptir.",
-            "recommended_action": "monitor",
-            "score": 43
-        },
-        "assumptions": [
-            "Firmaın uçuşlarını durdurduğu konusunda bilgi sahibi olundu."
-        ]
-    },
-    {
-        "source": {
-            "publisher": "new york times",
-            "url": "https://www.nytimes.com/2026/05/02/business/japan-bathhouse-oil-iran.html",
-            "retrieved_at_utc": "2026-05-02T20:52:57.843059+00:00"
-        },
-        "article": {
-            "text_summary_tr": "İran savaşının şokları, حتی Japonya'nın banliyölerinde bulunan Japon hamamlarını da etkilemektedir.",
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "Not Even Japanese Bathhouses Are Immune From Shocks of Iran War"
-        },
-        "entities": {
-            "company": {
-                "name": "null",
-                "ticker": null
-            },
-            "countries": [
-                "Japonya",
-                "İran"
-            ],
-            "from_location": "null",
-            "to_location": "null"
-        },
-        "industry": {
-            "sector": "null",
-            "line_type": "null",
+            "sector": "Automotive",
             "equipment_keywords": [
-                "null"
+                "SDV",
+                "excess capacity"
             ]
         },
         "signals": {
             "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": "null"
+            "timeline": "2026"
         },
         "bios_fit": {
-            "rationale_tr": "Bölge ve sektör bazında analiz gereklidir.",
+            "rationale_tr": "İndüstrinin 2026'taki meydan okumaları nedeniyle potansiyel bir lokasyon değişimi veya yatırımlar için bir olanak var.",
             "recommended_action": "monitor",
-            "score": 46
-        },
-        "assumptions": [
-            "İstatistiksel veri kullanılacaktır.",
-            "Çoklu kaynaklara dayalı bilgi toplama gereksinimi vardır."
-        ]
-    },
-    {
-        "source": {
-            "publisher": "new york times",
-            "url": "https://www.nytimes.com/2026/05/01/business/media/netflix-narnia-movie-theaters-release.html",
-            "retrieved_at_utc": "2026-05-02T20:53:05.479261+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Netflix, ilk geniş çaplı tiyatro gösterimi ile 'Narnia'yi planladı.",
-            "event_type": "new_plant",
-            "confidence": 1.0,
-            "title": "Netflix Plans First Wide Theatrical Release With ‘Narnia’"
-        },
-        "entities": {
-            "company": {
-                "name": "Netflix",
-                "ticker": null
-            },
-            "countries": [
-                null
-            ],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": null,
-            "score": 49
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "new york times",
-            "url": "https://www.nytimes.com/2026/05/01/business/thermos-bottles-recall.html",
-            "retrieved_at_utc": "2026-05-02T20:53:12.132474+00:00"
-        },
-        "article": {
-            "text_summary_tr": "8.2 milyon jar ve şişe thermal çayı hatırlatıldı, müşteriler yaralandı.",
-            "event_type": "closure",
-            "confidence": 0.0,
-            "title": "Thermos Recalls 8.2 Million Jars and Bottles After Customers Are Injured"
-        },
-        "entities": {
-            "company": {
-                "name": "Thermos",
-                "ticker": null
-            },
-            "countries": [],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Gıda ve İçecek",
-            "line_type": "thermal çay",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": "monitor",
-            "score": 38
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "new york times",
-            "url": "https://www.nytimes.com/2026/05/01/business/media/candace-owens-defamation-charlie-kirk.html",
-            "retrieved_at_utc": "2026-05-02T20:53:18.688486+00:00"
-        },
-        "article": {
-            "text_summary_tr": null,
-            "event_type": "other",
-            "confidence": 0.0,
-            "title": "Charlie Kirk’s Former Security Chief Sues Candace Owens for Defamation"
-        },
-        "entities": {
-            "company": {
-                "name": null,
-                "ticker": null
-            },
-            "countries": [],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": null,
-            "line_type": null,
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": null,
-            "recommended_action": null,
-            "score": 10
-        },
-        "assumptions": []
-    },
-    {
-        "source": {
-            "publisher": "new york times",
-            "url": "https://www.nytimes.com/2026/05/01/business/spirit-airlines-shutting-down.html",
-            "retrieved_at_utc": "2026-05-02T20:53:25.487361+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Trump yönetiminin kurtarma yardımı geçersiz hale gelmesinden sonra Spirit Airlines kapatılmaya hazırlanıyor.",
-            "event_type": "relocation",
-            "confidence": 1.0,
-            "title": "Spirit Airlines Prepares to Shut Down After Trump Administration Bailout Falls Through"
-        },
-        "entities": {
-            "company": {
-                "name": "Spirit Airlines",
-                "ticker": null
-            },
-            "countries": [],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Havacılık",
-            "line_type": "Spor",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": null,
-            "jobs_impact": null,
-            "timeline": "Trump yönetimi kurtarma yardımı"
-        },
-        "bios_fit": {
-            "rationale_tr": "Bios için uygun bir sektör ve lokasyon aranıyor.",
-            "recommended_action": ".monitor",
-            "score": 60
-        },
-        "assumptions": [
-            "Kurtarma yardımı geçersiz hale gelmesi"
-        ]
-    },
-    {
-        "source": {
-            "publisher": "new york times",
-            "url": "https://www.nytimes.com/2026/05/01/business/schwab-donations-southern-poverty-law-center.html",
-            "retrieved_at_utc": "2026-05-02T20:53:32.212059+00:00"
-        },
-        "article": {
-            "text_summary_tr": "Schwab Affiliate, Southern Poverty Law Center'a yapılan bağışları sona erdirdi.",
-            "event_type": "closure",
-            "confidence": 1.0,
-            "title": "Schwab Affiliate Halts Customer Donations to Southern Poverty Law Center"
-        },
-        "entities": {
-            "company": {
-                "name": "Schwab Affiliate",
-                "ticker": null
-            },
-            "countries": [],
-            "from_location": null,
-            "to_location": null
-        },
-        "industry": {
-            "sector": "Finansal Servis",
-            "line_type": "Bankacılık",
-            "equipment_keywords": []
-        },
-        "signals": {
-            "capex_usd": 0,
-            "jobs_impact": 0,
-            "timeline": null
-        },
-        "bios_fit": {
-            "rationale_tr": "Kapatma olayı nedeniyle şirketin lokasyon değişikliği yapacağı düşünülmektedir.",
-            "recommended_action": "monitor",
-            "score": 38
-        },
-        "assumptions": [
-            "Kapatma kararı sonrası şirketin yeni lokasyon seçimi ile ilgilendiğini düşündük"
-        ]
+            "score": 34
+        }
     }
 ]

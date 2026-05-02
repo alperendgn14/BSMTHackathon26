@@ -378,6 +378,17 @@
                             <h4 class="text-xs font-black text-slate-400 uppercase mb-2 tracking-widest">Yapay Zeka
                                 Özeti</h4>
                             <p id="detailSummary" class="text-slate-600 dark:text-slate-300 leading-relaxed"></p>
+                            <!-- Bunu detailSummary'nin bittiği <p> etiketinden hemen sonra ekle -->
+                            <div id="riskContainer"
+                                class="mt-4 p-4 bg-rose-50 dark:bg-rose-900/10 border border-rose-100 dark:border-rose-800/30 rounded-2xl hidden">
+                                <h4 class="text-[10px] font-black text-rose-600 uppercase mb-2 tracking-widest">
+                                    <i class="fas fa-exclamation-triangle"></i> Potansiyel Risk Analizi
+                                </h4>
+                                <ul id="detailRisks"
+                                    class="text-xs text-rose-700 dark:text-rose-300 list-disc list-inside space-y-1">
+                                    <!-- JS ile burası dolacak -->
+                                </ul>
+                            </div>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div
@@ -579,7 +590,12 @@
         async function fetchNews() {
             const c = document.getElementById('newsContainer'), l = document.getElementById('loading');
             l.classList.remove('hidden'); c.classList.add('opacity-40');
-            try { const res = await fetch(`${API_BASE}/news`); allNewsData = await res.json(); applyFilters(); }
+            try {
+                const res = await fetch(`${API_BASE}/news`);
+                allNewsData = await res.json();
+                console.log("Gelen Veri:", allNewsData[0]); // BU SATIRI EKLE VE F12 -> CONSOLE'A BAK
+                applyFilters();
+            }
             catch (e) { } finally { l.classList.add('hidden'); c.classList.remove('opacity-40'); }
         }
 
@@ -630,26 +646,54 @@
         function renderNews() {
             const c = document.getElementById('newsContainer'), no = document.getElementById('noNews');
             c.innerHTML = '';
-            if (currentNewsData.length === 0) no.classList.remove('hidden');
-            else {
+
+            if (currentNewsData.length === 0) {
+                no.classList.remove('hidden');
+            } else {
                 no.classList.add('hidden');
                 currentNewsData.forEach((i, idx) => {
+                    // Veri hazırlığı
                     const art = i.article || {}, src = i.source || {}, fit = i.bios_fit || {}, score = fit.score || 0, id = art.title || src.url;
+
+                    // --- YENİ: Sentiment Mantığı (Döngü içinde olmalı) ---
+                    const sentiment = i.analysis?.sentiment || 'neutral';
+                    const sentimentColor = sentiment === 'positive' ? 'bg-emerald-500' : sentiment === 'negative' ? 'bg-rose-500' : 'bg-gray-400';
+                    const sentimentText = sentiment === 'positive' ? 'Pozitif Gelişme' : sentiment === 'negative' ? 'Risk / Olumsuz' : 'Nötr';
+                    // ----------------------------------------------------
+
                     const star = favorites.includes(id) ? 'fas fa-star text-yellow-400 drop-shadow' : 'far fa-star text-gray-400 hover:text-yellow-400';
                     const sc = score > 70 ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800' : score > 40 ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800' : 'text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700';
 
                     c.innerHTML += `
-                        <div class="news-card bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm relative overflow-hidden group transition-colors" onclick="showDetails(${idx})" onmouseenter="focusMapOnIndex(${idx})" onmouseleave="resetMapFocus()">
-                            <div class="flex justify-between items-start mb-4">
-                                <div class="flex flex-col"><span class="text-[10px] font-bold text-blue-500 dark:text-blue-400 uppercase tracking-widest">${src.publisher || 'GLOBAL NEWS'}</span><span class="text-[10px] text-gray-400 mt-0.5"><i class="far fa-clock"></i> ${new Date(src.retrieved_at_utc).toLocaleDateString('tr-TR')}</span></div>
-                                <div class="flex items-center gap-3"><div class="px-3 py-1 rounded-full text-xs font-bold border ${sc}">Fit: ${score}/100</div><button onclick="toggleFavorite(event, this.dataset.id)" data-id="${id.replace(/"/g, '&quot;')}" class="p-1 hover:scale-125 transition-transform"><i class="${star} text-lg"></i></button></div>
+                <div class="news-card bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm relative overflow-hidden group transition-colors" onclick="showDetails(${idx})" onmouseenter="focusMapOnIndex(${idx})" onmouseleave="resetMapFocus()">
+                    <!-- Sentiment Bar (Kartın en üstünde ince bir çizgi olarak) -->
+                    <div class="absolute top-0 left-0 w-full h-1 ${sentimentColor} opacity-70"></div>
+
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] font-bold text-blue-500 dark:text-blue-400 uppercase tracking-widest">${src.publisher || 'GLOBAL NEWS'}</span>
+                            <!-- Sentiment Küçük Yazı -->
+                            <div class="flex items-center gap-1.5 mt-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full ${sentimentColor}"></span>
+                                <span class="text-[9px] font-bold uppercase ${sentiment === 'negative' ? 'text-rose-500' : 'text-emerald-600'}">${sentimentText}</span>
                             </div>
-                            <h3 class="text-xl font-bold mb-3 leading-tight text-slate-800 dark:text-slate-100 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition">${art.title || 'Başlıksız'}</h3>
-                            <p class="text-sm text-gray-500 dark:text-slate-400 mb-6 leading-relaxed line-clamp-3">${art.text_summary_tr || art.summary_tr || "Analiz ediliyor..."}</p>
-                            <div class="flex justify-between items-center border-t dark:border-slate-700 pt-4 text-[11px] font-bold text-slate-400">
-                                <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded uppercase"># ${art.event_type || 'genel'}</span><span class="text-blue-600 dark:text-blue-400">DETAYLARI GÖR <i class="fas fa-chevron-right"></i></span>
-                            </div>
-                        </div>`;
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="px-3 py-1 rounded-full text-xs font-bold border ${sc}">Fit: ${score}/100</div>
+                            <button onclick="toggleFavorite(event, this.dataset.id)" data-id="${id.replace(/"/g, '&quot;')}" class="p-1 hover:scale-125 transition-transform">
+                                <i class="${star} text-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-3 leading-tight text-slate-800 dark:text-slate-100 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition">${art.title || 'Başlıksız'}</h3>
+                    <p class="text-sm text-gray-500 dark:text-slate-400 mb-6 leading-relaxed line-clamp-3">${art.text_summary_tr || art.summary_tr || "Analiz ediliyor..."}</p>
+                    
+                    <div class="flex justify-between items-center border-t dark:border-slate-700 pt-4 text-[11px] font-bold text-slate-400">
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded uppercase"># ${art.event_type || 'genel'}</span>
+                        <span class="text-blue-600 dark:text-blue-400">DETAYLARI GÖR <i class="fas fa-chevron-right ml-1"></i></span>
+                    </div>
+                </div>`;
                 });
             }
         }
@@ -658,34 +702,37 @@
             const item = currentNewsData[index]; if (!item) return;
             currentDetailIndex = index;
 
+            // Elementlere veri atama
             document.getElementById('detailTitle').innerText = item.article?.title || "Analiz Detayı";
             document.getElementById('detailSummary').innerText = item.article?.text_summary_tr || "Özet hazır değil.";
             document.getElementById('detailCompany').innerText = item.entities?.company?.name || "Bilinmiyor";
-            document.getElementById('detailCapex').innerText = item.signals?.capex_usd ? `$${item.signals.capex_usd.toLocaleString()}` : "Veri Yok";
-            document.getElementById('detailTimeline').innerText = item.signals?.timeline || "Belirsiz";
 
-            // YENİ: Akıllı Lokasyon Çıkarımı
-            const locs = getSmartLocations(item);
-            document.getElementById('detailRoute').innerText = formatRoute(locs.from, locs.to);
+            // Risk Analizi Bağlantısı
+            const riskBox = document.getElementById('riskContainer');
+            const riskList = document.getElementById('detailRisks');
+            const analysis = item.analysis || {};
+            const risks = analysis.risks || [];
 
+            if (risks.length > 0) {
+                riskBox.classList.remove('hidden');
+                riskList.innerHTML = risks.map(r => `<li>${r}</li>`).join('');
+            } else {
+                riskBox.classList.add('hidden');
+            }
+
+            // Skor ve Renk Yönetimi
             const score = item.bios_fit?.score || 0;
+            const sentiment = analysis.sentiment || 'neutral';
             const detailScore = document.getElementById('detailScore');
             const scoreCircle = document.getElementById('scoreCircle');
 
             detailScore.innerText = score;
             scoreCircle.setAttribute('stroke-dasharray', `${score}, 100`);
 
-            const hue = (score / 100) * 120;
-            const dynamicColor = `hsl(${hue}, 85%, 50%)`;
+            // Sentiment'e göre renk ata
+            let dynamicColor = sentiment === 'positive' ? '#10b981' : sentiment === 'negative' ? '#f43f5e' : '#3b82f6';
             scoreCircle.style.color = dynamicColor;
             detailScore.style.color = dynamicColor;
-
-            const action = document.getElementById('detailAction');
-            action.className = `w-full text-center p-4 rounded-2xl font-bold text-[10px] uppercase transition-colors ${score > 70 ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' : 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400'}`;
-            action.innerText = score > 70 ? "Kritik Fırsat: Temasa Geçin" : "İzleme Listesinde";
-
-            document.getElementById('chatHistory').innerHTML = '<p class="text-slate-500 dark:text-slate-400 italic text-xs">Bu haberle ilgili merak ettiklerinizi yapay zekaya sorun...</p>';
-            document.getElementById('chatInput').value = '';
 
             document.getElementById('detailsModal').classList.add('active');
         }

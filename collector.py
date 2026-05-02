@@ -1,6 +1,7 @@
 import feedparser
 import os
 import json
+from matplotlib import text
 import requests
 import hashlib
 import urllib.robotparser
@@ -69,39 +70,32 @@ def is_duplicate(url):
 def analyze_with_llama3_api(text):
     """SOW Madde 2.1, 2.3 & 2.5 uyumlu, detaylı analiz fonksiyonu."""
     # Docx dosyalarındaki teknik isterlere göre hazırlanmış detaylı prompt
+   
+    # collector.py içinde prompt kısmını bu şekilde güncelleyin
+    # collector.py içindeki prompt değişkenini tamamen bununla değiştir
     prompt = f"""Sen BIOS için fırsat çıkaran bir endüstriyel relokasyon analistsin.
 GÖREV: Metinden şirket, lokasyon, sektör, hat tipi, zaman çizelgesi ve CAPEX bilgilerini çıkar.
-KURALLAR: Sadece JSON döndür. Bulamadığın alanları null bırak. Çıktı dili Türkçe olsun.
+Ayrıca haberin duygusunu (sentiment) ve olası riskleri analiz et.
 
 İSTENEN JSON YAPISI (MUTLAKA BU ANAHTARLAR OLMALI):
 {{
-  "source": {{ "original_language": "ISO639-1 kodu", "confidence": 0.0 }},
+  "source": {{ "original_language": "ISO-639-1", "confidence": 0.0 }},
   "article": {{
     "text_summary_tr": "2-4 cümlelik özet",
-    "event_type": "relocation | closure | downsizing | expansion | new_plant | tender | capex_fdi | other",
-    "confidence": 0.0
+    "event_type": "relocation | closure | downsizing | expansion | new_plant | tender | capex_fdi | other"
+  }},
+  "analysis": {{
+    "sentiment": "positive | negative | neutral",
+    "risks": ["Risk 1", "Risk 2"]
   }},
   "entities": {{
     "company": {{"name": "string", "ticker": "null"}},
-    "countries": ["list"],
     "from_location": "string",
     "to_location": "string"
   }},
-  "industry": {{
-    "sector": "string",
-    "line_type": "string",
-    "equipment_keywords": ["list"]
-  }},
-  "signals": {{
-    "capex_usd": 0,
-    "jobs_impact": 0,
-    "timeline": "string"
-  }},
-  "bios_fit": {{
-    "rationale_tr": "Skor gerekçesi",
-    "recommended_action": "monitor | reach_out | request_docs | propose_site_visit | partner_search | tender_watch"
-  }},
-  "assumptions": ["Varsayımlar listesi"]
+  "industry": {{ "sector": "string", "equipment_keywords": ["list"] }},
+  "signals": {{ "capex_usd": 0, "timeline": "string" }},
+  "bios_fit": {{ "rationale_tr": "Skor gerekçesi", "recommended_action": "monitor" }}
 }}
 
 METİN: {text}"""
