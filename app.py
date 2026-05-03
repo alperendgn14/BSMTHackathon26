@@ -483,6 +483,66 @@ def delete_news():
 
 
 
+
+@app.route('/api/news/comment', methods=['POST', 'OPTIONS'])
+def add_comment():
+    # CORS güvenlik onayı
+    if request.method == 'OPTIONS':
+        return jsonify({"status": "ok"}), 200
+
+    data = request.json
+    news_id = str(data.get("id", "")).strip()
+    comment_text = data.get("comment", "").strip()
+
+    if not news_id or not comment_text:
+        return jsonify({"error": "Eksik veri"}), 400
+
+    try:
+        news_list = []
+        if os.path.exists('database.json'):
+            try:
+                with open('database.json', 'r', encoding='utf-8') as f:
+                    content = f.read().strip()
+                    if content:
+                        news_list = json.loads(content)
+            except json.JSONDecodeError:
+                pass
+
+        # Yorum objesi oluşturuluyor (Fearr imzasıyla)
+        comment_obj = {
+            "text": comment_text,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "author": "Kıdemli Analist (Fearr)" # Buraya kendi adını/takımını yazabilirsin
+        }
+
+        updated = False
+        # Haberi bul ve yorumu içine göm
+        for n in news_list:
+            title = str(n.get('article', {}).get('title', '')).strip()
+            url = str(n.get('source', {}).get('url', '')).strip()
+            if news_id == title or news_id == url:
+                if 'comments' not in n:
+                    n['comments'] = []
+                n['comments'].append(comment_obj)
+                updated = True
+                break
+
+        if updated:
+            with open('database.json', 'w', encoding='utf-8') as f:
+                json.dump(news_list, f, ensure_ascii=False, indent=2)
+            return jsonify({"status": "success", "comment": comment_obj})
+        else:
+            return jsonify({"error": "Haber veritabanında bulunamadı."}), 404
+
+    except Exception as e:
+        print(f"Yorum Ekleme Hatası: {e}")
+        return jsonify({"error": "Sunucu hatası."}), 500
+
+
+
+
+
+
 if __name__ == "__main__":
     print("🚀 Backend API Sunucusu Çalışıyor: http://localhost:5000")
     app.run(debug=True, port=5000)

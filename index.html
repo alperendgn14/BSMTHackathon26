@@ -477,6 +477,22 @@
                         </div>
                     </div>
 
+                    <!-- YENİ 5: ANALİST NOTLARI (YORUMLAR) BÖLÜMÜ -->
+                    <div class="mt-8 pt-6 border-t dark:border-slate-700 flex flex-col">
+                        <h4 class="text-xs font-black text-slate-400 uppercase mb-3 tracking-widest flex items-center gap-2">
+                            <i class="fas fa-comments text-emerald-500"></i> Analist Notları (Team Notes)
+                        </h4>
+                        <div id="commentsList" class="space-y-3 mb-4 max-h-40 overflow-y-auto pr-2 text-sm scroll-smooth">
+                            <!-- Yorumlar buraya düşecek -->
+                        </div>
+                        <div class="flex gap-2">
+                            <input type="text" id="commentInput" placeholder="Bu yatırım stratejik, yakından izleyelim..." class="flex-1 p-3 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-600 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 text-sm dark:text-slate-100 transition-colors" onkeypress="if(event.key === 'Enter') submitComment()">
+                            <button onclick="submitComment()" id="commentBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-3 rounded-xl font-bold transition-colors shadow-md">
+                                <i class="fas fa-plus"></i> Ekle
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -681,7 +697,7 @@
             localStorage.setItem('bios_favorites', JSON.stringify(favorites)); applyFilters();
         }
 
-        // --- YENİ EKLENEN: SİLME FONKSİYONU ---
+        // --- SİLME FONKSİYONU ---
         async function deleteNewsItem(event, index) {
             event.stopPropagation(); // Modalın açılmasını engeller
             
@@ -814,7 +830,6 @@
                     const star = favorites.includes(id) ? 'fas fa-star text-yellow-400 drop-shadow' : 'far fa-star text-gray-400 hover:text-yellow-400';
                     const sc = score > 70 ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800' : score > 40 ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800' : 'text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700';
 
-                    // YENİ EKLENEN: ÇÖP KUTUSU BUTONU (.flex items-center gap-3 divinin içine)
                     c.innerHTML += `
                 <div class="news-card bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm relative overflow-hidden group transition-colors" onclick="showDetails(${idx})" onmouseenter="focusMapOnIndex(${idx})" onmouseleave="resetMapFocus()">
                     <div class="absolute top-0 left-0 w-full h-1 ${sentimentColor} opacity-70"></div>
@@ -926,6 +941,9 @@
             document.getElementById('chatHistory').innerHTML = '<p class="text-slate-500 dark:text-slate-400 italic text-xs">Ajan analiz için hazır...</p>';
             document.getElementById('chatInput').value = '';
             document.getElementById('detailsModal').classList.add('active');
+
+            // Yorumları Ekrana Çiz
+            renderComments(item.comments || []);
             
             focusMapOnIndex(index);
         }
@@ -1219,6 +1237,64 @@
             try { const res = await fetch(`${API_BASE}/rss`); const list = await res.json(); document.getElementById('rssList').innerHTML = list.length === 0 ? '<p class="text-sm text-gray-400 italic">Kayıtlı kaynak yok.</p>' : list.map(src => `<div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 group"><div class="flex flex-col overflow-hidden w-3/4"><span class="text-sm font-bold text-slate-700 dark:text-slate-200 truncate">${src.name || 'Kaynak'}</span><span class="text-[10px] text-gray-400 truncate">${src.url}</span></div><button onclick="deleteRss('${src.id}')" class="text-red-400 hover:text-red-600 p-2 opacity-0 group-hover:opacity-100 transition"><i class="fas fa-trash-alt"></i></button></div>`).join(''); } catch (e) { }
         }
         async function deleteRss(id) { if (confirm("Silmek istiyor musunuz?")) { try { const res = await fetch(`${API_BASE}/rss/${id}`, { method: 'DELETE' }); if (res.ok) fetchRssSources(); } catch (e) { } } }
+
+        // --- YENİ EKLENEN: YORUM (COMMENT) FONKSİYONLARI ---
+        function renderComments(comments) {
+            const list = document.getElementById('commentsList');
+            if (!comments || comments.length === 0) {
+                list.innerHTML = '<p class="text-slate-500 dark:text-slate-400 italic text-xs">Henüz bir analist notu eklenmemiş.</p>';
+                return;
+            }
+            list.innerHTML = comments.map(c => `
+                <div class="bg-slate-50 dark:bg-slate-900/80 p-3 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm relative group">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                            <i class="fas fa-user-shield"></i> ${c.author}
+                        </span>
+                        <span class="text-[9px] text-slate-400 font-mono">${new Date(c.timestamp).toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'})}</span>
+                    </div>
+                    <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">${c.text}</p>
+                </div>
+            `).join('');
+            list.scrollTop = list.scrollHeight;
+        }
+
+        async function submitComment() {
+            const input = document.getElementById('commentInput');
+            const text = input.value.trim();
+            if (!text || currentDetailIndex === null) return;
+
+            const btn = document.getElementById('commentBtn');
+            const item = currentNewsData[currentDetailIndex];
+            const uniqueId = item.article?.title || item.source?.url;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+            try {
+                const res = await fetch(`${API_BASE}/news/comment`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id: uniqueId, comment: text })
+                });
+                const data = await res.json();
+                
+                if (res.ok && data.status === "success") {
+                    if (!item.comments) item.comments = [];
+                    item.comments.push(data.comment); // Ekrandaki belleği güncelle
+                    renderComments(item.comments);    // Listeyi yeniden çiz
+                    input.value = '';
+                    addSystemLog("Yeni analist notu sisteme işlendi.");
+                } else {
+                    alert("Yorum eklenemedi: " + (data.error || "Hata"));
+                }
+            } catch (e) {
+                alert("Sunucuya bağlanılamadı!");
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-plus"></i> Ekle';
+        }
     </script>
 </body>
 
