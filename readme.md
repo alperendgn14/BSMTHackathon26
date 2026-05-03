@@ -4,7 +4,7 @@
 
 Bu proje, özellikle Avrupa bölgesindeki endüstriyel yatırımları, yeni fabrika açılışlarını ve kapasite artışlarını otonom olarak takip eden, bu verileri anlamlandıran ve B2B iş akışları için aksiyona dönüştüren bir yapay zeka ajanıdır.
 
-* **Kaynak Kod:** [https://github.com/alperendgn14](https://github.com/alperendgn14)
+* **Kaynak Kod:** [https://github.com/alperendgn14/BSMTHackathon26](https://github.com/alperendgn14/BSMTHackathon26)
 * **Demo:** [https://bsmthackathon26.onrender.com/](https://bsmthackathon26.onrender.com/)
 * **Sunum:** Proje sunum dosyası (PDF/PPTX) repo içerisinde yer almaktadır ve 14:00–15:00 arası jüri önünde sunulacaktır.
 
