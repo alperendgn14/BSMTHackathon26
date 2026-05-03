@@ -403,7 +403,7 @@ SORU: {user_question}"""
                 {"role": "system", "content": "You are a precise, context-aware Q&A assistant."},
                 {"role": "user", "content": prompt}
             ],
-            model="llama-3.1-8b-instant", # Hızlı ve token dostu model
+            model="llama-3.3-70b-versatile", # Hızlı ve token dostu model
         )
         answer = chat_completion.choices[0].message.content
         return jsonify({"answer": answer}), 200
