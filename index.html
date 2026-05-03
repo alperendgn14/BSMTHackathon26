@@ -304,8 +304,8 @@
                 </div>
             </div>
 
-            <!-- INTERAKTIF TERMİNAL / SİSTEM NABZI KUTUSU -->
-            <div class="bg-[#050505] p-4 rounded-2xl shadow-inner border border-gray-800 relative overflow-hidden flex flex-col h-60">
+            <!-- 4: TERMİNAL / SİSTEM NABZI KUTUSU -->
+            <div class="bg-[#050505] p-4 rounded-2xl shadow-inner border border-gray-800 relative overflow-hidden flex flex-col h-40">
                 <div class="flex items-center justify-between mb-2 pb-2 border-b border-gray-800">
                     <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-widest flex items-center gap-2">
                         <i class="fas fa-terminal"></i> Sistem Nabzı
@@ -316,13 +316,8 @@
                         <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></div>
                     </span>
                 </div>
-                <div id="terminalLogs" class="flex-1 overflow-y-auto text-[10px] font-mono text-emerald-400 space-y-1.5 pr-1 scroll-smooth mb-2">
+                <div id="terminalLogs" class="flex-1 overflow-y-auto text-[10px] font-mono text-emerald-400 space-y-1.5 pr-1 scroll-smooth">
                     <div><span class="text-gray-500">[SYSTEM]</span> Sistem başlatıldı. Ajan beklemede...</div>
-                    <div><span class="text-gray-500">[SYSTEM]</span> Yardım için <span class="text-white">/yardim</span> yazın.</div>
-                </div>
-                <div class="flex items-center gap-2 border-t border-gray-800 pt-2">
-                    <span class="text-emerald-500 text-[10px] font-bold font-mono">root@bios_agent:~$</span>
-                    <input type="text" id="terminalInput" placeholder="..." class="bg-transparent border-none outline-none text-emerald-300 text-[10px] font-mono w-full" autocomplete="off">
                 </div>
             </div>
 
@@ -580,42 +575,6 @@
             if (Math.random() > 0.6) addSystemLog(msgs[Math.floor(Math.random() * msgs.length)]);
         }, 8000);
 
-        // INTERAKTIF TERMINAL DINLEYICI
-        document.getElementById('terminalInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                const cmd = this.value.trim().toLowerCase();
-                this.value = '';
-                executeTerminalCommand(cmd);
-            }
-        });
-
-        function executeTerminalCommand(cmd) {
-            if (!cmd) return;
-            addSystemLog(`<span class="text-white">Executing: ${cmd}</span>`);
-            
-            if (cmd === '/yardim') {
-                addSystemLog("Kullanılabilir Komutlar:");
-                addSystemLog("- /ozet : En yüksek BIOS-fit 3 haberi getirir.");
-                addSystemLog("- /count : Veritabanı istatistiklerini gösterir.");
-                addSystemLog("- /analiz : Mevcut filtrelerin özetini sunar.");
-                addSystemLog("- /temizle : Ekranı temizler.");
-            } else if (cmd === '/ozet') {
-                const top = [...allNewsData].sort((a,b) => (b.bios_fit?.score || 0) - (a.bios_fit?.score || 0)).slice(0, 3);
-                top.forEach((n, i) => addSystemLog(`${i+1}. ${n.entities?.company?.name || 'Bilinmiyor'} - Skoru: ${n.bios_fit?.score}/100`));
-            } else if (cmd === '/count') {
-                addSystemLog(`Toplam Kayıt: ${allNewsData.length}`);
-                addSystemLog(`Favori Sayısı: ${favorites.length}`);
-            } else if (cmd === '/analiz') {
-                addSystemLog(`Şu an listelenen: ${currentNewsData.length} haber.`);
-                const avg = Math.round(currentNewsData.reduce((acc, curr) => acc + (curr.bios_fit?.score || 0), 0) / (currentNewsData.length || 1));
-                addSystemLog(`Görünen haberlerin ortalama Fit skoru: ${avg}`);
-            } else if (cmd === '/temizle') {
-                document.getElementById('terminalLogs').innerHTML = '<div><span class="text-gray-500">[SYSTEM]</span> Konsol temizlendi. Ajan hazır.</div>';
-            } else {
-                addSystemLog(`<span class="text-red-400">Komut bulunamadı: ${cmd}</span>`);
-            }
-        }
-
         function getSmartLocations(item) {
             let fromLoc = item.entities?.from_location;
             let toLoc = item.entities?.to_location;
@@ -628,7 +587,7 @@
             if (!fromLoc && !toLoc) {
                 const textToScan = `${item.article?.title || ''} ${item.article?.text_summary_tr || ''} ${item.article?.summary_tr || ''}`.toLowerCase();
                 const countries = {
-                    "türkiye": "Türkiye", "almanya": "Almanya", "polonya": "Polonya", "abd": "ABD", "amerika": "ABD", "çin": "Çin", "fransa": "Fransa", "ingiltere": "İngiltere", "italya": "İtalya", "japonya": "Japonya", "meksika": "Meksika", "ispanya": "İspanya", "romanya": "Romanya", "macaristan": "Macaristan", "hindistan": "Hindistan", "fas": "Fas", "sırbistan": "Sırbistan", "çekya": "Çeyka", "vietnam": "Vietnam"
+                    "türkiye": "Türkiye", "almanya": "Almanya", "polonya": "Polonya", "abd": "ABD", "amerika": "ABD", "çin": "Çin", "fransa": "Fransa", "ingiltere": "İngiltere", "italya": "İtalya", "japonya": "Japonya", "meksika": "Meksika", "ispanya": "İspanya", "romanya": "Romanya", "macaristan": "Macaristan", "hindistan": "Hindistan", "fas": "Fas", "sırbistan": "Sırbistan", "çekya": "Çekya", "vietnam": "Vietnam"
                 };
 
                 for (const [key, value] of Object.entries(countries)) {
@@ -750,6 +709,7 @@
 
         async function deleteNewsItem(event, index) {
             event.stopPropagation(); 
+            
             if(!confirm("Bu haberi veritabanından TAMAMEN silmek istediğinize emin misiniz?")) return;
 
             const itemToDelete = currentNewsData[index];
@@ -760,6 +720,7 @@
                 return id !== uniqueId;
             });
             applyFilters(); 
+            
             addSystemLog(`Hedef veri yokediliyor: ${uniqueId.substring(0, 20)}...`);
 
             try {
@@ -768,8 +729,15 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ id: uniqueId })
                 });
-                if(res.ok) { addSystemLog("Veri sunucudan kalıcı olarak silindi."); } else { addSystemLog("UYARI: Veri sunucudan silinemedi!"); }
-            } catch(e) { addSystemLog("HATA: Sunucu bağlantısı kurulamadı!"); }
+                
+                if(res.ok) {
+                    addSystemLog("Veri sunucudan kalıcı olarak silindi ve izler yok edildi.");
+                } else {
+                    addSystemLog("UYARI: Veri sunucudan silinemedi!");
+                }
+            } catch(e) {
+                addSystemLog("HATA: Sunucu bağlantısı kurulamadı!");
+            }
         }
 
         function toggleFavoritesView() {
@@ -782,16 +750,27 @@
 
         function updateKPIs() {
             const count = currentNewsData.length;
-            let totalCapex = 0; let totalScore = 0;
+            let totalCapex = 0;
+            let totalScore = 0;
+
             currentNewsData.forEach(item => {
-                totalCapex += (Number(item.signals?.capex_usd) || 0);
+                const capex = Number(item.signals?.capex_usd) || 0;
+                totalCapex += capex;
                 totalScore += (item.bios_fit?.score || 0);
             });
+
             const avgScore = count > 0 ? Math.round(totalScore / count) : 0;
+
             let formattedCapex = "$0";
-            if (totalCapex >= 1e9) formattedCapex = "$" + (totalCapex / 1e9).toFixed(1) + "B";
-            else if (totalCapex >= 1e6) formattedCapex = "$" + (totalCapex / 1e6).toFixed(1) + "M";
-            else formattedCapex = "$" + totalCapex.toLocaleString();
+            if (totalCapex > 0) {
+                if (totalCapex >= 1e9) {
+                    formattedCapex = "$" + (totalCapex / 1e9).toFixed(1) + "B";
+                } else if (totalCapex >= 1e6) {
+                    formattedCapex = "$" + (totalCapex / 1e6).toFixed(1) + "M";
+                } else {
+                    formattedCapex = "$" + totalCapex.toLocaleString();
+                }
+            }
 
             document.getElementById('kpiTotalCount').innerText = count;
             document.getElementById('kpiTotalCapex').innerText = formattedCapex;
@@ -807,57 +786,92 @@
             const isSortEnabled = document.getElementById('sortToggle')?.checked;
 
             let filtered = allNewsData.filter(i => {
-                const art = i.article || {}; const analysis = i.analysis || {}; const src = i.source || {}; const id = art.title || src.url;
+                const art = i.article || {};
+                const fit = i.bios_fit || {};
+                const analysis = i.analysis || {}; 
+                const signals = i.signals || {}; 
+                const src = i.source || {};
+                const c = i.entities?.company?.name || "";
+                const id = art.title || src.url;
+
                 if (showFavsOnly && !favorites.includes(id)) return false;
-                const txt = `${art.title || ''} ${art.text_summary_tr || art.summary_tr || ''} ${i.entities?.company?.name || ''}`.toLowerCase();
+
+                const txt = `${art.title || ''} ${art.text_summary_tr || art.summary_tr || ''} ${c}`.toLowerCase();
+
                 const matchesSearch = !q || txt.includes(q);
                 const matchesEvent = !e || (art.event_type || '') === e;
-                const matchesScore = (i.bios_fit?.score || 0) >= s;
+                const matchesScore = (fit.score || 0) >= s;
                 const matchesSentiment = !sent || (analysis.sentiment || 'neutral') === sent;
-                const matchesCapex = (Number(i.signals?.capex_usd) || 0) >= cpx;
+                
+                const itemCapex = Number(signals.capex_usd) || 0;
+                const matchesCapex = itemCapex >= cpx;
+
                 return matchesSearch && matchesEvent && matchesScore && matchesSentiment && matchesCapex;
             });
 
-            if (isSortEnabled) filtered.sort((a, b) => (b.bios_fit?.score || 0) - (a.bios_fit?.score || 0));
-            currentNewsData = filtered; renderNews();
+            if (isSortEnabled) {
+                filtered.sort((a, b) => (b.bios_fit?.score || 0) - (a.bios_fit?.score || 0));
+            }
+
+            currentNewsData = filtered;
+            addSystemLog(`Filtreler uygulandı. Bulunan sonuç: ${filtered.length}`);
+            renderNews();
         }
 
         function renderNews() {
             const c = document.getElementById('newsContainer'), no = document.getElementById('noNews');
             c.innerHTML = '';
-            if (currentNewsData.length === 0) { no.classList.remove('hidden'); } else {
+
+            if (currentNewsData.length === 0) {
+                no.classList.remove('hidden');
+            } else {
                 no.classList.add('hidden');
                 currentNewsData.forEach((i, idx) => {
-                    const art = i.article || {}, src = i.source || {}, score = i.bios_fit?.score || 0, id = art.title || src.url;
+                    const art = i.article || {}, src = i.source || {}, fit = i.bios_fit || {}, score = fit.score || 0, id = art.title || src.url;
+
                     const sentiment = i.analysis?.sentiment || 'neutral';
-                    const sColor = sentiment === 'positive' ? 'bg-emerald-500' : sentiment === 'negative' ? 'bg-rose-500' : 'bg-gray-400';
+                    const sentimentColor = sentiment === 'positive' ? 'bg-emerald-500' : sentiment === 'negative' ? 'bg-rose-500' : 'bg-gray-400';
+                    const sentimentText = sentiment === 'positive' ? 'Pozitif Gelişme' : sentiment === 'negative' ? 'Risk / Olumsuz' : 'Nötr';
+
                     const star = favorites.includes(id) ? 'fas fa-star text-yellow-400 drop-shadow' : 'far fa-star text-gray-400 hover:text-yellow-400';
                     const sc = score > 70 ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800' : score > 40 ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800' : 'text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700';
 
                     c.innerHTML += `
-                    <div class="news-card bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm relative overflow-hidden group transition-colors" onclick="showDetails(${idx})" onmouseenter="focusMapOnIndex(${idx})" onmouseleave="resetMapFocus()">
-                        <div class="absolute top-0 left-0 w-full h-1 ${sColor} opacity-70"></div>
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="flex flex-col">
-                                <span class="text-[10px] font-bold text-blue-500 dark:text-blue-400 uppercase tracking-widest">${src.publisher || 'GLOBAL NEWS'}</span>
-                                <div class="flex items-center gap-1.5 mt-0.5"><span class="w-1.5 h-1.5 rounded-full ${sColor}"></span><span class="text-[9px] font-bold uppercase ${sentiment === 'negative' ? 'text-rose-500' : 'text-emerald-600'}">${sentiment}</span></div>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="px-3 py-1 rounded-full text-xs font-bold border ${sc}">Fit: ${score}/100</div>
-                                <button onclick="toggleFavorite(event, '${id.replace(/'/g, "\\'")}')" class="p-1 hover:scale-125 transition-transform"><i class="${star} text-lg"></i></button>
-                                <button onclick="deleteNewsItem(event, ${idx})" class="p-1 text-gray-400 hover:text-red-500 hover:scale-125 transition-all"><i class="fas fa-trash-alt text-lg"></i></button>
+                <div class="news-card bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm relative overflow-hidden group transition-colors" onclick="showDetails(${idx})" onmouseenter="focusMapOnIndex(${idx})" onmouseleave="resetMapFocus()">
+                    <div class="absolute top-0 left-0 w-full h-1 ${sentimentColor} opacity-70"></div>
+
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] font-bold text-blue-500 dark:text-blue-400 uppercase tracking-widest">${src.publisher || 'GLOBAL NEWS'}</span>
+                            <div class="flex items-center gap-1.5 mt-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full ${sentimentColor}"></span>
+                                <span class="text-[9px] font-bold uppercase ${sentiment === 'negative' ? 'text-rose-500' : 'text-emerald-600'}">${sentimentText}</span>
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold mb-3 leading-tight text-slate-800 dark:text-slate-100 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition">${art.title || 'Başlıksız'}</h3>
-                        <p class="text-sm text-gray-500 dark:text-slate-400 mb-6 leading-relaxed line-clamp-3">${art.text_summary_tr || art.summary_tr || "Analiz ediliyor..."}</p>
-                        <div class="flex justify-between items-center border-t dark:border-slate-700 pt-4 text-[11px] font-bold text-slate-400">
-                            <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded uppercase"># ${art.event_type || 'genel'}</span>
-                            <span class="text-blue-600 dark:text-blue-400">DETAYLARI GÖR <i class="fas fa-chevron-right ml-1"></i></span>
+                        <div class="flex items-center gap-3">
+                            <div class="px-3 py-1 rounded-full text-xs font-bold border ${sc}">Fit: ${score}/100</div>
+                            <button onclick="toggleFavorite(event, '${id.replace(/'/g, "\\'")}')" class="p-1 hover:scale-125 transition-transform" title="Favorilere Ekle">
+                                <i class="${star} text-lg"></i>
+                            </button>
+                            <button onclick="deleteNewsItem(event, ${idx})" class="p-1 text-gray-400 hover:text-red-500 hover:scale-125 transition-all" title="Haberi Kalıcı Olarak Sil">
+                                <i class="fas fa-trash-alt text-lg"></i>
+                            </button>
                         </div>
-                    </div>`;
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-3 leading-tight text-slate-800 dark:text-slate-100 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition">${art.title || 'Başlıksız'}</h3>
+                    <p class="text-sm text-gray-500 dark:text-slate-400 mb-6 leading-relaxed line-clamp-3">${art.text_summary_tr || art.summary_tr || "Analiz ediliyor..."}</p>
+                    
+                    <div class="flex justify-between items-center border-t dark:border-slate-700 pt-4 text-[11px] font-bold text-slate-400">
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded uppercase"># ${art.event_type || 'genel'}</span>
+                        <span class="text-blue-600 dark:text-blue-400">DETAYLARI GÖR <i class="fas fa-chevron-right ml-1"></i></span>
+                    </div>
+                </div>`;
                 });
             }
-            updateHeatmap(); updateKPIs();
+            
+            updateHeatmap();
+            updateKPIs();
         }
 
         function showDetails(index) {
@@ -867,134 +881,441 @@
 
             document.getElementById('emailDraftContainer').classList.add('hidden');
             document.getElementById('emailDraftText').innerHTML = '';
+
             document.getElementById('detailTitle').innerText = item.article?.title || "Analiz Detayı";
             document.getElementById('detailSummary').innerText = item.article?.text_summary_tr || "Özet hazır değil.";
             document.getElementById('detailCompany').innerText = item.entities?.company?.name || "Bilinmiyor";
             document.getElementById('detailCapex').innerText = item.signals?.capex_usd ? `$${item.signals.capex_usd.toLocaleString()}` : "Veri Yok";
-            document.getElementById('detailButterfly').innerText = item.analysis?.butterfly_effect || "Veri bulunamadı.";
+            
+            const butterflyText = item.analysis?.butterfly_effect || "Kelebek etkisi verisi bulunamadı. Lütfen yeni veriler için backend sistemini güncelleyin.";
+            document.getElementById('detailButterfly').innerText = butterflyText;
+
             document.getElementById('detailSector').innerText = item.industry?.sector || "Bilinmiyor";
             document.getElementById('timelineEnd').innerText = item.signals?.timeline || "Belirsiz";
             
             let dateStr = "Bugün";
-            if(item.source?.retrieved_at_utc) dateStr = new Date(item.source.retrieved_at_utc).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short', year: 'numeric' });
+            if(item.source?.retrieved_at_utc) {
+                const d = new Date(item.source.retrieved_at_utc);
+                dateStr = d.toLocaleDateString('tr-TR', { day: 'numeric', month: 'short', year: 'numeric' });
+            }
             document.getElementById('timelineStart').innerText = dateStr;
-            document.getElementById('detailTimelineRaw').innerText = "AI: " + (item.signals?.timeline || "Metinde tarih bulunamadı.");
+            document.getElementById('detailTimelineRaw').innerText = "AI Çıktısı: " + (item.signals?.timeline || "Metinde tarih bulunamadı.");
 
-            const analysis = item.analysis || {}; const risks = analysis.risks || []; const score = item.bios_fit?.score || 0;
-            const riskBox = document.getElementById('riskContainer'); const riskList = document.getElementById('detailRisks');
-            if (risks.length > 0) { riskBox.classList.remove('hidden'); riskList.innerHTML = risks.map(r => `<li>${r}</li>`).join(''); } else { riskBox.classList.add('hidden'); }
+            const riskBox = document.getElementById('riskContainer');
+            const riskList = document.getElementById('detailRisks');
+            const analysis = item.analysis || {};
+            const risks = analysis.risks || [];
+            const sentiment = analysis.sentiment || 'neutral';
+            const score = item.bios_fit?.score || 0;
 
-            const detailScore = document.getElementById('detailScore'); const scoreCircle = document.getElementById('scoreCircle');
-            detailScore.innerText = score; scoreCircle.setAttribute('stroke-dasharray', `${score}, 100`);
-            const dColor = score >= 50 ? '#10b981' : (analysis.sentiment === 'negative' ? '#f43f5e' : '#3b82f6');
-            scoreCircle.style.color = dColor; detailScore.style.color = dColor;
+            if (risks.length > 0) {
+                riskBox.classList.remove('hidden');
+                riskList.innerHTML = risks.map(r => `<li>${r}</li>`).join('');
+            } else {
+                riskBox.classList.add('hidden');
+            }
+
+            const detailScore = document.getElementById('detailScore');
+            const scoreCircle = document.getElementById('scoreCircle');
+            detailScore.innerText = score;
+            scoreCircle.setAttribute('stroke-dasharray', `${score}, 100`);
+
+            let dynamicColor;
+            if (score >= 50) {
+                dynamicColor = '#10b981'; 
+            } else if (sentiment === 'negative') {
+                dynamicColor = '#f43f5e'; 
+            } else {
+                dynamicColor = '#3b82f6'; 
+            }
+
+            scoreCircle.style.color = dynamicColor;
+            detailScore.style.color = dynamicColor;
 
             const action = document.getElementById('detailAction');
-            if (score >= 50) { action.className = "w-full text-center p-4 rounded-2xl font-bold text-[10px] uppercase bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400"; action.innerText = analysis.sentiment === 'negative' ? "Kriz Fırsatı: Taşıma Teklifi" : "Kritik Fırsat: Temas Kurun"; }
-            else { action.className = "w-full text-center p-4 rounded-2xl font-bold text-[10px] uppercase bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400"; action.innerText = "İzleme Listesinde"; }
+            if (score >= 50) {
+                action.className = "w-full text-center p-4 rounded-2xl font-bold text-[10px] uppercase bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400";
+                action.innerText = sentiment === 'negative' ? "Kriz Fırsatı: Taşıma Teklifi Ver" : "Kritik Fırsat: Temasa Geçin";
+            } else {
+                action.className = "w-full text-center p-4 rounded-2xl font-bold text-[10px] uppercase bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400";
+                action.innerText = "İzleme Listesinde";
+            }
 
-            const locs = getSmartLocations(item); document.getElementById('detailRoute').innerText = formatRoute(locs.from, locs.to);
-            document.getElementById('chatHistory').innerHTML = '<p class="text-slate-500 dark:text-slate-400 italic text-xs">Ajan hazır...</p>';
-            document.getElementById('chatInput').value = ''; document.getElementById('detailsModal').classList.add('active');
-            renderComments(item.comments || []); focusMapOnIndex(index);
+            const locs = getSmartLocations(item);
+            document.getElementById('detailRoute').innerText = formatRoute(locs.from, locs.to);
+
+            document.getElementById('chatHistory').innerHTML = '<p class="text-slate-500 dark:text-slate-400 italic text-xs">Ajan analiz için hazır...</p>';
+            document.getElementById('chatInput').value = '';
+            document.getElementById('detailsModal').classList.add('active');
+
+            renderComments(item.comments || []);
+            
+            focusMapOnIndex(index);
         }
 
-        function closeDetails() { document.getElementById('detailsModal').classList.remove('active'); document.getElementById('emailDraftContainer').classList.add('hidden'); }
+        function closeDetails() { 
+            document.getElementById('detailsModal').classList.remove('active'); 
+            document.getElementById('emailDraftContainer').classList.add('hidden');
+        }
 
         async function generateMailDraft() {
             if (currentDetailIndex === null) return;
             const item = currentNewsData[currentDetailIndex];
-            const btn = document.getElementById('mailDraftBtn'); const textArea = document.getElementById('emailDraftText');
-            addSystemLog(`Llama 70B mail yazıyor...`);
+            const btn = document.getElementById('mailDraftBtn');
+            const container = document.getElementById('emailDraftContainer');
+            const textArea = document.getElementById('emailDraftText');
+
+            addSystemLog(`Llama 70B B2B temas maili yazıyor...`);
+
             const locs = getSmartLocations(item);
-            const context = `Haber: ${item.article?.title}\nŞirket: ${item.entities?.company?.name}\nRota: ${formatRoute(locs.from, locs.to)}`;
+            const contextText = `Haber: ${item.article?.title}\nŞirket: ${item.entities?.company?.name || 'Bilinmiyor'}\nRota: ${formatRoute(locs.from, locs.to)}\nSektör: ${item.industry?.sector || 'Bilinmiyor'}\nCAPEX: ${item.signals?.capex_usd ? '$' + item.signals.capex_usd.toLocaleString() : 'Bilinmiyor'}`;
+
+            const originalHtml = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Yazılıyor...';
             
-            btn.disabled = true; document.getElementById('emailDraftContainer').classList.remove('hidden');
-            textArea.innerHTML = 'Oluşturuluyor...';
+            container.classList.remove('hidden');
+            textArea.innerHTML = '<i class="fas fa-circle-notch fa-spin text-blue-500"></i> Llama 70B mail taslağını oluşturuyor, lütfen bekleyin...';
+
             try {
-                const res = await fetch(`${API_BASE}/generate-email`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ context: context }) });
+                const res = await fetch(`${API_BASE}/generate-email`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ context: contextText })
+                });
                 const data = await res.json();
-                textArea.innerHTML = data.email_draft?.replace(/\n/g, '<br>') || 'Hata!';
-            } catch (e) { textArea.innerHTML = 'Hata!'; } finally { btn.disabled = false; }
+                
+                if (res.ok && data.email_draft) {
+                    let formattedDraft = data.email_draft.replace(/\n/g, '<br>');
+                    formattedDraft = formattedDraft.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+                    textArea.innerHTML = formattedDraft;
+                    addSystemLog(`Mail taslağı başarıyla oluşturuldu.`);
+                } else {
+                    textArea.innerHTML = '<span class="text-red-500">Mail taslağı oluşturulamadı.</span>';
+                }
+            } catch (e) {
+                textArea.innerHTML = '<span class="text-red-500">Sunucu ile bağlantı koptu.</span>';
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalHtml;
+            }
         }
 
-        function copyEmail() { navigator.clipboard.writeText(document.getElementById('emailDraftText').innerText); alert("Kopyalandı!"); }
+        function copyEmail() {
+            const textToCopy = document.getElementById('emailDraftText').innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert("Mail taslağı başarıyla kopyalandı! Outlook/Gmail'e yapıştırabilirsiniz.");
+                addSystemLog("Mail panoya kopyalandı.");
+            }).catch(err => { console.error('Kopyalama hatası: ', err); });
+        }
 
         function playVoiceBriefing() {
-            if (isSpeaking) { synth.cancel(); isSpeaking = false; return; }
-            if (currentNewsData.length === 0) return;
-            const top = currentNewsData.slice(0, 3);
-            let text = "BIOS Yapay Zeka Sistemine hoş geldiniz. ";
-            top.forEach((n, i) => text += `${i+1}: ${n.entities?.company?.name || 'Bir şirket'}, ${n.entities?.to_location || 'yeni yer'}. `);
-            const utterance = new SpeechSynthesisUtterance(text); utterance.lang = 'tr-TR';
-            utterance.onstart = () => { isSpeaking = true; document.getElementById('voiceBtn').classList.add('animate-pulse'); };
-            utterance.onend = () => { isSpeaking = false; document.getElementById('voiceBtn').classList.remove('animate-pulse'); };
+            const btn = document.getElementById('voiceBtn');
+            if (isSpeaking) {
+                synth.cancel();
+                isSpeaking = false;
+                btn.innerHTML = '<i class="fas fa-headphones"></i> Sabah Brifingini Dinle';
+                btn.classList.remove('animate-pulse');
+                addSystemLog("Sesli brifing durduruldu.");
+                return;
+            }
+
+            if (currentNewsData.length === 0) {
+                alert("Okunacak güncel yatırım haberi bulunamadı.");
+                return;
+            }
+
+            addSystemLog("Web Speech API aktif edildi. Brifing okunuyor...");
+            const topNews = currentNewsData.slice(0, 3);
+            let textToRead = "BIOS Yapay Zeka Sistemine hoş geldiniz. İşte bugünün öne çıkan endüstriyel yatırım fırsatları... ";
+            
+            topNews.forEach((n, idx) => {
+                const company = n.entities?.company?.name || 'Bir şirket';
+                const location = n.entities?.to_location || 'yeni bir lokasyona';
+                const sector = n.industry?.sector || 'Endüstri';
+                let summary = n.article?.text_summary_tr || n.article?.summary_tr || '';
+                if(summary.length > 200) summary = summary.substring(0, 200) + '...';
+                
+                textToRead += `Haber ${idx + 1}... ${company}, ${location} bölgesine yatırım planlıyor. Sektör, ${sector}. Özetle; ${summary} `;
+            });
+
+            textToRead += "Brifing sona erdi. Detaylar için sol taraftaki panele göz atabilirsiniz. İyi çalışmalar.";
+
+            const utterance = new SpeechSynthesisUtterance(textToRead);
+            utterance.lang = 'tr-TR';
+            
+            utterance.onstart = () => {
+                isSpeaking = true;
+                btn.innerHTML = '<i class="fas fa-stop"></i> Brifingi Durdur';
+                btn.classList.add('animate-pulse');
+            };
+            
+            utterance.onend = () => {
+                isSpeaking = false;
+                btn.innerHTML = '<i class="fas fa-headphones"></i> Sabah Brifingini Dinle';
+                btn.classList.remove('animate-pulse');
+                addSystemLog("Sesli brifing tamamlandı.");
+            };
+            
+            utterance.onerror = () => {
+                isSpeaking = false;
+                btn.innerHTML = '<i class="fas fa-headphones"></i> Sabah Brifingini Dinle';
+                btn.classList.remove('animate-pulse');
+            };
+
             synth.speak(utterance);
         }
 
-        function exportToPDF() { window.print(); } // Basit PDF çıktısı
-        function exportToCSV() { /* CSV indirme mantığı buraya */ alert("CSV oluşturuluyor..."); }
+        function exportToPDF() {
+            if (currentDetailIndex === null) return;
+            const item = currentNewsData[currentDetailIndex];
+            addSystemLog("PDF Raporu derleniyor...");
+            
+            const locs = getSmartLocations(item);
+            const routeText = formatRoute(locs.from, locs.to);
+            const capexText = item.signals?.capex_usd ? `$${item.signals.capex_usd.toLocaleString()}` : "Veri Yok";
+            const score = item.bios_fit?.score || 0;
+            const risks = (item.analysis?.risks || []).map(r => `<li style="margin-bottom: 5px;">${r}</li>`).join('') || "Risk tespit edilmedi.";
+            
+            const printHtml = `
+                <div style="font-family: 'Arial', sans-serif; padding: 20px; color: #000; max-width: 800px; margin: 0 auto;">
+                    <div style="border-bottom: 2px solid #2563eb; padding-bottom: 10px; margin-bottom: 20px;">
+                        <h1 style="color: #1e3a8a; margin: 0; font-size: 24px; line-height: 1.3;">${item.article?.title || 'Analiz Raporu'}</h1>
+                        <p style="color: #666; font-size: 12px; margin-top: 8px;"><strong>Kaynak:</strong> ${item.source?.publisher || 'Bilinmiyor'} | <strong>Sinyal Türü:</strong> ${item.article?.event_type || 'Genel'}</p>
+                    </div>
+                    
+                    <div style="background: #f0fdf4; border: 2px solid #22c55e; color: #166534; padding: 15px; text-align: center; border-radius: 8px; width: 140px; float: right; margin-top: -85px;">
+                        <div style="font-size: 10px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">BIOS Fit Skoru</div>
+                        <div style="font-size: 28px; font-weight: 900; margin-top: 5px;">${score}</div>
+                    </div>
+
+                    <div style="background: #f8fafc; padding: 15px; border-left: 4px solid #2563eb; margin-bottom: 25px;">
+                        <div style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: bold; margin-bottom: 8px;">Yapay Zeka Özeti</div>
+                        <div style="font-size: 14px; line-height: 1.6;">${item.article?.text_summary_tr || item.article?.summary_tr || 'Özet bulunamadı.'}</div>
+                    </div>
+
+                    <table style="width: 100%; margin-bottom: 25px; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding: 15px; background: #fff; border: 1px solid #e5e7eb; width: 50%;">
+                                <div style="font-size: 10px; text-transform: uppercase; color: #64748b; font-weight: bold;">İlgili Şirket</div>
+                                <div style="font-size: 15px; font-weight: bold; margin-top: 5px;">${item.entities?.company?.name || 'Bilinmiyor'}</div>
+                            </td>
+                            <td style="padding: 15px; background: #fff; border: 1px solid #e5e7eb; width: 50%;">
+                                <div style="font-size: 10px; text-transform: uppercase; color: #64748b; font-weight: bold;">Tahmini Bütçe (CAPEX)</div>
+                                <div style="font-size: 15px; font-weight: bold; margin-top: 5px; color: #2563eb;">${capexText}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; background: #fff; border: 1px solid #e5e7eb;">
+                                <div style="font-size: 10px; text-transform: uppercase; color: #64748b; font-weight: bold;">Planlanan Rota</div>
+                                <div style="font-size: 15px; font-weight: bold; margin-top: 5px;">${routeText}</div>
+                            </td>
+                            <td style="padding: 15px; background: #fff; border: 1px solid #e5e7eb;">
+                                <div style="font-size: 10px; text-transform: uppercase; color: #64748b; font-weight: bold;">Hedeflenen Zaman</div>
+                                <div style="font-size: 15px; font-weight: bold; margin-top: 5px;">${item.signals?.timeline || 'Belirsiz'}</div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div style="background: #fff1f2; padding: 15px; border-left: 4px solid #e11d48; margin-bottom: 20px;">
+                        <div style="font-size: 11px; text-transform: uppercase; color: #e11d48; font-weight: bold; margin-bottom: 8px;">Potansiyel Risk Analizi</div>
+                        <ul style="margin: 0; padding-left: 20px; color: #be123c; font-size: 14px; line-height: 1.5;">${risks}</ul>
+                    </div>
+
+                    <div style="margin-top: 40px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #e5e7eb; padding-top: 15px;">
+                        Bu rapor BIOS AI Agent (Llama 3.1) tarafından otomatik olarak oluşturulmuştur.<br>
+                        Oluşturulma Tarihi: ${new Date().toLocaleString('tr-TR')}
+                    </div>
+                </div>
+            `;
+            
+            const printArea = document.getElementById('printArea');
+            printArea.innerHTML = printHtml;
+            window.print();
+        }
+
+        function exportToCSV() {
+            if (currentDetailIndex === null) return;
+            const item = currentNewsData[currentDetailIndex];
+            addSystemLog("Veriler CSV formatına dönüştürülüyor...");
+            
+            const locs = getSmartLocations(item);
+            const routeText = formatRoute(locs.from, locs.to);
+            const capexText = item.signals?.capex_usd ? item.signals.capex_usd : "Bilinmiyor";
+            const score = item.bios_fit?.score || 0;
+            const risks = (item.analysis?.risks || []).join('; ') || "Risk tespit edilmedi.";
+            const title = item.article?.title || "Bilinmiyor";
+            const company = item.entities?.company?.name || "Bilinmiyor";
+            const sector = item.industry?.sector || "Bilinmiyor";
+            const timeline = item.signals?.timeline || "Belirsiz";
+            const summary = item.article?.text_summary_tr || item.article?.summary_tr || "Özet yok";
+            const sentiment = item.analysis?.sentiment || "neutral";
+
+            const escapeCSV = (str) => {
+                if (str === null || str === undefined) return '""';
+                const s = String(str).replace(/"/g, '""');
+                return `"${s}"`;
+            };
+
+            const headers = ["Başlık", "Şirket", "Sektör", "Tahmini CAPEX (USD)", "Rota", "Zaman Çizelgesi", "BIOS Fit Skoru", "Duygu (Sentiment)", "Riskler", "Özet"];
+            const row = [
+                escapeCSV(title), escapeCSV(company), escapeCSV(sector), escapeCSV(capexText),
+                escapeCSV(routeText), escapeCSV(timeline), escapeCSV(score), escapeCSV(sentiment),
+                escapeCSV(risks), escapeCSV(summary)
+            ];
+
+            const csvContent = headers.join(",") + "\n" + row.join(",");
+            const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            
+            const safeCompanyName = company.replace(/[^a-zA-Z0-9]/g, '_');
+            link.setAttribute("href", url);
+            link.setAttribute("download", `BIOS_Analiz_${safeCompanyName}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
 
         async function askAgent() {
-            const input = document.getElementById('chatInput'); const question = input.value.trim();
+            const input = document.getElementById('chatInput');
+            const question = input.value.trim();
             if (!question) return;
-            const chat = document.getElementById('chatHistory'); const item = currentNewsData[currentDetailIndex];
-            chat.innerHTML += `<div class="text-right mb-2"><span class="bg-blue-600 text-white px-3 py-2 rounded-xl text-xs">${question}</span></div>`;
+
+            addSystemLog("RAG Modülü: Ajan ile sohbet başlatıldı.");
+            const chatHistory = document.getElementById('chatHistory'), btn = document.getElementById('chatBtn'), item = currentNewsData[currentDetailIndex];
+
+            const locs = getSmartLocations(item);
+            const routeContext = formatRoute(locs.from, locs.to);
+
+            const contextText = `
+                Haber Başlığı: ${item.article?.title || 'Bilinmiyor'}
+                Haber Özeti: ${item.article?.text_summary_tr || item.article?.summary_tr || 'Bilinmiyor'}
+                İlgili Şirket: ${item.entities?.company?.name || 'Bilinmiyor'}
+                Lokasyon/Rota: ${routeContext}
+                Tahmini CAPEX (Bütçe): ${item.signals?.capex_usd ? '$' + item.signals.capex_usd.toLocaleString() : 'Belirtilmemiş'}
+                Zaman Çizelgesi: ${item.signals?.timeline || 'Belirtilmemiş'}
+                Sektör/Ekipman Sinyalleri: ${(item.industry?.equipment_keywords || []).join(', ') || 'Yok'}
+            `;
+
+            chatHistory.innerHTML += `<div class="text-right mb-2"><span class="bg-blue-600 text-white px-3 py-2 rounded-xl inline-block text-xs max-w-[85%] text-left shadow-sm">${question}</span></div>`;
             input.value = '';
+
+            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+
             try {
-                const res = await fetch(`${API_BASE}/chat`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: question, context: item.article?.title }) });
+                const res = await fetch(`${API_BASE}/chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: question, context: contextText })
+                });
                 const data = await res.json();
-                chat.innerHTML += `<div class="text-left mb-2"><span class="bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 px-3 py-2 rounded-xl text-xs border border-gray-200 dark:border-slate-700">${data.answer}</span></div>`;
-            } catch (e) { }
-            chat.scrollTop = chat.scrollHeight;
+                if (res.ok && data.answer) chatHistory.innerHTML += `<div class="text-left mb-2"><span class="bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 px-3 py-2 rounded-xl inline-block text-xs border border-gray-200 dark:border-slate-700 max-w-[90%] shadow-sm leading-relaxed">${data.answer.replace(/\n/g, '<br>')}</span></div>`;
+                else chatHistory.innerHTML += `<div class="text-left mb-2"><span class="bg-red-50 text-red-600 px-3 py-2 rounded-xl inline-block text-xs border border-red-200">Yanıt alınamadı.</span></div>`;
+            } catch (e) { chatHistory.innerHTML += `<div class="text-left mb-2"><span class="bg-red-50 text-red-600 px-3 py-2 rounded-xl inline-block text-xs border border-red-200">Bağlantı hatası!</span></div>`; }
+
+            btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+            chatHistory.scrollTop = chatHistory.scrollHeight;
         }
 
         function updateScoreVal() { document.getElementById('scoreVal').innerText = document.getElementById('scoreRange').value; applyFilters(); }
-        function toggleRssModal() { document.getElementById('rssModal').classList.toggle('active'); }
+        function toggleRssModal() { const modal = document.getElementById('rssModal'); if (modal.classList.contains('active')) { modal.classList.remove('active'); } else { modal.classList.add('active'); } }
 
         async function triggerCollector() {
-            const btn = document.getElementById('scanBtn'); btn.disabled = true;
-            addSystemLog("Tarama başlatıldı...");
-            try { 
-                await fetch(`${API_BASE}/start-collector`, { method: 'POST' }); 
-                setTimeout(() => { fetchNews(); btn.disabled = false; }, 8000); 
-            } catch (e) { btn.disabled = false; }
+            addSystemLog("DİKKAT: Ana tarama protokolü başlatılıyor...");
+            const btn = document.getElementById('scanBtn'); const originalText = btn.innerHTML;
+            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin text-yellow-400"></i> <span class="hidden md:inline">Analiz...</span>';
+            try { await fetch(`${API_BASE}/start-collector`, { method: 'POST' }); alert("Tarama Başladı"); setTimeout(() => { fetchNews(); btn.disabled = false; btn.innerHTML = originalText; }, 8000); }
+            catch (e) { alert("Hata!"); btn.disabled = false; btn.innerHTML = originalText; }
         }
 
         async function addRss() {
-            const name = document.getElementById('rssNameInput').value, url = document.getElementById('rssUrlInput').value;
+            const name = document.getElementById('rssNameInput').value.trim(), url = document.getElementById('rssUrlInput').value.trim();
             if (!url) return;
-            try { 
-                const res = await fetch(`${API_BASE}/rss`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, url: url }) });
-                if (res.ok) { fetchRssSources(); document.getElementById('rssUrlInput').value = ''; }
-            } catch (e) { }
+            addSystemLog(`Yeni RSS Kaynağı eklendi: ${name}`);
+            try { const res = await fetch(`${API_BASE}/rss`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name || "Kaynak", url: url }) }); if (res.ok) { document.getElementById('rssNameInput').value = ''; document.getElementById('rssUrlInput').value = ''; fetchRssSources(); } } catch (e) { }
         }
 
         async function fetchRssSources() {
-            try { 
-                const res = await fetch(`${API_BASE}/rss`); const list = await res.json();
-                document.getElementById('rssList').innerHTML = list.map(src => `<div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700"><div><span class="text-sm font-bold text-slate-700 dark:text-slate-200">${src.name}</span></div><button onclick="deleteRss('${src.id}')" class="text-red-400"><i class="fas fa-trash-alt"></i></button></div>`).join('');
-            } catch (e) { }
+            try { const res = await fetch(`${API_BASE}/rss`); const list = await res.json(); document.getElementById('rssList').innerHTML = list.length === 0 ? '<p class="text-sm text-gray-400 italic">Kayıtlı kaynak yok.</p>' : list.map(src => `<div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 group"><div class="flex flex-col overflow-hidden w-3/4"><span class="text-sm font-bold text-slate-700 dark:text-slate-200 truncate">${src.name || 'Kaynak'}</span><span class="text-[10px] text-gray-400 truncate">${src.url}</span></div><button onclick="deleteRss('${src.id}')" class="text-red-400 hover:text-red-600 p-2 opacity-0 group-hover:opacity-100 transition"><i class="fas fa-trash-alt"></i></button></div>`).join(''); } catch (e) { }
         }
-
-        async function deleteRss(id) { if (confirm("Silinsin mi?")) { await fetch(`${API_BASE}/rss/${id}`, { method: 'DELETE' }); fetchRssSources(); } }
+        async function deleteRss(id) { if (confirm("Silmek istiyor musunuz?")) { try { const res = await fetch(`${API_BASE}/rss/${id}`, { method: 'DELETE' }); if (res.ok) fetchRssSources(); } catch (e) { } } }
 
         function renderComments(comments) {
             const list = document.getElementById('commentsList');
-            if (!comments || comments.length === 0) { list.innerHTML = '<p class="text-slate-500 italic text-xs">Not yok.</p>'; return; }
-            list.innerHTML = comments.map(c => `<div class="bg-slate-50 dark:bg-slate-900 p-3 rounded-xl mb-2 text-xs"><b>${c.author}:</b> ${c.text}</div>`).join('');
+            if (!comments || comments.length === 0) {
+                list.innerHTML = '<p class="text-slate-500 dark:text-slate-400 italic text-xs">Henüz bir analist notu eklenmemiş.</p>';
+                return;
+            }
+            list.innerHTML = comments.map(c => `
+                <div class="bg-slate-50 dark:bg-slate-900/80 p-3 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm relative group">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                            <i class="fas fa-user-shield"></i> ${c.author} 
+                            <span title="${c.email || ''}"><i class="fas fa-envelope ml-1 opacity-50"></i></span>
+                        </span>
+                        <span class="text-[9px] text-slate-400 font-mono">${new Date(c.timestamp).toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'})}</span>
+                    </div>
+                    <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">${c.text}</p>
+                </div>
+            `).join('');
             list.scrollTop = list.scrollHeight;
         }
 
         async function submitComment() {
-            const input = document.getElementById('commentInput'); const fName = document.getElementById('analystFirstName').value;
-            if (!input.value || !fName) return;
+            const input = document.getElementById('commentInput');
+            const fNameInput = document.getElementById('analystFirstName');
+            const lNameInput = document.getElementById('analystLastName');
+            const emailInput = document.getElementById('analystEmail');
+
+            const text = input.value.trim();
+            const fName = fNameInput.value.trim();
+            const lName = lNameInput.value.trim();
+            const email = emailInput.value.trim();
+
+            if (!text || !fName || currentDetailIndex === null) {
+                alert("Lütfen adınızı ve yorumunuzu girin.");
+                return;
+            }
+
+            const btn = document.getElementById('commentBtn');
             const item = currentNewsData[currentDetailIndex];
+            const uniqueId = item.article?.title || item.source?.url;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
             try {
-                const res = await fetch(`${API_BASE}/news/comment`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: item.article?.title, comment: input.value, first_name: fName }) });
+                const res = await fetch(`${API_BASE}/news/comment`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        id: uniqueId, 
+                        comment: text,
+                        first_name: fName,
+                        last_name: lName,
+                        email: email
+                    })
+                });
                 const data = await res.json();
-                if (res.ok) { if (!item.comments) item.comments = []; item.comments.push(data.comment); renderComments(item.comments); input.value = ''; }
-            } catch (e) { }
+                
+                if (res.ok && data.status === "success") {
+                    if (!item.comments) item.comments = [];
+                    item.comments.push(data.comment);
+                    renderComments(item.comments);
+                    input.value = ''; 
+                    addSystemLog(`Analist ${fName} sisteme not bıraktı.`);
+                } else {
+                    alert("Yorum eklenemedi: " + (data.error || "Hata"));
+                }
+            } catch (e) {
+                alert("Sunucuya bağlanılamadı!");
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-plus"></i> Ekle';
         }
     </script>
 </body>
