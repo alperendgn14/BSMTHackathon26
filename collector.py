@@ -117,7 +117,7 @@ METİN: {text}"""
                 {"role": "system", "content": "You are a data extraction assistant that strictly outputs the requested JSON structure. Focus specifically on extracting temporal markers for the 'timeline' field."},
                 {"role": "user", "content": prompt}
             ],
-            model="llama-3.1-8b-instant",
+            model="mixtral-8x7b-32768",
             response_format={"type": "json_object"}, 
         )
         return chat_completion.choices[0].message.content
