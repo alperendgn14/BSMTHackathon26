@@ -412,6 +412,48 @@ SORU: {user_question}"""
         return jsonify({"error": "Sistem geçici olarak yanıt veremiyor."}), 500
 
 
+
+
+
+@app.route('/api/generate-email', methods=['POST'])
+def generate_email():
+    """Seçilen haber için Llama 3.3 70B'den B2B Satış/Temas maili taslağı oluşturur."""
+    data = request.json
+    context = data.get("context", "")
+    
+    prompt = f"""Sen üst düzey bir kurumsal satış ve iş geliştirme yöneticisisin. 
+Aşağıdaki yatırım haberini okuyan bir Türk firması (BIOS) adına, yatırımı yapacak olan firmanın üst yönetimine (C-Level) profesyonel bir B2B (İşletmeden İşletmeye) temas e-postası yazacaksın.
+
+Amacın: Onların yeni lokasyonlarındaki tedarik zinciri, otomasyon, taşıma veya güvenlik süreçlerinde güçlü bir yerel partner olabileceğimizi vurgulamak.
+
+KURALLAR:
+1. Konu başlığı çarpıcı ve profesyonel olmalı (Örn: "KONU: [Şirket] - [Lokasyon] Yatırımınız ve Stratejik Partnerlik").
+2. Hitap profesyonel olmalı (Örn: "Sayın [Şirket] Yönetim Kurulu,").
+3. E-posta nazik, değer odaklı ve doğrudan hedefe yönelik olmalı. Çok uzun olmamalı.
+4. E-postanın sonuna "Saygılarımla, [Adınız/Unvanınız]" gibi bir imza alanı bırak.
+5. ASLA JSON formatı kullanma, sadece e-postanın metnini Markdown formatında dön.
+
+YATIRIM BAĞLAMI:
+{context}
+"""
+    
+    try:
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {"role": "system", "content": "Sen usta bir B2B satış yöneticisisin. Sadece mail taslağı metni üretirsin."},
+                {"role": "user", "content": prompt}
+            ],
+            model="llama-3.3-70b-versatile", # Güçlü model
+        )
+        return jsonify({"email_draft": chat_completion.choices[0].message.content})
+    except Exception as e:
+        print(f"Mail API Hatası: {e}")
+        return jsonify({"error": "Mail oluşturulamadı."}), 500
+
+
+
+
+
 if __name__ == "__main__":
     print("🚀 Backend API Sunucusu Çalışıyor: http://localhost:5000")
     app.run(debug=True, port=5000)
