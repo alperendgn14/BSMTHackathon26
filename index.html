@@ -682,23 +682,25 @@
         }
 
         // --- YENİ EKLENEN: SİLME FONKSİYONU ---
-        async function deleteNewsItem(event, uniqueId) {
-            event.stopPropagation(); // Kartın tıklanıp detay modalının açılmasını engeller
+        async function deleteNewsItem(event, index) {
+            event.stopPropagation(); // Modalın açılmasını engeller
             
-            // Kullanıcıdan onay al
             if(!confirm("Bu haberi veritabanından TAMAMEN silmek istediğinize emin misiniz?")) return;
 
-            // 1. Ekrandan Anında Sil (Optimistic UI - Kullanıcıyı bekletmemek için)
+            // Haberi diziden (array) tam isabetle bul
+            const itemToDelete = currentNewsData[index];
+            const uniqueId = itemToDelete.article?.title || itemToDelete.source?.url;
+
+            // 1. Ekrandan Anında Sil
             allNewsData = allNewsData.filter(i => {
                 const id = i.article?.title || i.source?.url;
                 return id !== uniqueId;
             });
+            applyFilters(); 
             
-            applyFilters(); // Kartı ekrandan uçurur, KPI'ları günceller
-            
-            addSystemLog(`Hedef veri yokediliyor: ${uniqueId.substring(0, 15)}...`);
+            addSystemLog(`Hedef veri yokediliyor: ${uniqueId.substring(0, 20)}...`);
 
-            // 2. Arka uca (Render Sunucusuna) silme emrini gönder
+            // 2. Arka Uca (Render'a) Emri Gönder
             try {
                 const res = await fetch(`${API_BASE}/news`, {
                     method: 'DELETE',
@@ -707,7 +709,7 @@
                 });
                 
                 if(res.ok) {
-                    addSystemLog("Veri sunucudan başarıyla silindi ve izler yok edildi.");
+                    addSystemLog("Veri sunucudan kalıcı olarak silindi ve izler yok edildi.");
                 } else {
                     addSystemLog("UYARI: Veri sunucudan silinemedi!");
                 }
@@ -830,7 +832,7 @@
                             <button onclick="toggleFavorite(event, '${id.replace(/'/g, "\\'")}')" class="p-1 hover:scale-125 transition-transform" title="Favorilere Ekle">
                                 <i class="${star} text-lg"></i>
                             </button>
-                            <button onclick="deleteNewsItem(event, '${id.replace(/'/g, "\\'")}')" class="p-1 text-gray-400 hover:text-red-500 hover:scale-125 transition-all" title="Haberi Kalıcı Olarak Sil">
+                            <button onclick="deleteNewsItem(event, ${idx})" class="p-1 text-gray-400 hover:text-red-500 hover:scale-125 transition-all" title="Haberi Kalıcı Olarak Sil">
                                 <i class="fas fa-trash-alt text-lg"></i>
                             </button>
                         </div>

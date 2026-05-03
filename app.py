@@ -453,29 +453,26 @@ YATIRIM BAĞLAMI:
 
 
 @app.route('/api/news', methods=['DELETE', 'OPTIONS'])
+@app.route('/api/news', methods=['DELETE'])
 def delete_news():
-    # Tarayıcının CORS güvenlik kontrolünü (Preflight) onayla
-    if request.method == 'OPTIONS': 
-        return jsonify({"status": "ok"}), 200
-        
     data = request.json
-    news_id = str(data.get("id", "")).strip() # Gelen ID'yi temizle
+    news_id = data.get("id")
     
     try:
         if os.path.exists('database.json'):
             with open('database.json', 'r', encoding='utf-8') as f:
                 news_list = json.load(f)
         else:
-            news_list = []
+            return jsonify({"error": "Veritabanı bulunamadı."}), 404
 
-        # ZIRHLI SİLME: ID, başlığın veya URL'in İÇİNDE GEÇİYORSA o haberi yok et!
+        # Haberi tam başlık veya URL üzerinden %100 isabetle filtrele
         filtered_news = [
             n for n in news_list 
-            if news_id not in str(n.get('article', {}).get('title', '')).strip() 
-            and news_id not in str(n.get('source', {}).get('url', '')).strip()
+            if n.get('article', {}).get('title') != news_id 
+            and n.get('source', {}).get('url') != news_id
         ]
         
-        # Güncel listeyi tekrar kaydet
+        # Temizlenmiş listeyi kaydet
         with open('database.json', 'w', encoding='utf-8') as f:
             json.dump(filtered_news, f, ensure_ascii=False, indent=2)
             
