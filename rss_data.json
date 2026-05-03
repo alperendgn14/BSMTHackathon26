@@ -1957,5 +1957,328 @@
             "sector": "null",
             "equipment_keywords": []
         }
+    },
+    {
+        "source": {
+            "publisher": "yahoo",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/mark-zuckerberg-sends-startling-message-133300156.html",
+            "retrieved_at_utc": "2026-05-03T04:55:04.891808+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Meta CEO'su Mark Zuckerberg, şirket çalışanlarına şaşırtıcı bir mesaj gönderdi. Şirketin gelecekteki planları ve stratejileri hakkında bilgi vermek için bu mesaj gönderildi. Aynı zamanda şirketin lokasyon seçenekleri ve sektörel etkileri de ele alınmıştır. Meta'nın büyüme stratejisinin lokasyon seçimine dayalı olduğunu ve gelecek yıllar içinde önemli adımlar atacağını gösteriyor.",
+            "event_type": "relocation",
+            "title": "Mark Zuckerberg sends startling message to Meta employees"
+        },
+        "analysis": {
+            "sentiment": "positive",
+            "risks": [],
+            "butterfly_effect": "Meta'nın bu planı, rakiplerinin de benzer adımlar atmasına yol açabilir. Bununla birlikte, Meta'nın sektöre etkileri ve büyüme stratejisinin lokasyon seçimine dayalı olması, gelecekteki olumlu sonuçlar doğurabilir."
+        },
+        "entities": {
+            "company": {
+                "name": "Meta",
+                "ticker": null
+            },
+            "from_location": null,
+            "to_location": null
+        },
+        "industry": {
+            "sector": "Teknoloji",
+            "equipment_keywords": [
+                "AI",
+                "Bilişim"
+            ]
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Skor gerekçesi: Gelecek planları ve stratejileri hakkında net bilgi verilmemiştir.",
+            "recommended_action": "monitor",
+            "score": 56
+        }
+    },
+    {
+        "source": {
+            "publisher": "yahoo",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/brown-university-cuts-stake-blue-212718065.html",
+            "retrieved_at_utc": "2026-05-03T04:55:05.513281+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Brown Üniversitesi, Blue Owl özel kredi fonunda hisselerinini %50 oranında azaltmaktadır. Buna bağlı olarak sektörün geleceği belirsizleşmektedir.",
+            "event_type": "downsizing",
+            "title": "Brown University cuts stake in Blue Owl private credit fund by over 50%"
+        },
+        "analysis": {
+            "sentiment": "negative",
+            "risks": [
+                "Sektörün karı düşebilir",
+                "Investor güveni zedelenebilir"
+            ],
+            "butterfly_effect": "Bu hareketin rakipler üzerindeki olası etkileri gözlenmeye başlanabilir."
+        },
+        "entities": {
+            "company": {
+                "name": "Brown Üniversitesi",
+                "ticker": "null"
+            },
+            "from_location": "null",
+            "to_location": "null"
+        },
+        "industry": {
+            "sector": "Finans",
+            "equipment_keywords": [
+                "Kredi fonları",
+                "Finansal araçlar"
+            ]
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Firma relokasyonunda bir fırsatın bulunmamasıdır.",
+            "recommended_action": "monitor",
+            "score": 42
+        }
+    },
+    {
+        "source": {
+            "publisher": "yahoo",
+            "url": "https://finance.yahoo.com/personal-finance/credit-cards/review/wells-fargo-autograph-journey-card-review-215134623.html",
+            "retrieved_at_utc": "2026-05-03T04:55:06.108802+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Bu haber Wells Fargo Autograph Journey℠ Kartı'nın incelemesi üzerine. Karta yapılan yatırımın stratejik önemi ve lokasyon seçimi sebepleri ile sektörel olası etkilerini kapsayan, 3-4 cümlelik bir C-Level yatırım özeti.",
+            "event_type": "new_plant",
+            "title": "Wells Fargo Autograph Journey℠ Card review: A high-earning card designed for frequent travelers"
+        },
+        "analysis": {
+            "sentiment": "positive",
+            "risks": [],
+            "butterfly_effect": "Bu yatırımın rakipler veya tedarik zinciri üzerindeki olası yansımı, sektördeki diğer bankaların yatırım yapma olasılığını artırabilir."
+        },
+        "entities": {
+            "company": {
+                "name": "Wells Fargo",
+                "ticker": null
+            },
+            "from_location": null,
+            "to_location": null
+        },
+        "industry": {
+            "sector": "Bankacılık",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Investitionün sektördeki stratejik önemi ve lokasyon seçimi.",
+            "recommended_action": "monitor",
+            "score": 55
+        }
+    },
+    {
+        "source": {
+            "publisher": "yahoo",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/u-equities-remain-king-diversification-210026786.html",
+            "retrieved_at_utc": "2026-05-03T04:55:06.564792+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Kingsiz diversifikasyon oyunları büyümeye devam ediyor. Yatırımın stratejik amacı ve lokasyon seçim nedenleri sektörel etkileri göz önüne alınarak en çok detaylı, profesyonel ve analitik bir C-Level yatırım özeti.",
+            "event_type": "expansion",
+            "title": "U.S. Equities Remain King but Diversification Plays Grow"
+        },
+        "analysis": {
+            "sentiment": "positive",
+            "risks": [],
+            "butterfly_effect": ""
+        },
+        "entities": {
+            "company": {
+                "name": "U.S. Equities",
+                "ticker": "null"
+            },
+            "from_location": null,
+            "to_location": null
+        },
+        "industry": {
+            "sector": "Finans",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Belirlenmedi",
+            "recommended_action": "monitor",
+            "score": 48
+        }
+    },
+    {
+        "source": {
+            "publisher": "yahoo",
+            "url": "https://finance.yahoo.com/economy/articles/simone-biles-says-shes-staying-205500205.html",
+            "retrieved_at_utc": "2026-05-03T04:55:07.134627+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Simone Biles, 22 bin dolarlık glam faturasına maruz kaldıktan sonra永遠に \"dışarıda kalacak\" olduğunu söyledi. Lifestyle creep herkesi bağlar.",
+            "event_type": "other",
+            "title": "Simone Biles says she's 'staying inside' forever after being hit with $22K glam bill — why lifestyle creep spares no one"
+        },
+        "analysis": {
+            "sentiment": "negative",
+            "risks": [],
+            "butterfly_effect": "Bu olay rakipler veya tedarik zinciri üzerinde önemli bir etki yaratmamaktadır."
+        },
+        "entities": {
+            "company": {
+                "name": "Simone Biles",
+                "ticker": null
+            },
+            "from_location": null,
+            "to_location": null
+        },
+        "industry": {
+            "sector": null,
+            "equipment_keywords": [
+                "glam",
+                "fashion"
+            ]
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Bu haber, bios için hiçbir fırsat içermez",
+            "recommended_action": "pass",
+            "score": 26
+        }
+    },
+    {
+        "source": {
+            "publisher": "yahoo",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/hot-start-enterprise-products-partners-212500634.html",
+            "retrieved_at_utc": "2026-05-03T04:55:07.727329+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Kaynak olarak 2023 yılından başlanarak 2024'te şirket expansion için genişlemeye devam etti, ve bu genişlemenin 2024 yılı sonunda tamamlanacağı belirtilmiştir.",
+            "event_type": "expansion",
+            "title": "After Hot Start to the Year, Is Enterprise Products Partners Stock Still a Buy?"
+        },
+        "analysis": {
+            "sentiment": "positive",
+            "risks": [],
+            "butterfly_effect": "Bu expansion rakipler için zorlu bir ortam yaratabilir veya bazı tedarikçilerle olası sorunlara neden olabilir."
+        },
+        "entities": {
+            "company": {
+                "name": "Enterprise Products Partners",
+                "ticker": "EPD"
+            },
+            "from_location": "null",
+            "to_location": "null"
+        },
+        "industry": {
+            "sector": "Petroleum",
+            "equipment_keywords": [
+                "Crude Oil Pipelines",
+                "Petroleum Infrastructure"
+            ]
+        },
+        "signals": {
+            "capex_usd": 1000000000,
+            "timeline": "Belirlenmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Bu haber expansion için genişlemeye dair bir örnekdir, bu nedenle Endüstriyel Re-lokasyon analizi için oldukça uygundur.",
+            "recommended_action": "monitor",
+            "score": 61
+        }
+    },
+    {
+        "source": {
+            "publisher": "yahoo",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/wabash-national-corporation-q1-2026-204952044.html",
+            "retrieved_at_utc": "2026-05-03T04:55:08.443689+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Wabash National Corporation'ın Q1 2026 finansal performansını genel olarak analiz edilmiştir. Şirketin gelecekteki hedefleri ve stratejileri değerlendirilmektedir. Yatırım kararı alınacaksa, Wabash National Corporation'ın sektörel konumu ve rakiplerine etkileri göz önünde bulundurulmalıdır. Şirketin yeni yatırıma gitme kararının stratejik önemi de önemlidir.",
+            "event_type": "relocation",
+            "title": "Wabash National Corporation Q1 2026 Earnings Call Summary"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [
+                "Finansal Performansın Düşmesi"
+            ],
+            "butterfly_effect": "Yatırımın rakiplere veya tedarik zincirine olası yansımaları olabilir."
+        },
+        "entities": {
+            "company": {
+                "name": "Wabash National Corporation",
+                "ticker": null
+            },
+            "from_location": "Belirtilmemiş",
+            "to_location": "Belirtilmemiş"
+        },
+        "industry": {
+            "sector": "Gemi Teknolojisi",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "2026 Q1, gelecek yıl, Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Wabash National Corporation'ın stratejik konumu ve potansiyeli, işleme ve montaj sektöründe yatırıma uygun bir firma niteliğine sahiptir.",
+            "recommended_action": "monitor",
+            "score": 78
+        }
+    },
+    {
+        "source": {
+            "publisher": "yahoo",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/shenandoah-telecommunications-company-q1-2026-204942025.html",
+            "retrieved_at_utc": "2026-05-03T04:55:14.075835+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Shenandoah Telecommunications Company, Q1 2026 dönemini değerlendirmek için açıklamış, lokasyondaki stratejik kararların sektöre olan etkisi ve yatırımın ön plana çıkardığı konular.",
+            "event_type": "new_plant",
+            "title": "Shenandoah Telecommunications Company Q1 2026 Earnings Call Summary"
+        },
+        "analysis": {
+            "sentiment": "positive",
+            "risks": [],
+            "butterfly_effect": "Yatırımın rakipler veya tedarik zinciri üzerindeki 1-2 cümlelik olası yansımaları potansiyel rakipler arasında rekabetin artması olabilir."
+        },
+        "entities": {
+            "company": {
+                "name": "Shenandoah Telecommunications Company"
+            },
+            "from_location": "null",
+            "to_location": "null"
+        },
+        "industry": {
+            "sector": "telecommunications",
+            "equipment_keywords": [
+                "telecom",
+                "infrastructure"
+            ]
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Lokasyon stratejisi ve yatırım planı detayları analiz edilebilir.",
+            "recommended_action": "monitor",
+            "score": 66
+        }
     }
 ]

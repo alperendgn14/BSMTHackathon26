@@ -1,15 +1,5 @@
 [
     {
-        "id": "9deddf43",
-        "url": "https://news.google.com/rss/search?q=factory+relocation+investment+automotive+europe+2026&hl=en-US&gl=US&ceid=US:en",
-        "name": "hnm"
-    },
-    {
-        "id": "831f9a64",
-        "url": "https://feeds.a.dj.com/rss/WSJcomUSBusiness.xml",
-        "name": "wsj"
-    },
-    {
         "id": "53b068de",
         "url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10001147",
         "name": "cnbc"
@@ -23,5 +13,10 @@
         "id": "e1286e25",
         "url": "https://rss.nytimes.com/services/xml/rss/nyt/Business.xml",
         "name": "new york times"
+    },
+    {
+        "id": "6fea9353",
+        "url": "https://finance.yahoo.com/news/rss",
+        "name": "yahoo"
     }
 ]
