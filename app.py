@@ -403,7 +403,7 @@ SORU: {user_question}"""
                 {"role": "system", "content": "You are a precise, context-aware Q&A assistant."},
                 {"role": "user", "content": prompt}
             ],
-            model="mixtral-8x7b-32768", # Hızlı ve token dostu model
+            model="gemma2-9b-it", # Hızlı ve token dostu model
         )
         answer = chat_completion.choices[0].message.content
         return jsonify({"answer": answer}), 200
@@ -443,7 +443,7 @@ YATIRIM BAĞLAMI:
                 {"role": "system", "content": "Sen usta bir B2B satış yöneticisisin. Sadece mail taslağı metni üretirsin."},
                 {"role": "user", "content": prompt}
             ],
-            model="mixtral-8x7b-32768", # Güçlü model
+            model="gemma2-9b-it", # Güçlü model
         )
         return jsonify({"email_draft": chat_completion.choices[0].message.content})
     except Exception as e:
