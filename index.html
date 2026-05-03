@@ -41,9 +41,7 @@
             }
         }
 
-        #printArea {
-            display: none;
-        }
+        #printArea { display: none; }
 
         /* KART BÜYÜME (SCALE) EFEKTİ */
         .news-card {
@@ -54,9 +52,7 @@
             will-change: transform, box-shadow;
         }
 
-        .dark .news-card {
-            border-color: #334155;
-        }
+        .dark .news-card { border-color: #334155; }
 
         .news-card:hover {
             transform: scale(1.025);
@@ -66,9 +62,7 @@
             position: relative;
         }
 
-        #scoreCircle {
-            transition: stroke-dasharray 0.8s ease-out, color 0.8s ease-out;
-        }
+        #scoreCircle { transition: stroke-dasharray 0.8s ease-out, color 0.8s ease-out; }
 
         /* MODAL FADE VE ZOOM ANİMASYONLARI */
         .modal-overlay {
@@ -95,10 +89,7 @@
         }
 
         /* Harita Karanlık Mod Ayarı */
-        .leaflet-container {
-            z-index: 10;
-            border-radius: 0.75rem;
-        }
+        .leaflet-container { z-index: 10; border-radius: 0.75rem; }
 
         .dark .leaflet-layer,
         .dark .leaflet-control-zoom-in,
@@ -107,27 +98,22 @@
             filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
         }
 
-        /* Sticky Panel Scrollbar */
+        /* Scrollbar Ayarları */
         #stickySidebar::-webkit-scrollbar,
-        #chatHistory::-webkit-scrollbar {
-            width: 4px;
-        }
+        #chatHistory::-webkit-scrollbar,
+        #terminalLogs::-webkit-scrollbar { width: 4px; }
 
         #stickySidebar::-webkit-scrollbar-track,
-        #chatHistory::-webkit-scrollbar-track {
-            background: transparent;
-        }
+        #chatHistory::-webkit-scrollbar-track,
+        #terminalLogs::-webkit-scrollbar-track { background: transparent; }
 
         #stickySidebar::-webkit-scrollbar-thumb,
-        #chatHistory::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
+        #chatHistory::-webkit-scrollbar-thumb,
+        #terminalLogs::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
 
         .dark #stickySidebar::-webkit-scrollbar-thumb,
-        .dark #chatHistory::-webkit-scrollbar-thumb {
-            background: #475569;
-        }
+        .dark #chatHistory::-webkit-scrollbar-thumb,
+        .dark #terminalLogs::-webkit-scrollbar-thumb { background: #475569; }
 
         /* Neon Navigasyon */
         @keyframes pan-gradient {
@@ -151,7 +137,7 @@
             border-bottom: 1px solid rgba(96, 165, 250, 0.6);
         }
 
-        /* SİBER GÜVENLİK (CYBER-SCAN) ANİMASYONU */
+        /* SİBER GÜVENLİK ANİMASYONU */
         @keyframes scanline {
             0% { transform: translateY(-100%); }
             100% { transform: translateY(100%); }
@@ -164,34 +150,18 @@
         }
 
         .cyber-bg::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(16, 185, 129, 0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(16, 185, 129, 0.08) 1px, transparent 1px);
-            background-size: 15px 15px;
-            opacity: 0.8;
-            z-index: 1;
+            content: ""; position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(16, 185, 129, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(16, 185, 129, 0.08) 1px, transparent 1px);
+            background-size: 15px 15px; opacity: 0.8; z-index: 1;
         }
 
         .cyber-bg::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
+            content: ""; position: absolute; top: 0; left: 0; right: 0; height: 100%;
             background: linear-gradient(to bottom, transparent, rgba(16, 185, 129, 0.25) 50%, transparent);
-            animation: scanline 4s linear infinite;
-            z-index: 2;
-            pointer-events: none;
+            animation: scanline 4s linear infinite; z-index: 2; pointer-events: none;
         }
 
-        .cyber-content {
-            position: relative;
-            z-index: 10;
-        }
+        .cyber-content { position: relative; z-index: 10; }
     </style>
 </head>
 
@@ -227,7 +197,7 @@
     <div class="container mx-auto p-4 md:p-8 flex flex-col md:flex-row gap-8 relative">
 
         <!-- SIDEBAR -->
-        <aside id="stickySidebar" class="md:w-1/3 lg:w-1/4 space-y-8 sticky top-24 self-start h-fit max-h-[calc(100vh-7rem)] overflow-y-auto pr-1">
+        <aside id="stickySidebar" class="md:w-1/3 lg:w-1/4 space-y-6 sticky top-24 self-start h-fit max-h-[calc(100vh-7rem)] overflow-y-auto pr-1">
 
             <!-- 1. FİLTRELEME KARTİ -->
             <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 transition-colors">
@@ -294,7 +264,7 @@
                         <input type="range" id="scoreRange" min="0" max="100" value="0" oninput="updateScoreVal()" class="w-full h-2 bg-gray-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-600">
                     </div>
 
-                    <!-- YENİ: SESLİ BRİFİNG BUTONU (F12) -->
+                    <!-- SESLİ BRİFİNG BUTONU -->
                     <div class="pt-4 border-t border-gray-100 dark:border-slate-700">
                         <button onclick="playVoiceBriefing()" id="voiceBtn" class="w-full bg-purple-500/10 hover:bg-purple-500/20 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-900/50 p-3 rounded-xl text-sm font-bold transition flex items-center justify-center gap-2 shadow-sm">
                             <i class="fas fa-headphones"></i> Sabah Brifingini Dinle
@@ -323,12 +293,30 @@
                     <i class="fas fa-satellite text-blue-500"></i>
                     <h2 class="text-xs font-bold text-gray-400 dark:text-slate-500 uppercase tracking-widest">Lokasyon Radarı</h2>
                 </div>
-                <div id="map" class="w-full h-48 border border-gray-200 dark:border-slate-600 rounded-xl relative">
+                <div id="map" class="w-full h-40 border border-gray-200 dark:border-slate-600 rounded-xl relative">
                     <div id="mapLoading" class="hidden absolute inset-0 bg-white/70 dark:bg-slate-800/70 z-20 flex items-center justify-center rounded-xl">
                         <i class="fas fa-spinner fa-spin text-blue-600 text-2xl"></i>
                     </div>
                 </div>
             </div>
+
+            <!-- YENİ 4: TERMİNAL / SİSTEM NABZI KUTUSU -->
+            <div class="bg-[#050505] p-4 rounded-2xl shadow-inner border border-gray-800 relative overflow-hidden flex flex-col h-40">
+                <div class="flex items-center justify-between mb-2 pb-2 border-b border-gray-800">
+                    <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-widest flex items-center gap-2">
+                        <i class="fas fa-terminal"></i> Sistem Nabzı
+                    </span>
+                    <span class="flex gap-1.5">
+                        <div class="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></div>
+                    </span>
+                </div>
+                <div id="terminalLogs" class="flex-1 overflow-y-auto text-[10px] font-mono text-emerald-400 space-y-1.5 pr-1 scroll-smooth">
+                    <div><span class="text-gray-500">[SYSTEM]</span> Sistem başlatıldı. Ajan beklemede...</div>
+                </div>
+            </div>
+
         </aside>
 
         <!-- Haber Listesi -->
@@ -371,15 +359,12 @@
             <div class="p-6 border-b dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50">
                 <h3 class="font-bold text-xl text-slate-800 dark:text-slate-100" id="detailTitle">Analiz Detayı</h3>
                 <div class="flex items-center gap-3">
-                    <!-- YENİ: MAİL TASLAĞI BUTONU -->
                     <button onclick="generateMailDraft()" id="mailDraftBtn" class="bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-900/50 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-2 shadow-sm">
                         <i class="fas fa-envelope"></i> Aksiyon: Mail Yaz
                     </button>
-                    <!-- CSV İNDİR BUTONU -->
                     <button onclick="exportToCSV()" class="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/50 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-2 shadow-sm">
                         <i class="fas fa-file-csv"></i> CSV İndir
                     </button>
-                    <!-- PDF İNDİR BUTONU -->
                     <button onclick="exportToPDF()" class="bg-red-500/10 hover:bg-red-500/20 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900/50 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-2 shadow-sm">
                         <i class="fas fa-file-pdf"></i> PDF İndir
                     </button>
@@ -416,6 +401,15 @@
                                 </h4>
                                 <ul id="detailRisks" class="text-xs text-rose-700 dark:text-rose-300 list-disc list-inside space-y-1"></ul>
                             </div>
+
+                            <!-- YENİ 3: KELEBEK ETKİSİ KUTUSU -->
+                            <div class="mt-4 bg-indigo-50 dark:bg-indigo-900/10 p-5 rounded-2xl border border-indigo-100 dark:border-indigo-800/30 transition-colors">
+                                <h4 class="text-[10px] font-black text-indigo-600 dark:text-indigo-400 uppercase mb-2 tracking-widest">
+                                    <i class="fas fa-project-diagram"></i> Kelebek Etkisi (Rakip & Sektör Simülasyonu)
+                                </h4>
+                                <p id="detailButterfly" class="text-xs text-indigo-700 dark:text-indigo-300 leading-relaxed font-medium italic">-</p>
+                            </div>
+
                         </div>
                         
                         <div class="grid grid-cols-2 gap-4">
@@ -458,7 +452,7 @@
                         </div>
                     </div>
 
-                    <!-- YENİ: MAİL TASLAĞI GÖSTERİM ALANI -->
+                    <!-- MAİL TASLAĞI GÖSTERİM ALANI -->
                     <div id="emailDraftContainer" class="mt-4 p-5 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/30 rounded-2xl hidden relative">
                         <button onclick="copyEmail()" class="absolute top-3 right-3 text-blue-500 hover:text-blue-700 transition" title="Kopyala">
                             <i class="fas fa-copy text-lg"></i>
@@ -538,9 +532,24 @@
             "india": [20.5937, 78.9629], "hindistan": [20.5937, 78.9629]
         };
 
-        // YENİ: Sesli Okuma Motoru
         let synth = window.speechSynthesis;
         let isSpeaking = false;
+
+        // YENİ 4: TERMİNAL LOG FONKSİYONU
+        function addSystemLog(msg) {
+            const logs = document.getElementById('terminalLogs');
+            const time = new Date().toLocaleTimeString('tr-TR', { hour12: false });
+            const logEntry = document.createElement('div');
+            logEntry.innerHTML = `<span class="text-gray-600">[${time}]</span> <span class="text-emerald-400">> ${msg}</span>`;
+            logs.appendChild(logEntry);
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        // Rastgele terminal hareketi (Jüri şovu)
+        setInterval(() => {
+            const msgs = ["Global ağlar dinleniyor...", "Veri bütünlüğü doğrulanıyor...", "Hedef rotalar optimize ediliyor...", "Yeni yatırımlar taranıyor...", "SOC protokolleri güncel."];
+            if (Math.random() > 0.6) addSystemLog(msgs[Math.floor(Math.random() * msgs.length)]);
+        }, 8000);
 
         function getSmartLocations(item) {
             let fromLoc = item.entities?.from_location;
@@ -554,12 +563,7 @@
             if (!fromLoc && !toLoc) {
                 const textToScan = `${item.article?.title || ''} ${item.article?.text_summary_tr || ''} ${item.article?.summary_tr || ''}`.toLowerCase();
                 const countries = {
-                    "türkiye": "Türkiye", "almanya": "Almanya", "polonya": "Polonya",
-                    "abd": "ABD", "amerika": "ABD", "çin": "Çin", "fransa": "Fransa",
-                    "ingiltere": "İngiltere", "italya": "İtalya", "japonya": "Japonya",
-                    "meksika": "Meksika", "ispanya": "İspanya", "romanya": "Romanya",
-                    "macaristan": "Macaristan", "hindistan": "Hindistan", "fas": "Fas",
-                    "sırbistan": "Sırbistan", "çekya": "Çekya", "vietnam": "Vietnam"
+                    "türkiye": "Türkiye", "almanya": "Almanya", "polonya": "Polonya", "abd": "ABD", "amerika": "ABD", "çin": "Çin", "fransa": "Fransa", "ingiltere": "İngiltere", "italya": "İtalya", "japonya": "Japonya", "meksika": "Meksika", "ispanya": "İspanya", "romanya": "Romanya", "macaristan": "Macaristan", "hindistan": "Hindistan", "fas": "Fas", "sırbistan": "Sırbistan", "çekya": "Çekya", "vietnam": "Vietnam"
                 };
 
                 for (const [key, value] of Object.entries(countries)) {
@@ -582,6 +586,7 @@
         function initMap() {
             map = L.map('map', { zoomControl: false }).setView([48.8566, 2.3522], 3);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            addSystemLog("Harita motoru (Leaflet) yüklendi.");
         }
 
         function updateHeatmap() {
@@ -658,14 +663,17 @@
         });
 
         async function fetchNews() {
+            addSystemLog("API'den haber akışı isteniyor...");
             const c = document.getElementById('newsContainer'), l = document.getElementById('loading');
             l.classList.remove('hidden'); c.classList.add('opacity-40');
             try {
                 const res = await fetch(`${API_BASE}/news`);
                 allNewsData = await res.json();
+                addSystemLog(`${allNewsData.length} kayıt veritabanından çekildi.`);
                 applyFilters();
             }
-            catch (e) { } finally { l.classList.add('hidden'); c.classList.remove('opacity-40'); }
+            catch (e) { addSystemLog("HATA: Haberler çekilemedi!"); } 
+            finally { l.classList.add('hidden'); c.classList.remove('opacity-40'); }
         }
 
         function toggleFavorite(event, uniqueId) {
@@ -749,6 +757,7 @@
             }
 
             currentNewsData = filtered;
+            addSystemLog(`Filtreler uygulandı. Bulunan sonuç: ${filtered.length}`);
             renderNews();
         }
 
@@ -808,8 +817,8 @@
         function showDetails(index) {
             const item = currentNewsData[index]; if (!item) return;
             currentDetailIndex = index;
+            addSystemLog(`Hedef analiz ediliyor: ${item.entities?.company?.name || 'Bilinmeyen Firma'}`);
 
-            // Her açılışta Mail Taslağı ekranını sıfırla ve gizle
             document.getElementById('emailDraftContainer').classList.add('hidden');
             document.getElementById('emailDraftText').innerHTML = '';
 
@@ -818,6 +827,10 @@
             document.getElementById('detailCompany').innerText = item.entities?.company?.name || "Bilinmiyor";
             document.getElementById('detailCapex').innerText = item.signals?.capex_usd ? `$${item.signals.capex_usd.toLocaleString()}` : "Veri Yok";
             
+            // YENİ 3: KELEBEK ETKİSİ DOM GÜNCELLEMESİ
+            const butterflyText = item.analysis?.butterfly_effect || "Kelebek etkisi verisi bulunamadı. Lütfen yeni veriler için backend sistemini güncelleyin.";
+            document.getElementById('detailButterfly').innerText = butterflyText;
+
             document.getElementById('detailSector').innerText = item.industry?.sector || "Bilinmiyor";
             document.getElementById('timelineEnd').innerText = item.signals?.timeline || "Belirsiz";
             
@@ -884,13 +897,14 @@
             document.getElementById('emailDraftContainer').classList.add('hidden');
         }
 
-        // --- YENİ: MAİL TASLAĞI OLUŞTURMA (B2B SATIŞ) ---
         async function generateMailDraft() {
             if (currentDetailIndex === null) return;
             const item = currentNewsData[currentDetailIndex];
             const btn = document.getElementById('mailDraftBtn');
             const container = document.getElementById('emailDraftContainer');
             const textArea = document.getElementById('emailDraftText');
+
+            addSystemLog(`Llama 70B B2B temas maili yazıyor...`);
 
             const locs = getSmartLocations(item);
             const contextText = `Haber: ${item.article?.title}\nŞirket: ${item.entities?.company?.name || 'Bilinmiyor'}\nRota: ${formatRoute(locs.from, locs.to)}\nSektör: ${item.industry?.sector || 'Bilinmiyor'}\nCAPEX: ${item.signals?.capex_usd ? '$' + item.signals.capex_usd.toLocaleString() : 'Bilinmiyor'}`;
@@ -914,8 +928,9 @@
                     let formattedDraft = data.email_draft.replace(/\n/g, '<br>');
                     formattedDraft = formattedDraft.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
                     textArea.innerHTML = formattedDraft;
+                    addSystemLog(`Mail taslağı başarıyla oluşturuldu.`);
                 } else {
-                    textArea.innerHTML = '<span class="text-red-500">Mail taslağı oluşturulamadı. App.py route ayarlarınızı kontrol edin.</span>';
+                    textArea.innerHTML = '<span class="text-red-500">Mail taslağı oluşturulamadı.</span>';
                 }
             } catch (e) {
                 textArea.innerHTML = '<span class="text-red-500">Sunucu ile bağlantı koptu.</span>';
@@ -925,15 +940,14 @@
             }
         }
 
-        // --- YENİ: MAİLİ PANOYA KOPYALAMA ---
         function copyEmail() {
             const textToCopy = document.getElementById('emailDraftText').innerText;
             navigator.clipboard.writeText(textToCopy).then(() => {
                 alert("Mail taslağı başarıyla kopyalandı! Outlook/Gmail'e yapıştırabilirsiniz.");
+                addSystemLog("Mail panoya kopyalandı.");
             }).catch(err => { console.error('Kopyalama hatası: ', err); });
         }
 
-        // --- YENİ: SESLİ BRİFİNG MOTORU ---
         function playVoiceBriefing() {
             const btn = document.getElementById('voiceBtn');
             if (isSpeaking) {
@@ -941,6 +955,7 @@
                 isSpeaking = false;
                 btn.innerHTML = '<i class="fas fa-headphones"></i> Sabah Brifingini Dinle';
                 btn.classList.remove('animate-pulse');
+                addSystemLog("Sesli brifing durduruldu.");
                 return;
             }
 
@@ -949,6 +964,7 @@
                 return;
             }
 
+            addSystemLog("Web Speech API aktif edildi. Brifing okunuyor...");
             const topNews = currentNewsData.slice(0, 3);
             let textToRead = "BIOS Yapay Zeka Sistemine hoş geldiniz. İşte bugünün öne çıkan endüstriyel yatırım fırsatları... ";
             
@@ -977,6 +993,7 @@
                 isSpeaking = false;
                 btn.innerHTML = '<i class="fas fa-headphones"></i> Sabah Brifingini Dinle';
                 btn.classList.remove('animate-pulse');
+                addSystemLog("Sesli brifing tamamlandı.");
             };
             
             utterance.onerror = () => {
@@ -988,10 +1005,10 @@
             synth.speak(utterance);
         }
 
-        // --- PDF ÇIKTISI ---
         function exportToPDF() {
             if (currentDetailIndex === null) return;
             const item = currentNewsData[currentDetailIndex];
+            addSystemLog("PDF Raporu derleniyor...");
             
             const locs = getSmartLocations(item);
             const routeText = formatRoute(locs.from, locs.to);
@@ -1056,10 +1073,10 @@
             window.print();
         }
 
-        // --- CSV ÇIKTISI ---
         function exportToCSV() {
             if (currentDetailIndex === null) return;
             const item = currentNewsData[currentDetailIndex];
+            addSystemLog("Veriler CSV formatına dönüştürülüyor...");
             
             const locs = getSmartLocations(item);
             const routeText = formatRoute(locs.from, locs.to);
@@ -1087,7 +1104,6 @@
             ];
 
             const csvContent = headers.join(",") + "\n" + row.join(",");
-
             const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement("a");
             const url = URL.createObjectURL(blob);
@@ -1106,6 +1122,7 @@
             const question = input.value.trim();
             if (!question) return;
 
+            addSystemLog("RAG Modülü: Ajan ile sohbet başlatıldı.");
             const chatHistory = document.getElementById('chatHistory'), btn = document.getElementById('chatBtn'), item = currentNewsData[currentDetailIndex];
 
             const locs = getSmartLocations(item);
@@ -1146,6 +1163,7 @@
         function toggleRssModal() { const modal = document.getElementById('rssModal'); if (modal.classList.contains('active')) { modal.classList.remove('active'); } else { modal.classList.add('active'); } }
 
         async function triggerCollector() {
+            addSystemLog("DİKKAT: Ana tarama protokolü başlatılıyor...");
             const btn = document.getElementById('scanBtn'); const originalText = btn.innerHTML;
             btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin text-yellow-400"></i> <span class="hidden md:inline">Analiz...</span>';
             try { await fetch(`${API_BASE}/start-collector`, { method: 'POST' }); alert("Tarama Başladı"); setTimeout(() => { fetchNews(); btn.disabled = false; btn.innerHTML = originalText; }, 8000); }
@@ -1155,6 +1173,7 @@
         async function addRss() {
             const name = document.getElementById('rssNameInput').value.trim(), url = document.getElementById('rssUrlInput').value.trim();
             if (!url) return;
+            addSystemLog(`Yeni RSS Kaynağı eklendi: ${name}`);
             try { const res = await fetch(`${API_BASE}/rss`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name || "Kaynak", url: url }) }); if (res.ok) { document.getElementById('rssNameInput').value = ''; document.getElementById('rssUrlInput').value = ''; fetchRssSources(); } } catch (e) { }
         }
 

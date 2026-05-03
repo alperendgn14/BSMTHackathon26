@@ -96,7 +96,8 @@ Sadece saf JSON döndür.
   }},
   "analysis": {{
     "sentiment": "positive | negative | neutral",
-    "risks": ["Risk 1", "Risk 2"]
+    "risks": ["Risk 1", "Risk 2"],
+    "butterfly_effect": "Yatırımın rakipler veya tedarik zinciri üzerindeki 1-2 cümlelik olası yansımaları"
   }},
   "entities": {{
     "company": {{"name": "string", "ticker": "null"}},
