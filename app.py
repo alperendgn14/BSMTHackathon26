@@ -459,8 +459,8 @@ def delete_news():
     news_id = data.get("id")
     
     try:
-        if os.path.exists('database.json'):
-            with open('database.json', 'r', encoding='utf-8') as f:
+        if os.path.exists('rss_data.json'):
+            with open('rss_data.json', 'r', encoding='utf-8') as f:
                 news_list = json.load(f)
         else:
             return jsonify({"error": "Veritabanı bulunamadı."}), 404
@@ -473,7 +473,7 @@ def delete_news():
         ]
         
         # Temizlenmiş listeyi kaydet
-        with open('database.json', 'w', encoding='utf-8') as f:
+        with open('rss_data.json', 'w', encoding='utf-8') as f:
             json.dump(filtered_news, f, ensure_ascii=False, indent=2)
             
         return jsonify({"status": "success", "message": "Haber veritabanından kalıcı olarak yok edildi."})
