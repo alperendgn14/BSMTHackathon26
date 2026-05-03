@@ -443,7 +443,7 @@ YATIRIM BAĞLAMI:
                 {"role": "system", "content": "Sen usta bir B2B satış yöneticisisin. Sadece mail taslağı metni üretirsin."},
                 {"role": "user", "content": prompt}
             ],
-            model="llama-3.1-8b-instant", # Güçlü model
+            model="llama-3.3-70b-versatile", # Güçlü model
         )
         return jsonify({"email_draft": chat_completion.choices[0].message.content})
     except Exception as e:
