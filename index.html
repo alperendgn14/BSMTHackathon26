@@ -101,19 +101,23 @@
         /* Scrollbar Ayarları */
         #stickySidebar::-webkit-scrollbar,
         #chatHistory::-webkit-scrollbar,
-        #terminalLogs::-webkit-scrollbar { width: 4px; }
+        #terminalLogs::-webkit-scrollbar,
+        #commentsList::-webkit-scrollbar { width: 4px; }
 
         #stickySidebar::-webkit-scrollbar-track,
         #chatHistory::-webkit-scrollbar-track,
-        #terminalLogs::-webkit-scrollbar-track { background: transparent; }
+        #terminalLogs::-webkit-scrollbar-track,
+        #commentsList::-webkit-scrollbar-track { background: transparent; }
 
         #stickySidebar::-webkit-scrollbar-thumb,
         #chatHistory::-webkit-scrollbar-thumb,
-        #terminalLogs::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        #terminalLogs::-webkit-scrollbar-thumb,
+        #commentsList::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
 
         .dark #stickySidebar::-webkit-scrollbar-thumb,
         .dark #chatHistory::-webkit-scrollbar-thumb,
-        .dark #terminalLogs::-webkit-scrollbar-thumb { background: #475569; }
+        .dark #terminalLogs::-webkit-scrollbar-thumb,
+        .dark #commentsList::-webkit-scrollbar-thumb { background: #475569; }
 
         /* Neon Navigasyon */
         @keyframes pan-gradient {
@@ -477,16 +481,22 @@
                         </div>
                     </div>
 
-                    <!-- YENİ 5: ANALİST NOTLARI (YORUMLAR) BÖLÜMÜ -->
+                    <!-- ANALİST NOTLARI (YORUMLAR) BÖLÜMÜ -->
                     <div class="mt-8 pt-6 border-t dark:border-slate-700 flex flex-col">
                         <h4 class="text-xs font-black text-slate-400 uppercase mb-3 tracking-widest flex items-center gap-2">
                             <i class="fas fa-comments text-emerald-500"></i> Analist Notları (Team Notes)
                         </h4>
-                        <div id="commentsList" class="space-y-3 mb-4 max-h-40 overflow-y-auto pr-2 text-sm scroll-smooth">
-                            <!-- Yorumlar buraya düşecek -->
+                        <div id="commentsList" class="space-y-3 mb-4 max-h-40 overflow-y-auto pr-2 text-sm scroll-smooth"></div>
+                        
+                        <!-- ANALİST BİLGİ FORMU -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-2">
+                            <input type="text" id="analystFirstName" placeholder="Ad" class="p-2 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg text-xs outline-none focus:ring-1 focus:ring-emerald-500 dark:text-slate-100">
+                            <input type="text" id="analystLastName" placeholder="Soyad" class="p-2 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg text-xs outline-none focus:ring-1 focus:ring-emerald-500 dark:text-slate-100">
+                            <input type="email" id="analystEmail" placeholder="Kurumsal Mail" class="p-2 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg text-xs outline-none focus:ring-1 focus:ring-emerald-500 dark:text-slate-100">
                         </div>
+                        
                         <div class="flex gap-2">
-                            <input type="text" id="commentInput" placeholder="Bu yatırım stratejik, yakından izleyelim..." class="flex-1 p-3 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-600 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 text-sm dark:text-slate-100 transition-colors" onkeypress="if(event.key === 'Enter') submitComment()">
+                            <input type="text" id="commentInput" placeholder="Analiz notunuzu buraya girin..." class="flex-1 p-3 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-600 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 text-sm dark:text-slate-100 transition-colors" onkeypress="if(event.key === 'Enter') submitComment()">
                             <button onclick="submitComment()" id="commentBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-3 rounded-xl font-bold transition-colors shadow-md">
                                 <i class="fas fa-plus"></i> Ekle
                             </button>
@@ -697,17 +707,14 @@
             localStorage.setItem('bios_favorites', JSON.stringify(favorites)); applyFilters();
         }
 
-        // --- SİLME FONKSİYONU ---
         async function deleteNewsItem(event, index) {
-            event.stopPropagation(); // Modalın açılmasını engeller
+            event.stopPropagation(); 
             
             if(!confirm("Bu haberi veritabanından TAMAMEN silmek istediğinize emin misiniz?")) return;
 
-            // Haberi diziden (array) tam isabetle bul
             const itemToDelete = currentNewsData[index];
             const uniqueId = itemToDelete.article?.title || itemToDelete.source?.url;
 
-            // 1. Ekrandan Anında Sil
             allNewsData = allNewsData.filter(i => {
                 const id = i.article?.title || i.source?.url;
                 return id !== uniqueId;
@@ -716,7 +723,6 @@
             
             addSystemLog(`Hedef veri yokediliyor: ${uniqueId.substring(0, 20)}...`);
 
-            // 2. Arka Uca (Render'a) Emri Gönder
             try {
                 const res = await fetch(`${API_BASE}/news`, {
                     method: 'DELETE',
@@ -942,7 +948,6 @@
             document.getElementById('chatInput').value = '';
             document.getElementById('detailsModal').classList.add('active');
 
-            // Yorumları Ekrana Çiz
             renderComments(item.comments || []);
             
             focusMapOnIndex(index);
@@ -1238,7 +1243,6 @@
         }
         async function deleteRss(id) { if (confirm("Silmek istiyor musunuz?")) { try { const res = await fetch(`${API_BASE}/rss/${id}`, { method: 'DELETE' }); if (res.ok) fetchRssSources(); } catch (e) { } } }
 
-        // --- YENİ EKLENEN: YORUM (COMMENT) FONKSİYONLARI ---
         function renderComments(comments) {
             const list = document.getElementById('commentsList');
             if (!comments || comments.length === 0) {
@@ -1249,7 +1253,8 @@
                 <div class="bg-slate-50 dark:bg-slate-900/80 p-3 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm relative group">
                     <div class="flex justify-between items-center mb-1">
                         <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
-                            <i class="fas fa-user-shield"></i> ${c.author}
+                            <i class="fas fa-user-shield"></i> ${c.author} 
+                            <span title="${c.email || ''}"><i class="fas fa-envelope ml-1 opacity-50"></i></span>
                         </span>
                         <span class="text-[9px] text-slate-400 font-mono">${new Date(c.timestamp).toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'})}</span>
                     </div>
@@ -1261,8 +1266,19 @@
 
         async function submitComment() {
             const input = document.getElementById('commentInput');
+            const fNameInput = document.getElementById('analystFirstName');
+            const lNameInput = document.getElementById('analystLastName');
+            const emailInput = document.getElementById('analystEmail');
+
             const text = input.value.trim();
-            if (!text || currentDetailIndex === null) return;
+            const fName = fNameInput.value.trim();
+            const lName = lNameInput.value.trim();
+            const email = emailInput.value.trim();
+
+            if (!text || !fName || currentDetailIndex === null) {
+                alert("Lütfen adınızı ve yorumunuzu girin.");
+                return;
+            }
 
             const btn = document.getElementById('commentBtn');
             const item = currentNewsData[currentDetailIndex];
@@ -1275,16 +1291,22 @@
                 const res = await fetch(`${API_BASE}/news/comment`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id: uniqueId, comment: text })
+                    body: JSON.stringify({ 
+                        id: uniqueId, 
+                        comment: text,
+                        first_name: fName,
+                        last_name: lName,
+                        email: email
+                    })
                 });
                 const data = await res.json();
                 
                 if (res.ok && data.status === "success") {
                     if (!item.comments) item.comments = [];
-                    item.comments.push(data.comment); // Ekrandaki belleği güncelle
-                    renderComments(item.comments);    // Listeyi yeniden çiz
-                    input.value = '';
-                    addSystemLog("Yeni analist notu sisteme işlendi.");
+                    item.comments.push(data.comment);
+                    renderComments(item.comments);
+                    input.value = ''; 
+                    addSystemLog(`Analist ${fName} sisteme not bıraktı.`);
                 } else {
                     alert("Yorum eklenemedi: " + (data.error || "Hata"));
                 }

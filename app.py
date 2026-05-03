@@ -486,13 +486,16 @@ def delete_news():
 
 @app.route('/api/news/comment', methods=['POST', 'OPTIONS'])
 def add_comment():
-    # CORS güvenlik onayı
     if request.method == 'OPTIONS':
         return jsonify({"status": "ok"}), 200
 
     data = request.json
     news_id = str(data.get("id", "")).strip()
     comment_text = data.get("comment", "").strip()
+    # Yeni dinamik alanlar
+    first_name = data.get("first_name", "Anonim").strip()
+    last_name = data.get("last_name", "").strip()
+    email = data.get("email", "").strip()
 
     if not news_id or not comment_text:
         return jsonify({"error": "Eksik veri"}), 400
@@ -508,15 +511,15 @@ def add_comment():
             except json.JSONDecodeError:
                 pass
 
-        # Yorum objesi oluşturuluyor (Fearr imzasıyla)
+        # Dinamik yazar bilgisiyle yorum objesi
         comment_obj = {
             "text": comment_text,
             "timestamp": datetime.now(timezone.utc).isoformat(),
-            "author": "Kıdemli Analist (Fearr)" # Buraya kendi adını/takımını yazabilirsin
+            "author": f"{first_name} {last_name}".strip(),
+            "email": email
         }
 
         updated = False
-        # Haberi bul ve yorumu içine göm
         for n in news_list:
             title = str(n.get('article', {}).get('title', '')).strip()
             url = str(n.get('source', {}).get('url', '')).strip()
@@ -531,11 +534,10 @@ def add_comment():
             with open('rss_data.json', 'w', encoding='utf-8') as f:
                 json.dump(news_list, f, ensure_ascii=False, indent=2)
             return jsonify({"status": "success", "comment": comment_obj})
-        else:
-            return jsonify({"error": "Haber veritabanında bulunamadı."}), 404
-
+        
+        return jsonify({"error": "Haber bulunamadı."}), 404
     except Exception as e:
-        print(f"Yorum Ekleme Hatası: {e}")
+        print(f"Yorum Hatası: {e}")
         return jsonify({"error": "Sunucu hatası."}), 500
 
 
