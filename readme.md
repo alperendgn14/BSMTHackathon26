@@ -37,15 +37,13 @@ Projeyi yerel ortamda çalıştırmak için Groq Cloud üzerinden alınmış üc
 ## Kurulum Adımları
 Projeyi kendi bilgisayarınızda çalıştırmak için aşağıdaki adımları sırasıyla izleyin:
 
-**Adım 1: Depoyu Klonlayın**
+Adım 1: Depoyu Klonlayın
 Terminalinizi açın ve projeyi yerel bilgisayarınıza indirin:
-```bash
 git clone <repo-linki>
 cd <repo-klasoru>
 
 Adım 2: Gerekli Kütüphaneleri Yükleyin
 Python ortamınızda projenin sorunsuz çalışması için gerekli olan bağımlılıkları kurun:
-```bash
 pip install -r requirements.txt
 
 Adım 3: Ortam Değişkenlerini (API Anahtarı) Ayarlayın
@@ -55,7 +53,6 @@ GROQ_API_KEY=gsk_sizin_api_anahtariniz_buraya
 
 Adım 4: Uygulamayı Başlatın
 Bağımlılıklar ve API anahtarı hazır olduğunda Flask sunucusunu ve otonom tarama motorunu başlatın:
-```bash
 python app.py
 
 Örnek RSS Listesi (Test Kaynakları)
