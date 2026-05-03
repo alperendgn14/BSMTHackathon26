@@ -23,6 +23,29 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
+        /* YAZDIRMA (PDF) GÖRÜNÜM AYARLARI */
+        @media print {
+            body > *:not(#printArea) {
+                display: none !important;
+            }
+            #printArea {
+                display: block !important;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            /* Renklerin ve arka planların PDF'e geçmesi için */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        #printArea {
+            display: none;
+        }
+
         /* KART BÜYÜME (SCALE) EFEKTİ */
         .news-card {
             transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.5s ease;
@@ -109,17 +132,9 @@
 
         /* Neon Navigasyon */
         @keyframes pan-gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .neon-navbar {
@@ -139,13 +154,8 @@
 
         /* SİBER GÜVENLİK (CYBER-SCAN) ANİMASYONU */
         @keyframes scanline {
-            0% {
-                transform: translateY(-100%);
-            }
-
-            100% {
-                transform: translateY(100%);
-            }
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
         }
 
         .cyber-bg {
@@ -188,6 +198,9 @@
 
 <body class="bg-gray-50 text-gray-900 dark:bg-slate-900 dark:text-slate-100">
 
+    <!-- YENİ: PDF Çıktısı İçin Gizli Alan -->
+    <div id="printArea"></div>
+
     <!-- Header -->
     <nav class="neon-navbar text-white p-4 sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
@@ -222,7 +235,7 @@
 
     <div class="container mx-auto p-4 md:p-8 flex flex-col md:flex-row gap-8 relative">
 
-        <!-- SIDEBAR - Tüm kartların arası space-y-8 ile açıldı -->
+        <!-- SIDEBAR -->
         <aside id="stickySidebar"
             class="md:w-1/3 lg:w-1/4 space-y-8 sticky top-24 self-start h-fit max-h-[calc(100vh-7rem)] overflow-y-auto pr-1">
 
@@ -339,6 +352,27 @@
 
         <!-- Haber Listesi -->
         <main class="md:flex-1">
+            
+            <!-- MİNİ KPI İSTATİSTİKLERİ -->
+            <div id="kpiContainer" class="grid grid-cols-3 gap-3 md:gap-4 mb-6">
+                <!-- Toplam Fırsat -->
+                <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 transition-colors flex flex-col items-center justify-center text-center">
+                    <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 uppercase tracking-widest mb-1">Toplam Fırsat</span>
+                    <span id="kpiTotalCount" class="text-2xl md:text-3xl font-black text-slate-800 dark:text-slate-100">0</span>
+                </div>
+                <!-- Tespit Edilen CAPEX -->
+                <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-[0_0_15px_rgba(59,130,246,0.15)] border border-blue-200 dark:border-blue-800/50 transition-colors flex flex-col items-center justify-center text-center relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-blue-50/50 dark:bg-blue-900/20 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/40 transition-colors"></div>
+                    <span class="relative z-10 text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-1">Tespit Edilen CAPEX</span>
+                    <span id="kpiTotalCapex" class="relative z-10 text-2xl md:text-3xl font-black text-blue-600 dark:text-blue-400">$0</span>
+                </div>
+                <!-- Ortalama Skor -->
+                <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 transition-colors flex flex-col items-center justify-center text-center">
+                    <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 uppercase tracking-widest mb-1">Ort. Fit Skoru</span>
+                    <span id="kpiAvgScore" class="text-2xl md:text-3xl font-black text-emerald-500 dark:text-emerald-400">0</span>
+                </div>
+            </div>
+
             <div id="loading" class="hidden flex flex-col items-center py-20">
                 <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
                 <p class="mt-4 text-gray-500 dark:text-slate-400 font-medium italic">Veriler yapay zeka ile
@@ -361,11 +395,16 @@
         class="modal-overlay fixed inset-0 bg-slate-900/80 backdrop-blur-md flex items-center justify-center p-4 z-[110]">
         <div
             class="modal-content bg-white dark:bg-slate-800 rounded-3xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col transition-colors">
-            <div
-                class="p-6 border-b dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50">
+            
+            <div class="p-6 border-b dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50">
                 <h3 class="font-bold text-xl text-slate-800 dark:text-slate-100" id="detailTitle">Analiz Detayı</h3>
-                <button onclick="closeDetails()"
-                    class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 text-3xl">&times;</button>
+                <div class="flex items-center gap-3">
+                    <!-- YENİ: PDF İNDİR BUTONU -->
+                    <button onclick="exportToPDF()" class="bg-red-500/10 hover:bg-red-500/20 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900/50 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-2 shadow-sm">
+                        <i class="fas fa-file-pdf"></i> PDF İndir
+                    </button>
+                    <button onclick="closeDetails()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 text-3xl">&times;</button>
+                </div>
             </div>
 
             <div class="p-8 overflow-y-auto flex-1 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
@@ -395,60 +434,70 @@
                 <div class="md:col-span-2 flex flex-col">
                     <div class="space-y-6 flex-1">
                         <div>
-                            <h4 class="text-xs font-black text-slate-400 uppercase mb-2 tracking-widest">Yapay Zeka
-                                Özeti</h4>
+                            <h4 class="text-xs font-black text-slate-400 uppercase mb-2 tracking-widest">Yapay Zeka Özeti</h4>
                             <p id="detailSummary" class="text-slate-600 dark:text-slate-300 leading-relaxed"></p>
-                            <!-- Bunu detailSummary'nin bittiği <p> etiketinden hemen sonra ekle -->
+                            
                             <div id="riskContainer"
                                 class="mt-4 p-4 bg-rose-50 dark:bg-rose-900/10 border border-rose-100 dark:border-rose-800/30 rounded-2xl hidden">
                                 <h4 class="text-[10px] font-black text-rose-600 uppercase mb-2 tracking-widest">
                                     <i class="fas fa-exclamation-triangle"></i> Potansiyel Risk Analizi
                                 </h4>
-                                <ul id="detailRisks"
-                                    class="text-xs text-rose-700 dark:text-rose-300 list-disc list-inside space-y-1">
-                                    <!-- JS ile burası dolacak -->
-                                </ul>
+                                <ul id="detailRisks" class="text-xs text-rose-700 dark:text-rose-300 list-disc list-inside space-y-1"></ul>
                             </div>
                         </div>
+                        
                         <div class="grid grid-cols-2 gap-4">
-                            <div
-                                class="bg-slate-50 dark:bg-slate-900 p-4 rounded-2xl border dark:border-slate-700 transition-colors">
+                            <div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-2xl border dark:border-slate-700 transition-colors">
                                 <p class="text-[10px] text-slate-400 font-bold uppercase">Şirket</p>
                                 <p id="detailCompany" class="font-bold text-slate-800 dark:text-slate-200">-</p>
                             </div>
-                            <div
-                                class="bg-slate-50 dark:bg-slate-900 p-4 rounded-2xl border dark:border-slate-700 transition-colors">
+                            <div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-2xl border dark:border-slate-700 transition-colors">
                                 <p class="text-[10px] text-slate-400 font-bold uppercase">Tahmini CAPEX</p>
                                 <p id="detailCapex" class="font-bold text-blue-600 dark:text-blue-400">-</p>
                             </div>
-                            <div
-                                class="bg-slate-50 dark:bg-slate-900 p-4 rounded-2xl border dark:border-slate-700 transition-colors">
+                            <div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-2xl border dark:border-slate-700 transition-colors">
                                 <p class="text-[10px] text-slate-400 font-bold uppercase">Rota</p>
                                 <p id="detailRoute" class="font-bold text-slate-800 dark:text-slate-200">-</p>
                             </div>
-                            <div
-                                class="bg-slate-50 dark:bg-slate-900 p-4 rounded-2xl border dark:border-slate-700 transition-colors">
-                                <p class="text-[10px] text-slate-400 font-bold uppercase">Zaman Çizelgesi</p>
-                                <p id="detailTimeline" class="font-bold text-slate-800 dark:text-slate-200">-</p>
+                            <div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-2xl border dark:border-slate-700 transition-colors">
+                                <p class="text-[10px] text-slate-400 font-bold uppercase">Sektör</p>
+                                <p id="detailSector" class="font-bold text-slate-800 dark:text-slate-200">-</p>
                             </div>
+                        </div>
+
+                        <!-- GÖRSEL ZAMAN ÇİZELGESİ (TIMELINE) -->
+                        <div class="mt-2 bg-slate-50 dark:bg-slate-900 p-5 rounded-2xl border dark:border-slate-700 transition-colors relative overflow-hidden">
+                            <h4 class="text-[10px] font-black text-slate-400 uppercase mb-5 tracking-widest"><i class="fas fa-calendar-alt"></i> Projeksiyon / Zaman Çizelgesi</h4>
+                            
+                            <div class="relative flex items-center justify-between w-full px-2">
+                                <div class="absolute left-6 right-6 top-[11px] h-[3px] bg-gray-200 dark:bg-slate-700 rounded-full z-0"></div>
+                                <div class="absolute left-6 top-[11px] h-[3px] bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full z-0 animate-pulse" style="width: 50%;"></div>
+                    
+                                <div class="relative z-10 flex flex-col items-center">
+                                    <div class="w-6 h-6 rounded-full bg-blue-500 border-4 border-slate-50 dark:border-slate-900 shadow"></div>
+                                    <span class="text-[9px] font-bold text-slate-500 mt-2 uppercase">Sinyal Tarihi</span>
+                                    <span id="timelineStart" class="text-xs font-black text-slate-800 dark:text-slate-200 mt-0.5">Bugün</span>
+                                </div>
+                    
+                                <div class="relative z-10 flex flex-col items-center">
+                                    <div class="w-6 h-6 rounded-full bg-emerald-500 border-4 border-slate-50 dark:border-slate-900 shadow shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
+                                    <span class="text-[9px] font-bold text-slate-500 mt-2 uppercase">Hedeflenen</span>
+                                    <span id="timelineEnd" class="text-xs font-black text-emerald-600 dark:text-emerald-400 mt-0.5">Belirsiz</span>
+                                </div>
+                            </div>
+                            <p id="detailTimelineRaw" class="text-[10px] text-center text-slate-400 mt-4 italic bg-white dark:bg-slate-800 py-1.5 rounded-lg border dark:border-slate-700">-</p>
                         </div>
                     </div>
 
                     <!-- MİNİ RAG SOHBET -->
                     <div class="mt-8 pt-6 border-t dark:border-slate-700 flex flex-col h-56">
-                        <h4
-                            class="text-xs font-black text-slate-400 uppercase mb-3 tracking-widest flex items-center gap-2">
+                        <h4 class="text-xs font-black text-slate-400 uppercase mb-3 tracking-widest flex items-center gap-2">
                             <i class="fas fa-robot text-blue-500"></i> Analist Ajan'a Soru Sor
                         </h4>
-                        <div id="chatHistory"
-                            class="flex-1 bg-slate-50 dark:bg-slate-900/50 rounded-xl p-4 overflow-y-auto mb-3 space-y-3 text-sm border border-slate-100 dark:border-slate-700">
-                        </div>
+                        <div id="chatHistory" class="flex-1 bg-slate-50 dark:bg-slate-900/50 rounded-xl p-4 overflow-y-auto mb-3 space-y-3 text-sm border border-slate-100 dark:border-slate-700"></div>
                         <div class="flex gap-2">
-                            <input type="text" id="chatInput" placeholder="Bu haberdeki riskler neler?"
-                                class="flex-1 p-3 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-600 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 text-sm dark:text-slate-100 transition-colors"
-                                onkeypress="if(event.key === 'Enter') askAgent()">
-                            <button onclick="askAgent()" id="chatBtn"
-                                class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-bold transition-colors shadow-md">
+                            <input type="text" id="chatInput" placeholder="Bu haberdeki riskler neler?" class="flex-1 p-3 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-600 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 text-sm dark:text-slate-100 transition-colors" onkeypress="if(event.key === 'Enter') askAgent()">
+                            <button onclick="askAgent()" id="chatBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-bold transition-colors shadow-md">
                                 <i class="fas fa-paper-plane"></i>
                             </button>
                         </div>
@@ -460,27 +509,20 @@
     </div>
 
     <!-- RSS Modal -->
-    <div id="rssModal"
-        class="modal-overlay fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-[100]">
-        <div
-            class="modal-content bg-white dark:bg-slate-800 rounded-3xl shadow-2xl w-full max-w-xl overflow-hidden transition-colors">
-            <div
-                class="p-6 bg-gray-50 dark:bg-slate-800/50 border-b dark:border-slate-700 flex justify-between items-center">
+    <div id="rssModal" class="modal-overlay fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-[100]">
+        <div class="modal-content bg-white dark:bg-slate-800 rounded-3xl shadow-2xl w-full max-w-xl overflow-hidden transition-colors">
+            <div class="p-6 bg-gray-50 dark:bg-slate-800/50 border-b dark:border-slate-700 flex justify-between items-center">
                 <h3 class="font-bold text-lg flex items-center gap-2 text-slate-800 dark:text-slate-100">
                     <i class="fas fa-rss-square text-orange-500"></i> Kaynak Yönetimi
                 </h3>
-                <button onclick="toggleRssModal()"
-                    class="w-8 h-8 rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 flex items-center justify-center transition dark:text-slate-300">&times;</button>
+                <button onclick="toggleRssModal()" class="w-8 h-8 rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 flex items-center justify-center transition dark:text-slate-300">&times;</button>
             </div>
             <div class="p-8">
                 <div class="flex flex-col gap-3 mb-8">
-                    <input type="text" id="rssNameInput" placeholder="Kaynak Adı (örn: Reuters)"
-                        class="w-full p-3 border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-sm dark:text-slate-100 transition-colors">
+                    <input type="text" id="rssNameInput" placeholder="Kaynak Adı (örn: Reuters)" class="w-full p-3 border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-sm dark:text-slate-100 transition-colors">
                     <div class="flex gap-2">
-                        <input type="text" id="rssUrlInput" placeholder="RSS URL girin..."
-                            class="flex-1 p-3 border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-sm dark:text-slate-100 transition-colors">
-                        <button onclick="addRss()"
-                            class="bg-slate-900 dark:bg-blue-600 text-white px-6 py-3 rounded-2xl font-bold hover:bg-slate-800 dark:hover:bg-blue-700 transition border border-transparent dark:border-blue-500">Ekle</button>
+                        <input type="text" id="rssUrlInput" placeholder="RSS URL girin..." class="flex-1 p-3 border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-sm dark:text-slate-100 transition-colors">
+                        <button onclick="addRss()" class="bg-slate-900 dark:bg-blue-600 text-white px-6 py-3 rounded-2xl font-bold hover:bg-slate-800 dark:hover:bg-blue-700 transition border border-transparent dark:border-blue-500">Ekle</button>
                     </div>
                 </div>
                 <div id="rssList" class="space-y-3 max-h-72 overflow-y-auto pr-2"></div>
@@ -488,8 +530,10 @@
         </div>
     </div>
 
-    <!-- Leaflet JS -->
+    <!-- Leaflet JS ve Heatmap Eklentisi -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+    
 
     <script>
         const API_BASE = "http://127.0.0.1:5000/api";
@@ -499,8 +543,7 @@
         let showFavsOnly = false;
         let currentDetailIndex = null;
 
-        let map, mapMarker, hoverTimeout;
-        // Güncellenmiş Lokasyon Önbelleği (Türkçe ve İngilizce)
+        let map, mapMarker, hoverTimeout, heatLayer; 
         const locationCache = {
             "germany": [51.1657, 10.4515], "almanya": [51.1657, 10.4515],
             "poland": [51.9194, 19.1451], "polonya": [51.9194, 19.1451],
@@ -516,7 +559,6 @@
             "india": [20.5937, 78.9629], "hindistan": [20.5937, 78.9629]
         };
 
-        // YENİ: YAPAY ZEKA FALLBACK MOTORU (Kaçırılan Lokasyonları Metinden Bulur)
         function getSmartLocations(item) {
             let fromLoc = item.entities?.from_location;
             let toLoc = item.entities?.to_location;
@@ -526,7 +568,6 @@
             if (isInvalid(fromLoc)) fromLoc = null;
             if (isInvalid(toLoc)) toLoc = null;
 
-            // Eğer Backend hiçbir şey bulamadıysa, Frontend metni tarayıp kurtarsın
             if (!fromLoc && !toLoc) {
                 const textToScan = `${item.article?.title || ''} ${item.article?.text_summary_tr || ''} ${item.article?.summary_tr || ''}`.toLowerCase();
                 const countries = {
@@ -539,7 +580,6 @@
                 };
 
                 for (const [key, value] of Object.entries(countries)) {
-                    // Kelime metin içinde geçiyorsa hedef lokasyon olarak ata
                     if (textToScan.includes(key)) {
                         toLoc = value;
                         break;
@@ -549,7 +589,6 @@
             return { from: fromLoc, to: toLoc };
         }
 
-        // LOKASYON FORMATLAYICI FONKSİYON
         function formatRoute(fromLoc, toLoc) {
             if (fromLoc && toLoc) return `${fromLoc} ➔ ${toLoc}`;
             if (toLoc) return `Hedef: ${toLoc}`;
@@ -560,6 +599,36 @@
         function initMap() {
             map = L.map('map', { zoomControl: false }).setView([48.8566, 2.3522], 3);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        }
+
+        function updateHeatmap() {
+            if (heatLayer) map.removeLayer(heatLayer);
+            
+            let heatPoints = [];
+            
+            currentNewsData.forEach(item => {
+                const locs = getSmartLocations(item);
+                const targetLoc = locs.to || locs.from;
+                
+                if (targetLoc) {
+                    const locKey = targetLoc.toLowerCase().trim();
+                    const coords = locationCache[locKey];
+                    
+                    if (coords) {
+                        const intensity = (item.bios_fit?.score || 50) / 100;
+                        heatPoints.push([coords[0], coords[1], intensity * 2]); 
+                    }
+                }
+            });
+
+            if (heatPoints.length > 0) {
+                heatLayer = L.heatLayer(heatPoints, {
+                    radius: 20, 
+                    blur: 15, 
+                    maxZoom: 5,
+                    gradient: { 0.4: '#1d4ed8', 0.6: '#06b6d4', 0.8: '#f59e0b', 1.0: '#ef4444' } 
+                }).addTo(map);
+            }
         }
 
         async function focusMapOnIndex(index) {
@@ -591,7 +660,11 @@
             }, 500);
         }
 
-        function resetMapFocus() { clearTimeout(hoverTimeout); }
+        function resetMapFocus() { 
+            clearTimeout(hoverTimeout); 
+            if (mapMarker) map.removeLayer(mapMarker);
+            map.setView([48.8566, 2.3522], 3, { animate: true });
+        }
 
         function toggleTheme() {
             const html = document.documentElement.classList;
@@ -613,7 +686,6 @@
             try {
                 const res = await fetch(`${API_BASE}/news`);
                 allNewsData = await res.json();
-                console.log("Gelen Veri:", allNewsData[0]); // BU SATIRI EKLE VE F12 -> CONSOLE'A BAK
                 applyFilters();
             }
             catch (e) { } finally { l.classList.add('hidden'); c.classList.remove('opacity-40'); }
@@ -634,18 +706,46 @@
             applyFilters();
         }
 
+        function updateKPIs() {
+            const count = currentNewsData.length;
+            let totalCapex = 0;
+            let totalScore = 0;
+
+            currentNewsData.forEach(item => {
+                const capex = Number(item.signals?.capex_usd) || 0;
+                totalCapex += capex;
+                totalScore += (item.bios_fit?.score || 0);
+            });
+
+            const avgScore = count > 0 ? Math.round(totalScore / count) : 0;
+
+            let formattedCapex = "$0";
+            if (totalCapex > 0) {
+                if (totalCapex >= 1e9) {
+                    formattedCapex = "$" + (totalCapex / 1e9).toFixed(1) + "B";
+                } else if (totalCapex >= 1e6) {
+                    formattedCapex = "$" + (totalCapex / 1e6).toFixed(1) + "M";
+                } else {
+                    formattedCapex = "$" + totalCapex.toLocaleString();
+                }
+            }
+
+            document.getElementById('kpiTotalCount').innerText = count;
+            document.getElementById('kpiTotalCapex').innerText = formattedCapex;
+            document.getElementById('kpiAvgScore').innerText = avgScore;
+        }
+
         function applyFilters() {
             const q = document.getElementById('searchInput').value.toLowerCase();
             const e = document.getElementById('eventFilter').value;
             const s = parseInt(document.getElementById('scoreRange').value) || 0;
-            const sent = document.getElementById('sentimentFilter').value; // Yeni Duygu Filtresi
+            const sent = document.getElementById('sentimentFilter').value; 
             const isSortEnabled = document.getElementById('sortToggle')?.checked;
 
-            // 1. Veri Filtreleme
             let filtered = allNewsData.filter(i => {
                 const art = i.article || {};
                 const fit = i.bios_fit || {};
-                const analysis = i.analysis || {}; // Sentiment verisi buradan gelir
+                const analysis = i.analysis || {}; 
                 const src = i.source || {};
                 const c = i.entities?.company?.name || "";
                 const id = art.title || src.url;
@@ -654,7 +754,6 @@
 
                 const txt = `${art.title || ''} ${art.text_summary_tr || art.summary_tr || ''} ${c}`.toLowerCase();
 
-                // Tüm filtrelerin kontrolü
                 const matchesSearch = !q || txt.includes(q);
                 const matchesEvent = !e || (art.event_type || '') === e;
                 const matchesScore = (fit.score || 0) >= s;
@@ -663,7 +762,6 @@
                 return matchesSearch && matchesEvent && matchesScore && matchesSentiment;
             });
 
-            // 2. Akıllı Sıralama (Açıksa)
             if (isSortEnabled) {
                 filtered.sort((a, b) => (b.bios_fit?.score || 0) - (a.bios_fit?.score || 0));
             }
@@ -681,27 +779,22 @@
             } else {
                 no.classList.add('hidden');
                 currentNewsData.forEach((i, idx) => {
-                    // Veri hazırlığı
                     const art = i.article || {}, src = i.source || {}, fit = i.bios_fit || {}, score = fit.score || 0, id = art.title || src.url;
 
-                    // --- YENİ: Sentiment Mantığı (Döngü içinde olmalı) ---
                     const sentiment = i.analysis?.sentiment || 'neutral';
                     const sentimentColor = sentiment === 'positive' ? 'bg-emerald-500' : sentiment === 'negative' ? 'bg-rose-500' : 'bg-gray-400';
                     const sentimentText = sentiment === 'positive' ? 'Pozitif Gelişme' : sentiment === 'negative' ? 'Risk / Olumsuz' : 'Nötr';
-                    // ----------------------------------------------------
 
                     const star = favorites.includes(id) ? 'fas fa-star text-yellow-400 drop-shadow' : 'far fa-star text-gray-400 hover:text-yellow-400';
                     const sc = score > 70 ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800' : score > 40 ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800' : 'text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700';
 
                     c.innerHTML += `
                 <div class="news-card bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm relative overflow-hidden group transition-colors" onclick="showDetails(${idx})" onmouseenter="focusMapOnIndex(${idx})" onmouseleave="resetMapFocus()">
-                    <!-- Sentiment Bar (Kartın en üstünde ince bir çizgi olarak) -->
                     <div class="absolute top-0 left-0 w-full h-1 ${sentimentColor} opacity-70"></div>
 
                     <div class="flex justify-between items-start mb-4">
                         <div class="flex flex-col">
                             <span class="text-[10px] font-bold text-blue-500 dark:text-blue-400 uppercase tracking-widest">${src.publisher || 'GLOBAL NEWS'}</span>
-                            <!-- Sentiment Küçük Yazı -->
                             <div class="flex items-center gap-1.5 mt-0.5">
                                 <span class="w-1.5 h-1.5 rounded-full ${sentimentColor}"></span>
                                 <span class="text-[9px] font-bold uppercase ${sentiment === 'negative' ? 'text-rose-500' : 'text-emerald-600'}">${sentimentText}</span>
@@ -709,7 +802,7 @@
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="px-3 py-1 rounded-full text-xs font-bold border ${sc}">Fit: ${score}/100</div>
-                            <button onclick="toggleFavorite(event, this.dataset.id)" data-id="${id.replace(/"/g, '&quot;')}" class="p-1 hover:scale-125 transition-transform">
+                            <button onclick="toggleFavorite(event, '${id.replace(/'/g, "\\'")}')" class="p-1 hover:scale-125 transition-transform">
                                 <i class="${star} text-lg"></i>
                             </button>
                         </div>
@@ -725,20 +818,31 @@
                 </div>`;
                 });
             }
+            
+            updateHeatmap();
+            updateKPIs();
         }
 
         function showDetails(index) {
             const item = currentNewsData[index]; if (!item) return;
             currentDetailIndex = index;
 
-            // Temel Bilgiler
             document.getElementById('detailTitle').innerText = item.article?.title || "Analiz Detayı";
             document.getElementById('detailSummary').innerText = item.article?.text_summary_tr || "Özet hazır değil.";
             document.getElementById('detailCompany').innerText = item.entities?.company?.name || "Bilinmiyor";
             document.getElementById('detailCapex').innerText = item.signals?.capex_usd ? `$${item.signals.capex_usd.toLocaleString()}` : "Veri Yok";
-            document.getElementById('detailTimeline').innerText = item.signals?.timeline || "Belirsiz";
+            
+            document.getElementById('detailSector').innerText = item.industry?.sector || "Bilinmiyor";
+            document.getElementById('timelineEnd').innerText = item.signals?.timeline || "Belirsiz";
+            
+            let dateStr = "Bugün";
+            if(item.source?.retrieved_at_utc) {
+                const d = new Date(item.source.retrieved_at_utc);
+                dateStr = d.toLocaleDateString('tr-TR', { day: 'numeric', month: 'short', year: 'numeric' });
+            }
+            document.getElementById('timelineStart').innerText = dateStr;
+            document.getElementById('detailTimelineRaw').innerText = "AI Çıktısı: " + (item.signals?.timeline || "Metinde tarih bulunamadı.");
 
-            // Risk ve Sentiment Analizi
             const riskBox = document.getElementById('riskContainer');
             const riskList = document.getElementById('detailRisks');
             const analysis = item.analysis || {};
@@ -746,7 +850,6 @@
             const sentiment = analysis.sentiment || 'neutral';
             const score = item.bios_fit?.score || 0;
 
-            // Risk listesi gösterimi[cite: 6]
             if (risks.length > 0) {
                 riskBox.classList.remove('hidden');
                 riskList.innerHTML = risks.map(r => `<li>${r}</li>`).join('');
@@ -754,26 +857,23 @@
                 riskBox.classList.add('hidden');
             }
 
-            // Skor Dairesi ve Renk Mantığı (Senin istediğin özel ayar)
             const detailScore = document.getElementById('detailScore');
             const scoreCircle = document.getElementById('scoreCircle');
             detailScore.innerText = score;
             scoreCircle.setAttribute('stroke-dasharray', `${score}, 100`);
 
             let dynamicColor;
-            // Eğer puan 50'den büyükse fırsattır, sentiment negatif olsa bile yeşil/emerald tonu yap[cite: 6]
             if (score >= 50) {
-                dynamicColor = '#10b981'; // Emerald 500 (Fırsat Yeşili)
+                dynamicColor = '#10b981'; 
             } else if (sentiment === 'negative') {
-                dynamicColor = '#f43f5e'; // Sadece düşük puanlı ve negatifse kırmızı kalsın
+                dynamicColor = '#f43f5e'; 
             } else {
-                dynamicColor = '#3b82f6'; // Nötr/Mavi
+                dynamicColor = '#3b82f6'; 
             }
 
             scoreCircle.style.color = dynamicColor;
             detailScore.style.color = dynamicColor;
 
-            // Aksiyon Butonu Metni Güncelleme[cite: 6]
             const action = document.getElementById('detailAction');
             if (score >= 50) {
                 action.className = "w-full text-center p-4 rounded-2xl font-bold text-[10px] uppercase bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400";
@@ -783,16 +883,87 @@
                 action.innerText = "İzleme Listesinde";
             }
 
-            // Rota Bilgisi[cite: 6]
             const locs = getSmartLocations(item);
             document.getElementById('detailRoute').innerText = formatRoute(locs.from, locs.to);
 
             document.getElementById('chatHistory').innerHTML = '<p class="text-slate-500 dark:text-slate-400 italic text-xs">Ajan analiz için hazır...</p>';
             document.getElementById('chatInput').value = '';
             document.getElementById('detailsModal').classList.add('active');
+            
+            focusMapOnIndex(index);
         }
 
         function closeDetails() { document.getElementById('detailsModal').classList.remove('active'); }
+
+        // --- YENİ: GARANTİLİ VE TEMİZ PDF ÇIKTISI (NATIVE PRINT) ---
+        function exportToPDF() {
+            if (currentDetailIndex === null) return;
+            const item = currentNewsData[currentDetailIndex];
+            
+            const locs = getSmartLocations(item);
+            const routeText = formatRoute(locs.from, locs.to);
+            const capexText = item.signals?.capex_usd ? `$${item.signals.capex_usd.toLocaleString()}` : "Veri Yok";
+            const score = item.bios_fit?.score || 0;
+            const risks = (item.analysis?.risks || []).map(r => `<li style="margin-bottom: 5px;">${r}</li>`).join('') || "Risk tespit edilmedi.";
+            
+            // Özel PDF Şablonu
+            const printHtml = `
+                <div style="font-family: 'Arial', sans-serif; padding: 20px; color: #000; max-width: 800px; margin: 0 auto;">
+                    <div style="border-bottom: 2px solid #2563eb; padding-bottom: 10px; margin-bottom: 20px;">
+                        <h1 style="color: #1e3a8a; margin: 0; font-size: 24px; line-height: 1.3;">${item.article?.title || 'Analiz Raporu'}</h1>
+                        <p style="color: #666; font-size: 12px; margin-top: 8px;"><strong>Kaynak:</strong> ${item.source?.publisher || 'Bilinmiyor'} | <strong>Sinyal Türü:</strong> ${item.article?.event_type || 'Genel'}</p>
+                    </div>
+                    
+                    <div style="background: #f0fdf4; border: 2px solid #22c55e; color: #166534; padding: 15px; text-align: center; border-radius: 8px; width: 140px; float: right; margin-top: -85px;">
+                        <div style="font-size: 10px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">BIOS Fit Skoru</div>
+                        <div style="font-size: 28px; font-weight: 900; margin-top: 5px;">${score}</div>
+                    </div>
+
+                    <div style="background: #f8fafc; padding: 15px; border-left: 4px solid #2563eb; margin-bottom: 25px;">
+                        <div style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: bold; margin-bottom: 8px;">Yapay Zeka Özeti</div>
+                        <div style="font-size: 14px; line-height: 1.6;">${item.article?.text_summary_tr || item.article?.summary_tr || 'Özet bulunamadı.'}</div>
+                    </div>
+
+                    <table style="width: 100%; margin-bottom: 25px; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding: 15px; background: #fff; border: 1px solid #e5e7eb; width: 50%;">
+                                <div style="font-size: 10px; text-transform: uppercase; color: #64748b; font-weight: bold;">İlgili Şirket</div>
+                                <div style="font-size: 15px; font-weight: bold; margin-top: 5px;">${item.entities?.company?.name || 'Bilinmiyor'}</div>
+                            </td>
+                            <td style="padding: 15px; background: #fff; border: 1px solid #e5e7eb; width: 50%;">
+                                <div style="font-size: 10px; text-transform: uppercase; color: #64748b; font-weight: bold;">Tahmini Bütçe (CAPEX)</div>
+                                <div style="font-size: 15px; font-weight: bold; margin-top: 5px; color: #2563eb;">${capexText}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; background: #fff; border: 1px solid #e5e7eb;">
+                                <div style="font-size: 10px; text-transform: uppercase; color: #64748b; font-weight: bold;">Planlanan Rota</div>
+                                <div style="font-size: 15px; font-weight: bold; margin-top: 5px;">${routeText}</div>
+                            </td>
+                            <td style="padding: 15px; background: #fff; border: 1px solid #e5e7eb;">
+                                <div style="font-size: 10px; text-transform: uppercase; color: #64748b; font-weight: bold;">Hedeflenen Zaman</div>
+                                <div style="font-size: 15px; font-weight: bold; margin-top: 5px;">${item.signals?.timeline || 'Belirsiz'}</div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div style="background: #fff1f2; padding: 15px; border-left: 4px solid #e11d48; margin-bottom: 20px;">
+                        <div style="font-size: 11px; text-transform: uppercase; color: #e11d48; font-weight: bold; margin-bottom: 8px;">Potansiyel Risk Analizi</div>
+                        <ul style="margin: 0; padding-left: 20px; color: #be123c; font-size: 14px; line-height: 1.5;">${risks}</ul>
+                    </div>
+
+                    <div style="margin-top: 40px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #e5e7eb; padding-top: 15px;">
+                        Bu rapor BIOS AI Agent (Llama 3.1) tarafından otomatik olarak oluşturulmuştur.<br>
+                        Oluşturulma Tarihi: ${new Date().toLocaleString('tr-TR')}
+                    </div>
+                </div>
+            `;
+            
+            // Gizli alanı doldur ve yazdır
+            const printArea = document.getElementById('printArea');
+            printArea.innerHTML = printHtml;
+            window.print();
+        }
 
         async function askAgent() {
             const input = document.getElementById('chatInput');
@@ -801,7 +972,6 @@
 
             const chatHistory = document.getElementById('chatHistory'), btn = document.getElementById('chatBtn'), item = currentNewsData[currentDetailIndex];
 
-            // YENİ: Ajana da doğru (akıllı) rotayı gönder
             const locs = getSmartLocations(item);
             const routeContext = formatRoute(locs.from, locs.to);
 

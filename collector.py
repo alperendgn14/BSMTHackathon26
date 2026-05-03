@@ -14,16 +14,17 @@ load_dotenv()
 
 RSS_DB_FILE = "rss_data.json"      # Verilerin (haberlerin) yazılacağı yer
 RSS_SOURCES_FILE = "rss_sources.json"  # Kaynakların (site listesinin) okunacağı yer
+DB_FILE = "database.json"
 
 # Yapılandırma
 api_key = os.getenv("GROQ_API_KEY")
 if api_key is None:
     raise ValueError("Hata: .env dosyasında GROQ_API_KEY bulunamadı!")
 
-client = Groq()
+client = Groq(api_key=api_key)
 feedparser.USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-DB_FILE = "database.json"
 WEBHOOK_URL = "BURAYA_WEBHOOK_URL_GELECEK"
+
 
 def check_robots_txt(url):
     """SOW Madde 6 ve 1.6: Robots.txt kontrolünü daha esnek bir şekilde yapar."""
@@ -53,29 +54,36 @@ def check_robots_txt(url):
         # Hata durumunda (bağlantı hatası, robots.txt yokluğu vb.) izin ver.
         return True
 
+
 def is_duplicate(url):
-    """SOW Madde 1.5: URL bazlı kopya kontrolü."""
-    if os.path.exists(DB_FILE):
-        with open(DB_FILE, "r", encoding="utf-8") as f:
-            try:
-                data = json.load(f)
-                for item in data:
-                    if item.get("source", {}).get("url") == url: return True
-                    for up in item.get("updates", []):
-                        if up.get("url") == url: return True
-            except:
-                return False
+    """
+    SOW Madde 1.5: URL bazlı tekrar kontrolü. 
+    Frontend ile uyumlu olması için hem ana db'yi hem de yedek db'yi kontrol eder.
+    """
+    files_to_check = [RSS_DB_FILE, DB_FILE] # Her iki dosyayı da tara
+    for file_path in files_to_check:
+        if os.path.exists(file_path):
+            with open(file_path, "r", encoding="utf-8") as f:
+                try:
+                    data = json.load(f)
+                    # Frontend JSON yapısındaki source.url anahtarını kontrol et
+                    if any(item.get("source", {}).get("url") == url for item in data):
+                        return True
+                except (json.JSONDecodeError, KeyError):
+                    continue
     return False
 
 def analyze_with_llama3_api(text):
-    """SOW Madde 2.1, 2.3 & 2.5 uyumlu, detaylı analiz fonksiyonu."""
-    # Docx dosyalarındaki teknik isterlere göre hazırlanmış detaylı prompt
-   
-    # collector.py içinde prompt kısmını bu şekilde güncelleyin
-    # collector.py içindeki prompt değişkenini tamamen bununla değiştir
+    """SOW Madde 2.1, 2.3 & 2.5 uyumlu, Zaman Çizelgesi (Timeline) fixli analiz fonksiyonu."""
+    
+    # Başlıkları ve anahtarları sabit tutup sadece talimatı güçlendirdik
     prompt = f"""Sen BIOS için fırsat çıkaran bir endüstriyel relokasyon analistsin.
 GÖREV: Metinden şirket, lokasyon, sektör, hat tipi, zaman çizelgesi ve CAPEX bilgilerini çıkar.
 Ayrıca haberin duygusunu (sentiment) ve olası riskleri analiz et.
+
+KRİTİK TALİMAT (TIMELINE): 
+'signals' -> 'timeline' alanını ASLA boş bırakma. Metinde geçen '2026', 'Q3', 'gelecek yıl', '6 ay içinde' gibi 
+tüm zaman ifadelerini bu alana işle. Eğer hiçbir zaman verisi yoksa 'Belirtilmemiş' yaz.
 
 İSTENEN JSON YAPISI (MUTLAKA BU ANAHTARLAR OLMALI):
 {{
@@ -94,7 +102,7 @@ Ayrıca haberin duygusunu (sentiment) ve olası riskleri analiz et.
     "to_location": "string"
   }},
   "industry": {{ "sector": "string", "equipment_keywords": ["list"] }},
-  "signals": {{ "capex_usd": 0, "timeline": "string" }},
+  "signals": {{ "capex_usd": 0, "timeline": "Tarih bilgisi buraya" }},
   "bios_fit": {{ "rationale_tr": "Skor gerekçesi", "recommended_action": "monitor" }}
 }}
 
@@ -103,7 +111,7 @@ METİN: {text}"""
     try:
         chat_completion = client.chat.completions.create(
             messages=[
-                {"role": "system", "content": "You are a data extraction assistant that strictly outputs the requested JSON structure. Never omit the 'article' key."},
+                {"role": "system", "content": "You are a data extraction assistant that strictly outputs the requested JSON structure. Focus specifically on extracting temporal markers for the 'timeline' field."},
                 {"role": "user", "content": prompt}
             ],
             model="llama-3.1-8b-instant",
@@ -111,13 +119,16 @@ METİN: {text}"""
         )
         return chat_completion.choices[0].message.content
     except Exception as e:
-        # Hata anında SOW yapısını bozmamak için boş ama geçerli bir JSON dönüyoruz
         print(f"⚠️ LLM Hatası: {e}")
+        # Hata anında bile frontend'in beklediği anahtar yapısını dönüyoruz
         return json.dumps({
             "article": {"text_summary_tr": "Analiz başarısız", "event_type": "other"},
             "entities": {"company": {"name": "null"}},
+            "signals": {"capex_usd": 0, "timeline": "Belirtilmemiş"},
             "bios_fit": {"score": 0},
-            "signals": {"capex_usd": 0}
+            "source": {"original_language": "tr", "confidence": 0.0},
+            "analysis": {"sentiment": "neutral", "risks": []},
+            "industry": {"sector": "null", "equipment_keywords": []}
         })
 
 def calculate_bios_fit_score(parsed_json, source_url):
@@ -249,28 +260,31 @@ def save_to_db(new_item):
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 def fetch_rss_news(rss_url, publisher_name="RSS"):
-    feed = feedparser.parse(rss_url)
+    """
+    Bağlantı hatalarına karşı korunmuş ve veri zenginleştirmeli RSS çekici.
+    """
+    try:
+        feed = feedparser.parse(rss_url) # Global timeout burada devreye girer
+        if feed.bozo: return
+    except Exception as e:
+        print(f"❌ Bağlantı hatası ({publisher_name}): {e}")
+        return
     
     for entry in feed.entries[:10]:
-        if is_duplicate(entry.link): continue
+        if is_duplicate(entry.link): continue # tekrar kontrolü
         
-        result = analyze_with_llama3_api(entry.title)
+        # FIX: Zaman çizelgesini bulabilmesi için başlık + özeti birleştiriyoruz
+        content_for_ai = f"BAŞLIK: {entry.title}\nÖZET: {entry.get('summary', entry.get('description', ''))}"
+        
+        result = analyze_with_llama3_api(content_for_ai)
         try:
             parsed = json.loads(result)
             
-            # --- ONARICI MANTIK ---
-            # Eğer 'article' anahtarı hala yoksa (LLM kurallara uymadıysa) manuel oluştur
-            if "article" not in parsed:
-                parsed["article"] = {
-                    "text_summary_tr": "Otomatik analiz başarısız oldu.",
-                    "event_type": "other"
-                }
-
-            # Eksik olabilecek diğer anahtarları da garantiye alalım
-            if "bios_fit" not in parsed: parsed["bios_fit"] = {"score": 10}
-            if "entities" not in parsed: parsed["entities"] = {"company": {"name": "Bilinmiyor"}}
-
-            # Veriyi zenginleştir ve başlığı ekle
+            # --- ONARICI MANTIK (Frontend uyumu için) ---
+            if "article" not in parsed: parsed["article"] = {"text_summary_tr": "Analiz başarısız.", "event_type": "other"}
+            if "signals" not in parsed: parsed["signals"] = {"timeline": "Belirtilmemiş", "capex_usd": 0}
+            
+            # Veriyi zenginleştir (index.html'in beklediği yapı)
             parsed["source"] = {
                 "publisher": publisher_name,
                 "url": entry.link,
@@ -278,15 +292,14 @@ def fetch_rss_news(rss_url, publisher_name="RSS"):
             }
             parsed["article"]["title"] = entry.title
             
-            # Skorlama yap ve kaydet
+            # Skorlama ve Kaydet
             score, _ = calculate_bios_fit_score(parsed, entry.link)
             parsed["bios_fit"]["score"] = score
             
             save_to_db(parsed)
             print(f"✅ Kaydedildi: {entry.title[:40]}...")
-
         except Exception as e:
-            print(f"❌ Haber işlenemedi: {e}")
+            print(f"❌ İşleme hatası: {e}")
 
 
 def run_scanner():
