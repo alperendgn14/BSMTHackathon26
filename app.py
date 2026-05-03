@@ -452,28 +452,34 @@ YATIRIM BAĞLAMI:
 
 
 
-@app.route('/api/news', methods=['DELETE'])
+@app.route('/api/news', methods=['DELETE', 'OPTIONS'])
 def delete_news():
-    """Seçilen haberi veritabanından kalıcı olarak siler."""
+    # Tarayıcının CORS güvenlik kontrolünü (Preflight) onayla
+    if request.method == 'OPTIONS': 
+        return jsonify({"status": "ok"}), 200
+        
     data = request.json
-    news_id = data.get("id") # Front-end'den gelen benzersiz başlık veya URL
+    news_id = str(data.get("id", "")).strip() # Gelen ID'yi temizle
     
     try:
-        # 1. Mevcut veritabanını oku
         if os.path.exists('database.json'):
             with open('database.json', 'r', encoding='utf-8') as f:
                 news_list = json.load(f)
         else:
             news_list = []
+
+        # ZIRHLI SİLME: ID, başlığın veya URL'in İÇİNDE GEÇİYORSA o haberi yok et!
+        filtered_news = [
+            n for n in news_list 
+            if news_id not in str(n.get('article', {}).get('title', '')).strip() 
+            and news_id not in str(n.get('source', {}).get('url', '')).strip()
+        ]
         
-        # 2. Silinmek istenen haberi listeden çıkar (Filtrele)
-        filtered_news = [n for n in news_list if n.get('article', {}).get('title') != news_id and n.get('source', {}).get('url') != news_id]
-        
-        # 3. Güncel listeyi tekrar kaydet
+        # Güncel listeyi tekrar kaydet
         with open('database.json', 'w', encoding='utf-8') as f:
             json.dump(filtered_news, f, ensure_ascii=False, indent=2)
             
-        return jsonify({"status": "success", "message": "Haber başarıyla silindi."})
+        return jsonify({"status": "success", "message": "Haber veritabanından kalıcı olarak yok edildi."})
     except Exception as e:
         print(f"Silme Hatası: {e}")
         return jsonify({"error": "Silme işlemi başarısız oldu."}), 500
