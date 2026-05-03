@@ -55,7 +55,9 @@ Adım 4: Uygulamayı Başlatın
 Bağımlılıklar ve API anahtarı hazır olduğunda Flask sunucusunu ve otonom tarama motorunu başlatın:
 python app.py
 
-Örnek RSS Listesi (Test Kaynakları)
+
+
+## Örnek RSS Listesi (Test Kaynakları)
 
 Arayüzdeki "Kaynaklar" bölümünden sistemi test etmek için, Avrupa ve küresel endüstriyel gelişmeleri takip edebileceğiniz aşağıdaki RSS kaynaklarını kullanabilirsiniz:
 
