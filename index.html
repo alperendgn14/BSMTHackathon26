@@ -301,7 +301,7 @@
                         </select>
                     </div>
 
-                    <!-- YENİ: CAPEX Filtresi -->
+                    <!-- CAPEX Filtresi -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">Minimum CAPEX</label>
                         <select id="capexFilter" onchange="applyFilters()"
@@ -414,6 +414,11 @@
             <div class="p-6 border-b dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50">
                 <h3 class="font-bold text-xl text-slate-800 dark:text-slate-100" id="detailTitle">Analiz Detayı</h3>
                 <div class="flex items-center gap-3">
+                    <!-- YENİ: CSV İNDİR BUTONU -->
+                    <button onclick="exportToCSV()" class="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/50 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-2 shadow-sm">
+                        <i class="fas fa-file-csv"></i> CSV İndir
+                    </button>
+                    <!-- YENİ: PDF İNDİR BUTONU -->
                     <button onclick="exportToPDF()" class="bg-red-500/10 hover:bg-red-500/20 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900/50 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-2 shadow-sm">
                         <i class="fas fa-file-pdf"></i> PDF İndir
                     </button>
@@ -754,14 +759,14 @@
             const e = document.getElementById('eventFilter').value;
             const s = parseInt(document.getElementById('scoreRange').value) || 0;
             const sent = document.getElementById('sentimentFilter').value; 
-            const cpx = parseInt(document.getElementById('capexFilter').value) || 0; // YENİ: CAPEX Filtresi
+            const cpx = parseInt(document.getElementById('capexFilter').value) || 0; 
             const isSortEnabled = document.getElementById('sortToggle')?.checked;
 
             let filtered = allNewsData.filter(i => {
                 const art = i.article || {};
                 const fit = i.bios_fit || {};
                 const analysis = i.analysis || {}; 
-                const signals = i.signals || {}; // YENİ: Signals verisini çek
+                const signals = i.signals || {}; 
                 const src = i.source || {};
                 const c = i.entities?.company?.name || "";
                 const id = art.title || src.url;
@@ -775,7 +780,6 @@
                 const matchesScore = (fit.score || 0) >= s;
                 const matchesSentiment = !sent || (analysis.sentiment || 'neutral') === sent;
                 
-                // YENİ: CAPEX Kontrolü
                 const itemCapex = Number(signals.capex_usd) || 0;
                 const matchesCapex = itemCapex >= cpx;
 
@@ -915,6 +919,7 @@
 
         function closeDetails() { document.getElementById('detailsModal').classList.remove('active'); }
 
+        // --- PDF ÇIKTISI ---
         function exportToPDF() {
             if (currentDetailIndex === null) return;
             const item = currentNewsData[currentDetailIndex];
@@ -980,6 +985,61 @@
             const printArea = document.getElementById('printArea');
             printArea.innerHTML = printHtml;
             window.print();
+        }
+
+        // --- YENİ: CSV ÇIKTISI ---
+        function exportToCSV() {
+            if (currentDetailIndex === null) return;
+            const item = currentNewsData[currentDetailIndex];
+            
+            const locs = getSmartLocations(item);
+            const routeText = formatRoute(locs.from, locs.to);
+            const capexText = item.signals?.capex_usd ? item.signals.capex_usd : "Bilinmiyor";
+            const score = item.bios_fit?.score || 0;
+            const risks = (item.analysis?.risks || []).join('; ') || "Risk tespit edilmedi.";
+            const title = item.article?.title || "Bilinmiyor";
+            const company = item.entities?.company?.name || "Bilinmiyor";
+            const sector = item.industry?.sector || "Bilinmiyor";
+            const timeline = item.signals?.timeline || "Belirsiz";
+            const summary = item.article?.text_summary_tr || item.article?.summary_tr || "Özet yok";
+            const sentiment = item.analysis?.sentiment || "neutral";
+
+            // Excel uyumlu CSV Formatlayıcı
+            const escapeCSV = (str) => {
+                if (str === null || str === undefined) return '""';
+                const s = String(str).replace(/"/g, '""');
+                return `"${s}"`;
+            };
+
+            const headers = ["Başlık", "Şirket", "Sektör", "Tahmini CAPEX (USD)", "Rota", "Zaman Çizelgesi", "BIOS Fit Skoru", "Duygu (Sentiment)", "Riskler", "Özet"];
+            const row = [
+                escapeCSV(title),
+                escapeCSV(company),
+                escapeCSV(sector),
+                escapeCSV(capexText),
+                escapeCSV(routeText),
+                escapeCSV(timeline),
+                escapeCSV(score),
+                escapeCSV(sentiment),
+                escapeCSV(risks),
+                escapeCSV(summary)
+            ];
+
+            const csvContent = headers.join(",") + "\n" + row.join(",");
+
+            // Excel'de Türkçe karakterlerin bozulmaması için BOM (\uFEFF) ekliyoruz
+            const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            
+            // Dosya ismi oluştur
+            const safeCompanyName = company.replace(/[^a-zA-Z0-9]/g, '_');
+            link.setAttribute("href", url);
+            link.setAttribute("download", `BIOS_Analiz_${safeCompanyName}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
         async function askAgent() {

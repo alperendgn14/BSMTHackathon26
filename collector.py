@@ -81,15 +81,17 @@ def analyze_with_llama3_api(text):
 GÖREV: Metinden şirket, lokasyon, sektör, hat tipi, zaman çizelgesi ve CAPEX bilgilerini çıkar.
 Ayrıca haberin duygusunu (sentiment) ve olası riskleri analiz et.
 
-KRİTİK TALİMAT (TIMELINE): 
+KRİTİK TALİMATLAR (TIMELINE): 
 'signals' -> 'timeline' alanını ASLA boş bırakma. Metinde geçen '2026', 'Q3', 'gelecek yıl', '6 ay içinde' gibi 
 tüm zaman ifadelerini bu alana işle. Eğer hiçbir zaman verisi yoksa 'Belirtilmemiş' yaz.
+C-LEVEL ÖZET (text_summary_tr): Bu alana ASLA aşağıdaki JSON şablonundaki örnek metni kopyalama! Metni oku ve yatırımın arka planını, stratejik önemini, lokasyon nedenlerini ve sektörel etkilerini kapsayan en az 3-4 cümlelik son derece detaylı, profesyonel ve analitik, Türkçe bir C-Level özeti KENDİN YAZ.
+Sadece saf JSON döndür.
 
 İSTENEN JSON YAPISI (MUTLAKA BU ANAHTARLAR OLMALI):
 {{
   "source": {{ "original_language": "ISO-639-1", "confidence": 0.0 }},
   "article": {{
-    "text_summary_tr": "2-4 cümlelik özet",
+    "text_summary_tr": "Haberin arka planını, yatırımın stratejik önemini, lokasyon seçim nedenlerini ve sektörel olası etkilerini kapsayan, en az 3-4 cümlelik son derece detaylı, profesyonel ve analitik bir C-Level yatırım özeti.",
     "event_type": "relocation | closure | downsizing | expansion | new_plant | tender | capex_fdi | other"
   }},
   "analysis": {{
