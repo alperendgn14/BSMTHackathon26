@@ -499,9 +499,9 @@ def add_comment():
 
     try:
         news_list = []
-        if os.path.exists('database.json'):
+        if os.path.exists('rss_data.json'):
             try:
-                with open('database.json', 'r', encoding='utf-8') as f:
+                with open('rss_data.json', 'r', encoding='utf-8') as f:
                     content = f.read().strip()
                     if content:
                         news_list = json.loads(content)
@@ -528,7 +528,7 @@ def add_comment():
                 break
 
         if updated:
-            with open('database.json', 'w', encoding='utf-8') as f:
+            with open('rss_data.json', 'w', encoding='utf-8') as f:
                 json.dump(news_list, f, ensure_ascii=False, indent=2)
             return jsonify({"status": "success", "comment": comment_obj})
         else:
