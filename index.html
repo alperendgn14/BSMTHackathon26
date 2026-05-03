@@ -198,7 +198,7 @@
 
 <body class="bg-gray-50 text-gray-900 dark:bg-slate-900 dark:text-slate-100">
 
-    <!-- YENİ: PDF Çıktısı İçin Gizli Alan -->
+    <!-- PDF Çıktısı İçin Gizli Alan -->
     <div id="printArea"></div>
 
     <!-- Header -->
@@ -301,6 +301,21 @@
                         </select>
                     </div>
 
+                    <!-- YENİ: CAPEX Filtresi -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">Minimum CAPEX</label>
+                        <select id="capexFilter" onchange="applyFilters()"
+                            class="w-full p-2.5 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-600 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 dark:text-slate-100">
+                            <option value="0">Tümü (Farketmez)</option>
+                            <option value="1000000">> $1 Milyon</option>
+                            <option value="10000000">> $10 Milyon</option>
+                            <option value="50000000">> $50 Milyon</option>
+                            <option value="100000000">> $100 Milyon</option>
+                            <option value="500000000">> $500 Milyon</option>
+                            <option value="1000000000">> $1 Milyar</option>
+                        </select>
+                    </div>
+
                     <!-- Skor Range -->
                     <div>
                         <div class="flex justify-between mb-2">
@@ -399,7 +414,6 @@
             <div class="p-6 border-b dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50">
                 <h3 class="font-bold text-xl text-slate-800 dark:text-slate-100" id="detailTitle">Analiz Detayı</h3>
                 <div class="flex items-center gap-3">
-                    <!-- YENİ: PDF İNDİR BUTONU -->
                     <button onclick="exportToPDF()" class="bg-red-500/10 hover:bg-red-500/20 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900/50 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-2 shadow-sm">
                         <i class="fas fa-file-pdf"></i> PDF İndir
                     </button>
@@ -740,12 +754,14 @@
             const e = document.getElementById('eventFilter').value;
             const s = parseInt(document.getElementById('scoreRange').value) || 0;
             const sent = document.getElementById('sentimentFilter').value; 
+            const cpx = parseInt(document.getElementById('capexFilter').value) || 0; // YENİ: CAPEX Filtresi
             const isSortEnabled = document.getElementById('sortToggle')?.checked;
 
             let filtered = allNewsData.filter(i => {
                 const art = i.article || {};
                 const fit = i.bios_fit || {};
                 const analysis = i.analysis || {}; 
+                const signals = i.signals || {}; // YENİ: Signals verisini çek
                 const src = i.source || {};
                 const c = i.entities?.company?.name || "";
                 const id = art.title || src.url;
@@ -758,8 +774,12 @@
                 const matchesEvent = !e || (art.event_type || '') === e;
                 const matchesScore = (fit.score || 0) >= s;
                 const matchesSentiment = !sent || (analysis.sentiment || 'neutral') === sent;
+                
+                // YENİ: CAPEX Kontrolü
+                const itemCapex = Number(signals.capex_usd) || 0;
+                const matchesCapex = itemCapex >= cpx;
 
-                return matchesSearch && matchesEvent && matchesScore && matchesSentiment;
+                return matchesSearch && matchesEvent && matchesScore && matchesSentiment && matchesCapex;
             });
 
             if (isSortEnabled) {
@@ -895,7 +915,6 @@
 
         function closeDetails() { document.getElementById('detailsModal').classList.remove('active'); }
 
-        // --- YENİ: GARANTİLİ VE TEMİZ PDF ÇIKTISI (NATIVE PRINT) ---
         function exportToPDF() {
             if (currentDetailIndex === null) return;
             const item = currentNewsData[currentDetailIndex];
@@ -906,7 +925,6 @@
             const score = item.bios_fit?.score || 0;
             const risks = (item.analysis?.risks || []).map(r => `<li style="margin-bottom: 5px;">${r}</li>`).join('') || "Risk tespit edilmedi.";
             
-            // Özel PDF Şablonu
             const printHtml = `
                 <div style="font-family: 'Arial', sans-serif; padding: 20px; color: #000; max-width: 800px; margin: 0 auto;">
                     <div style="border-bottom: 2px solid #2563eb; padding-bottom: 10px; margin-bottom: 20px;">
@@ -959,7 +977,6 @@
                 </div>
             `;
             
-            // Gizli alanı doldur ve yazdır
             const printArea = document.getElementById('printArea');
             printArea.innerHTML = printHtml;
             window.print();
