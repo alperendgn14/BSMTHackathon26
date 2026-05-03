@@ -446,5 +446,1516 @@
             "recommended_action": "monitor",
             "score": 72
         }
+    },
+    {
+        "source": {
+            "publisher": "wsj",
+            "url": "https://www.wsj.com/articles/canada-to-provide-720-million-to-canada-post-to-avoid-insolvency-at-mail-service-fc09a6b9?mod=pls_whats_news_us_business_f",
+            "retrieved_at_utc": "2026-05-03T04:12:48.570717+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Kanada Postası'nı iflasını önlemek için olağanüstü kredide bulunmaktan bahseden Kanada hükümeti, ulusal posta hizmetindeki iflas riskini engellemek için finansmana yardımcı olacaktır.",
+            "event_type": "relocation",
+            "title": "Canada to Provide $720 Million to Canada Post to Avoid Insolvency at Mail Service"
+        },
+        "analysis": {
+            "sentiment": "positive",
+            "risks": [],
+            "butterfly_effect": "Bu yatırıma yönelik olası etkiler, rakipler veya tedarik zincirinde muhtemelen minimal kalacaktır."
+        },
+        "entities": {
+            "company": {
+                "name": "Kanada Postası",
+                "ticker": null
+            },
+            "from_location": null,
+            "to_location": null
+        },
+        "industry": {
+            "sector": "Telekominikasyon",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 720000000,
+            "timeline": "Gelecek yıl veya Q3, çünkü metinde gelecek yıl veya 6 ay içinde ifadeleri geçmektedir."
+        },
+        "bios_fit": {
+            "rationale_tr": "Bu projenin fırsatları, Kanada'nın sektöründe güçlü bir konumunu vurgulamaktadır.",
+            "recommended_action": "monitor",
+            "score": 59
+        }
+    },
+    {
+        "source": {
+            "publisher": "wsj",
+            "url": "https://www.wsj.com/articles/amazon-willing-to-discuss-quebec-shutdown-with-canadian-officials-610e5f59?mod=pls_whats_news_us_business_f",
+            "retrieved_at_utc": "2026-05-03T04:12:59.463550+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Amazon, Kanada'da Quebec eyaletinde operasyonlarını kapatması ve 1.700 kişinin işini bırakmasına neden olacağı için, ülkeyi temsilen yönetimler ve Quebec hükümetiyle görüşmek için hazır.",
+            "event_type": "closure",
+            "title": "Amazon Willing to Discuss Quebec Shutdown With Canadian Officials"
+        },
+        "analysis": {
+            "sentiment": "negative",
+            "risks": [
+                "İşgücü kayıpları",
+                "İstihdamın düşmesi"
+            ],
+            "butterfly_effect": "Rakipler tarafından fırsatların oluşması ya da tedarik zinciri üzerinde olası değişiklikler"
+        },
+        "entities": {
+            "company": {
+                "name": "Amazon.com",
+                "ticker": "AMZN"
+            },
+            "from_location": "Kanada",
+            "to_location": "Belirtilmemiş"
+        },
+        "industry": {
+            "sector": "E-ticaret",
+            "equipment_keywords": [
+                "İnternet satış platformu",
+                "E-dükkan",
+                "Online mağaza"
+            ]
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "İşgücü hareketlerinin artması ve işten çıkarılan personelin yeni fırsatlara adapte edilmesi gereksinimi",
+            "recommended_action": "monitor",
+            "score": 55
+        }
+    },
+    {
+        "source": {
+            "publisher": "wsj",
+            "url": "https://www.wsj.com/articles/target-drops-dei-goals-and-ends-program-to-boost-black-suppliers-77cb4c75?mod=pls_whats_news_us_business_f",
+            "retrieved_at_utc": "2026-05-03T04:13:10.701252+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Açıkça söylemek gerekirse, Target'ın DEI amaçlarından geri çekilmesinin ve Black tedarikçiler lehine bir programdan vazgeçmesinin arka planı, stratejik önemi ve lokasyon seçimi nedenleri birlikte düşünüldüğünde, rekabetteki rakip firmaları veya tedarik zincirinde bir dizi potansiyel risk ve etki oluşturabilmektedir. Ayrıca bu kararın sektörel yansımaları da göz ardından geçmemelidir.",
+            "event_type": "downsizing",
+            "title": "Target Drops DEI Goals and Ends Program to Boost Black Suppliers"
+        },
+        "analysis": {
+            "sentiment": "negative",
+            "risks": [
+                "Rakipler tarafından potansiyel avantajların kaybedilmesi",
+                "Tedarik zinciri etkileşiminin negatif şekilde bozulması"
+            ],
+            "butterfly_effect": "Target'ın DEI programlarını kapatması, rekabetçi pazarlarda rakiplerden bir avantaja sahip olmak için çalışan firmalara da aynı şeyi yapma motivasyonu verebilir."
+        },
+        "entities": {
+            "company": {
+                "name": "Target",
+                "ticker": null
+            },
+            "from_location": "null",
+            "to_location": "null"
+        },
+        "industry": {
+            "sector": "Retail",
+            "equipment_keywords": [
+                "Retail Management",
+                "Diversity and inclusion"
+            ]
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Target'ın DEI programları kapatması büyük bir CAPEX olmayıp, bu tür programların işletme kültürünü değiştireceği ve çalışan motivasyonunu da etkileyebileceği için, bios için bu bir fırsat olabilir.",
+            "recommended_action": "monitor",
+            "score": 45
+        }
+    },
+    {
+        "source": {
+            "publisher": "wsj",
+            "url": "https://www.wsj.com/articles/energy-utilities-roundup-market-talk-08708375?mod=pls_whats_news_us_business_f",
+            "retrieved_at_utc": "2026-05-03T04:13:20.847746+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Enerji ve hizmet sektöründeki şirketlerin lokasyon seçim nedenlerini, yatırım stratejilerini ve olası etkilerini inceleyen bir C-Level yatırım özeti.",
+            "event_type": "other",
+            "title": "Energy & Utilities Roundup: Market Talk"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [],
+            "butterfly_effect": "Buinvestmentın rakipler veya tedarik zinciri üzerine herhangi bir etkisi yok."
+        },
+        "entities": {
+            "company": {
+                "name": "null",
+                "ticker": "null"
+            },
+            "from_location": "null",
+            "to_location": "null"
+        },
+        "industry": {
+            "sector": "Enerji & Hizmet",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": null,
+            "recommended_action": "monitor",
+            "score": 45
+        }
+    },
+    {
+        "source": {
+            "publisher": "wsj",
+            "url": "https://www.wsj.com/articles/basic-materials-roundup-market-talk-f817645e?mod=pls_whats_news_us_business_f",
+            "retrieved_at_utc": "2026-05-03T04:13:30.492294+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Haberin arka planını, yatırımın stratejik önemini, lokasyon seçim nedenlerini ve sektörel olası etkilerini kapsayan, en az 3-4 cümlelik son derece detaylı, profesyonel ve analitik bir C-Level yatırım özeti.",
+            "event_type": "other",
+            "title": "Basic Materials Roundup: Market Talk"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [],
+            "butterfly_effect": ""
+        },
+        "entities": {
+            "company": {
+                "name": "",
+                "ticker": null
+            },
+            "from_location": "",
+            "to_location": ""
+        },
+        "industry": {
+            "sector": "Basic Materials",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "",
+            "recommended_action": "monitor",
+            "score": 26
+        }
+    },
+    {
+        "source": {
+            "publisher": "wsj",
+            "url": "https://www.wsj.com/articles/auto-transport-roundup-market-talk-f1469058?mod=pls_whats_news_us_business_f",
+            "retrieved_at_utc": "2026-05-03T04:13:40.502067+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Auto ekosistemindeki şirketler ve onların yatırımlarıyla ilgili bir haber özeti.",
+            "event_type": "relocation",
+            "title": "Auto & Transport Roundup: Market Talk"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [],
+            "butterfly_effect": "Kısaca bu haberlerin rakipler veya tedarik zinciri üzerindeki olası yansımaları hakkında bilgilendirmek gerekir. Şirketlerin yeni yatırımları ve stratejileri önümüzdeki dönemlerde rekabet ve tedarik zincirinin değişimini beraberinde getirebilir."
+        },
+        "entities": {
+            "company": {
+                "name": "null",
+                "ticker": "null"
+            },
+            "from_location": "null",
+            "to_location": "null"
+        },
+        "industry": {
+            "sector": "Taşıma",
+            "equipment_keywords": [
+                "otomobil",
+                "otomobil",
+                "transport"
+            ]
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Bu haberde bahsedilen şirketler ve yatırımlarıyla ilgilenebilir olduğumuza inanıyorum. Ancak daha fazla detay gerekiyor.",
+            "recommended_action": "research",
+            "score": 72
+        }
+    },
+    {
+        "source": {
+            "publisher": "wsj",
+            "url": "https://www.wsj.com/articles/financial-services-roundup-market-talk-fb36548b?mod=pls_whats_news_us_business_f",
+            "retrieved_at_utc": "2026-05-03T04:13:50.608561+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Finans sektöründe Banca Monte dei Paschi di Siena'nin Mediobanca için yaptığı teklifi, Travelers ve diğer şirketleri etkileyen son haberleri ve finansal hizmetleri anlamak içi araştırmalar içeren Market Talks'ten yararlanın.",
+            "event_type": "relocation",
+            "title": "Financial Services Roundup: Market Talk"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [],
+            "butterfly_effect": "Finansal hizmetlerde gerçekleşen bu gelişmeler rakipleri ve tedarik zinciri üzerinde etkileyecek mi? Bu sorunun yanıtını henüz bulamadık."
+        },
+        "entities": {
+            "company": {
+                "name": "Banca Monte dei Paschi di Siena",
+                "ticker": null
+            },
+            "from_location": "Belirtilmemiş",
+            "to_location": "Belirtilmemiş"
+        },
+        "industry": {
+            "sector": "Financial Services",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Bu haberin bios için herhangi bir fırsatı sunduğunu görmedik.",
+            "recommended_action": "monitor",
+            "score": 72
+        }
+    },
+    {
+        "source": {
+            "publisher": "wsj",
+            "url": "https://www.wsj.com/articles/novo-nordisk-shares-surge-on-new-obesity-drug-results-416670ee?mod=pls_whats_news_us_business_f",
+            "retrieved_at_utc": "2026-05-03T04:14:01.728215+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Novo Nordisk'in payları yükselerek tıbbi devin yeni obezite tedavisinin klinik deneylerde hasta vücut ağırlığında %22 oranında azalma sağlamasından sonra yükseldi.",
+            "event_type": "expansion",
+            "title": "Novo Nordisk Shares Surge on New Obesity Drug Results"
+        },
+        "analysis": {
+            "sentiment": "positive",
+            "risks": [],
+            "butterfly_effect": "Bu yatırıma diğer ilaç firmaları veya tedarik zinciri şirketi üzerinde muhtemelen etkisi yoktur."
+        },
+        "entities": {
+            "company": {
+                "name": "Novo Nordisk",
+                "ticker": null
+            },
+            "from_location": "",
+            "to_location": ""
+        },
+        "industry": {
+            "sector": "pharma",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Novo Nordisk'in yeni obezite tedavisine yapılan yatırımın, sektörde rekabet avantajı sağlaması ve firmayı daha kazançlı duruma getirecektir.",
+            "recommended_action": "monitor",
+            "score": 55
+        }
+    },
+    {
+        "source": {
+            "publisher": "wsj",
+            "url": "https://www.wsj.com/articles/eu-conditionally-approves-international-papers-7-16-billion-ds-smith-buy-c1ce87f1?mod=pls_whats_news_us_business_f",
+            "retrieved_at_utc": "2026-05-03T04:14:10.556114+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Avrupa Komisyonu, DS Smith alımı konusunda rekabet endişelerini tamamen ortadan kaldıran, beş Avrupa tesisinin devrine yönelik International Paper'in önerilerini onayladı.",
+            "event_type": "relocation",
+            "title": "EU Conditionally Approves International Paper's $7.16 Billion DS Smith Buy"
+        },
+        "analysis": {
+            "sentiment": "positive",
+            "risks": [],
+            "butterfly_effect": "Bu yatırım, rakipler veya tedarik zinciri üzerinde önemli yansımalar doğurmayacaktır."
+        },
+        "entities": {
+            "company": {
+                "name": "International Paper",
+                "ticker": null
+            },
+            "from_location": null,
+            "to_location": "Avrupa"
+        },
+        "industry": {
+            "sector": "Kağıt | Karton",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 7160000000,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Bu yatırım, Avrupa'daki lokasyon stratejisinin ve sektörde önemli bir oyuncu olma ihtiyacını karşılayacak. Uluslararası Paper, DS Smith'in güçlü bir rakip olacaktır.",
+            "recommended_action": "monitor",
+            "score": 65
+        }
+    },
+    {
+        "source": {
+            "publisher": "cnbc",
+            "url": "https://www.cnbc.com/2026/05/02/hair-loss-glp-1s.html",
+            "retrieved_at_utc": "2026-05-03T04:14:20.093627+00:00"
+        },
+        "article": {
+            "text_summary_tr": "GLP-1 ilaçlarının ortak bir yan etkisi olan saç dökülmesi, yeni bir saç tedavi pazarı yaratıyor. Bu pazar, önce hiç dikkate alınmeyen ama giderek büyüyen bir pazardır.",
+            "event_type": "relocation",
+            "title": "Weight loss and hair loss: The growing hair treatment market from GLP-1s"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [],
+            "butterfly_effect": "Bu pazarın rakipler veya tedarik zinciri üzerinde olası etkileri yok."
+        },
+        "entities": {
+            "company": {
+                "name": "Haberin konusu"
+            },
+            "from_location": "Belirtilmemiş",
+            "to_location": "Belirtilmemiş"
+        },
+        "industry": {
+            "sector": "saç tedavisi",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "6 ay içinde"
+        },
+        "bios_fit": {
+            "rationale_tr": "Haberin konusu, sektör ve lokasyon özellikleri GLP-1 ilaçlarından sonra oluşan saç dökülmesi pazarını analiz etmeyi haklı kılmaktadır.",
+            "recommended_action": "monitor",
+            "score": 73
+        }
+    },
+    {
+        "source": {
+            "publisher": "cnbc",
+            "url": "https://www.cnbc.com/2026/05/01/spirit-airlines-trump-bailout.html",
+            "retrieved_at_utc": "2026-05-03T04:14:29.812211+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Bailout anlaşması yapamayan Spirit Airlines'in kapatılması, düşük maliyetli seyahat çağının sonunu getirmektedir.",
+            "event_type": "closure",
+            "title": "Spirit Airlines shuts down after failing to reach a bailout deal, ending discount travel era"
+        },
+        "analysis": {
+            "sentiment": "negative",
+            "risks": [
+                "Kapatma riski"
+            ],
+            "butterfly_effect": ""
+        },
+        "entities": {
+            "company": {
+                "name": "Spirit Airlines",
+                "ticker": null
+            },
+            "from_location": "null",
+            "to_location": "null"
+        },
+        "industry": {
+            "sector": "Havacılık",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": null,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Kapatma riski, yeniden lokasyon seçimi ve kapasite optimizasyonu",
+            "recommended_action": "monitor",
+            "score": 57
+        }
+    },
+    {
+        "source": {
+            "publisher": "cnbc",
+            "url": "https://www.cnbc.com/2026/05/01/spirit-airlines-flights-shut-down.html",
+            "retrieved_at_utc": "2026-05-03T04:14:39.402895+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Uçuş biletine sahip yolcular için gerekenleri öğrenmek isteyenler için haber.",
+            "event_type": "closure",
+            "title": "Spirit Airlines shut down. Here's what travelers need to know if they have tickets"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [],
+            "butterfly_effect": ""
+        },
+        "entities": {
+            "company": {
+                "name": "Spirit Airlines"
+            },
+            "from_location": "null",
+            "to_location": "null"
+        },
+        "industry": {
+            "sector": "null",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Tüm zamanlı şirketlerin ve endüstrinin risk taşımadığı için uygun bir fırsattır.",
+            "recommended_action": "monitor",
+            "score": 57
+        }
+    },
+    {
+        "source": {
+            "publisher": "cnbc",
+            "url": "https://www.cnbc.com/2026/05/01/trump-eu-auto-tariffs.html",
+            "retrieved_at_utc": "2026-05-03T04:14:49.300842+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Haberde Trump, Avrupa otomobil vergilerini 25'e çıkarma planını açıkladı. Ancak Supreme Court bu önlemi önceki yıl iptal etti. Avrupa, bu durumun Washington ile ticaret anlaşmesinin riskini arttıracağını belirtti.",
+            "event_type": "relocation | closure | downsizing | expansion | new_plant | other",
+            "title": "Trump says he's raising EU auto tariffs to 25%"
+        },
+        "analysis": {
+            "sentiment": "negative",
+            "risks": [
+                "Avrupa ile ticaret anlaşmasının riski",
+                "Gümrük vergileri"
+            ],
+            "butterfly_effect": "Bu politikanın ABD'deki otomotiv sektörüne, tedarikçilere ve rakiplere olası etkisi"
+        },
+        "entities": {
+            "company": {
+                "name": "Avrupa Birliği",
+                "ticker": null
+            },
+            "from_location": "ABD",
+            "to_location": "Avrupa Birliği"
+        },
+        "industry": {
+            "sector": "otomotiv",
+            "equipment_keywords": [
+                "otomobil",
+                "zenginlik"
+            ]
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Açıklanan politika, birçoğunun Avrupa'daki işletmeyi yeniden konumlandırma ve yatırım planlar hakkında endişe duyasına neden oldu.",
+            "recommended_action": "monitor",
+            "score": 43
+        }
+    },
+    {
+        "source": {
+            "publisher": "cnbc",
+            "url": "https://www.cnbc.com/2026/05/01/kentucky-derby-prediction-platforms.html",
+            "retrieved_at_utc": "2026-05-03T04:15:00.173642+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Kentucky Derby'de yatırımın stratejik önemi ve potansiyel riskleri göz ardı edilmemelidir.",
+            "event_type": "other",
+            "title": "Why you won't find Kentucky Derby bets on prediction platforms"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [],
+            "butterfly_effect": "Haberin olası yansımaları: Kentucky Derby'de yatırım yapmamayı tercih eden prediction market platformları (Kalshi, Polymarket)"
+        },
+        "entities": {
+            "company": {},
+            "from_location": null,
+            "to_location": null
+        },
+        "industry": {
+            "sector": "Eğlence",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Bu olay bios için uygun değildir, çünkü yatırımın arka planı ve potansiyel riskleri göz ardı edilmemelidir.",
+            "recommended_action": "monitor",
+            "score": 19
+        }
+    },
+    {
+        "source": {
+            "publisher": "cnbc",
+            "url": "https://www.cnbc.com/2026/05/01/smoothie-king-plots-expansion-as-wellness-trends-boost-sales.html",
+            "retrieved_at_utc": "2026-05-03T04:15:07.899517+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Wellness trendleri satışları artırmaya devam ettiği için Smoothie King genişlemeyi planlıyor. Sistemsel satışlar son 5 yıl içinde %64 oranında artış gösterdi.",
+            "event_type": "expansion",
+            "title": "Smoothie King plots expansion as wellness trends boost sales"
+        },
+        "analysis": {
+            "sentiment": "positive",
+            "risks": [],
+            "butterfly_effect": "Rakiplerinin de benzer stratejileri uygulamaya çalışabilir"
+        },
+        "entities": {
+            "company": {
+                "name": "Smoothie King",
+                "ticker": null
+            },
+            "from_location": null,
+            "to_location": null
+        },
+        "industry": {
+            "sector": "Gıda",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": null,
+            "timeline": null
+        },
+        "bios_fit": {
+            "rationale_tr": "Wellness trendleri ve satış artışı nedeni ile",
+            "recommended_action": "monitor",
+            "score": 47
+        }
+    },
+    {
+        "source": {
+            "publisher": "cnbc",
+            "url": "https://www.cnbc.com/2026/05/01/apollo-sports-capital-tom-dundon-pickleball-investment.html",
+            "retrieved_at_utc": "2026-05-03T04:15:17.652756+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Yatırımın stratejik önemi, lokasyon seçimi nedenleri ve sektörel olası etkilerini açıklamayan, daha fazla bilgiye ihtiyaç duyulan bir C-Level yatırım özeti.",
+            "event_type": "capex_fdi",
+            "title": "Apollo Sports Capital and Tom Dundon make landmark $225 million investment in pickleball"
+        },
+        "analysis": {
+            "sentiment": "positive",
+            "risks": [],
+            "butterfly_effect": "Pickleball Inc.'in rakipleri üzerindeki olası yansımalar"
+        },
+        "entities": {
+            "company": {
+                "name": "Pickleball Inc.",
+                "ticker": null
+            },
+            "from_location": null,
+            "to_location": null
+        },
+        "industry": {
+            "sector": "",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 225000000,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Yatırımın büyük olasılıkla sektördeki büyüme trendini yansıdığı için olumlu bir işaret",
+            "recommended_action": "monitor",
+            "score": 26
+        }
+    },
+    {
+        "source": {
+            "publisher": "cnbc",
+            "url": "https://www.cnbc.com/2026/04/30/rivian-renegotiates-doe-loan-adjusts-capacity-plans-for-georgia-plant.html",
+            "retrieved_at_utc": "2026-05-03T04:15:28.447114+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Georgiya fabrikası için kapasite planlarını adjust eden Rivian, DOE loan'u $4.5 milyar'a indirdi. Önceki planda 400.000 ünite yıllık üretim için iki üretim aşamasını desteklemeyi amaçlıyordu.",
+            "event_type": "relocation",
+            "title": "Rivian renegotiates DOE loan down to $4.5 billion, adjusts capacity plans for Georgia plant"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [],
+            "butterfly_effect": ""
+        },
+        "entities": {
+            "company": {
+                "name": "Rivian",
+                "ticker": null
+            },
+            "from_location": null,
+            "to_location": "Georgiya"
+        },
+        "industry": {
+            "sector": "Ulaşım",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": null,
+            "timeline": ""
+        },
+        "bios_fit": {
+            "rationale_tr": "",
+            "recommended_action": "monitor",
+            "score": 61
+        }
+    },
+    {
+        "source": {
+            "publisher": "cnbc",
+            "url": "https://www.cnbc.com/2026/04/30/investor-jack-selby-markets-underpricing-middle-east-ai-pullback-risk.html",
+            "retrieved_at_utc": "2026-05-03T04:15:37.202287+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Teknoloji yatırımcısı Jack Selby'ye göre, Middle East'in AI yatırımları 5 yıl içinde küresel yatırımların yaklaşık bir čtvrtünü oluşturacaktır.",
+            "event_type": "relocation",
+            "title": "Markets are underpricing the risk of Middle East pullback in AI, says tech investor Jack Selby"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [
+                "Middle East'in AI yatırımları tehlikeye girmesi"
+            ],
+            "butterfly_effect": "Bu durumun rakipler ve tedarik zinciri üzerindeki olası yansımalarını görmek için daha fazla.monitor"
+        },
+        "entities": {
+            "company": {
+                "name": "Thiel Capital",
+                "ticker": null
+            },
+            "from_location": null,
+            "to_location": "Middle East"
+        },
+        "industry": {
+            "sector": "AI",
+            "equipment_keywords": [
+                "AI",
+                "güncelleme"
+            ]
+        },
+        "signals": {
+            "capex_usd": null,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Investorseye göre bölgeye ait risklerin gözden kaçması",
+            "recommended_action": "monitor",
+            "score": 62
+        }
+    },
+    {
+        "source": {
+            "publisher": "cnbc",
+            "url": "https://www.cnbc.com/2026/04/30/pricey-nfl-nba-ownership-stakes-investors-leagues-valuations.html",
+            "retrieved_at_utc": "2026-05-03T04:15:46.970452+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Haberin arka planını, yatırımın stratejik önemini, lokasyon seçim nedenlerini ve sektörel olası etkilerini kapsayan, en az 3-4 cümlelik son derece detaylı, profesyonel ve analitik bir C-Level yatırım özeti.",
+            "event_type": "downsizing",
+            "title": "Pricey NFL, NBA ownership stakes are pushing investors to smaller leagues and driving valuations higher"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [],
+            "butterfly_effect": "Yatırımın rakipler üzerindeki 1-2 cümlelik olası yansımaları"
+        },
+        "entities": {
+            "company": {
+                "name": "NFL ve NBA",
+                "ticker": null
+            },
+            "from_location": "null",
+            "to_location": "küçük ligler"
+        },
+        "industry": {
+            "sector": "spor",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Skor gerekçesi daha yüksek değerlemeler ve ufak lig yatırım fırsatları ile ilgililik",
+            "recommended_action": "monitor",
+            "score": 42
+        }
+    },
+    {
+        "source": {
+            "publisher": "bbc",
+            "url": "https://www.bbc.com/news/articles/c794zd1vqn4o?at_medium=RSS&at_campaign=rss",
+            "retrieved_at_utc": "2026-05-03T04:15:57.628515+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Piyasalarda kısa süre önce havayollarına yakındaki kaynaklardan gaz alabileceği bildirilen bir planın havayollarının gelecekteki uçuşlarından iptal etmelerini önleyecek olup olmayacağını görmek açısından önemlidir. Bu durum özellikle yaz aylarında yaşanan geçici uçuş kısıtlamalarına neden olabilecek Orta Doğu petrollerinin mevcut talebi karşılama sorunları açısından stratejik öneme sahiptir.",
+            "event_type": "relocation",
+            "title": "Airlines can cancel flights in advance over fuel shortages, under new plans"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [
+                "Petrol tedarikindeki olası sorunlar",
+                "Uçuşlar için son dakika iptalleri"
+            ],
+            "butterfly_effect": "Tedarik zincirindeki olası sorunlar havayollarının rakip firmalara karşı stratejilerini etkileyebilir. Ayrıca, petrol talebi ve arzındaki dengesizlikler, Orta Doğu'daki diğer endüstrilere de yansıyabilir."
+        },
+        "entities": {
+            "company": {
+                "name": "Havayolları",
+                "ticker": null
+            },
+            "from_location": "Yakındaki petrol kaynakları",
+            "to_location": "Orta Doğu"
+        },
+        "industry": {
+            "sector": "Havacılık ve Ulaştırma",
+            "equipment_keywords": [
+                "uçaklar"
+            ]
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Stratejik konum nedeniyle",
+            "recommended_action": ".monitor",
+            "score": 69
+        }
+    },
+    {
+        "source": {
+            "publisher": "bbc",
+            "url": "https://www.bbc.com/news/articles/cqxlnrqjvzyo?at_medium=RSS&at_campaign=rss",
+            "retrieved_at_utc": "2026-05-03T04:16:03.353371+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Haberin arka planını, yatırımın stratejik önemini, lokasyon seçim nedenlerini ve sektörel olası etkilerini kapsayan, en az 3-4 cümlelik son derece detaylı, profesyonel ve analitik bir C-Level yatırım özeti.",
+            "event_type": "closure",
+            "title": "Spirit Airlines shutting down after rescue talks collapse"
+        },
+        "analysis": {
+            "sentiment": "negative",
+            "risks": [
+                "Finansal sorunlar",
+                "Kriz"
+            ],
+            "butterfly_effect": ""
+        },
+        "entities": {
+            "company": {
+                "name": "Spirit Airlines"
+            },
+            "from_location": "",
+            "to_location": ""
+        },
+        "industry": {
+            "sector": "Havacılık",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 500,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "İlk etapta şirketin lokasyon değişikliğine uygun olduğumun belirtilmesi önemlidir.",
+            "recommended_action": "monitor",
+            "score": 44
+        }
+    },
+    {
+        "source": {
+            "publisher": "bbc",
+            "url": "https://www.bbc.com/news/articles/c4g8zpylzz9o?at_medium=RSS&at_campaign=rss",
+            "retrieved_at_utc": "2026-05-03T04:16:12.825772+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Tüm detaylarını değerlendirmek adına, hem şirketin lokasyon değişikliğinin finansal etkilerini hem de sektörle ilgili gerçekleşen trend ve beklentileri incelersek Trump'ın açıklamaları ile ilişkili gelecekte 25'lere varan AB'ne yönelik verginin olası etkisi hakkında daha ayrıntılı bilgiler elde edebiliriz.",
+            "event_type": "relocation",
+            "title": "Trump says he will hike tariffs on EU cars to 25%"
+        },
+        "analysis": {
+            "sentiment": "negative",
+            "risks": [
+                "Ekonomik krize neden olabilecek ABD'nin AB'ne yönelik yeni vergilendirme politikası"
+            ],
+            "butterfly_effect": "Trump'ın bu kararı muhtemelen AB'nin kendi vergileri artırarak ABD'ye tepki verecek, küresel ekonomide yeni bir dizi etkileşim ve rekabet yaratacak."
+        },
+        "entities": {
+            "company": {
+                "name": "Trump",
+                "ticker": "null"
+            },
+            "from_location": "ABD",
+            "to_location": "null"
+        },
+        "industry": {
+            "sector": "Gemi İnşası",
+            "equipment_keywords": [
+                "Savar",
+                "Sahne"
+            ]
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilumsuz"
+        },
+        "bios_fit": {
+            "rationale_tr": "Trump'ın açıklaması ile olası AB'ne yönelik yeni vergilendirme politikasının etkilerini analiz ederken, şirketlerin lokasyon seçimleri ve olası etkilerini incelersek daha iyi kararlar verebiliriz.",
+            "recommended_action": "ölçüm",
+            "score": 69
+        }
+    },
+    {
+        "source": {
+            "publisher": "bbc",
+            "url": "https://www.bbc.com/news/articles/cg4pqe1zzgqo?at_medium=RSS&at_campaign=rss",
+            "retrieved_at_utc": "2026-05-03T04:16:23.563800+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Bank of England'ın son raporuna göre, İran çatışması nostra maliyesi ne kadar etkileyeceği hakkında bazı ilginç detaylar var.",
+            "event_type": "relocation",
+            "title": "Mortgages, jobs and energy bills - how the Iran war will affect your money"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [],
+            "butterfly_effect": "Iran çatışması Bank of England'ın politika decisionlarını etkileyecek."
+        },
+        "entities": {
+            "company": {
+                "name": "Bank of England",
+                "ticker": "null"
+            },
+            "from_location": "İngiltere",
+            "to_location": "Belirtilmemiş"
+        },
+        "industry": {
+            "sector": "finans",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Çatışma ile Bank of England'ın politika değiştirme potansiyeli var.",
+            "recommended_action": "monitor",
+            "score": 69
+        }
+    },
+    {
+        "source": {
+            "publisher": "bbc",
+            "url": "https://www.bbc.com/news/articles/cy02gjq2987o?at_medium=RSS&at_campaign=rss",
+            "retrieved_at_utc": "2026-05-03T04:16:33.431714+00:00"
+        },
+        "article": {
+            "text_summary_tr": "ABD ordusunun gelecekte AI tabanlı mücadeleye odaklanacağı belirtilerek, büyük teknoloji firmaları ile sekiz yeni sözleşme imzalandığı belirtildi. Bu expansion, AI yeteneklerinin geliştirilmesiyle alakalıdır.",
+            "event_type": "expansion",
+            "title": "Pentagon says US military to be an 'AI-first' fighting force"
+        },
+        "analysis": {
+            "sentiment": "positive",
+            "risks": [],
+            "butterfly_effect": "Yatırımın rakipler veya tedarik zinciri üzerine 1-2 cümlelik olası yansımaları; ABD savunma sanayisinin AI geliştirmesinin rekabetçi avantajı olması"
+        },
+        "entities": {
+            "company": {
+                "name": "ABD ordusu",
+                "ticker": null
+            },
+            "from_location": "ABD",
+            "to_location": "Belirtilmemiş"
+        },
+        "industry": {
+            "sector": "savunma-sanayi",
+            "equipment_keywords": [
+                "artificial_intelligence",
+                "AI",
+                "yetenekler"
+            ]
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Yatırımın ABD savunma sanayisinin AI gelişimiyle alakalı genişlemesi nedeniyle uygun olduğu belirtilmiştir.",
+            "recommended_action": "monitor",
+            "score": 61
+        }
+    },
+    {
+        "source": {
+            "publisher": "bbc",
+            "url": "https://www.bbc.com/news/articles/cwyw6rylzepo?at_medium=RSS&at_campaign=rss",
+            "retrieved_at_utc": "2026-05-03T04:16:44.301592+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Yatırımın stratejik önemi hakkında açıklanmış olsa da, arka planı ve olası etkiler üzerine ayrıntılı bir analiz eksikliğini gözlemleyerek yatırımın potansiyel faydalarını karşılaştırmadan değerlendirmek yerinde değildir.",
+            "event_type": "other",
+            "title": "Will AI lead to more accurate opinion polls?"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [],
+            "butterfly_effect": "Yatırımın rakipler üzerindeki olası yansımaları: daha hızlı sonuçların potansiyel olarak rakipler üzerindeki avantaj oluşturmasına neden olabilir."
+        },
+        "entities": {
+            "company": {
+                "name": "",
+                "ticker": ""
+            },
+            "from_location": "",
+            "to_location": ""
+        },
+        "industry": {
+            "sector": "",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Bu konuyla alakalı yatırımların analizinde eksikliklerin giderilmesi gerektiğini düşünüyoruz. Önerimiz, konuyla alakalı haberleri ve analizleri izlemektir.",
+            "recommended_action": "monitor",
+            "score": 10
+        }
+    },
+    {
+        "source": {
+            "publisher": "bbc",
+            "url": "https://www.bbc.com/news/articles/c93xqnlq33qo?at_medium=RSS&at_campaign=rss",
+            "retrieved_at_utc": "2026-05-03T04:16:53.119838+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Sirket, The Real Greek'nin geri kalanini kurtaran Cote Brasserie-i sahibi Karali grubu, kadinin 28 lokasyonundan sadece 9'u dahil olmak üzere, bu zincirin çoğunu ele geçirdi.",
+            "event_type": "expansion",
+            "title": "The Real Greek rescued by Cote Brasserie-owner"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [],
+            "butterfly_effect": "Yatırımda rakiplerle ilişkiler ve olası etkileri"
+        },
+        "entities": {
+            "company": {
+                "name": "The Real Greek",
+                "ticker": null
+            },
+            "from_location": null,
+            "to_location": "Karali grubu"
+        },
+        "industry": {
+            "sector": "Restoran",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Yatırım, mevcut lokasyonlardan expansion yaparak, yeni pazarlara ulaşmaya çalıştığı için uygun olabilir.",
+            "recommended_action": "monitor",
+            "score": 55
+        }
+    },
+    {
+        "source": {
+            "publisher": "bbc",
+            "url": "https://www.bbc.com/news/articles/cdjp3dlkzwwo?at_medium=RSS&at_campaign=rss",
+            "retrieved_at_utc": "2026-05-03T04:17:03.539234+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Haberin arka planını inceleyeceğimiz ilk unsur, Crayola markalı oyuncakların olası asbest kirliliği nedeniyle geri çekilmesinin şirketin gelecekteki iş stratejileri açısından ne derece stratejik önem taşıdığıdır. Şirketin bu kararının nedenlerinin analizine geçmeden önce, öncelikle oyuncak sektöründeki iş stratejilerinin şirket açısından ne derece önemli olduğu ile başlamak gerekir. Bunun için oyuncak sektöründeki pazar payının şirketin iş gelirlerine katkıda bulunduğu oranın belirlenmesi gerekmektedir. Ayrıca oyuncak sektöründeki rekabet ne derece yüksek olup şirketin bu sektördeki iş gelirlerinin ne derece stabil olduğu da analiz edilecektir. Tüm bu analizler sonucunda Crayola markalı oyuncakların olası asbest kirliliği nedeniyle geri çekilmesinin şirketin iş stratejilerini hangi ölçüde etkilediği belirlenecektir. Bu nedenle, bu haberin şirket için ne derece stratejik bir önem taşıdığının açıklaması bu şekilde yapılacaktır.",
+            "event_type": "closure",
+            "title": "Crayola toys recalled over possible asbestos contamination"
+        },
+        "analysis": {
+            "sentiment": "negative",
+            "risks": [
+                "Oyuncak sektöründeki gelir kaybı",
+                "İnsanlık hayatı için risk oluşturan asbest kirliliği"
+            ],
+            "butterfly_effect": "Crayola markalı oyuncakların geri çekilmesinin büyük marka imgelerini olumsuz etkileyerek rakip oyuncak markalarının pazar payını artışa geçirmesi"
+        },
+        "entities": {
+            "company": {
+                "name": "Crayola",
+                "ticker": null
+            },
+            "from_location": "string",
+            "to_location": "string"
+        },
+        "industry": {
+            "sector": "Oyuncak Sektörü",
+            "equipment_keywords": [
+                "asbest",
+                "oyuncak",
+                "çocuk"
+            ]
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Skor gerekçesi: Oyuncak sektöründeki riskli durum. Ürün geri çekimi ve asbest kirliliği riski var.",
+            "recommended_action": "monitor",
+            "score": 52
+        }
+    },
+    {
+        "source": {
+            "publisher": "bbc",
+            "url": "https://www.bbc.com/news/articles/c62djjj0z09o?at_medium=RSS&at_campaign=rss",
+            "retrieved_at_utc": "2026-05-03T04:17:16.481503+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Haberde, bir watchdogın, Şubat ve Mart arası kazanılan marjların \"genel olarak değişmediğini\" belirttiği, geniş çaplı benzin fiyat artmesinin kanıtı yok. Yatırımın arka planı, bir yarışçının rekabet politikasını etkileyebilir. Bu yatırımın stratejik önemi, benzin fiyatlarındaki değişimlere bağlı. Bir şirketin lokasyon seçimi nedenleri arasında, yakıt kaynakları ile ilgili nedenler olabilir.",
+            "event_type": "other",
+            "title": "No evidence of widespread fuel price-gouging, watchdog says"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [],
+            "butterfly_effect": "Bu yatırımın, rakipler veya tedarik zinciri üzerindeki etkileri minimal"
+        },
+        "entities": {
+            "company": {
+                "name": "",
+                "ticker": null
+            },
+            "from_location": "İngiltere",
+            "to_location": ""
+        },
+        "industry": {
+            "sector": "",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Fakat mevcut veriler, bios için bir fırsat ortaya koyuyor. Bir yarışçının rekabet politikasını etkileyen bir yatırım olmasından hareketle.",
+            "recommended_action": "monitor",
+            "score": 23
+        }
+    },
+    {
+        "source": {
+            "publisher": "bbc",
+            "url": "https://www.bbc.com/news/articles/cpwp50v4ye7o?at_medium=RSS&at_campaign=rss",
+            "retrieved_at_utc": "2026-05-03T04:17:26.314830+00:00"
+        },
+        "article": {
+            "text_summary_tr": "İran savaşının sebebiyle gıda üretimi ve fiyatlar artacak. Yara firmasının lideri böyle konuştu.",
+            "event_type": "relocation | closure | downsizing | expansion | new_plant | tender | capex_fdi | other",
+            "title": "Billions of meals at risk due to Iran war, says fertiliser boss"
+        },
+        "analysis": {
+            "sentiment": "negative",
+            "risks": [
+                "Crop yields decrease",
+                "Price increase"
+            ],
+            "butterfly_effect": "Rakipler ve tedarik zinciri üzerinde olası bir yansıma, Yara firması için zor bir dönemin başlangıcı olabilir"
+        },
+        "entities": {
+            "company": {
+                "name": "Yara",
+                "ticker": "null"
+            },
+            "from_location": "Belirtilmemiş",
+            "to_location": "Belirtilmemiş"
+        },
+        "industry": {
+            "sector": "gıda",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Bu olayda İran savaşının sonucu olarak gıda üretiminde azalma ve fiyat artışını önlemek için yatırım yapmak gerekebilir. Bu nedenle, gıda alanında yeniden yerleştirme yapılabilir.",
+            "recommended_action": "monitor",
+            "score": 42
+        }
+    },
+    {
+        "source": {
+            "publisher": "new york times",
+            "url": "https://www.nytimes.com/2026/05/02/business/spirit-airlines-passengers-stranded.html",
+            "retrieved_at_utc": "2026-05-03T04:17:31.707609+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Spirit Airlines'in ani şekilde tüm uçuşlarını iptal etmesi ve böylece yolcuların aceleyle yeni planlar yaptırmaya zorlanmasıyla karşılaşıldı. Bu karar sonrasında biri \"Onlar tekrar işlerine dönecekler bile, bu asla daha fazla olacak\" demiştir.",
+            "event_type": "closure",
+            "title": "Spirit Airlines Cancels All Flights, Stranding Passengers"
+        },
+        "analysis": {
+            "sentiment": "negative",
+            "risks": [
+                "Müşteri memnuniyeti önemli ölçüde düşmüş olabilir",
+                "Firmaya karşı güven azalabilir"
+            ],
+            "butterfly_effect": "Bu ani karar, rakiplerine olan bağlılığını artırmış olabilir."
+        },
+        "entities": {
+            "company": {
+                "name": "Spirit Airlines",
+                "ticker": null
+            },
+            "from_location": null,
+            "to_location": null
+        },
+        "industry": {
+            "sector": " Havacılık | Seyahat",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Firma, kısa süre önce tüm uçuşlarını iptal etti. Şirketin mevcut durumda bir lokasyon değişikliğinin yok gibi görünmesi nedeniyle bu analiz tam olarak burada tam anlamıyla uygundur.",
+            "recommended_action": "monitor",
+            "score": 44
+        }
+    },
+    {
+        "article": {
+            "text_summary_tr": "Analiz başarısız",
+            "event_type": "other",
+            "title": "The Cannabis Industry’s New Best Friend? President Trump"
+        },
+        "entities": {
+            "company": {
+                "name": "null"
+            }
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "score": 34
+        },
+        "source": {
+            "publisher": "new york times",
+            "url": "https://www.nytimes.com/2026/05/02/business/dealbook/cannabis-industry-trump.html",
+            "retrieved_at_utc": "2026-05-03T04:17:51.246480+00:00"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": []
+        },
+        "industry": {
+            "sector": "null",
+            "equipment_keywords": []
+        }
+    },
+    {
+        "source": {
+            "publisher": "new york times",
+            "url": "https://www.nytimes.com/2026/05/02/business/flossing-brushing-work-gross.html",
+            "retrieved_at_utc": "2026-05-03T04:18:05.990552+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Haberin arka planını, yatırımın stratejik önemini, lokasyon seçim nedenlerini ve sektörel olası etkileri hakkında analiz yapabilmek için daha fazla bilgi gerekmektedir. Yatırım konusundaki net bir karar verilmemiştir.",
+            "event_type": "other",
+            "title": "Is Tooth Brushing at Work Gross?"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [],
+            "butterfly_effect": ""
+        },
+        "entities": {
+            "company": {
+                "name": "string",
+                "ticker": null
+            },
+            "from_location": "string",
+            "to_location": "string"
+        },
+        "industry": {
+            "sector": "string",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "İlgılış skoru düşük.",
+            "recommended_action": "monitor",
+            "score": 42
+        }
+    },
+    {
+        "article": {
+            "text_summary_tr": "Analiz başarısız",
+            "event_type": "other",
+            "title": "5 Money Lessons From People Caring for Their Elderly Parents"
+        },
+        "entities": {
+            "company": {
+                "name": "null"
+            }
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "score": 38
+        },
+        "source": {
+            "publisher": "new york times",
+            "url": "https://www.nytimes.com/2026/05/02/business/aging-parents-money-finances-retirement.html",
+            "retrieved_at_utc": "2026-05-03T04:18:15.728140+00:00"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": []
+        },
+        "industry": {
+            "sector": "null",
+            "equipment_keywords": []
+        }
+    },
+    {
+        "article": {
+            "text_summary_tr": "Analiz başarısız",
+            "event_type": "other",
+            "title": "Spirit Airlines Shuts Down After Years of Struggle"
+        },
+        "entities": {
+            "company": {
+                "name": "null"
+            }
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "score": 38
+        },
+        "source": {
+            "publisher": "new york times",
+            "url": "https://www.nytimes.com/2026/05/02/business/spirit-airlines-shutdown.html",
+            "retrieved_at_utc": "2026-05-03T04:18:38.448513+00:00"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": []
+        },
+        "industry": {
+            "sector": "null",
+            "equipment_keywords": []
+        }
+    },
+    {
+        "article": {
+            "text_summary_tr": "Analiz başarısız",
+            "event_type": "other",
+            "title": "Not Even Japanese Bathhouses Are Immune From Shocks of Iran War"
+        },
+        "entities": {
+            "company": {
+                "name": "null"
+            }
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "score": 38
+        },
+        "source": {
+            "publisher": "new york times",
+            "url": "https://www.nytimes.com/2026/05/02/business/japan-bathhouse-oil-iran.html",
+            "retrieved_at_utc": "2026-05-03T04:18:57.002131+00:00"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": []
+        },
+        "industry": {
+            "sector": "null",
+            "equipment_keywords": []
+        }
+    },
+    {
+        "source": {
+            "publisher": "new york times",
+            "url": "https://www.nytimes.com/2026/05/01/business/media/netflix-narnia-movie-theaters-release.html",
+            "retrieved_at_utc": "2026-05-03T04:19:06.774678+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Şirket, uzun süreli bir politikadan ayrılan bir strateji izliyor. Netflix, film dağıtımında yenilik yapmaktadır.",
+            "event_type": "relocation",
+            "title": "Netflix Plans First Wide Theatrical Release With ‘Narnia’"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": [],
+            "butterfly_effect": "Büyüyen platformun film endüstrisine olası etkileri"
+        },
+        "entities": {
+            "company": {
+                "name": "Netflix",
+                "ticker": null
+            },
+            "from_location": null,
+            "to_location": null
+        },
+        "industry": {
+            "sector": "bilişim",
+            "equipment_keywords": [
+                "güncel bilişim teknolojileri",
+                "yaratıcı içerik platformları"
+            ]
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Skor, sektörde yenilikçi bir yaklaşım görmesinden kaynaklanmaktadır.",
+            "recommended_action": "monitor",
+            "score": 56
+        }
+    },
+    {
+        "source": {
+            "publisher": "new york times",
+            "url": "https://www.nytimes.com/2026/05/01/business/thermos-bottles-recall.html",
+            "retrieved_at_utc": "2026-05-03T04:19:17.822628+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Yatırımın stratejik önemi ve sektörel etkiler ile lokasyon seçim nedenleri açısından Thermos şirketinin 8,2 milyon ürün hatırlatmasının ardında yatan nedenler ile bu olayların olası etkileri analiz edilmiştir.",
+            "event_type": "closure",
+            "title": "Thermos Recalls 8.2 Million Jars and Bottles After Customers Are Injured"
+        },
+        "analysis": {
+            "sentiment": "negative",
+            "risks": [
+                "Customer kazaları"
+            ],
+            "butterfly_effect": "Bu olayın rakiplere veya tedarik zincirine etkileri sınırlı olabilir."
+        },
+        "entities": {
+            "company": {
+                "name": "Thermos",
+                "ticker": null
+            },
+            "from_location": "Belirtilmemiş",
+            "to_location": "Belirtilmemiş"
+        },
+        "industry": {
+            "sector": "Gıda | Çay | Kahve",
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Thermos'un ürün hattından 8,2 milyon ürün hatırlatırken yaşanan kazalar, potansiyel müşterileri ve marka imajını olumsuz etkilemektedir. Bu nedenle potansiyel endüstriyel relokasyon fırsatları değerlendirirken şirketin hali hazırda ürün hatlarını iyileştirmek gibi önemli öncelikleri olabilir.",
+            "recommended_action": "monitor",
+            "score": 52
+        }
+    },
+    {
+        "source": {
+            "publisher": "new york times",
+            "url": "https://www.nytimes.com/2026/05/01/business/media/candace-owens-defamation-charlie-kirk.html",
+            "retrieved_at_utc": "2026-05-03T04:19:38.832953+00:00"
+        },
+        "article": {
+            "text_summary_tr": "Haber, Charlie Kirk'in eski güvenlik uzmanı, Candace Owens'a iftira davası açtı. Davada odaklanan, Ms. Owens tarafından yapılan yorumlara odaklanıyor, bir bölgedeki artan gerilimle ilgili.",
+            "event_type": "other",
+            "title": "Charlie Kirk’s Former Security Chief Sues Candace Owens for Defamation"
+        },
+        "analysis": {
+            "sentiment": "negative",
+            "risks": [],
+            "butterfly_effect": "Bu yaptırım, rakipler veya tedarik zinciri üzerindeki olası yansımaları gözden geçirmeyi gerektirir."
+        },
+        "entities": {
+            "company": {
+                "name": "Candace Owens",
+                "ticker": null
+            },
+            "from_location": null,
+            "to_location": null
+        },
+        "industry": {
+            "sector": null,
+            "equipment_keywords": []
+        },
+        "signals": {
+            "capex_usd": null,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "rationale_tr": "Bu dava, bir bölgedeki artan gerilimle ilgili.",
+            "recommended_action": "monitor",
+            "score": 31
+        }
+    },
+    {
+        "article": {
+            "text_summary_tr": "Analiz başarısız",
+            "event_type": "other",
+            "title": "Spirit Airlines Prepares to Shut Down After Trump Administration Bailout Falls Through"
+        },
+        "entities": {
+            "company": {
+                "name": "null"
+            }
+        },
+        "signals": {
+            "capex_usd": 0,
+            "timeline": "Belirtilmemiş"
+        },
+        "bios_fit": {
+            "score": 38
+        },
+        "source": {
+            "publisher": "new york times",
+            "url": "https://www.nytimes.com/2026/05/01/business/spirit-airlines-shutting-down.html",
+            "retrieved_at_utc": "2026-05-03T04:19:59.347893+00:00"
+        },
+        "analysis": {
+            "sentiment": "neutral",
+            "risks": []
+        },
+        "industry": {
+            "sector": "null",
+            "equipment_keywords": []
+        }
     }
 ]
