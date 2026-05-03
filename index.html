@@ -300,7 +300,7 @@
                 </div>
             </div>
 
-            <!-- YENİ 4: TERMİNAL / SİSTEM NABZI KUTUSU -->
+            <!-- 4: TERMİNAL / SİSTEM NABZI KUTUSU -->
             <div class="bg-[#050505] p-4 rounded-2xl shadow-inner border border-gray-800 relative overflow-hidden flex flex-col h-40">
                 <div class="flex items-center justify-between mb-2 pb-2 border-b border-gray-800">
                     <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-widest flex items-center gap-2">
@@ -402,7 +402,7 @@
                                 <ul id="detailRisks" class="text-xs text-rose-700 dark:text-rose-300 list-disc list-inside space-y-1"></ul>
                             </div>
 
-                            <!-- YENİ 3: KELEBEK ETKİSİ KUTUSU -->
+                            <!-- KELEBEK ETKİSİ KUTUSU -->
                             <div class="mt-4 bg-indigo-50 dark:bg-indigo-900/10 p-5 rounded-2xl border border-indigo-100 dark:border-indigo-800/30 transition-colors">
                                 <h4 class="text-[10px] font-black text-indigo-600 dark:text-indigo-400 uppercase mb-2 tracking-widest">
                                     <i class="fas fa-project-diagram"></i> Kelebek Etkisi (Rakip & Sektör Simülasyonu)
@@ -535,7 +535,6 @@
         let synth = window.speechSynthesis;
         let isSpeaking = false;
 
-        // YENİ 4: TERMİNAL LOG FONKSİYONU
         function addSystemLog(msg) {
             const logs = document.getElementById('terminalLogs');
             const time = new Date().toLocaleTimeString('tr-TR', { hour12: false });
@@ -545,7 +544,6 @@
             logs.scrollTop = logs.scrollHeight;
         }
 
-        // Rastgele terminal hareketi (Jüri şovu)
         setInterval(() => {
             const msgs = ["Global ağlar dinleniyor...", "Veri bütünlüğü doğrulanıyor...", "Hedef rotalar optimize ediliyor...", "Yeni yatırımlar taranıyor...", "SOC protokolleri güncel."];
             if (Math.random() > 0.6) addSystemLog(msgs[Math.floor(Math.random() * msgs.length)]);
@@ -683,6 +681,41 @@
             localStorage.setItem('bios_favorites', JSON.stringify(favorites)); applyFilters();
         }
 
+        // --- YENİ EKLENEN: SİLME FONKSİYONU ---
+        async function deleteNewsItem(event, uniqueId) {
+            event.stopPropagation(); // Kartın tıklanıp detay modalının açılmasını engeller
+            
+            // Kullanıcıdan onay al
+            if(!confirm("Bu haberi veritabanından TAMAMEN silmek istediğinize emin misiniz?")) return;
+
+            // 1. Ekrandan Anında Sil (Optimistic UI - Kullanıcıyı bekletmemek için)
+            allNewsData = allNewsData.filter(i => {
+                const id = i.article?.title || i.source?.url;
+                return id !== uniqueId;
+            });
+            
+            applyFilters(); // Kartı ekrandan uçurur, KPI'ları günceller
+            
+            addSystemLog(`Hedef veri yokediliyor: ${uniqueId.substring(0, 15)}...`);
+
+            // 2. Arka uca (Render Sunucusuna) silme emrini gönder
+            try {
+                const res = await fetch(`${API_BASE}/news`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id: uniqueId })
+                });
+                
+                if(res.ok) {
+                    addSystemLog("Veri sunucudan başarıyla silindi ve izler yok edildi.");
+                } else {
+                    addSystemLog("UYARI: Veri sunucudan silinemedi!");
+                }
+            } catch(e) {
+                addSystemLog("HATA: Sunucu bağlantısı kurulamadı!");
+            }
+        }
+
         function toggleFavoritesView() {
             showFavsOnly = !showFavsOnly;
             const btn = document.getElementById('favBtn'), txt = document.getElementById('noNewsText');
@@ -779,6 +812,7 @@
                     const star = favorites.includes(id) ? 'fas fa-star text-yellow-400 drop-shadow' : 'far fa-star text-gray-400 hover:text-yellow-400';
                     const sc = score > 70 ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800' : score > 40 ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800' : 'text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700';
 
+                    // YENİ EKLENEN: ÇÖP KUTUSU BUTONU (.flex items-center gap-3 divinin içine)
                     c.innerHTML += `
                 <div class="news-card bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm relative overflow-hidden group transition-colors" onclick="showDetails(${idx})" onmouseenter="focusMapOnIndex(${idx})" onmouseleave="resetMapFocus()">
                     <div class="absolute top-0 left-0 w-full h-1 ${sentimentColor} opacity-70"></div>
@@ -793,8 +827,11 @@
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="px-3 py-1 rounded-full text-xs font-bold border ${sc}">Fit: ${score}/100</div>
-                            <button onclick="toggleFavorite(event, '${id.replace(/'/g, "\\'")}')" class="p-1 hover:scale-125 transition-transform">
+                            <button onclick="toggleFavorite(event, '${id.replace(/'/g, "\\'")}')" class="p-1 hover:scale-125 transition-transform" title="Favorilere Ekle">
                                 <i class="${star} text-lg"></i>
+                            </button>
+                            <button onclick="deleteNewsItem(event, '${id.replace(/'/g, "\\'")}')" class="p-1 text-gray-400 hover:text-red-500 hover:scale-125 transition-all" title="Haberi Kalıcı Olarak Sil">
+                                <i class="fas fa-trash-alt text-lg"></i>
                             </button>
                         </div>
                     </div>
@@ -827,7 +864,6 @@
             document.getElementById('detailCompany').innerText = item.entities?.company?.name || "Bilinmiyor";
             document.getElementById('detailCapex').innerText = item.signals?.capex_usd ? `$${item.signals.capex_usd.toLocaleString()}` : "Veri Yok";
             
-            // YENİ 3: KELEBEK ETKİSİ DOM GÜNCELLEMESİ
             const butterflyText = item.analysis?.butterfly_effect || "Kelebek etkisi verisi bulunamadı. Lütfen yeni veriler için backend sistemini güncelleyin.";
             document.getElementById('detailButterfly').innerText = butterflyText;
 
