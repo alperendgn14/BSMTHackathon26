@@ -21,7 +21,7 @@ CORS(app) #teammatenin hata almaması için
 
 @app.route('/')
 def index():
-    # index.html dosyan app.py ile aynı klasördeyse '.' kullanılır
+    # index.html dosyası app.py ile aynı klasördeyse '.' kullanılır
     return send_from_directory('.', 'index.html')
 
 
