@@ -27,7 +27,7 @@ WEBHOOK_URL = "BURAYA_WEBHOOK_URL_GELECEK"
 
 
 def check_robots_txt(url):
-    """SOW Madde 6 ve 1.6: Robots.txt kontrolünü daha esnek bir şekilde yapar."""
+    """madde 6 ve 1.6: Robots.txt kontrolünü daha esnek bir şekilde yapar."""
     try:
         parsed_uri = urllib.parse.urlparse(url)
         base_url = f"{parsed_uri.scheme}://{parsed_uri.netloc}"
@@ -42,7 +42,7 @@ def check_robots_txt(url):
         rp.read()
         
         # Eğer site açıkça 'disallow' demediyse veya kütüphane hata verirse True dön.
-        # Bu, demo sırasında akışı korumak için stratejik bir yaklaşımdır.[cite: 1]
+        
         can_fetch = rp.can_fetch(feedparser.USER_AGENT, url)
         
         if not can_fetch:
@@ -57,7 +57,7 @@ def check_robots_txt(url):
 
 def is_duplicate(url):
     """
-    SOW Madde 1.5: URL bazlı tekrar kontrolü. 
+    madde 1.5: URL bazlı tekrar kontrolü. 
     Frontend ile uyumlu olması için hem ana db'yi hem de yedek db'yi kontrol eder.
     """
     files_to_check = [RSS_DB_FILE, DB_FILE] # Her iki dosyayı da tara
@@ -74,7 +74,7 @@ def is_duplicate(url):
     return False
 
 def analyze_with_llama3_api(text):
-    """SOW Madde 2.1, 2.3 & 2.5 uyumlu, Zaman Çizelgesi (Timeline) fixli analiz fonksiyonu."""
+    """madde 2.1, 2.3 & 2.5 uyumlu, Zaman Çizelgesi (Timeline) fixli analiz fonksiyonu."""
     
     # Başlıkları ve anahtarları sabit tutup sadece talimatı güçlendirdik
     prompt = f"""Sen BIOS için fırsat çıkaran bir endüstriyel relokasyon analistsin.
@@ -157,8 +157,8 @@ def calculate_bios_fit_score(parsed_json, source_url):
     if ent.get("to_location"): a_val += 0.25
     if ind.get("sector"): a_val += 0.10
 
-    # 3. G (Geography): Coğrafya Puanı - Ağırlık: 0.20[cite: 1]
-    # Avrupa/TR=1.0, Komşu=0.5, Diğer=0.1, Bilinmiyor=0.3[cite: 1]
+    # 3. G (Geography): Coğrafya Puanı - Ağırlık: 0.20
+    # Avrupa/TR=1.0, Komşu=0.5, Diğer=0.1, Bilinmiyor=0.3
     loc_text = (str(ent.get("from_location", "")) + " " + str(ent.get("to_location", ""))).lower()
     europe_keywords = ["germany", "france", "poland", "turkey", "türkiye", "romania", "hungary", "balkans", "uk", "europe"]
     
@@ -171,8 +171,8 @@ def calculate_bios_fit_score(parsed_json, source_url):
     else:
         g_val = 0.1
 
-    # 4. T (Timeline): Zaman Penceresi - Ağırlık: 0.15[cite: 1]
-    # Yakın(0-6ay)=1.0, Orta(6-18ay)=0.7, Uzun(18-36ay)=0.4, Belirtilmemiş=0.3[cite: 1]
+    # 4. T (Timeline): Zaman Penceresi - Ağırlık: 0.15
+    # Yakın(0-6ay)=1.0, Orta(6-18ay)=0.7, Uzun(18-36ay)=0.4, Belirtilmemiş=0.3
     timeline_text = str(sig.get("timeline", "")).lower()
     if any(x in timeline_text for x in ["announced", "will move", "q1", "q2", "6 months"]):
         t_val = 1.0
@@ -183,8 +183,8 @@ def calculate_bios_fit_score(parsed_json, source_url):
     else:
         t_val = 0.4
 
-    # 5. C (Source Trust): Kaynak Güveni - Ağırlık: 0.10[cite: 1]
-    # Resmi/IR=1.0, Reuters/Bloomberg=0.85, Sektörel=0.7, Genel=0.55[cite: 1]
+    # 5. C (Source Trust): Kaynak Güveni - Ağırlık: 0.10
+    # Resmi/IR=1.0, Reuters/Bloomberg=0.85, Sektörel=0.7, Genel=0.55
     source_url_l = source_url.lower()
     if "ir" in source_url_l or "press" in source_url_l:
         c_val = 1.0
@@ -195,11 +195,11 @@ def calculate_bios_fit_score(parsed_json, source_url):
     else:
         c_val = 0.55
 
-    # --- Resmi Ağırlıklı Skor Hesaplama ---[cite: 1]
-    # Score = 100 * (0.30*E + 0.25*A + 0.20*G + 0.15*T + 0.10*C)[cite: 1]
+    # --- Resmi Ağırlıklı Skor Hesaplama ---
+    # Score = 100 * (0.30*E + 0.25*A + 0.20*G + 0.15*T + 0.10*C)
     score = 100 * (0.30 * e_val + 0.25 * a_val + 0.20 * g_val + 0.15 * t_val + 0.10 * c_val)
 
-    # --- Güven Puanı (Confidence) - Madde 7.4.3 ---[cite: 1]
+    # --- Güven Puanı - Madde 7.4.3 ---
     # Kritik 5 alanın doluluk oranı: company, from_loc, to_loc, sector, event_type[cite: 1]
     critical_fields = [
         ent.get("company", {}).get("name"),
@@ -208,11 +208,11 @@ def calculate_bios_fit_score(parsed_json, source_url):
         ind.get("sector"),
         art.get("event_type")
     ]
-    confidence = sum(1 for field in critical_fields if field) / 5.0 #[cite: 1]
+    confidence = sum(1 for field in critical_fields if field) / 5.0 
 
-    # Confidence 0.40 altındaysa skoru cezalandır (0.5 ile çarp)[cite: 1]
+    # Confidence 0.40 altındaysa skoru cezalandır (0.5 ile çarp)
     if confidence < 0.40:
-        score *= 0.5 #[cite: 1]
+        score *= 0.5 
 
     return int(round(score)), round(confidence, 2)
 
@@ -283,7 +283,7 @@ def fetch_rss_news(rss_url, publisher_name="RSS"):
         try:
             parsed = json.loads(result)
             
-            # --- ONARICI MANTIK (Frontend uyumu için) ---
+            # --- Onarıcı Mantık(Frontend uyumu için) ---
             if "article" not in parsed: parsed["article"] = {"text_summary_tr": "Analiz başarısız.", "event_type": "other"}
             if "signals" not in parsed: parsed["signals"] = {"timeline": "Belirtilmemiş", "capex_usd": 0}
             
@@ -307,7 +307,7 @@ def fetch_rss_news(rss_url, publisher_name="RSS"):
 
 def run_scanner():
     """Site üzerinden eklenen kaynakları tarar."""
-    # app.py'da tanımladığın değişken ismini kullanıyoruz
+    # app.py'da tanımladığım değişken ismini kullanıyoruz
     if not os.path.exists(RSS_SOURCES_FILE):
         print(f"⚠️ {RSS_SOURCES_FILE} bulunamadı. Önce siteden kaynak ekle.")
         return
@@ -326,7 +326,7 @@ def run_scanner():
 
 
 if __name__ == "__main__":
-    # ÖNEMLİ: Sabit linki sildik, artık run_scanner() çağırıyoruz.
+    # Sabit linki sildik, artık run_scanner() çağırıyoruz.
     # Bu sayede rss_sources.json içindeki tüm linklere bakacak.
     print("🚀 Tarayıcı başlatılıyor...")
     run_scanner()
