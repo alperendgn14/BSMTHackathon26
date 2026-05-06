@@ -49,8 +49,11 @@ Python ortamınızda projenin sorunsuz çalışması için gerekli olan bağıml
 pip install -r requirements.txt
 
 Adım 3: Ortam Değişkenlerini (API Anahtarı) ve API linkini Ayarlayın
+
 Projenin ana dizininde .env adında yeni bir dosya oluşturun. İçerisine Groq üzerinden aldığınız API anahtarını aşağıdaki formatta ekleyin (Bu adım, yapay zeka analizlerinin çalışması için kritik öneme sahiptir):
+
 GROQ_API_KEY=gsk_sizin_api_anahtariniz_buraya
+
 index.html dosyasında 538. satırdaki "const API_BASE = "https://bsmthackathon26.onrender.com/api";" kısmındaki linki 127.0.0.1:5000/api olarak değiştirin.
 
 
