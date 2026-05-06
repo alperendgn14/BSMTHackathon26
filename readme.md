@@ -1,6 +1,6 @@
 # BIOS AI News Agent
 
-bsmthackathon26.onrender.com 
+Live link : bsmthackathon26.onrender.com 
 
 **Avrupa Endüstriyel Haber Tarama Ajanı**
 
