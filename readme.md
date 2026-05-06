@@ -73,7 +73,7 @@ Arayüzdeki "Kaynaklar" bölümünden sistemi test etmek için, Avrupa ve küres
     http://feeds.bbci.co.uk/news/business/rss.xml
 
     CNBC - Europe News: (Kıtadaki ekonomik gelişmeler ve yeni tesis duyuruları)
-    [https://search.cnbc.com/rs/search/combinedcms/view.xml?profile=120000000&id=10001147](https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10001147)
+    https://search.cnbc.com/rs/search/combinedcms/view.xml?profile=120000000&id=10001147
 
     New York Times
     https://rss.nytimes.com/services/xml/rss/nyt/Business.xml
