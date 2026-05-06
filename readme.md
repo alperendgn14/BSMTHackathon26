@@ -41,22 +41,21 @@ Projeyi kendi bilgisayarınızda çalıştırmak için aşağıdaki adımları s
 
 Adım 1: Depoyu Klonlayın
 Terminalinizi açın ve projeyi yerel bilgisayarınıza indirin:
-git clone <repo-linki>
-cd <repo-klasoru>
+* git clone <repo-linki>
+* cd <repo-klasoru>
 
 Adım 2: Gerekli Kütüphaneleri Yükleyin
-Python ortamınızda projenin sorunsuz çalışması için gerekli olan bağımlılıkları kurun:
-pip install -r requirements.txt
+* Python ortamınızda projenin sorunsuz çalışması için gerekli olan bağımlılıkları kurun:
+* pip install -r requirements.txt
 
 Adım 3: Ortam Değişkenlerini (API Anahtarı) ve API linkini Ayarlayın
-Projenin ana dizininde .env adında yeni bir dosya oluşturun. İçerisine Groq üzerinden aldığınız API anahtarını aşağıdaki formatta ekleyin (Bu adım, yapay zeka analizlerinin çalışması için kritik öneme sahiptir):
-GROQ_API_KEY=gsk_sizin_api_anahtariniz_buraya
-index.html dosyasında 538. satırdaki "const API_BASE = "https://bsmthackathon26.onrender.com/api";" kısmındaki linki 127.0.0.1:5000/api olarak değiştirin.
+* Projenin ana dizininde .env adında yeni bir dosya oluşturun. İçerisine Groq üzerinden aldığınız API anahtarını verilen formatta ekleyin (Bu adım, yapay zeka analizlerinin çalışması için kritik öneme sahiptir): GROQ_API_KEY=gsk_sizin_api_anahtariniz_buraya
+* index.html dosyasında 538. satırdaki "const API_BASE = "https://bsmthackathon26.onrender.com/api";" kısmındaki linki 127.0.0.1:5000/api olarak değiştirin.
 
 
 Adım 4: Uygulamayı Başlatın
-Bağımlılıklar ve API anahtarı hazır olduğunda Flask sunucusunu ve otonom tarama motorunu başlatın:
-python app.py
+* Bağımlılıklar ve API anahtarı hazır olduğunda Flask sunucusunu ve otonom tarama motorunu başlatın:
+* python app.py
 
 
 
