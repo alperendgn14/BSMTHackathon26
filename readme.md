@@ -1,5 +1,7 @@
 # BIOS AI News Agent
 
+bsmthackathon26.onrender.com 
+
 **Avrupa Endüstriyel Haber Tarama Ajanı**
 
 Bu proje, özellikle Avrupa bölgesindeki endüstriyel yatırımları, yeni fabrika açılışlarını ve kapasite artışlarını otonom olarak takip eden, bu verileri anlamlandıran ve B2B iş akışları için aksiyona dönüştüren bir yapay zeka ajanıdır.
